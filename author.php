@@ -22,7 +22,7 @@ class Polc_Author
     private $user_subscribe_cnt;
 
     /**
-     * Polc_Author constructor.
+     * Polc Author constructor
      */
     public function __construct()
     {
@@ -88,6 +88,7 @@ class Polc_Author
         }
 
         $this->profile_right();
+
         echo '</div>';
     }
 

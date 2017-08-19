@@ -88,6 +88,7 @@ class Polc_Author
         }
 
         $this->profile_right();
+
         echo '</div>';
     }
 

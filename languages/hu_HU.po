@@ -1,0 +1,112 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Polc\n"
+"POT-Creation-Date: 2017-06-11 09:39+0200\n"
+"PO-Revision-Date: 2017-06-11 09:39+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: hu_HU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: style.css\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: functions.php:60
+msgid "author-slug"
+msgstr "szerzo"
+
+#: includes/classes/helper-class.php:36
+msgid "Comment"
+msgstr "komment"
+
+#: includes/modules/story-content-module.php:68
+msgid "Default"
+msgstr "Alapértelmezett"
+
+#: includes/modules/story-content-module.php:139 includes/types/story.php:35
+msgid "Volume"
+msgstr "Kötet"
+
+#: includes/modules/story-content-module.php:141
+msgid "Chapter"
+msgstr "Fejezet"
+
+#: includes/types/story.php:26
+msgid "(no parent)"
+msgstr "nincs szülő"
+
+#: includes/types/story.php:41 includes/types/story.php:42
+msgid "Content"
+msgstr "Tartalom"
+
+#: includes/types/story.php:43 includes/types/story.php:44
+msgid "Contents"
+msgstr "Tartalmak"
+
+#: includes/types/story.php:45
+msgid "Add New"
+msgstr "Új hozzáadása"
+
+#: includes/types/story.php:46
+msgid "Add New Item"
+msgstr "Új tartalom hozzáadása"
+
+#: includes/types/story.php:47
+msgid "New Item"
+msgstr "Új elem"
+
+#: includes/types/story.php:48
+msgid "Content Edit"
+msgstr "Tartalom szerkesztése"
+
+#: includes/types/story.php:49
+msgid "View Content"
+msgstr "Tartalom megtekintése"
+
+#: includes/types/story.php:50
+msgid "All Content"
+msgstr "Összes tartalom"
+
+#: includes/types/story.php:51
+msgid "Search Content"
+msgstr "Tartalom keresése"
+
+#: includes/types/story.php:53
+msgid "Content Not Found"
+msgstr "Nem található tartalom"
+
+#: includes/types/story.php:54
+msgid "Content Not Found In Trash"
+msgstr "Nem található tartalom a lomtárban"
+
+#: includes/types/story.php:65
+msgid "content-slug"
+msgstr "tartalom"
+
+#. Theme Name of the plugin/theme
+msgid "Polc"
+msgstr "Polc"
+
+#. Description of the plugin/theme
+msgid "Polc.eu téma leírása."
+msgstr "Polc téma"
+
+#. Author of the plugin/theme
+msgid "POLC.EU"
+msgstr "polc.eu"
+
+#. Author URI of the plugin/theme
+msgid "http://polc.eu"
+msgstr "http://polc.eu"
+
+#~ msgid "Description."
+#~ msgstr "Leírás"

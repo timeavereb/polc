@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 "Project-Id-Version: Polc\n"
-"POT-Creation-Date: 2017-06-11 09:22+0200\n"
+"POT-Creation-Date: 2017-06-17 17:03+0200\n"
 "PO-Revision-Date: 2017-06-11 08:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -20,19 +20,179 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: functions.php:60
+#: author.php:66
+msgid "Add new volume"
+msgstr ""
+
+#: author.php:87
+msgid "Change profile picture"
+msgstr ""
+
+#: author.php:98
+msgid "people's  favourite author"
+msgstr ""
+
+#: author.php:101
+msgid "stories"
+msgstr ""
+
+#: author.php:104
+msgid "followers"
+msgstr ""
+
+#: author.php:109
+msgid "Add author to favorites"
+msgstr ""
+
+#: author.php:178
+msgid "Choose category"
+msgstr ""
+
+#: author.php:194
+msgid "Choose subcategory"
+msgstr ""
+
+#: functions.php:63
 msgid "author-slug"
 msgstr ""
 
-#: includes/modules/story-content-module.php:68
+#: header.php:69 header.php:99 header.php:171
+msgid "Registration"
+msgstr ""
+
+#: header.php:72
+msgid "Username"
+msgstr ""
+
+#: header.php:76
+msgid "Email"
+msgstr ""
+
+#: header.php:81
+msgid "Email confirmation"
+msgstr ""
+
+#: header.php:85 header.php:132
+msgid "Password"
+msgstr ""
+
+#: header.php:90
+msgid "Password confirmation"
+msgstr ""
+
+#: header.php:95
+msgid "I accept the"
+msgstr ""
+
+#: header.php:95
+msgid "tems of use"
+msgstr ""
+
+#: header.php:104
+msgid "Already registered?"
+msgstr ""
+
+#: header.php:104
+msgid "Sign in!"
+msgstr ""
+
+#: header.php:125
+msgid "Sign in"
+msgstr ""
+
+#: header.php:129
+msgid "Username or email"
+msgstr ""
+
+#: header.php:135
+msgid "Sign In"
+msgstr ""
+
+#: header.php:139
+msgid "Still not part of the team?"
+msgstr ""
+
+#: header.php:140
+msgid "Sign up now!"
+msgstr ""
+
+#: header.php:143
+msgid "Sign in with your social account"
+msgstr ""
+
+#: header.php:172
+msgid "Login"
+msgstr ""
+
+#: header.php:176
+msgid "Logout"
+msgstr ""
+
+#: header.php:180
+msgid "Welcome"
+msgstr ""
+
+#: includes/modules/helper-module.php:36
+msgid "Comment"
+msgstr ""
+
+#: includes/modules/login-module.php:30
+msgid "Login Invalid"
+msgstr ""
+
+#: includes/modules/login-module.php:48
+msgid "Invalid login credentials"
+msgstr ""
+
+#: includes/modules/login-module.php:58
+msgid "Your account is not active!"
+msgstr ""
+
+#: includes/modules/register-module.php:36
+msgid "Email Invalid"
+msgstr ""
+
+#: includes/modules/register-module.php:40
+msgid "Username Invalid"
+msgstr ""
+
+#: includes/modules/register-module.php:44
+msgid "Username Taken"
+msgstr ""
+
+#: includes/modules/register-module.php:48
+msgid "Email Taken"
+msgstr ""
+
+#: includes/modules/register-module.php:52
+msgid "Invalid Password"
+msgstr ""
+
+#: includes/modules/register-module.php:56
+msgid "Passwords Are Not The Same"
+msgstr ""
+
+#: includes/modules/register-module.php:60
+msgid "Emails Are Not The Same"
+msgstr ""
+
+#: includes/modules/register-module.php:87
+msgid "Register Success Message"
+msgstr ""
+
+#: includes/modules/story-content-module.php:72
 msgid "Default"
 msgstr ""
 
-#: includes/modules/story-content-module.php:139 includes/types/story.php:35
+#: includes/modules/story-content-module.php:138
+msgid "wrote at"
+msgstr ""
+
+#: includes/modules/story-content-module.php:159 includes/types/story.php:35
 msgid "Volume"
 msgstr ""
 
-#: includes/modules/story-content-module.php:141
+#: includes/modules/story-content-module.php:161
 msgid "Chapter"
 msgstr ""
 
@@ -82,6 +242,10 @@ msgstr ""
 
 #: includes/types/story.php:54
 msgid "Content Not Found In Trash"
+msgstr ""
+
+#: includes/types/story.php:65
+msgid "content-slug"
 msgstr ""
 
 #. Theme Name of the plugin/theme

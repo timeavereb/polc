@@ -26,6 +26,21 @@ html, body {height: 100%;}
 	width:100%;
 	height:70px;
 	float:left;
+    position:relative;
+    animation:headerfadein 1000ms;
+    -webkit-animation:headerfadein 1000ms;
+}
+@keyframes headerfadein{
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(-200px);
+        transform: translateY(-200px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0px);
+        transform: translateY(0px);
+    }
 }
 .site_id {
     width: 125px;
@@ -38,6 +53,40 @@ html, body {height: 100%;}
 .plc_header a {
     display: table;
     margin:0 auto;
+}
+.plcHeaderSearch {
+    position: absolute;
+    top: 15px;
+    right: 100px;
+}
+.plcHeaderSearch input {
+    margin: 0;
+    padding: 0 40px 0 0;
+    height: 40px;
+    border: none;
+    width:40px;
+    background-image:url('../img/search_white.svg');
+    background-size: 25px 25px;
+    background-position:center center;
+    background-color: rgb(251, 92, 67);
+    overflow: hidden;
+    background-repeat:no-repeat;
+    cursor:pointer;
+}
+.plcHeaderSearch input:focus {
+    background-position:right;
+    padding: 0 15px;
+    width:350px;
+    background-color:white;
+    overflow: visible;
+    cursor:auto;
+    border:solid 1px rgb(251, 92, 67);
+    outline:none;
+    -webkit-transition: all 350ms ease-in-out;
+    -moz-transition: all 350ms ease-in-out;
+    -ms-transition: all 350ms ease-in-out;
+    -o-transition: all 350ms ease-in-out;
+    transition: all 350ms ease-in-out;
 }
 /*POLC HEADER END*/
 /*POLC NAVIGATION*/
@@ -100,6 +149,10 @@ html, body {height: 100%;}
 .plc_regnlogin {
     float: left;
     padding: 0;
+    border-bottom: solid 1px rgba(255,255,255,0.2);
+}
+.plc_regnlogin a {
+    border-right: solid 1px rgba(255,255,255,0.2);
 }
 .plc_regnlogin a {
     width: 50%;
@@ -107,12 +160,78 @@ html, body {height: 100%;}
     border: none;
     padding: 15px 0;
 }
-.plc_navigation_item a:before, .login:before, .signup:before {
+.plc_navigation_item:before, .login:before, .signup:before,.logout:before,ul.plc_user_menu a:before {
     content: '';
     width: 25px;
     height: 25px;
     float: left;
     margin: 0 10px 0 10px;
+}
+.plc_navigation_item_wrapper:first-of-type .plc_navigation_item:before{
+    background-image:url('../img/navigation/home.svg');
+    background-size: 30px 30px;
+    background-position: center center;
+}
+.plc_navigation_item_wrapper:first-of-type:hover .plc_navigation_item:before{
+    background-image:url('../img/navigation/home_black.svg');
+}
+.plc_navigation_item_wrapper:nth-of-type(2) .plc_navigation_item:before{
+    background-image:url('../img/navigation/news.svg');
+    background-size: 30px 30px;
+    background-position: center center;
+}
+.plc_navigation_item_wrapper:nth-of-type(2):hover .plc_navigation_item:before{
+    background-image:url('../img/navigation/news_black.svg');
+}
+.plc_navigation_item_wrapper:nth-of-type(3) .plc_navigation_item:before{
+    background-image:url('../img/navigation/toplist.svg');
+    background-size: 30px 30px;
+    background-position: center center;
+}
+.plc_navigation_item_wrapper:nth-of-type(3):hover .plc_navigation_item:before{
+    background-image:url('../img/navigation/toplist_black.svg');
+}
+.plc_navigation_item_wrapper:nth-of-type(4) .plc_navigation_item:before{
+    background-image:url('../img/navigation/help.svg');
+    background-size: 30px 30px;
+    background-position: center center;
+}
+.plc_navigation_item_wrapper:nth-of-type(4):hover .plc_navigation_item:before{
+    background-image:url('../img/navigation/help_black.svg');
+}
+.plc_user_menu li:nth-of-type(1) a:before{
+    background-image:url('../img/navigation/profile.svg');
+    background-size: 30px 30px;
+    background-position: center center;
+}
+.plc_user_menu li:nth-of-type(1):hover a:before{
+    background-image:url('../img/navigation/profile_black.svg');
+}
+
+.signup:before{
+    background-image:url('../img/navigation/registration.svg');
+    background-size: 30px 30px;
+    background-position: center center;
+}
+.logout:before{
+    background-image:url('../img/navigation/logout.svg');
+    background-size: 30px 30px;
+    background-position: center center;
+}
+.login:before{
+    background-image:url('../img/navigation/login.svg');
+    background-size: 30px 30px;
+    background-position: center center;
+}
+.plc_regnlogin .login:hover:before{
+    background-image:url('../img/navigation/login_black.svg');
+}
+.plc_regnlogin .logout:hover:before{
+     background-image:url('../img/navigation/logout_black.svg');
+ }
+
+.plc_regnlogin #plc_registration:hover:before{
+    background-image:url('../img/navigation/registration_black.svg');
 }
 /*POLC NAVIAGATION END*/
 /*POLC FOOTER*/
@@ -136,7 +255,7 @@ footer {
 	height:100%;
 	min-height:100%;
 	margin-bottom: -25px;
-    font-family:'Ubuntu';
+    font-family:'Ubuntu',sans-serif;
     font-weight: 300;
     text-align: center;
     font-size:12px;
@@ -145,27 +264,53 @@ footer {
 
 /*LATEST*/
 .latest_item {
-    width: 33.33%;
-    float: left;
-}
-.latest_item:hover{
-    background-color:#f8f8f6;
-    -webkit-transition: background 250ms ease-in-out;
-    -moz-transition: background 250ms ease-in-out;
-    -ms-transition: background 250ms ease-in-out;
-    -o-transition: background 250ms ease-in-out;
-    transition: background 250ms ease-in-out;
-}
-.plc_latest_item {
-    padding:10px 20px 25px 20px;
     width: 100%;
     float: left;
+    opacity:0;
+}
+.latest_item.polc-load{
+    opacity:1;
+}
+.polc-load{
+    -webkit-animation: latesloadstyle 1000ms;
+    animation: latestloadstyle 1000ms;
+}
+@keyframes latestloadstyle{
+    0%{
+        opacity: 0;
+        transform: rotateX(90deg);
+        -webkit-transform: rotateX(90deg);
+    }
+    100%{
+        opacity:1;
+        -webkit-transform: rotateX(0deg);
+    }
+}
+.plc_latest_item {
+    padding:10px 20px 25px 0;
+    width: 100%;
+    float: left;
+    animation: latestload 1000ms;
+    -webkit-animation: latesload 1000ms;
+
+}
+@keyframes latestload{
+    0%{
+        opacity:0;
+        -webkit-transform:translateX(-200px);
+        transform:translateX(-200px);
+    }
+    100%{
+        opacity:1;
+        -webkit-transform:translateX(0px);
+        transform:translateX(0px);
+    }
 }
 .plc_latest_item h2 {
     font-size: 20px;
     line-height: normal;
     font-weight: 700;
-    color:black;
+    color:#292929;
 }
 .plc_latest_item p {
     font-size: 15px;
@@ -177,7 +322,7 @@ footer {
     color: white;
     background-color: #fb5c43;
     font-size: 13px;
-    padding: 0px 5px 2px 5px;
+    padding: 0 5px 2px 5px;
     text-transform: lowercase;
     float: right;
     margin-left: 10px;
@@ -206,10 +351,16 @@ footer {
     float: left;
     margin-bottom: 20px;
 }
-.plc_latest {
+.plcLatestStoriesWrapper {
     width: 75%;
     float: left;
+    padding-right: 10px;
 }
+.plc_latest {
+    width: 100%;
+    float: left;
+}
+
 /*LATEST END*/
 /*CONTENT*/
 .plc_story_content{
@@ -217,12 +368,14 @@ footer {
     float:left;
 }
 .plc_story_content p{
-    margin:5px 0;
+    margin:5px 0!important;
     width: 100%;
     float: left;
     color: #3e3e3e;
     font-size: 16px;
     line-height: 32px;
+    font-family: 'Titillium', sans-serif;
+    text-align: left;
 }
 .plc_article_inner_wrapper{
     width:60%;
@@ -231,7 +384,8 @@ footer {
 }
 .plc_story_content h1,
 .plc_story_content h2,
-.plc_story_content h3{
+.plc_story_content h3,
+.plcContentEditorWrapper .editorHead h1{
     font-size: 26px;
     margin: 20px 0 0 0;
     width: 100%;
@@ -312,25 +466,34 @@ footer {
     background-color: #151515;
 }
 .nightstyle .plc_article_inner_wrapper p{
-    color: #afafaf;
+    color: #afafaf!important;
 }
 .justify .plc_article_inner_wrapper p{
-    text-align:justify;
+    text-align:justify!important;
 }
 .nightstyle .plcChapterselector select{
-    color:white;
-    background-color: #151515;
-    border:solid 1px rgba(255,255,255,0.2);
+    color:white!important;
+    background-color: #151515!important;
+    border:solid 1px rgba(255,255,255,0.2)!important;
 }
 .nightstyle .plc_story_content address a{
-    color:white;
+    color:white!important;
 }
 
 .font_pt_serif{
     font-family: 'PT Serif', serif;
 }
+.font_pt_serif p{
+    font-family: 'PT Serif', serif;
+}
 .font_ubuntu{
     font-family: 'Ubuntu', sans-serif;
+}
+.font_ubuntu p{
+    font-family: 'Ubuntu', sans-serif;
+}
+.font_titillium p{
+    font-family: 'Titillium', sans-serif;
 }
 .font_titillium{
     font-family: 'Titillium', sans-serif;
@@ -342,9 +505,9 @@ footer {
     min-width: 135px;
     position: absolute;
     top: 50px;
-    -webkit-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.2);
-    box-shadow: 0px 5px 10px 0px rgba(0,0,0,0.2);
+    -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.2);
     display:none;
 }
 .fontstyle_selector ul.show,
@@ -410,6 +573,65 @@ footer {
 /*CONTENT*/
 
 /*PROFILE*/
+.plcProfileTabMenu {
+    float: left!important;
+}
+.plcAdminBar {
+    width: 100%;
+    float: left;
+    margin-top: 10px;
+}
+.plcProfileTabMenu button,
+.plcProfileTabMenu button:focus{
+    border: solid 1px #fb5c43;
+    border-bottom: 0;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 6px 10px;
+    color: #fb5c43;
+    outline: none;
+    margin-bottom: -2px;
+    line-height: 30px;
+    float: left;
+    margin-right: -1px;
+}
+.plcProfileTabMenu button:before{
+    content:'';
+    display:block;
+    float:left;
+    margin-right:10px;
+    width:30px;
+    height:30px;
+    background-position: center center;
+    background-size: 30px 30px;
+    background-repeat: no-repeat;
+}
+.plcProfileTabMenu button.active{
+    color: white;
+    border: solid 2px #fb5c43;
+    border-bottom: none;
+    background-color: #fb5c43;
+}
+.datachange_btn.active:before{
+    background-image:url('../img/settings/data_change_white.svg');
+}
+.datachange_btn:before{
+    background-image:url('../img/settings/data_change.svg');
+}
+.favorited_by_btn.active:before{
+    background-image:url('../img/settings/star_white.svg');
+    background-size: 28px 28px!important;
+}
+.favorited_by_btn:before{
+    background-image:url('../img/settings/star.svg');
+    background-size: 28px 28px!important;
+}
+.my_content_btn.active:before{
+    background-image:url('../img/settings/content_white.svg');
+}
+.my_content_btn:before{
+    background-image:url('../img/settings/content.svg');
+}
 .plcUserInformation h1 {
     text-align: center;
     font-size: 18px;
@@ -417,21 +639,131 @@ footer {
     font-weight: 700;
     padding: 0 10px 15px 10px;
 }
+#plcUserDataSaveBtn,#plc_login_btn,
+#plc_register_btn{
+    border: solid 2px white;
+    padding: 8px 20px;
+    background-color: transparent;
+    border-radius: 50px;
+    color: white;
+    cursor: pointer;
+    float: right;
+}
+#plcUserDataSaveBtn:hover,
+#plc_login_btn:hover,
+#plc_register_btn:hover{
+    color:#fb5c43;
+    background-color: white;
+    -webkit-transition: all 200ms ease-in-out;
+    -moz-transition: all 200ms ease-in-out;
+    -ms-transition: all 200ms ease-in-out;
+    -o-transition: all 200ms ease-in-out;
+    transition: all 200ms ease-in-out;
+}
+#ui-datepicker-div {
+    -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6);
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6);
+    padding: 10px;
+    background-color: white;
+    min-width: 260px;
+    width: 100%;
+    max-width: 260px;
+}
+.ui-datepicker-header.ui-widget-header a {
+    width: 50%;
+    float: left;
+}
+.ui-datepicker-header.ui-widget-header a span{
+    display:block;
+    text-transform: uppercase;
+    font-size: 12px;
+    cursor:pointer;
+}
+.ui-datepicker-header.ui-widget-header a:nth-of-type(2) span{
+    text-align: right;
+}
+.ui-datepicker-calendar tbody tr td a,
+.ui-datepicker-calendar tbody tr th span{
+    text-align: center;
+    display: block;
+}
+.ui-datepicker-title select {
+    width: 50%;
+    float: left;
+    height: 35px;
+}
+.ui-datepicker-calendar tbody tr th span{
+
+}
+.ui-datepicker-calendar tbody tr th{
+
+}
+.ui-datepicker-calendar tbody tr td{
+    width: 35px;
+    height: 35px;
+    margin: 1px;
+    border: solid 1px white;
+}
+.ui-datepicker-calendar tbody tr td a{
+    background-color: #fb5c43;
+    color: white;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 35px;
+    height: 35px;
+}
+
+.ui-datepicker-calendar {
+    width: 100%;
+}
+#plc_old_password-error {
+    float: right;
+    width: 50%;
+}
 .plc_profile_wrapper{
     width:80%;
     margin:0 auto;
 }
-.plProfileLeft{
+.plcDataChangeElement {
+    width: 100%;
+    float: left;
+    padding: 10px 0;
+}
+.plcDataChangeElement label,
+.plcDataChangeElement input{
+    width: 50%;
+    float: left;
+}
+.plcDataChangeElement label{
+    line-height:35px;
+}
+.plcDataChangeElement input {
+    border: none;
+    padding: 0 20px;
+    height: 35px;
+    background-color: white;
+}
+#plcDataChangeWrapper {
+    background-color: rgb(251, 92, 67);
+    padding: 20px;
+    color: white;
+    width: 100%;
+    float: left;
+}
+.plcProfileLeft{
     float:left;
     width:75%;
 }
-.plProfileRight{
+.plcProfileRight{
     float:left;
     width:25%;
 }
 .plcUserInformation{
     background-color: #f8f8f6;
     padding:20px;
+    animation: newsload 1000ms;
+    -webkit-animation: newsload 1000ms;
 }
 .plcUserImage{
     margin:0 auto 15px auto;
@@ -441,6 +773,7 @@ footer {
     background-position:top center;
     position:relative;
     overflow: hidden;
+    background-size: cover;
 }
 .admin .plcUserImage:hover .changeImage{
     opacity:1;
@@ -509,7 +842,7 @@ footer {
     float: left;
 }
 .plcUserStat {
-    padding: 10px;
+    padding: 10px 0;
 }
 .articleViews {
     font-size: 14px;
@@ -531,28 +864,39 @@ footer {
     display:none;
 }
 .addStoryWrapper span {
-    background-image:url('img/settings/add_story.svg');
+    background-image:url('../img/settings/add_story.svg');
     width: 30px;
     height: 30px;
     background-size: 30px 30px;
 }
-.plcAdminBar {
-    width: 100%;
-    float: left;
-}
 .addFavouriteUser{
     background-color: #fb5c43;
     color:white;
-    font-size:12px;
+    font-size:11px;
     width: 100%;
     float: left;
     padding: 10px;
     text-transform: uppercase;
     line-height: 25px;
     margin-top: 10px;
+    cursor:pointer;
+    border: solid 1px #fb5c43;
+}
+.addFavouriteUser:hover {
+    color: #fb5c43;
+    background-color: transparent;
+    border: dotted 1px #fb5c43;
+    -webkit-transition: all 150ms ease-in-out;
+    -moz-transition: all 150ms ease-in-out;
+    -ms-transition: all 150ms ease-in-out;
+    -o-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+}
+.addFavouriteUser:hover span{
+    background-image:url('../img/settings/star_white_red.svg');
 }
 .addFavouriteUser span{
-    background-image:url('img/settings/star_white.svg');
+    background-image:url('../img/settings/star_white.svg');
     display:block;
     float:left;
     margin-right:10px;
@@ -561,7 +905,32 @@ footer {
     height:25px;
     background-repeat:no-repeat;
 }
-
+.plcUserFavoriteElement {
+    background-color: #f8f8f6;
+    border: solid 1px #e4e2e2;
+    padding: 10px;
+    width: 100%;
+    float: left;
+}
+.plc_profile_wrapper .plc_latest {
+    width: 100%;
+}
+.plc_user_info_wrapper {
+    width: 100%;
+    float: left;
+}
+.plc_user_info_wrapper .name,.plc_user_info_wrapper .plc_welcome_text {
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+.plc_user_info_wrapper .name{
+    font-weight:700;
+}
+ul.plc_user_menu a{
+    width: 100%;
+    float: left;
+}
 /*PROFILE END*/
 /*activites*/
 .activitiesItem{
@@ -612,6 +981,308 @@ footer {
     margin-left: 10px;
 }
 
+
+/*SOCIAL,TAGS,COMMENTS*/
+.polcCommentWrapper {
+    width: 100%;
+    float: left;
+}
+.polcCommentInnerWrapper {
+    width: 50%;
+    margin: 0 auto;
+}
+.polcSocialShareAndTags{
+    width:75%;
+    margin:0 auto;
+}
+.polcCommentInnerWrapper textarea {
+    width: 100%;
+    min-height: 150px;
+    margin-bottom: 20px;
+    resize: none;
+    padding: 10px;
+    font-family: 'Titillium',sans-serif;
+}
+.polcSocialShare {
+    width: 30%;
+    float: right;
+}
+.polcTagsWrapper {
+    float: left;
+    width: 70%;
+}
+.fb_share_wrapper,.fb_like_wrapper,.gplus_share_wrapper,.twitter_share_wrapper {
+    width: 30px;
+    height: 30px;
+    float: right;
+    padding: 5px;
+}
+.fb_share_wrapper span,.fb_like_wrapper span,.gplus_share_wrapper span,.twitter_share_wrapper span{
+    width:25px;
+    height:25px;
+    background-size: 25px 25px;
+    background-position: center center;
+    display:block;
+    cursor:pointer;
+}
+.fb_share_wrapper span{
+    background-image:url('../img/social/facebook.svg');
+}
+.fb_like_wrapper span{
+    background-image:url('../img/social/facebook.svg');
+}
+.gplus_share_wrapper span{
+    background-image:url('../img/social/google.svg');
+}
+.twitter_share_wrapper span{
+    background-image:url('../img/social/twitter.svg');
+}
+.polcTagsWrapper a {
+    float: left;
+}
+/*SOCIAL,TAGS,COMMENTS END*/
+
+
+/*REGISTRATION*/
+#plc_reg_ovrly,#addStory_ovrly{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-color:rgba(0,0,0,0.7);
+    display:none;
+    z-index: 99999;
+}
+.quit,.ui-dialog[aria-describedby="plc_alert_popup"] .ui-dialog-titlebar-close,
+.ui-dialog[aria-describedby="plc_lost_password_popup"] .ui-dialog-titlebar-close{
+    display: block;
+    position: absolute;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+    top: 5px;
+    background-image:url('../img/x_icon.png');
+    background-size:20px 20px;
+    background-repeat:no-repeat;
+    background-position:center center;
+    cursor:pointer;
+    z-index: 99;
+    border: none;
+    background-color: transparent;
+}
+.ui-dialog-titlebar-close .ui-button-text {
+    display: none;
+}
+.registration_popup_overlay.show{
+    display: block!important;
+}
+.show.plcreg .login {
+    display: none;
+}
+.show.plclogin .registration {
+    display: none;
+}
+#addStoryPopup,#plc_reg_popup,#plc_login_popup,
+.ui-dialog[aria-describedby="plc_alert_popup"],
+.ui-dialog[aria-describedby="plc_lost_password_popup"]{
+    width: 100%!important;
+    max-width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fb5c43;
+    display:none;
+}
+.plc_lost_password_msg {
+    color: white;
+    text-align: center;
+    display: block;
+    padding: 15px;
+}
+.ui-dialog {
+    max-width: 500px!important;
+    z-index: 99;
+    width:100%!important;
+}
+.show.plclogin .plc_poup_wrapper.login{
+    display:block;
+}
+.show.plcreg .plc_poup_wrapper.registration{
+    display:block;
+}
+#plc_popup_wrapper h1, #plc_login_form h1,#plc_reg_form h1,#plc_alert_popup h1 {
+    color: white;
+    font-size: 20px;
+    margin: 20px 0;
+    width: 100%;
+    text-align: center;
+}
+.reg_box_top,.addStoryPopup_wrapper{
+    width: 70%;
+    margin: 0 auto;
+}
+#plc_alert_popup p{
+    text-align:center;
+    width:100%;
+    font-size:14px;
+    color:white;
+}
+.reg_box_bottom,.login_box_social {
+    width:100%;
+    display: table;
+    padding: 20px 0;
+    border-top: solid 1px rgba(255,255,255,0.2);
+}
+.regbox_row input,#lost_password_login,
+.plc_password_reset_element input{
+    width: 100%;
+    margin: 10px 0;
+    height: 40px;
+    border: none;
+    padding: 0 20px;
+}
+#plc_lost_password_form {
+    width: 80%;
+    margin: 0 auto;
+}
+.regbox_row input[type="checkbox"]{
+    height:15px;
+    width:15px;
+    float:left;
+    margin-right:15px;
+    margin-top: 5px;
+}
+.regbox_row.termsouse {
+    color: white;
+    font-size: 14px;
+}
+.regbox_row.submit input,.newStoryData_row.submit input,
+.addStorySubmit input {
+    max-width: 200px;
+    margin: 30px auto;
+    background-color: white;
+    display: block;
+    font-weight:700;
+    color:#fb5c43;
+    cursor:pointer;
+    border:none;
+    height: 40px;
+    padding:0 20px;
+}
+.regbox_row {
+    width: 100%;
+    float: left;
+}
+.regbox_row.termsouse a {
+    font-weight: 700;
+    color: white;
+    text-decoration: underline;
+}
+.reg_box_bottom p,
+.reg_box_bottom a {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    width: 100%;
+    display: block;
+}
+.plc_social_login {
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    float: left;
+    margin: 10px;
+    border-radius: 100%;
+}
+.social_login_icon_wrapper {
+    margin: 0 auto;
+    display: table;
+}
+.login_box_social h2{
+    text-align:center;
+    color:white;
+}
+.reg_box_bottom .signup:before {
+    display: none;
+}
+.reg_box_bottom .signup {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.ui-dialog[aria-describedby="plc_alert_popup"] button,
+.ui-dialog[aria-describedby="plc_lost_password_popup"] .ui-dialog-buttonpane button,
+.plc_password_reset_element button ,p.plcSearchFilter input[type='submit']{
+    background-color:white;
+    color:#fb5c43;
+    padding:10px 20px;
+    margin:15px auto;
+    display:block;
+    border:none;
+    font-size: 12px;
+    font-weight: 700;
+    cursor:pointer;
+    text-transform: uppercase;
+}
+.plcErrorText,.error {
+    font-size: 13px;
+}
+.ui-widget-overlay.ui-front {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 98;
+    background-color: rgba(45, 28, 25, 0.7);
+    top: 0;
+    bottom: 0;
+}
+#plc_login_btn,
+#plc_register_btn{
+    float:none;
+    margin:10px auto;
+    display:table;
+}
+#plc_reg_popup .login {
+    color: white;
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    cursor:pointer;
+}
+#plc_reg_popup .login:before{
+    display:none;
+}
+#plc_lost_password_btn {
+    background-color: transparent;
+    border: none;
+    margin: 0 auto;
+    display: block;
+    color: white;
+    font-family: Titillium, sans-serif;
+    cursor:pointer;
+}
+.polc_lostpass-wrapper {
+    width: 100%;
+    float: left;
+}
+#plc_password_reset_container {
+    width: 100%;
+    float: left;
+}
+#plc_password_reset_form {
+    width: 50%;
+    margin: 20px auto;
+    background-color: #fb5c43;
+    padding:20px;
+}
+/*REGISTRATION END */
+
 /*ADD STORY*/
 .newStoryWrapper {
     width: 80%;
@@ -629,7 +1300,8 @@ footer {
     background-color: #fb5c43;
 }
 .newStoryData_row input[type="text"],
-.newStoryData_row textarea{
+.newStoryData_row textarea,
+.plcContentEditorWrapper .editorDataRow textarea{
     height: 40px;
     width: 100%;
     border: none;
@@ -643,6 +1315,8 @@ footer {
 .form_info {
     color: white;
     font-size: 12px!important;
+    width: 100%;
+    float: left;
 }
 .agelimit div {
     width: 25%;
@@ -705,7 +1379,8 @@ footer {
     float: left;
     padding-top: 20px;
 }
-.warning label{
+.warning label,
+.plcCheckbox label{
     width: 18px;
     height: 18px;
     cursor: pointer;
@@ -759,13 +1434,15 @@ footer {
     filter: alpha(opacity=100);
     opacity: 1;
 }
-.newStoryData_row h4 {
+.newStoryData_row h4,.newStoryData_row.tag label,
+.editorContainerRow h4{
     text-transform: uppercase;
     font-size: 14px;
     font-weight: 700;
     border-top: solid 1px rgba(255,255,255,0.3);
     padding: 10px 0;
     margin: 10px 0 0 0;
+    color: white;
 }
 .newStoryWrapperRight h1{
     color: white;
@@ -778,85 +1455,459 @@ footer {
 .plcStoryFirstChapter textarea {
     height: 500px;
 }
-.storyChategory select,.storyGenre select,.storySubChategory select{
+.storyCategory select,.storyGenre select,.storySubCategory select,
+.newStoryData_row.storyType select{
     width:100%;
     height:40px;
 }
-.addChapter,.editStory {
-    font-size: 14px;
+.addChapter,.editStory,
+.listElement p{
+    font-size: 14px!important;
     float: left;
     color: #fb5c43;
     display: none;
-    font-weight: 700;
-    margin-right:10px;
-    cursor:pointer;
+    font-weight:500;
+    margin-right: 10px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    line-height: normal;
+    font-family: 'Titillium', sans-serif;
 }
-.addChapter:after{
+.editStory:before{
     content:'|';
-    margin-left:10px;
+    margin-right:10px;
 }
-.plc_latest_item.plcUseradmin:hover .addChapter ,.plc_latest_item.plcUseradmin:hover .editStory{
+.plc_latest_item:hover .addChapter ,.plc_latest_item:hover .editStory{
     display:block;
 }
-
-/*ADD STORY END*/
-/*SOCIAL,TAGS,COMMENTS*/
-.polcCommentWrapper {
+.plc_reg h1,#addStoryForm h1 {
+    color: white;
+    font-size: 20px;
+    margin: 20px 0;
+    width: 100%;
+    text-align: center;
+}
+#addStoryForm {
+    width: 100%;
+    float: left;
+    padding-bottom: 20px;
+}
+#polc_tag_handler {
+    height: 40px;
+    border: none;
+    padding: 0 10px;
+    float: left;
+    width:30%;
+    margin: 0;
+}
+.plcTagContainer {
+    width: 70%;
+    float: left;
+    padding-left: 15px;
+}
+.plcTagElement {
+    border: solid 1px white;
+    float: left;
+    padding: 0 5px;
+    font-size: 14px;
+    color: white;
+    line-height: 38px;
+    margin-right: 5px;
+    margin-bottom:5px;
+}
+.plcTagElementDelete {
+    display: block;
+    width: 10px;
+    height: 10px;
+    float: right;
+    margin: 14px 0 0 5px;
+    background-image:url('../img/settings/tag_delete.svg');
+    cursor:pointer;
+    background-size: 10px 10px;
+    background-position: center center;
+}
+.ui-autocomplete {
+    width: 100px;
+    position: absolute!important;
+    background-color: #fb5c43;
+    -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6);
+    -moz-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6);
+    box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6);
+}
+.ui-menu-item {
+    padding: 5px;
+    font-size: 14px;
+    border-bottom: solid 1px rgba(0,0,0,0.5);
+    cursor: pointer;
+}
+.newStoryData_row.tag label {
     width: 100%;
     float: left;
 }
-.polcCommentInnerWrapper {
-    width: 50%;
+.newStoryData_row.tag {
+    margin: 0;
+    padding: 0;
+}
+.newStoryWrapperRight {
+    margin-top: 20px;
+}
+.plc_article_datas.bottom {
+    min-height: 40px;
+}
+/*ADD STORY END*/
+
+/*COVER NEWS*/
+.plcNewStoriesWrapper {
+    width: 90%;
     margin: 0 auto;
 }
-.polcSocialShareAndTags{
-    width:75%;
+.plcLatestNewsWrapper {
+    width: 25%;
+    float: left;
+    padding-left: 10px;
+    animation:newsload 1000ms;
+    -webkit-animation:newsload 1000ms;
+}
+@keyframes newsload{
+    0%{
+        opacity:0;
+        transform:translateX(200px);
+        -webkit-transform:translateX(200px);
+    }
+    100%{
+        opacity:1;
+        transform:translateX(0px);
+        -webkit-transform:translateX(0px);
+    }
+}
+.plcNewsImage {
+    width: 100%;
+    padding-bottom: 100%;
+    background-position:center center;
+    background-size:cover;
+}
+.plcNewsImageWrapper {
+    width: 35%;
+    float: left;
+}
+.plcLatestNewsWrapper article {
+    width: 100%;
+    float: left;
+    padding-bottom: 10px;
+}
+.plcNewsText {
+    float: left;
+    padding-left: 15px;
+    width: 65%;
+}
+.plcNewsText h1 {
+    color: #292929;
+    font-weight: 700;
+}
+.plcTitle {
+    color: rgb(251, 92, 67);
+    width: 100%;
+    float: left;
+    padding: 5px 0 5px 0;
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.plcTitle:after {
+    content: '';
+    width: 100px;
+    height: 5px;
+    background-color:rgb(251, 92, 67);
+    display: block;
+}
+.plcNewsText .date {
+    width: 100%;
+    font-size: 11px;
+    color: grey;
+    padding: 10px 0;
+}
+/*COVER NEWS END*/
+
+/*TOPLISTS*/
+.plcToplistsWrapper{
+    max-width:90%;
     margin:0 auto;
 }
-.polcCommentInnerWrapper textarea {
-    width: 100%;
-    min-height: 150px;
-    margin-bottom: 20px;
-    resize: none;
-    padding: 10px;
-    font-family: 'Titillium';
-}
-.polcSocialShare {
-    width: 30%;
-    float: right;
-}
-.polcTagsWrapper {
+.toplistsItem {
+    width: 50%;
     float: left;
-    width: 70%;
+    padding: 20px;
 }
-.fb_share_wrapper,.fb_like_wrapper,.gplus_share_wrapper,.twitter_share_wrapper {
+.toplistsItem .innerItem {
+    background-color: #f8f8f6;
+    border: solid 1px #e4e2e2;
+    padding: 10px;
+    width: 100%;
+    float:left;
+}
+.innerItem h1 {
+    text-align: center;
+    color: #fb5c43;
+    font-weight: 700;
+    font-size: 16px;
+    text-transform: uppercase;
+
+}
+.list span {
+    float: left;
+    width: 25px;
+    height: 25px;
+    display: block;
+    line-height: 25px;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    background-color: #fb5c43;
+    text-align: center;
+    margin-right: 10px;
+}
+.list a {
+    color: black;
+    width: 70%;
+    float: left;
+    padding: 5px 0;
+}
+.favouriteContent,.view {
+    width: 100%;
+}
+.favouriteContent .contentItem a:nth-of-type(2),
+.view .contentItem p,  .toplistListItem a:nth-of-type(2){
+    font-size: 13px;
+    float: right;
+    width: 30%;
+    color: #fb5c43;
+    text-align: right;
+}
+.favouriteContent .contentItem a:nth-of-type(1),
+.view .contentItem a:nth-of-type(1){
+    float:left;
+    width:70%;
+}
+.view .contentItem p{
+    color:black;
+}
+/*TOPLISTS END*/
+
+/*SEARCH PAGE*/
+#plcSearchFilterInnerWrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+#plcSearchMainWrapper{
+    width: 100%;
+    float: left;
+    color: white;
+}
+.plcHitsWrapper {
+    width: 75%;
+    float: left;
+}
+.plcPhraseAndSubmitWrapper {
+    width:90%;
+    margin:0 auto;
+}
+.plcSearchFormTop {
+    background-color: #fb5c43;
+    margin-bottom: 15px;
+}
+#total_hits_text {
+    width: 90%;
+    margin: 0 auto;
+}
+.plcSearchFilter input[type='submit']{
+    margin:0;
+ }
+.plcTotalHitsWrapper {
+    width: 100%;
+    float: left;
+}
+.searchPhraseWrapper input {
+    height: 40px;
+    border: none;
+    margin: 10px 0;
+    padding: 0 10px;
+    width: 80%;
+}
+.searchPhraseWrapper input[type="submit"] {
+    width: 20%;
+    background-color: rgba(255,255,255,1);
+    float: right;
+    border-left: solid 2px #fb5c43;
+    cursor: pointer;
+    color: #fb5c43;
+    font-family: "Titillium", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.plcFilterWrapper {
+    width: 25%;
+    float: left;
+    background-color: #fb5c43;
+    padding: 20px;
+}
+.plcSearchFormMiddle {
+    width: 90%;
+    margin: 0 auto;
+}
+.plcSearchFilter span {
+    margin: 15px 0;
+    display: block;
+}
+.plcSearchFilter:first-of-type span{
+    margin:0 0 15px 0;
+}
+.plcCheckBoxWrapper {
+    width: 100%;
+    float: left;
+    padding: 5px 20px;
+}
+.plcCheckBoxWrapper p {
+    line-height: 16px;
+    float: left;
+}
+.plcSearchFilter,.plcSearchWrapper,#plcSearchForm,
+.plcSearchFormTop{
+    width: 100%;
+    float: left;
+}
+.plcPagerWrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+.plcPagerInnerWrapper {
+    float: right;
+    padding: 15px 0;
+}
+.plcPagerInnerWrapper button {
+    background-color: #fb5c43;
+    border: 1px solid white;
+    color: white;
     width: 30px;
     height: 30px;
-    float: right;
-    padding: 5px;
+    cursor: pointer;
+    font-family: "Titillium",sans-serif;
+    float:left;
 }
-.fb_share_wrapper span,.fb_like_wrapper span,.gplus_share_wrapper span,.twitter_share_wrapper span{
-    width:25px;
-    height:25px;
-    background-size: 25px 25px;
-    background-position: center center;
-    display:block;
-    cursor:pointer;
+.current_page,.plcPagerInnerWrapper button:hover {
+    border: solid 1px #fb5c43!important;
+    background-color: white!important;
+    color: #fb5c43!important;
 }
-.fb_share_wrapper span{
-    background-image:url('../img/social/facebook.svg');
+.plcPagerInnerWrapper button:first-of-type,
+.plcPagerInnerWrapper button:last-of-type{
+    width:auto;
 }
-.fb_like_wrapper span{
-    background-image:url('../img/social/facebook.svg');
-}
-.gplus_share_wrapper span{
-    background-image:url('../img/social/google.svg');
-}
-.twitter_share_wrapper span{
-    background-image:url('../img/social/twitter.svg');
-}
-/*SOCIAL,TAGS,COMMENTS END*/
+/*SEARCH PAGE END*/
 
+
+.plcOnlyRegisteredWarning {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0 0 0;
+    float: left;
+    height: 100%;
+}
+
+/*EDITOR*/
+.plcContentEditorWrapper .editorContainer {
+    background-color: #fb5c43;
+    width: 100%;
+    float: left;
+    padding: 20px;
+    color: white;
+}
+.plcContentEditorWrapper .editorHead {
+    width: 100%;
+    float: left;
+}
+.plcContentEditorWrapper {
+    width: 90%;
+    margin: 0 auto;
+}
+.editorContainerRow {
+    width: 100%;
+    float: left;
+}
+.editorHead h2 {
+    color: #fb5c43;
+    text-align: center;
+    width: 100%;
+    float: left;
+    padding: 0 0 10px 0;
+    font-size: 16px;
+}
+.contentList {
+    width:100%;
+    float:left;
+}
+.contentList .listElement {
+    background-color: #f8f8f6;
+    border: solid 1px #e4e2e2;
+    padding: 10px;
+    margin: 5px 0;
+    width: 100%;
+    float: left;
+    position: relative;
+}
+.listElement p{
+    margin:0;
+    padding-right:30px;
+    width:30%;
+    float:right;
+    text-align: right;
+}
+.contentList .listElement h2 {
+    width: 70%;
+    float: left;
+}
+.contentList .listElement:hover p,
+.contentList .listElement:hover span{
+    display:block;
+}
+.contentList .listElement span {
+    float: right;
+    width: 22px;
+    height: 22px;
+    border-radius: 50px;
+    background-color: #fb5c43;
+    background-image: url('../img/x_icon.png');
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+.plcContentEditorWrapper .editorDataRow textarea {
+    resize: none;
+    min-height: 150px;
+    padding: 10px;
+}
+.editorContainerRow.bttons button {
+    float: right;
+    background-color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 13px;
+    font-family: 'Titillium', sans-serif;
+    text-transform: uppercase;
+    cursor: pointer;
+    color:#fb5c43;
+    font-weight: 700;
+}
+/*EDITOR END*/
 
 
 /*RESPONSIVE BREAKPOINTS*/
@@ -876,29 +1927,68 @@ footer {
 
 
 @media all and (max-width: 1024px){
-    .latest_item { width: 50%;}
+
 }
 
 
 @media all and (max-width: 940px){
+    .plcLatestNewsWrapper,.plcLatestStoriesWrapper{width:100%;padding:0;}
 }
 
 @media all and (max-width: 768px){
-    .plProfileLeft,.plProfileRight{width:100%;}
+    .plcProfileLeft,.plcProfileRight{width:100%;}
+    .plcHeaderSearch{right:20px;}
+    .contentList .listElement h2{font-size:14px;}
+    .contentList .listElement{min-height:45px;}
 }
 
-@media all and (max-width: 600px){
+@media all and (max-width: 640px){
     .plc_latest{width: 100%;}
+    .contentWarning .warning{width:100%;padding: 5px 0;}
+    .newStoryWrapper{width:95%;}
+    .plcUserImage{width:100px;height:100px;}
+    .plcUserInformation h1{font-size:16px;padding: 0 10px 10px 10px;}
+    .plc_latest_item h2 {font-size: 16px;}
+    .plc_latest_item p,.date {font-size: 13px;}
+    .comments, .addedFavourite{font-size:12px;}
+    .plc_header{height:auto;}
+    .plcHeaderSearch {position: relative;top: 0;right: 0;}
+    .plcTagContainer,#polc_tag_handler{width:100%;}
+    .plcTagContainer{padding:0;}
+    .plcTagElement {margin: 5px 5px 5px 0;}
+    .plc_story_content h1,
+    .plc_story_content h2,
+    .plc_story_content h3 {font-size: 18px;}
+    .contentList .listElement p,
+    .contentList .listElement span{display:block;}
+    .plcHeaderSearch input,
+    .plcHeaderSearch input:focus{width:90%;border: solid 1px rgb(251, 92, 67);background-color:white;display:table;margin: 5px auto 15px auto; padding: 0 15px;}
+    .plcProfileTabMenu button,
+    .plcProfileTabMenu button:focus{padding:5px;}
+    .plcDataChangeElement label, .plcDataChangeElement input{width:100%;}
+    .plcDataChangeElement{padding:0;}
 }
 
 @media all and (max-width: 480px) {
     .plc_article_inner_wrapper {width: 100%;padding: 0 25px;}
     .plcChapterselector select{width:40%;}
     .prevwrapper,.nextwrapper{width:30%;}
-}
-@media all and (max-width: 360px){
-}
+    .contentList .listElement h2,
+    .listElement p {width: 100%;padding-right:30px;}
+    .listElement p{text-align:left;padding-top:10px;}
+    .plcContentEditorWrapper .editorHead h1{font-size:12px;}
+    .agelimit div {width: 33.33%;}
+    .plcProfileTabMenu button,
+    .plcProfileTabMenu button:focus{width:33.33%;color: transparent!important;height:40px;border-bottom: solid 1px #fb5c43!important;}
+    .plcProfileTabMenu{width:100%;}
+    .plcProfileTabMenu button:before{width:100%;}
+    .addStoryWrapper{float:left!important;}
 
+}
+@media all and (max-width: 375px) {
+    .agelimit div {width: 50%;}
+}
 
 @media all and (max-width: 320px){
+    .agelimit div {width: 100%;}
 }

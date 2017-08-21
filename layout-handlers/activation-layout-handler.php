@@ -16,6 +16,7 @@ class Polc_Activation_Layout_Handler extends Polc_Layout_Handler_Base
     CONST POLC_LAYOUT_NAME = "Aktiváció";
 
 
+
     public function render()
     {
         $user_id = filter_input(INPUT_GET, 'user', FILTER_VALIDATE_INT, array('options' => array('min_range' => 1)));

@@ -17,7 +17,7 @@ class Polc_Story_Post_Type
         add_action('init', array($this, 'register_story_post_type'));
         add_action('add_meta_boxes', array($this, 'meta_box_init'));
         add_filter('post_type_link', array($this, 'polc_story_author_tag'), 10, 4);
-        add_action('save_post', array($this, 'save') ,1, 2);
+        add_action('save_post', array($this, 'save'), 1, 2);
     }
 
     public function meta_box_init()
@@ -28,7 +28,7 @@ class Polc_Story_Post_Type
 
     public function save($post_id, $post)
     {
-        if ( !is_admin() || (isset($post->post_status) && 'auto-draft' == $post->post_status)){
+        if (!is_admin() || (isset($post->post_status) && 'auto-draft' == $post->post_status)) {
             return;
         }
 
@@ -37,16 +37,21 @@ class Polc_Story_Post_Type
 
         if (isset($_REQUEST["parent_id"]) && $_REQUEST["parent_id"] != "") {
             $id = $_REQUEST["parent_id"];
-        }else{
+        } else {
             $id = $_REQUEST["post_ID"];
         }
 
         foreach ($keys as $key => $value) {
             $meta_value = isset($_REQUEST[$key]) ? $_REQUEST[$key] : "";
-            update_post_meta($id, $key, $meta_value);
+            //in case of authors comment we always update the current post ( it's individual in every story content )
+            if ($key == "author-comment") {
+                update_post_meta($_REQUEST["post_ID"], $key, $meta_value);
+            } else {
+                update_post_meta($id, $key, $meta_value);
+            }
         }
 
-        if($post->post_type == "story" && $_REQUEST["parent_id"] != ""){
+        if ($post->post_type == "story" && $_REQUEST["parent_id"] != "") {
             //TODO::szülő utolsó módosítás dátum frissítése.
             //wp_update_post(array("ID" => $_REQUEST["parent_id"]));
         }
@@ -103,6 +108,10 @@ class Polc_Story_Post_Type
             "only-registered" => array(
                 "name" => __('Content only for registered users', 'polc'),
                 "type" => "checkbox"
+            ),
+            "author-comment" => array(
+                "name" => __("Author's comment", "polc"),
+                "type" => "text"
             )
         );
     }
@@ -116,7 +125,12 @@ class Polc_Story_Post_Type
         echo '<table class="widefat">';
 
         foreach ($keys as $key => $value) {
-            $meta = get_post_meta($id, $key);
+            //in case of authors comment we always display the current post ( it's individual in every story content )
+            if ($key == "author-comment") {
+                $meta = get_post_meta($post->ID, $key);
+            } else {
+                $meta = get_post_meta($id, $key);
+            }
             echo '<tr>';
             echo '<td>';
             echo $value["name"];
@@ -166,7 +180,7 @@ class Polc_Story_Post_Type
             'has_archive' => true,
             'hierarchical' => true,
             'menu_position' => 5,
-            'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments'),
+            'supports' => array('title', 'editor', 'author', 'thumbnail', 'excerpt', 'comments', 'revisions' ),
             'taxonomies' => array('category', 'post_tag'),
 
         );

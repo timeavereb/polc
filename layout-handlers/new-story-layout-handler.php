@@ -135,14 +135,9 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
         <input type="hidden" id="content_type" name="content_type" value="<?= $_REQUEST["content-type"]; ?>">
 
         <h1><?= __('Story details', 'polc'); ?></h1>
-
-        <div class="newStoryData_row">
-            <input type="text" name="volume_title" placeholder="<?= __('Volume title', 'polc'); ?>*">
-        </div>
-        <div class="newStoryData_row">
-            <input type="text" name="volume-sub-title" placeholder="<?= __('Volume sub-title', 'polc'); ?>">
-        </div>
         <?php
+        Polc_Helper_Module::content_volume_title();
+        Polc_Helper_Module::content_volume_sub_title();
         Polc_Helper_Module::content_blurb();
         Polc_Helper_Module::content_warnings();
         Polc_Helper_Module::content_age_limit();
@@ -168,7 +163,7 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
 
             <?php if ($_REQUEST["content-type"] == "sequel" || $this->mode == "new-chapter"): ?>
                 <?php
-                Polc_Helper_Module::content_title();
+                Polc_Helper_Module::content_chapter_title();
             endif; ?>
             <?php
             Polc_Helper_Module::content_author_comment();

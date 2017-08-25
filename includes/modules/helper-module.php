@@ -414,12 +414,42 @@ class Polc_Helper_Module
         <?php
     }
 
-    public static function content_title($value = "")
+    /**
+     * Displays the chapter title.
+     * @param string $value
+     */
+    public static function content_chapter_title($value = "")
     {
         ?>
         <div class="newStoryData_row">
             <input type="text" id="chapter_title" name="chapter_title"
                    placeholder="<?= __('Chapter\'s title', 'polc'); ?>*" value="<?= $value; ?>">
+        </div>
+        <?php
+    }
+
+    /**
+     * Displays the volume title.
+     * @param string $value
+     */
+    public static function content_volume_title($value = "")
+    {
+        ?>
+        <div class="newStoryData_row">
+            <input type="text" name="volume_title" placeholder="<?= __('Volume title', 'polc'); ?>*" value="<?= $value; ?>">
+        </div>
+        <?php
+    }
+
+    /**
+     * Displays the volume sub title.
+     * @param $value
+     */
+    public static function content_volume_sub_title($value = "")
+    {
+        ?>
+        <div class="newStoryData_row">
+            <input type="text" name="volume-sub-title" placeholder="<?= __('Volume sub-title', 'polc'); ?>" value="<?= $value; ?>">
         </div>
         <?php
     }

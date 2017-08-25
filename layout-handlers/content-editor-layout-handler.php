@@ -36,8 +36,8 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
 
         //If the save button has been triggered.
         if (isset($_REQUEST["update"])) {
-            if(!$this->update()){
-                echo __( "Error at updating story!", "polc" );
+            if (!$this->update()) {
+                echo __("Error at updating story!", "polc");
                 return false;
             }
 
@@ -101,14 +101,14 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
     {
         ?>
         <div class="plcContentEditorWrapper">
-            <div class="editorHead">
-                <h1><?= $this->post->post_title; ?></h1>
-                <?php if ($this->post_meta["volume-sub-title"] != ""): ?>
-                    <h2><?= $this->post_meta["volume-sub-title"]; ?></h2>
-                <?php endif; ?>
-            </div>
             <div class="editorContainer">
                 <form method="POST" id="polc-story-form">
+                    <div class="editorHead">
+                        <?php
+                        Polc_Helper_Module::content_volume_title($this->post->post_title);
+                        Polc_Helper_Module::content_volume_sub_title($this->post_meta["volume-sub-title"]);
+                        ?>
+                    </div>
                     <?= wp_nonce_field("polc-editor-validate", "polc-edit"); ?>
                     <input type="hidden" name="volume-id" value="<?= $_REQUEST["volume-id"]; ?>">
                     <input type="hidden" id="mode" name="mode" value="new-volume">
@@ -125,7 +125,6 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
 
                     Polc_Helper_Module::content_tags($this->tags);
                     ?>
-
                     <div class="editorContainerRow bttons">
                         <input type="submit" id="submit" name="update" value="<?= __("Save", "polc"); ?>">
                     </div>
@@ -172,7 +171,7 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
                     <input type="hidden" name="chapter-id" value="<?= $this->id; ?>">
                     <input type="hidden" id="mode" name="mode" value="new-chapter">
                     <?php
-                    Polc_Helper_Module::content_title($this->post->post_title);
+                    Polc_Helper_Module::content_chapter_title($this->post->post_title);
                     Polc_Helper_Module::content_author_comment($this->post_meta["author-comment"]);
                     Polc_Helper_Module::content_editor($this->post->post_content);
                     Polc_Helper_Module::content_tags($this->tags);
@@ -273,7 +272,8 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
         if ($_REQUEST["mode"] == "new-volume") {
             $id = $_REQUEST["volume-id"];
             $args["post_excerpt"] = $_REQUEST["blurb"];
-            $volume_meta = array("obscene-content", "violent-content", "erotic-content", "agelimit", "only-registered", "");
+            $args["post_title"] = $_REQUEST["volume_title"];
+            $volume_meta = array("volume-sub-title", "obscene-content", "violent-content", "erotic-content", "agelimit", "only-registered", "");
             $meta_keys = array_merge($meta_keys, $volume_meta);
         } else {
             $id = $_REQUEST["chapter-id"];

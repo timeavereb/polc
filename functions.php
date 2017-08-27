@@ -73,15 +73,14 @@ add_action('init', function () {
     $wp_rewrite->author_base = $author_slug;
 
     $comment_page_id = Polc_Settings_Manager::pages()["comment_page"];
-    if(isset($comment_page_id) && is_numeric($comment_page_id)){
+    if (isset($comment_page_id) && is_numeric($comment_page_id)) {
 
         $comment_page = get_post($comment_page_id);
-        add_rewrite_rule('^'. $comment_page->post_name .'/([^/]*)/?$', 'index.php?page_id=' . $comment_page_id . '&comment_post_slug=$matches[1]', 'top');
+        add_rewrite_rule('^' . $comment_page->post_name . '/([^/]*)/?$', 'index.php?page_id=' . $comment_page_id . '&comment_post_slug=$matches[1]', 'top');
     }
 });
 
-add_filter( 'query_vars',function ( $vars )
-{
+add_filter('query_vars', function ($vars) {
     array_push($vars, 'comment_post_slug');
     return $vars;
 });
@@ -100,3 +99,34 @@ function polc_tag_query($query)
 
     return $query;
 }
+
+add_action("wp_head", function () {
+    global $post;
+    if ($post->post_type == "story") {
+
+        if ($post->post_parent == 0) {
+            $content = wp_trim_words(strip_tags($post->post_excerpt), 40, "...");
+        } else {
+            $content = wp_trim_words(strip_tags($post->post_content), 40, "...");
+        }
+
+        ?>
+
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/hu_HU/sdk.js#xfbml=1&version=v2.10";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+        <meta property="og:title" content="<?= $post->post_title; ?>"/>
+        <meta property="og:image" content="<?= home_url(); ?>/wp-content/themes/polc/img/social/share_default.png"/>
+        <meta property="og:site_name" content="Polc"/>
+        <meta property="og:description" content="<?= $content; ?>"/>
+        <?php
+    }
+});

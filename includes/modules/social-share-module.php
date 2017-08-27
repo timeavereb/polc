@@ -10,12 +10,12 @@
 /**
  * Class Pol_Social_Share_Module
  */
-class Pol_Social_Share_Module
+class Polc_Social_Share_Module
 {
     /**
      * @param $custom_args
      */
-    public function __construct($custom_args)
+    public function __construct($custom_args = array())
     {
         $default_args = array(
             "fb_share",
@@ -24,7 +24,7 @@ class Pol_Social_Share_Module
             "g_share",
         );
 
-        $args = isset($custom_args) ? $custom_args : $default_args;
+        $args = wp_parse_args($custom_args, $default_args);
 
         echo '<div class="polcSocialShare">';
 
@@ -50,21 +50,42 @@ class Pol_Social_Share_Module
 
     public function facebook_share()
     {
-        echo "<div class=\"fb_share_wrapper\"><span></span></div>";
+        ?>
+        <div class="fb_share_wrapper">
+            <span></span>
+
+            <div class="fb-share-button"></div>
+        </div>
+        <?php
     }
 
     public function facebook_like()
     {
-        echo "<div class=\"fb_share_wrapper\"><span></span></div>";
+        ?>
+        <div class="fb_share_wrapper">
+            <span></span>
+
+            <div class="fb-like"
+                 data-layout="box_count"
+                 data-action="true">
+            </div>
+        </div>
+        <?php
     }
 
     public function twitter_share()
     {
-        echo "<div class=\"twitter_share_wrapper\"><span></span></div>";
+        ?>
+        <div class="twitter_share_wrapper"><span></span>
+
+        </div>
+        <?php
     }
 
     public function google_share()
     {
-        echo "<div class=\"gplus_share_wrapper\"><span></span></div>";
+        ?>
+        <div class="gplus_share_wrapper"><span></span></div>
+        <?php
     }
 }

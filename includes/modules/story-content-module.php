@@ -10,6 +10,7 @@
  * Content display module.
  * Class Polc_Story_Content
  */
+
 class Polc_Story_Content_Module
 {
     private $post;
@@ -21,6 +22,7 @@ class Polc_Story_Content_Module
     public function __construct()
     {
         global $post;
+
         setup_postdata($post);
         $this->post = $post;
         $logged = is_user_logged_in();
@@ -140,7 +142,7 @@ class Polc_Story_Content_Module
             </article>
             <div class="polcSocialShareAndTags">
                 <?php
-                $share = new Pol_Social_Share_Module();
+                new Polc_Social_Share_Module();
                 $tags = get_the_tags($this->post->ID);
                 if ($tags):
                 ?>
@@ -163,7 +165,7 @@ class Polc_Story_Content_Module
                         </div>
                         <button id="plcSendComment"><?= __("Send comment", "polc"); ?></button>
                     </div>
-                <?php
+                    <?php
                 endif;
                 ?>
                 <div class="plcCommentListWrapper">

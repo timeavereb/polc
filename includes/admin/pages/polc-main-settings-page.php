@@ -120,6 +120,19 @@ class Polc_Main_Settings_Page
                 ?>
             </p>
             <p>
+                <label for="comment_page"><?= __('Comment list page', 'polc'); ?></label>
+                <?php
+                wp_dropdown_pages(
+                    array("id" => "comment_page",
+                        "name" => "pages[comment_page]",
+                        "show_option_none" => __('None selected', 'polc'),
+                        "option_none_value" => 0,
+                        "selected" => isset($pages["comment_page"]) ? $pages["comment_page"] : 0
+                    )
+                );
+                ?>
+            </p>
+            <p>
                 <label for="new-story-page"><?= __('Content editor page', 'polc'); ?></label>
                 <?php
                 wp_dropdown_pages(

@@ -69,8 +69,17 @@ class Polc_Story_Content_Module
 
     private function render()
     {
+        wp_enqueue_script("polc-comment-module", PLC_THEME_PATH . '/js/comment-handler.js');
         ?>
-        <script>var polc_content_handler = new polc_content_handler();</script>
+        <script>
+            var polc_comment_handler,
+                polc_content_handler = new polc_content_handler();
+            jQuery(document).ready(function () {
+                polc_comment_handler = new polc_comment_handler(<?= json_encode($this->options()); ?>);
+
+                polc_comment_handler.load_comments();
+            });
+        </script>
         <div class="plc_story_content_wrapper">
             <div class="plc_story_content_settings">
                 <div class="plc_text_settings">
@@ -124,47 +133,40 @@ class Polc_Story_Content_Module
                         }
                         ?>
                     </p>
-
                     <?php
                     $this->chapter_selection();
                     ?>
                 </div>
             </article>
             <div class="polcSocialShareAndTags">
-
                 <?php
                 $share = new Pol_Social_Share_Module();
                 $tags = get_the_tags($this->post->ID);
                 if ($tags):
-                    echo '<div class="polcTagsWrapper">';
+                ?>
+                <div class="polcTagsWrapper">
+                    <?php
                     for ($i = 0; $i < min(4, count($tags)); $i++) : ?>
                         <a href="<?= get_tag_link($tags[$i]->term_id); ?>"><span
                                 class="category"><?= $tags[$i]->name; ?></span></a>
                     <?php endfor;
-                endif;
-                echo '</div>';
-                ?>
+                    endif;
+                    ?>
+                </div>
             </div>
             <div class="polcCommentWrapper">
                 <?php if ($this->can_comment): ?>
                     <div class="polcCommentInnerWrapper">
-                        <div class="Name">Name</div>
-                        <div class="Name"><textarea>Írj kritikát...</textarea></div>
+                        <div class="Name">
+                            <textarea id="plcCommentContent"
+                                      placeholder="<?= __("Share your thoughts...", "polc"); ?>"></textarea>
+                        </div>
+                        <button id="plcSendComment"><?= __("Send comment", "polc"); ?></button>
                     </div>
-                <?php endif; ?>
+                <?php
+                endif;
+                ?>
                 <div class="plcCommentListWrapper">
-                    <?php
-                    $comments = get_comments(array(
-                        'post_id' => $this->post->ID,
-                        'number' => '2'));
-                    foreach ($comments as $comment) {
-                        echo '<div class="plcCommentWrapper">';
-                        echo '<span> ' . $comment->comment_content . ' </span>';
-                        echo '<a href="' . get_author_posts_url($comment->user_id) . '">' . $comment->comment_author . '</a>';
-                        echo '<span> ' . __('wrote at', 'polc') . ' ' . mysql2date('Y F j', strtotime($comment->comment_date)) . ' </span>';
-                        echo '</div>';
-                    }
-                    ?>
                 </div>
             </div>
         </div>
@@ -174,31 +176,51 @@ class Polc_Story_Content_Module
     public function chapter_selection()
     {
         if (count($this->chapters) > 0):
+            ?>
+            <div class="plcChapterselector">
+                <div class="prevwrapper">
+                    <span class="prev"></span>
+                </div>
 
-            echo '<div class="plcChapterselector">';
-            echo '<div class="prevwrapper">';
-            echo '<span class="prev"></span>';
-            echo '</div>';
+                <select class="plcChapterSelect">
+                    <?php
+                    if ($this->post->post_parent == 0) {
+                        $volume_link = get_permalink($this->post->ID);
+                    } else {
+                        $volume_link = get_permalink($this->post->post_parent);
+                    }
+                    ?>
+                    <option data-link="<?= $volume_link; ?>"><?= __('Volume', 'polc') ?></option>
+                    <?php
+                    $cnt = 1;
+                    foreach ($this->chapters as $chapter):
+                        ?>
+                        <option <?= ($this->post->ID == $chapter->ID ? "selected" : ""); ?>
+                            data-link="<?= get_permalink($chapter->ID); ?>">
+                            <?= __("Chapter", "polc") . " " . $cnt; ?>
+                        </option>
+                        <?php
+                        $cnt++;
+                    endforeach;
+                    ?>
+                </select>
 
-            echo '<select class="plcChapterSelect">';
-            if ($this->post->post_parent == 0) {
-                $volume_link = get_permalink($this->post->ID);
-            } else {
-                $volume_link = get_permalink($this->post->post_parent);
-            }
-            echo '<option data-link="' . $volume_link . '">' . __('Volume', 'polc') . '</option>';
-
-            $cnt = 1;
-            foreach ($this->chapters as $chapter):
-                echo '<option ' . ($this->post->ID == $chapter->ID ? "selected" : "") . ' data-link="' . get_permalink($chapter->ID) . '">Fejezet ' . $cnt . '</option>';
-                $cnt++;
-            endforeach;
-            echo '</select>';
-
-            echo '<div class="nextwrapper">';
-            echo '<span class="next"></span>';
-            echo '</div>';
-            echo '</div>';
+                <div class="nextwrapper">
+                    <span class="next"></span>
+                </div>
+            </div>
+            <?php
         endif;
+    }
+
+    private function options()
+    {
+        global $post;
+        $options = new stdClass();
+        $options->id = $post->ID;
+        $options->number = 5;
+        $options->parent = 0;
+
+        return $options;
     }
 }

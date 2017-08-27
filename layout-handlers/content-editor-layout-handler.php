@@ -105,25 +105,25 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
                 <form method="POST" id="polc-story-form">
                     <div class="editorHead">
                         <?php
-                        Polc_Helper_Module::content_volume_title($this->post->post_title);
-                        Polc_Helper_Module::content_volume_sub_title($this->post_meta["volume-sub-title"]);
+                        Polc_Editor_Helper_Module::content_volume_title($this->post->post_title);
+                        Polc_Editor_Helper_Module::content_volume_sub_title($this->post_meta["volume-sub-title"]);
                         ?>
                     </div>
                     <?= wp_nonce_field("polc-editor-validate", "polc-edit"); ?>
                     <input type="hidden" name="volume-id" value="<?= $_REQUEST["volume-id"]; ?>">
                     <input type="hidden" id="mode" name="mode" value="new-volume">
                     <?php
-                    Polc_Helper_Module::content_blurb((string)$this->post->post_excerpt);
-                    Polc_Helper_Module::content_warnings((array)$this->warnings);
-                    Polc_Helper_Module::content_age_limit((int)$this->post_meta["agelimit"]);
-                    Polc_Helper_Module::content_restriction((bool)$this->post_meta["only-registered"]);
+                    Polc_Editor_Helper_Module::content_blurb((string)$this->post->post_excerpt);
+                    Polc_Editor_Helper_Module::content_warnings((array)$this->warnings);
+                    Polc_Editor_Helper_Module::content_age_limit((int)$this->post_meta["agelimit"]);
+                    Polc_Editor_Helper_Module::content_restriction((bool)$this->post_meta["only-registered"]);
 
                     if (!$this->has_child) {
-                        Polc_Helper_Module::content_author_comment((string)$this->post_meta["author-comment"]);
-                        Polc_Helper_Module::content_editor($this->post->post_content);
+                        Polc_Editor_Helper_Module::content_author_comment((string)$this->post_meta["author-comment"]);
+                        Polc_Editor_Helper_Module::content_editor($this->post->post_content);
                     }
 
-                    Polc_Helper_Module::content_tags($this->tags);
+                    Polc_Editor_Helper_Module::content_tags($this->tags);
                     ?>
                     <div class="editorContainerRow bttons">
                         <input type="submit" id="submit" name="update" value="<?= __("Save", "polc"); ?>">
@@ -171,10 +171,10 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
                     <input type="hidden" name="chapter-id" value="<?= $this->id; ?>">
                     <input type="hidden" id="mode" name="mode" value="new-chapter">
                     <?php
-                    Polc_Helper_Module::content_chapter_title($this->post->post_title);
-                    Polc_Helper_Module::content_author_comment($this->post_meta["author-comment"]);
-                    Polc_Helper_Module::content_editor($this->post->post_content);
-                    Polc_Helper_Module::content_tags($this->tags);
+                    Polc_Editor_Helper_Module::content_chapter_title($this->post->post_title);
+                    Polc_Editor_Helper_Module::content_author_comment($this->post_meta["author-comment"]);
+                    Polc_Editor_Helper_Module::content_editor($this->post->post_content);
+                    Polc_Editor_Helper_Module::content_tags($this->tags);
                     ?>
                     <input type="submit" id="submit" name="update" value="<?= __("Save", "polc"); ?>">
                 </form>

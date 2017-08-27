@@ -8,10 +8,7 @@
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/wp-load.php";
 
-if (!is_user_logged_in()) {
-    wp_send_json(array("error" => __('You\'ve not signed in!', 'polc')));
-}
-
+Polc_Helper_Module::is_logged();
 
 if(!isset($_REQUEST["plc_user_data_change_nonce"]) || !wp_verify_nonce($_REQUEST["plc_user_data_change_nonce"],"plc_user_data_change")):
     wp_send_json(array("error" => "Invalid identification!"));

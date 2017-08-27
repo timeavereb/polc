@@ -14,3 +14,4 @@ require_once "new-story-layout-handler.php";
 require_once "toplists-layout-handler.php";
 require_once "password-reset-layout-handler.php";
 require_once "content-editor-layout-handler.php";
+require_once "comment-list-layout-handler.php";

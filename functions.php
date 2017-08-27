@@ -71,6 +71,19 @@ add_action('init', function () {
     global $wp_rewrite;
     $author_slug = __('author-slug', 'polc');
     $wp_rewrite->author_base = $author_slug;
+
+    $comment_page_id = Polc_Settings_Manager::pages()["comment_page"];
+    if(isset($comment_page_id) && is_numeric($comment_page_id)){
+
+        $comment_page = get_post($comment_page_id);
+        add_rewrite_rule('^'. $comment_page->post_name .'/([^/]*)/?$', 'index.php?page_id=' . $comment_page_id . '&comment_post_slug=$matches[1]', 'top');
+    }
+});
+
+add_filter( 'query_vars',function ( $vars )
+{
+    array_push($vars, 'comment_post_slug');
+    return $vars;
 });
 
 add_filter('pre_get_posts', 'polc_tag_query');

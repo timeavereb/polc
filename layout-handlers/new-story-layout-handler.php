@@ -106,7 +106,7 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
                             $this->volume();
                         }
                         $this->chapter();
-                        Polc_Helper_Module::content_tags();
+                        Polc_Editor_Helper_Module::content_tags();
                         ?>
                         <div class="newStoryData_row">
                             <p class="form_info"><?= __('Fields marked with * are required.', 'polc'); ?></p>
@@ -136,12 +136,12 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
 
         <h1><?= __('Story details', 'polc'); ?></h1>
         <?php
-        Polc_Helper_Module::content_volume_title();
-        Polc_Helper_Module::content_volume_sub_title();
-        Polc_Helper_Module::content_blurb();
-        Polc_Helper_Module::content_warnings();
-        Polc_Helper_Module::content_age_limit();
-        Polc_Helper_Module::content_restriction();
+        Polc_Editor_Helper_Module::content_volume_title();
+        Polc_Editor_Helper_Module::content_volume_sub_title();
+        Polc_Editor_Helper_Module::content_blurb();
+        Polc_Editor_Helper_Module::content_warnings();
+        Polc_Editor_Helper_Module::content_age_limit();
+        Polc_Editor_Helper_Module::content_restriction();
     }
 
     /**
@@ -163,11 +163,11 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
 
             <?php if ($_REQUEST["content-type"] == "sequel" || $this->mode == "new-chapter"): ?>
                 <?php
-                Polc_Helper_Module::content_chapter_title();
+                Polc_Editor_Helper_Module::content_chapter_title();
             endif; ?>
             <?php
-            Polc_Helper_Module::content_author_comment();
-            Polc_Helper_Module::content_editor();
+            Polc_Editor_Helper_Module::content_author_comment();
+            Polc_Editor_Helper_Module::content_editor();
             ?>
         </div>
         <?php

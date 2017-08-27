@@ -10,6 +10,7 @@
 /**
  * Class Polc_Activation_Layout_Handler
  */
+
 class Polc_Activation_Layout_Handler extends Polc_Layout_Handler_Base
 {
     CONST POLC_LAYOUT = "polc-activation";

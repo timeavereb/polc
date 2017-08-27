@@ -120,6 +120,19 @@ class Polc_Main_Settings_Page
                 ?>
             </p>
             <p>
+                <label for="new-story-page"><?= __('Content editor page', 'polc'); ?></label>
+                <?php
+                wp_dropdown_pages(
+                    array("id" => "content-editor-page",
+                        "name" => "pages[content-editor-page]",
+                        "show_option_none" => __('None selected', 'polc'),
+                        "option_none_value" => 0,
+                        "selected" => isset($pages["content-editor-page"]) ? $pages["content-editor-page"] : 0
+                    )
+                );
+                ?>
+            </p>
+            <p>
                 <label for="reg-activation"><?= __('Activation page', 'polc'); ?></label>
                 <?php
                 wp_dropdown_pages(

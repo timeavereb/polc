@@ -30,14 +30,22 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
             return false;
         }
 
-        $this->content_category = isset($_REQUEST["content-category"]) ? $_REQUEST["content-category"] : "";
-        $this->content_subcategory = isset($_REQUEST["content-subcategory"]) ? $_REQUEST["content-subcategory"] : "";
-        $this->content_genre = isset($_REQUEST["content-genre"]) ? $_REQUEST["content-genre"] : "";
+        $this->content_category = isset($_REQUEST["content-category"]) ? $_REQUEST["content-category"] : array();
+        $this->content_subcategory = isset($_REQUEST["content-subcategory"]) ? $_REQUEST["content-subcategory"] : array();
+        $this->content_genre = isset($_REQUEST["content-genre"]) ? $_REQUEST["content-genre"] : array();
 
         $this->user = Polc_Header::current_user();
 
-
         wp_enqueue_script("polc-story-handler", PLC_THEME_PATH . "/js/content-upload.js");
+        ?>
+        <script>
+            var polc_editor;
+            jQuery(document).ready(function () {
+                polc_editor = new polc_content_editor_handler();
+            });
+        </script>
+        <?php
+
         //Validate referer.
         if (isset($_REQUEST["volume-id-nonce"]) && wp_verify_nonce($_REQUEST["volume-id-nonce"], 'add-chapter') && is_numeric($_REQUEST["volume-id"])) {
 
@@ -98,17 +106,8 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
                             $this->volume();
                         }
                         $this->chapter();
+                        Polc_Helper_Module::content_tags();
                         ?>
-                        <div class="newStoryData_row tag">
-                            <label for="polc_tag_handler"><?= __('Add tags', 'polc'); ?></label>
-                            <input type="text" id="polc_tag_handler">
-
-                            <div class="plcTagContainer">
-                            </div>
-                            <div class="plcTagWarningWrapper">
-                                <p class="form_info"><?= __( 'The maximum number of tags is 8.', 'polc'); ?></p>
-                            </div>
-                        </div>
                         <div class="newStoryData_row">
                             <p class="form_info"><?= __('Fields marked with * are required.', 'polc'); ?></p>
                         </div>
@@ -136,93 +135,13 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
         <input type="hidden" id="content_type" name="content_type" value="<?= $_REQUEST["content-type"]; ?>">
 
         <h1><?= __('Story details', 'polc'); ?></h1>
-
-        <div class="newStoryData_row">
-            <input type="text" name="volume_title" placeholder="<?= __('Volume title', 'polc'); ?>*">
-        </div>
-        <div class="newStoryData_row">
-            <input type="text" name="volume-sub-title" placeholder="<?= __('Volume sub-title', 'polc'); ?>">
-        </div>
-        <div class="newStoryData_row">
-            <textarea name="blurb" placeholder="<?= __('Blurb', 'polc'); ?>*" id="blurb"></textarea>
-
-            <p class="form_info"><?= __('The bulrb character limit is 1200 characters.', 'polc'); ?></p>
-        </div>
-
-        <div class="newStoryData_row contentWarning">
-            <h4><?= __('Warnings', 'polc'); ?></h4>
-
-            <div class="warning obscenecontent">
-                <div class="plcCheckbox">
-                    <input type="checkbox" id="obscene-content" name="obscene-content">
-                    <label></label>
-                </div>
-                <p><?= __('Obscene content', 'polc'); ?></p>
-            </div>
-            <div class="warning violentcontent">
-                <div class="plcCheckbox">
-                    <input type="checkbox" id="violent-content" name="violent-content">
-                    <label></label>
-                </div>
-                <p><?= __('Violent content', 'polc'); ?></p>
-            </div>
-            <div class="warning eroticcontent">
-                <div class="plcCheckbox">
-                    <input type="checkbox" id="erotic-content" name="erotic-content">
-                    <label></label>
-                </div>
-                <p><?= __('Erotic content', 'polc'); ?></p>
-            </div>
-        </div>
-        <div class="newStoryData_row agelimit">
-            <h4><?= __('Age limit', 'polc'); ?></h4>
-
-            <div class="plcRadiobutton">
-                <label>
-                    <input type="radio" name="agelimit" value="18" class="agelimit18">
-                    <span>18</span>
-                </label>
-            </div>
-            <div class="plcRadiobutton">
-                <label>
-                    <input type="radio" name="agelimit" value="16" class="agelimit16">
-                    <span>16</span>
-                </label>
-            </div>
-            <div class="plcRadiobutton">
-                <label>
-                    <input type="radio" name="agelimit" value="14" class="agelimit14">
-                    <span>14</span>
-                </label>
-            </div>
-            <div class="plcRadiobutton">
-                <label>
-                    <input type="radio" name="agelimit" value="12" class="agelimit12">
-                    <span>12</span>
-                </label>
-            </div>
-            <div class="plcRadiobutton">
-                <label>
-                    <input type="radio" name="agelimit" value="0" checked class="noagelimit">
-                    <span><?= __('No age limit', 'polc'); ?></span>
-                </label>
-            </div>
-        </div>
-        <div class="newStoryData_row regWarning">
-            <h4><?= __('Restrictions', 'polc'); ?></h4>
-
-            <div class="warning registeredOnly">
-                <div class="plcCheckbox">
-                    <input type="checkbox" id="only-registered" name="only-registered">
-                    <label></label>
-                </div>
-                <p><?= __('Content only for registered users', 'polc'); ?></p>
-            </div>
-            <div class="newStoryData_row">
-                <p class="form_info"><?= __('Warning! Content under 18+ available only for registered users!', 'polc'); ?></p>
-            </div>
-        </div>
         <?php
+        Polc_Helper_Module::content_volume_title();
+        Polc_Helper_Module::content_volume_sub_title();
+        Polc_Helper_Module::content_blurb();
+        Polc_Helper_Module::content_warnings();
+        Polc_Helper_Module::content_age_limit();
+        Polc_Helper_Module::content_restriction();
     }
 
     /**
@@ -230,7 +149,6 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
      */
     public function chapter()
     {
-
         if ($this->mode == "new-chapter"):
             ?>
             <input type="hidden" name="volume-id" value="<?= $_REQUEST["volume-id"]; ?>">
@@ -244,23 +162,13 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
             <?php endif; ?>
 
             <?php if ($_REQUEST["content-type"] == "sequel" || $this->mode == "new-chapter"): ?>
-                <div class="newStoryData_row">
-                    <input type="text" id="chapter_title" name="chapter_title"
-                           placeholder="<?= __('Chapter\'s title', 'polc'); ?>*">
-                </div>
-            <?php endif; ?>
-            <div class="newStoryData_row">
-                <input type="text" name="author-comment" placeholder="<?= __('Author\'s comment', 'polc'); ?>">
-            </div>
-            <div class="newStoryData_row">
                 <?php
-                wp_editor('', 'story_content', array("media_buttons" => false, "teeny" => true, "quicktags" => false));
-                ?>
-                <label id="story_content-error" for="story_content"
-                       style="display: none;"><?= __('Content is empty!', 'polc'); ?></label>
-
-                <p class="form_info"><?= __('The content maximum character limit is 28 000 characters.', 'polc'); ?></p>
-            </div>
+                Polc_Helper_Module::content_chapter_title();
+            endif; ?>
+            <?php
+            Polc_Helper_Module::content_author_comment();
+            Polc_Helper_Module::content_editor();
+            ?>
         </div>
         <?php
     }
@@ -270,8 +178,8 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
      */
     public function init_upload()
     {
-        if(count($_REQUEST["post_tag"]) > 8){
-            echo __( 'The maximum number of tags is 8.', 'polc' );;
+        if (count($_REQUEST["post_tag"]) > 8) {
+            echo __('The maximum number of tags is 8.', 'polc');;
             return false;
         }
 
@@ -335,10 +243,9 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
             wp_set_post_tags($this->insert_id, $_REQUEST["post_tag"]);
         }
 
-        $keys = array("volume-sub-title", "obscene-content", "violent-content", "erotic-content", "agelimit", "only-registered");
+        $keys = array("volume-sub-title", "obscene-content", "violent-content", "erotic-content", "agelimit", "only-registered", "author-comment");
 
         foreach ($keys as $key) {
-
             if (isset($_REQUEST[$key])) {
                 update_post_meta($this->insert_id, $key, $_REQUEST[$key]);
             }
@@ -352,8 +259,9 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
      */
     public function upload_chapter()
     {
-
+        $new_chapter = false;
         if (isset($_REQUEST["mode"]) && $_REQUEST["mode"] == "new-chapter") {
+            $new_chapter = true;
             $parent_id = $_REQUEST["volume-id"];
         } else {
             $parent_id = $this->insert_id;
@@ -375,6 +283,11 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
         wp_set_post_terms($insert_id, $_REQUEST["genre"], "genre");
         if (isset($_REQUEST["post_tag"]) && count($_REQUEST["post_tag"]) > 0) {
             wp_set_post_tags($insert_id, $_REQUEST["post_tag"]);
+        }
+
+        //If it's a new chapter, we set the author-comment meta
+        if ($new_chapter) {
+            update_post_meta($insert_id, "author-comment", $_REQUEST["author-comment"]);
         }
     }
 }

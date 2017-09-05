@@ -239,7 +239,7 @@ class Polc_Author
                 </div>
                 <div class="plcUserDefault">
                     <p><?= $this->author->user_email; ?></p>
-                    <a href="userSite"><?= $this->author->user_url; ?></a>
+                    <a href="<?= $this->author->user_url; ?>"><?= $this->author->user_url; ?></a>
                 </div>
                 <div class="plcUserStat">
                     <div class="plcUserStatElement">
@@ -278,7 +278,7 @@ class Polc_Author
                     endif; ?>
                 </div>
             </div>
-            <div class="plcWriterLatestActivities">
+            <!--<div class="plcWriterLatestActivities">
                 <div class="activitiesItem underControl">
                     <div class="activitiesDate">
                         <p>Május</p>
@@ -287,7 +287,6 @@ class Polc_Author
                     <div class="activitiesTitle">
                         <h2>Nullam imperdiet facilisis gravida - Nullam imperdiet facilisis gravida</h2>
                     </div>
-                    <!--<div class="activitesStatus">Ellenőrzés alatt</div>-->
                 </div>
                 <div class="activitiesItem">
                     <div class="activitiesDate">
@@ -316,7 +315,7 @@ class Polc_Author
                         <h2>Nullam gravida imperdiet facilisis gravida</h2>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <div class="plcUserCommentary">
             </div>
         </div>

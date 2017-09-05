@@ -110,7 +110,8 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
                         ?>
                     </div>
                     <?= wp_nonce_field("polc-editor-validate", "polc-edit"); ?>
-                    <input type="hidden" name="volume-id" value="<?= $_REQUEST["volume-id"]; ?>">
+                    <input type="hidden" id="plc-volume-title" value="<?= $this->post->post_title; ?>">
+                    <input type="hidden" id="volume-id" name="volume-id" value="<?= $_REQUEST["volume-id"]; ?>">
                     <input type="hidden" id="mode" name="mode" value="new-volume">
                     <?php
                     Polc_Editor_Helper_Module::content_blurb((string)$this->post->post_excerpt);
@@ -155,6 +156,7 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
                 <?php
             endif; ?>
         </div>
+        <button id="plcDeleteVolume"><?= __( "Delete volume", "polc" );?></button>
         <?php
     }
 
@@ -201,7 +203,7 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
 
             <div id="plcChapterDeleteInner">
                 <input type="hidden" id="chapter-id">
-                <span class="plcConfirmMsg"><?= __("Are you sure you want to delete this chapter?", "polc"); ?></span>
+                <span class="plcConfirmMsg"><?= __("Are you sure you want to delete this?", "polc"); ?></span>
                 <span id="plcChapterName"></span>
 
                 <div class="plcPopupButtonBar">
@@ -231,6 +233,12 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
 
         $this->user = Polc_Header::current_user();
         $this->post = get_post($this->id);
+
+        if($this->post->post_status != "publish"){
+            echo __("Invalid content identifier!", "polc");
+            return false;
+        }
+
 
         //If someone would try to send a volume id with a chapter id paramter we throw error.
         if ($this->post->post_parent == 0 && $this->mode == "chapter") {

@@ -13,7 +13,8 @@
 class Polc_Helper_Module
 {
 
-    public static function is_logged(){
+    public static function is_logged()
+    {
         if (!is_user_logged_in()) {
             self::error(__('You\'ve not signed in!', 'polc'));
         }
@@ -203,16 +204,18 @@ class Polc_Helper_Module
             $img = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium');
             $img = isset($img[0]) && $img[0] != "" ? $img[0] : "http:/defaultimg.jpg";
             ?>
-            <article>
-                <div class="plcNewsImageWrapper">
-                    <div class="plcNewsImage" style="background-image:url('<?= $img; ?>');"></div>
-                </div>
-                <div class="plcNewsText">
-                    <h1><?= $post->post_title; ?></h1>
+            <a href="<?= get_permalink($post->ID); ?>">
+                <article>
+                    <div class="plcNewsImageWrapper">
+                        <div class="plcNewsImage" style="background-image:url('<?= $img; ?>');"></div>
+                    </div>
+                    <div class="plcNewsText">
+                        <h1><?= $post->post_title; ?></h1>
 
-                    <p class="date"><?= get_the_date(); ?></p>
-                </div>
-            </article>
+                        <p class="date"><?= get_the_date(); ?></p>
+                    </div>
+                </article>
+            </a>
             <?php
 
         }

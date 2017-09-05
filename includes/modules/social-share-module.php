@@ -53,7 +53,6 @@ class Polc_Social_Share_Module
         ?>
         <div class="fb_share_wrapper">
             <span></span>
-
             <div class="fb-share-button"></div>
         </div>
         <?php
@@ -62,12 +61,9 @@ class Polc_Social_Share_Module
     public function facebook_like()
     {
         ?>
-        <div class="fb_share_wrapper">
+        <div class="fb_like_wrapper">
             <span></span>
-
-            <div class="fb-like"
-                 data-layout="box_count"
-                 data-action="true">
+            <div class="fb-like" data-layout="box_count" data-action="true">
             </div>
         </div>
         <?php
@@ -75,17 +71,24 @@ class Polc_Social_Share_Module
 
     public function twitter_share()
     {
+        $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
-        <div class="twitter_share_wrapper"><span></span>
-
-        </div>
+        <a href="https://twitter.com/share?url=<?= $actual_link; ?>" target="_blank">
+            <div class="twitter_share_wrapper"><span></span>
+            </div>
+        </a>
         <?php
     }
 
     public function google_share()
     {
         ?>
-        <div class="gplus_share_wrapper"><span></span></div>
+        <div class="gplus_share_wrapper">
+            <span></span>
+            <div class="g-plus-share-wrapper">
+                <div class="g-plus" data-action="share"></div>
+            </div>
+        </div>
         <?php
     }
 }

@@ -35,28 +35,29 @@ class Polc_Story_Delete_Module
         if ($this->post && $this->post->post_type == "story" && $this->post->post_author == $this->user->ID) {
             $this->mode = $this->post->post_parent == 0 ? "volume" : "chapter";
             $this->init();
-        }else{
+        } else {
             wp_send_json(array("error" => __('Invalid content identifier!', 'polc')));
         }
     }
 
     private function init()
     {
-        if($this->mode == "chapter"){
+        if ($this->mode == "chapter") {
             wp_trash_post($this->post->ID);
-            wp_send_json(array("success" => __( "The chapter has been deleted!", "polc" )));
-        }else{
+            wp_send_json(array("success" => __("The chapter has been deleted!", "polc")));
+        } else {
             $this->delete_chapters();
             wp_trash_post($this->post->ID);
-            wp_send_json(array("success" => __( "The volume with all it's chapters has been deleted!", "polc" )));
+            wp_send_json(array("success" => __("The volume with all it's chapters has been deleted!", "polc"), "chapter_delete" => true));
         }
     }
 
-    private function delete_chapters(){
+    private function delete_chapters()
+    {
 
         $chapters = get_children(array("post_parent" => $this->post->ID, "post_type" => "story"));
 
-        foreach($chapters as $chapter){
+        foreach ($chapters as $chapter) {
             wp_trash_post($chapter->ID);
         }
     }

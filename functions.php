@@ -101,8 +101,10 @@ function polc_tag_query($query)
 }
 
 add_action("wp_head", function () {
+
     global $post;
-    if ($post->post_type == "story") {
+
+    if (isset($post->post_type) && ($post->post_type == "story" || $post->post_type == "post")) {
 
         if ($post->post_parent == 0) {
             $content = wp_trim_words(strip_tags($post->post_excerpt), 40, "...");
@@ -110,8 +112,23 @@ add_action("wp_head", function () {
             $content = wp_trim_words(strip_tags($post->post_content), 40, "...");
         }
 
+        $featured_img = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), "medium");
+        $image = !$featured_img ? home_url() . "/wp-content/themes/polc/img/social/share_default.png" : $featured_img[0];
+
+        if(!$featured_img){
+            $image_info = getimagesize($image);
+            $width = $image_info[0];
+            $height = $image_info[1];
+        }else{
+            $width = $featured_img[1];
+            $height = $featured_img[2];
+        }
         ?>
 
+        <!--g+ sdk-->
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+        <!-- fb sdk-->
         <div id="fb-root"></div>
         <script>(function(d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
@@ -121,12 +138,14 @@ add_action("wp_head", function () {
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));</script>
 
-
-
+        <!--setting up meta tags-->
         <meta property="og:title" content="<?= $post->post_title; ?>"/>
-        <meta property="og:image" content="<?= home_url(); ?>/wp-content/themes/polc/img/social/share_default.png"/>
+        <meta property="og:image" content="<?= $image; ?>">
         <meta property="og:site_name" content="Polc"/>
         <meta property="og:description" content="<?= $content; ?>"/>
+        <meta property="og:image:width" content="<?= $width; ?>" />
+        <meta property="og:image:height" content="<?= $height; ?>" />
+
         <?php
     }
 });

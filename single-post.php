@@ -7,5 +7,12 @@
  */
 
 get_header();
-echo "ez lesz a cikkmegjelenítő";
+
+the_title();
+the_post_thumbnail("full");
+the_excerpt();
+the_content();
+
+new Polc_Social_Share_Module();
+
 get_footer();

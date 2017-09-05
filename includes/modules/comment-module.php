@@ -122,7 +122,7 @@ class Polc_Comment_Module
             <?php
         }
 
-        if ($more) {
+        if ($more && count($comments) > 0) {
             ?>
             <a href="<?= $more_link; ?>"><?= __("All comments", "polc"); ?></a>
             <?php

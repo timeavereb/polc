@@ -2085,7 +2085,160 @@ SOCIAL,TAGS,COMMENTS END*/
     width: 95%;
 }
 /*COMMENT END*/
+/*ARTICLE READER*/
+.plcArticleWrapper {
+    width: 100%;
+    float: left;
+}
+.plcArticleInnerWrapper {
+    width: 70%;
+    margin: 0 auto;
+    display: table;
+}
+.plcArticleInnerWrapper header {
+    padding-bottom: 35%;
+    background-size: cover;
+    background-position: top center;
+    position: relative;
+}
+.plcArticleInnerWrapper hgroup{
+    width: 70%;
+    background-color: rgba(0,0,0,0.7);
+    text-align: center;
+    color: white;
+    display: table;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 0;
 
+}
+.plcArticleInnerWrapper hgroup h1{
+    font-weight: 700;
+    font-size: 35px;
+}
+section.left {
+    width: 75%;
+    float: left;
+}
+.plcArticleInnerWrapper .right {
+    width: 25%;
+    padding-top: 20px;
+}
+section.left article {
+    padding: 20px 20px 20px 0;
+    font-size: 16px;
+    line-height: 32px;
+}
+.plcArticleInnerWrapper .right article {
+    width: 100%;
+    padding-bottom: 56.25%;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    margin-bottom:20px;
+}
+.plcArticleInnerWrapper .right article h1 {
+    position: absolute;
+    bottom: 15%;
+    padding: 10px 15px;
+    background-color: rgba(0,0,0,0.6);
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+}
+p.plcHighlited {
+    border-left: 5px solid #fb5c43;
+    color: #fb5c43;
+    padding: 10px 25px;
+    background-color: #f8f8f6;
+    border-bottom: solid 1px #e4e2e2;
+    border-top: solid 1px #e4e2e2;
+    border-right: solid 1px #e4e2e2;
+    margin: 10px 0;
+    font-weight: 700;
+    font-size: 16px;
+}
+.plcArticleWrapper .plc_story_content_settings {
+    margin-top: 20px;
+    border: none;
+    background-color: transparent;
+}
+.plcArticleWrapper .plc_text_settings {
+    margin: 0;
+    display: table;
+    float: right;
+    padding-right: 20px;
+}
+.otherChategory article .plcArticleImage {
+    width: 30%;
+    padding-bottom: 30%;
+    background-size: cover;
+    background-position: center center;
+    float: left;
+}
+.otherChategory article h1 {
+    color: black!important;
+    background-color: transparent!important;
+    padding: 0px!important;
+    float: left;
+    position: relative!important;
+    padding-left: 10px!important;
+    bottom: 0!important;
+    width: 70%;
+}
+.otherChategory article{
+    padding-bottom:0!important;
+    width:100%;
+    float:left;
+}
+.plcButtonWrapper button {
+    border: 2px solid #fb5c43;
+    border-radius: 50px;
+    padding: 5px 15px;
+    background-color: transparent;
+    color: #fb5c43;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-family: Titillium;
+    cursor:pointer;
+}
+.plcButtonWrapper{
+    width:100%;
+    float:left;
+    margin-bottom:20px;
+}
+.plcArticleInnerWrapper hgroup h4 {
+    text-transform: uppercase;
+    font-size: 14px;
+}
+.plcArticleInnerWrapper hgroup a h2 {
+    font-size: 14px;
+    color: #fb5c43;
+}
+.plcArticleInnerWrapper hgroup a{
+    float:left;
+    text-align: right;
+}
+.plcArticleInnerWrapper hgroup h3 {
+    font-size: 14px;
+    color: #efefef;
+    float: left;
+    text-align: left;
+}
+.plcArticleInnerWrapper hgroup h3:before{
+    content:'•';
+    margin:0 5px;
+    font-family:Arial;
+}
+.articleDatas {
+    margin: 0 auto;
+    width: auto;
+    display: table;
+}
+/*ARTICLE READER END*/
 
 /*RESPONSIVE BREAKPOINTS*/
 @media all and (max-width: 1600px){
@@ -2098,18 +2251,21 @@ SOCIAL,TAGS,COMMENTS END*/
     .plc_article_inner_wrapper {width: 75%;}
     .plc_profile_wrapper { width: 90%;}
     .newStoryWrapperRight, .newStoryWrapperLeft{width:100%;}
+    .plcArticleInnerWrapper {width: 90%;}
 }
 @media all and (max-width: 1200px){
+    .plcArticleInnerWrapper hgroup h1{font-size:28px;}
 }
-
 
 @media all and (max-width: 1024px){
-
+    .plcArticleInnerWrapper hgroup h1 {font-size: 24px;font-weight: 500;}
+    section.left article{font-size: 15px;line-height: 26px;}
+    .plc_navigation_icon {width: 50px;height: 50px;background-position: -57px -2px;right: -50px;}
 }
-
 
 @media all and (max-width: 940px){
     .plcLatestNewsWrapper,.plcLatestStoriesWrapper{width:100%;padding:0;}
+    .plcArticleInnerWrapper .right article h1{font-weight:500;}
 }
 
 @media all and (max-width: 768px){
@@ -2117,6 +2273,8 @@ SOCIAL,TAGS,COMMENTS END*/
     .plcHeaderSearch{right:20px;}
     .contentList .listElement h2{font-size:14px;}
     .contentList .listElement{min-height:45px;}
+    section.left { width: 100%;}
+    .plcArticleInnerWrapper .right {width: 50%;margin: 0 auto; float: none;display: table;}
 }
 
 @media all and (max-width: 640px){
@@ -2146,6 +2304,10 @@ SOCIAL,TAGS,COMMENTS END*/
     .plcDataChangeElement{padding:0;}
     .listElement input[type="submit"],
     .listElement input[type="submit"]:hover{width:100%; float:left;padding:10px 0 0 0;text-align: left;}
+    .plcArticleInnerWrapper hgroup h1 {font-size: 18px;}
+    .plcArticleInnerWrapper hgroup h4,
+    .plcArticleInnerWrapper hgroup h3,
+    .plcArticleInnerWrapper hgroup a h2{font-size:12px;}
 }
 
 @media all and (max-width: 480px) {
@@ -2162,7 +2324,9 @@ SOCIAL,TAGS,COMMENTS END*/
     .plcProfileTabMenu{width:100%;}
     .plcProfileTabMenu button:before{width:100%;}
     .addStoryWrapper{float:left!important;}
-
+    .plcArticleInnerWrapper .right {width: 100%;display:block;float:left;}
+    .plcArticleInnerWrapper header {padding-bottom: 45%;}
+    .plcArticleInnerWrapper hgroup {width: 80%;padding:10px;}
 }
 @media all and (max-width: 375px) {
     .agelimit div {width: 50%;}

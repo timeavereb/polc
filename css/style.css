@@ -1033,24 +1033,27 @@ ul.plc_user_menu a{
     width: 70%;
     padding-left: 12.5%;
 }
-.fb_share_wrapper,.fb_like_wrapper,.gplus_share_wrapper,.twitter_share_wrapper {
+/*.fb_share_wrapper,.gplus_share_wrapper,.twitterShareAnchor {
     width: 30px;
     height: 30px;
     float: right;
-    padding: 5px;
+    position:relative;
+    z-index:98;
+    overflow: hidden;
 }
-.fb_share_wrapper span,.fb_like_wrapper span,.gplus_share_wrapper span,.twitter_share_wrapper span{
+.fb_share_wrapper span,
+.gplus_share_wrapper span,
+.twitterShareAnchor span{
     width:25px;
     height:25px;
     background-size: 25px 25px;
     background-position: center center;
     display:block;
     cursor:pointer;
+    z-index: 98;
+    position:relative;
 }
 .fb_share_wrapper span{
-    background-image:url('../img/social/facebook.svg');
-}
-.fb_like_wrapper span{
     background-image:url('../img/social/facebook.svg');
 }
 .gplus_share_wrapper span{
@@ -1059,10 +1062,31 @@ ul.plc_user_menu a{
 .twitter_share_wrapper span{
     background-image:url('../img/social/twitter.svg');
 }
+
 .polcTagsWrapper a {
     float: left;
 }
-/*SOCIAL,TAGS,COMMENTS END*/
+.fb-share-button,
+.g-plus-share-wrapper{
+    width: 25px!important;
+    height: 25px!important;
+    overflow: hidden;
+    position: absolute!important;
+    top: 0;
+    z-index: 99;
+    opacity: 0;
+}
+.fb-share-button.fb_iframe_widget iframe
+.g-plus-share-wrapper iframe{
+    -ms-transform: scale(2, 2);
+    -webkit-transform: scale(2, 2);
+    transform: scale(2, 2);
+}
+.fb-share-button.fb_iframe_widget span {
+    background-image: none;
+}
+
+SOCIAL,TAGS,COMMENTS END*/
 
 
 /*REGISTRATION*/

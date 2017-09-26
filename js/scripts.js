@@ -182,7 +182,7 @@ function polc_header_handler() {
 
         //navigation
         jQuery('.plc_side_naviagtion').click(function () {
-            jQuery(this).addClass('opened');
+            jQuery(this).toggleClass('opened');
         });
 
         jQuery(document).keypress(function (event) {

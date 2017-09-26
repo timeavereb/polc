@@ -54,9 +54,10 @@ class Polc_Helper_Module
                             <?php
                             if ($post->post_author != $logged) {
                                 ?>
-                                <a href="#"><span
-                                        class="comments"><?= wp_count_comments($post->ID)->total_comments . " " . __('Comment', 'polc'); ?>
-                                </span></a>
+                                <a href="#">
+                                    <span
+                                        class="comments"><?= wp_count_comments($post->ID)->total_comments . " " . __('Comment', 'polc'); ?></span>
+                                </a>
                                 <?php
                             } else {
                                 ?>
@@ -76,12 +77,19 @@ class Polc_Helper_Module
                                 <?php
                             }
                             if ($tags):
-                                for ($i = 0; $i < min(4, count($tags)); $i++):
-                                    ?>
-                                    <a href="<?= get_tag_link($tags[$i]->term_id); ?>"><span
-                                            class="category"><?= $tags[$i]->name; ?></span></a>
+                                ?>
+                                <div class="plcTagsWrapper">
                                     <?php
-                                endfor;
+                                    for ($i = 0; $i < min(4, count($tags)); $i++):
+                                        ?>
+                                        <a href="<?= get_tag_link($tags[$i]->term_id); ?>">
+                                            <span class="category"><?= $tags[$i]->name; ?></span>
+                                        </a>
+                                        <?php
+                                    endfor;
+                                    ?>
+                                </div>
+                                <?php
                             endif;
                             ?>
                         </div>
@@ -146,16 +154,19 @@ class Polc_Helper_Module
                             <a href="#"><span
                                     class="comments"><?= wp_count_comments($post->ID)->total_comments . " " . __('Comment', 'polc'); ?>
                         </span></a>
-                            <?php
-                            if ($tags):
-                                for ($i = 0; $i < min(4, count($tags)); $i++):
-                                    ?>
-                                    <a href="<?= get_tag_link($tags[$i]->term_id); ?>"><span
-                                            class="category"><?= $tags[$i]->name; ?></span></a>
-                                    <?php
-                                endfor;
-                            endif;
-                            ?>
+
+                            <div class="plcTagsWrapper">
+                                <?php
+                                if ($tags):
+                                    for ($i = 0; $i < min(4, count($tags)); $i++):
+                                        ?>
+                                        <a href="<?= get_tag_link($tags[$i]->term_id); ?>"><span
+                                                class="category"><?= $tags[$i]->name; ?></span></a>
+                                        <?php
+                                    endfor;
+                                endif;
+                                ?>
+                            </div>
                         </div>
                     </article>
                 </div>
@@ -173,16 +184,18 @@ class Polc_Helper_Module
             $img = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium');
             $img = isset($img[0]) && $img[0] != "" ? $img[0] : "http:/defaultimg.jpg";
             ?>
-            <article>
-                <div class="plcNewsImageWrapper">
-                    <div class="plcNewsImage" style="background-image:url('<?= $img; ?>');"></div>
-                </div>
-                <div class="plcNewsText">
-                    <h1><?= $post->post_title; ?></h1>
+            <a href="<?= get_permalink($post->ID); ?>">
+                <article>
+                    <div class="plcNewsImageWrapper">
+                        <div class="plcNewsImage" style="background-image:url('<?= $img; ?>');"></div>
+                    </div>
+                    <div class="plcNewsText">
+                        <h1><?= $post->post_title; ?></h1>
 
-                    <p class="date"><?= get_the_date(); ?></p>
-                </div>
-            </article>
+                        <p class="date"><?= get_the_date(); ?></p>
+                    </div>
+                </article>
+            </a>
             <?php
 
         }
@@ -436,7 +449,8 @@ class Polc_Helper_Module
     {
         ?>
         <div class="newStoryData_row">
-            <input type="text" name="volume_title" placeholder="<?= __('Volume title', 'polc'); ?>*" value="<?= $value; ?>">
+            <input type="text" name="volume_title" placeholder="<?= __('Volume title', 'polc'); ?>*"
+                   value="<?= $value; ?>">
         </div>
         <?php
     }
@@ -449,7 +463,8 @@ class Polc_Helper_Module
     {
         ?>
         <div class="newStoryData_row">
-            <input type="text" name="volume-sub-title" placeholder="<?= __('Volume sub-title', 'polc'); ?>" value="<?= $value; ?>">
+            <input type="text" name="volume-sub-title" placeholder="<?= __('Volume sub-title', 'polc'); ?>"
+                   value="<?= $value; ?>">
         </div>
         <?php
     }

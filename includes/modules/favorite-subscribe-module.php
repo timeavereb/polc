@@ -46,53 +46,32 @@ class Polc_Favorite_Subscribe_Module
     {
         if ($data["mode"] == "author") {
 
-            /*delete_user_meta(self::$user->ID, "favorite_author_list");
-            delete_user_meta($_REQUEST["obj_id"], 'favorite_user_list');
-            delete_user_meta($_REQUEST["obj_id"], 'user_favorite_cnt');
+            global $wpdb;
+            $table = $wpdb->prefix . "polc_favorite_authors";
 
-            return;*/
-            //The meta container all the author ids
-            self::$list->favorite_list = unserialize(get_user_meta(self::$user->ID, "favorite_author_list", true));
-            //The meta that the author has containing all user id whom favorited her/him.
-            self::$list->user_list = unserialize(get_user_meta($_REQUEST["obj_id"], 'favorite_user_list', true));
-            //The meta that the author has containg favourite count
-            $cnt = get_user_meta($_REQUEST["obj_id"], 'user_favorite_cnt', true);
-            $add = true;
-
+            $result = $wpdb->get_results(
+                $wpdb->prepare(
+                    "SELECT Id FROM {$table} WHERE UserId = %d AND AuthorId = %d",
+                    (int)self::$user->ID,
+                    (int)$data["obj_id"]
+                )
+            );
             //If we found the author ID among the list, then it is "unlike", so we delete it from the list.
-            if (is_array(self::$list->favorite_list) && array_key_exists($data["obj_id"], self::$list->favorite_list)) {
-                unset( self::$list->favorite_list[$data["obj_id"]]);
-                unset(self::$list->user_list[self::$user->ID]);
-                $add = false;
-            }
-            //Otherwise we add the author id to the list
-            else {
-                self::$list->favorite_list[$data["obj_id"]] = $data["obj_id"];
-                self::$list->user_list[self::$user->ID] = self::$user->ID;
-            }
-
-            if ($add) {
-                if (empty($cnt)) {
-                    $cnt = 1;
-                } else {
-                    $cnt++;
-                }
-
-                $msg = __('Remove author from favorites', 'polc');
-
-            } else {
-                if (empty(self::$list->user_list)) {
-                    $cnt = "";
-                } else {
-                    $cnt--;
-
-                }
+            if(count($result) > 0){
+                $wpdb->delete($table, array("Id" => $result[0]->Id));
                 $msg = __('Add author to favorites', 'polc');
             }
+            //Otherwise we add the author id to the list
+            else{
+                $wpdb->insert(
+                    $table,
+                    array('UserId' => (int)self::$user->ID, 'AuthorId' => (int)$data["obj_id"]),
+                    array('%d', '%d')
+                );
 
-            update_user_meta($_REQUEST["obj_id"], 'user_favorite_cnt', $cnt);
-            update_user_meta($_REQUEST["obj_id"], 'favorite_user_list', serialize(self::$list->user_list));
-            update_user_meta(self::$user->ID, "favorite_author_list",  serialize(self::$list->favorite_list));
+                $msg = __('Remove author from favorites', 'polc');
+            }
+
             wp_send_json(array("success" => $msg));
         }
     }

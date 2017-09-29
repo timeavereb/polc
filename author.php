@@ -32,9 +32,9 @@ class Polc_Author
         }
 
         $avatar = get_user_meta($this->author->ID, "polc_current_avatar");
-        $this->user_favorite_cnt = intval(get_user_meta($this->author->ID, "user_favorite_cnt", true));
-        $this->user_favorite_list = unserialize(get_user_meta($this->author->ID, 'favorite_user_list', true));
-        $this->user_subscribe_cnt = intval(get_user_meta($this->author->ID, "user_subscribe_cnt", true));
+
+        $this->user_favorite_list = Polc_Favorite_Helper_Module::get_favorite_users($this->author->ID, "users");
+        $this->user_favorite_cnt = count($this->user_favorite_list);
 
         $this->avatar = !empty($avatar) ? $avatar[0]["src"] : "";
         wp_enqueue_script("author-handler", PLC_THEME_PATH . '/js/author-handler.js');
@@ -265,7 +265,8 @@ class Polc_Author
                             <span></span>
 
                             <p id="addFavouriteText">
-                                <?php $author_list = unserialize(Polc_Header::$curr_user->data->favorite_author_list);
+                                <?php $author_list = Polc_Header::$curr_user->data->favorite_author_list;
+
                                 if (is_array($author_list) && array_key_exists($this->author->ID, $author_list)) {
                                     echo __('Remove author from favorites', 'polc');
                                 } else {

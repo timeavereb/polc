@@ -32,7 +32,7 @@ class Polc_Header
     public static function current_user()
     {
         if(empty(self::$curr_user_meta) && is_user_logged_in()){
-            self::$curr_user->data->favorite_author_list = get_user_meta(self::$curr_user->ID, 'favorite_author_list', true);
+            self::$curr_user->data->favorite_author_list = Polc_Favorite_Helper_Module::get_favorite_users(self::$curr_user->ID, "authors");
             self::$curr_user->data->user_birth_date = get_user_meta(self::$curr_user->ID, 'user_birth_date', true);
         }
 

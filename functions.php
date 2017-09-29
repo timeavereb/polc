@@ -100,7 +100,13 @@ function polc_tag_query($query)
     return $query;
 }
 
-add_action("wp_head", function () {
+add_action("wp_head", "polc_setup_head");
+
+/**
+ * Sets the head section.
+ */
+function polc_setup_head()
+{
 
     global $post;
 
@@ -115,11 +121,11 @@ add_action("wp_head", function () {
         $featured_img = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), "medium");
         $image = !$featured_img ? home_url() . "/wp-content/themes/polc/img/social/share_default.png" : $featured_img[0];
 
-        if(!$featured_img){
+        if (!$featured_img) {
             $image_info = getimagesize($image);
             $width = $image_info[0];
             $height = $image_info[1];
-        }else{
+        } else {
             $width = $featured_img[1];
             $height = $featured_img[2];
         }
@@ -130,10 +136,11 @@ add_action("wp_head", function () {
 
         <!-- fb sdk-->
         <div id="fb-root"></div>
-        <script>(function(d, s, id) {
+        <script>(function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0];
                 if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
+                js = d.createElement(s);
+                js.id = id;
                 js.src = "//connect.facebook.net/hu_HU/sdk.js#xfbml=1&version=v2.10";
                 fjs.parentNode.insertBefore(js, fjs);
             }(document, 'script', 'facebook-jssdk'));</script>
@@ -143,9 +150,20 @@ add_action("wp_head", function () {
         <meta property="og:image" content="<?= $image; ?>">
         <meta property="og:site_name" content="Polc"/>
         <meta property="og:description" content="<?= $content; ?>"/>
-        <meta property="og:image:width" content="<?= $width; ?>" />
-        <meta property="og:image:height" content="<?= $height; ?>" />
+        <meta property="og:image:width" content="<?= $width; ?>"/>
+        <meta property="og:image:height" content="<?= $height; ?>"/>
 
         <?php
     }
-});
+}
+
+add_action('after_switch_theme', 'polc_theme_setup');
+
+function polc_theme_setup()
+{
+    if(!get_option("polc_version")){
+        require_once "install/custom-table.php";
+        $install = new Polc_Install_Tables();
+        $install->init();
+    }
+}

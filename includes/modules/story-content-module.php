@@ -10,7 +10,6 @@
  * Content display module.
  * Class Polc_Story_Content
  */
-
 class Polc_Story_Content_Module
 {
     private $post;
@@ -141,20 +140,31 @@ class Polc_Story_Content_Module
                 </div>
             </article>
             <div class="polcSocialShareAndTags">
+                <div class="favoriteBtnWrapper">
+
+                    <?php
+                    $favorite_list = Polc_Header::$curr_user->data->favorite_content_list;
+                    $text = is_array($favorite_list) && array_key_exists($this->post->ID, $favorite_list) ? __('Remove from favorites', 'polc') : __( 'Add to favorites', 'polc' );;
+                    ?>
+                    <span id="plcFavoriteBtn" data-post-id="<?= $this->post->ID; ?>"><?= $text; ?></span>
+                </div>
                 <?php
                 new Polc_Social_Share_Module();
                 $tags = get_the_tags($this->post->ID);
                 if ($tags):
-                ?>
-                <div class="polcTagsWrapper">
-                    <?php
-                    for ($i = 0; $i < min(4, count($tags)); $i++) : ?>
-                        <a href="<?= get_tag_link($tags[$i]->term_id); ?>"><span
-                                class="category"><?= $tags[$i]->name; ?></span></a>
-                    <?php endfor;
-                    endif;
                     ?>
-                </div>
+                    <div class="polcTagsWrapper">
+                        <?php
+                        for ($i = 0; $i < min(4, count($tags)); $i++) : ?>
+                            <a href="<?= get_tag_link($tags[$i]->term_id); ?>"><span
+                                    class="category"><?= $tags[$i]->name; ?></span></a>
+                            <?php
+                        endfor;
+                        ?>
+                    </div>
+                    <?php
+                endif;
+                ?>
             </div>
             <div class="polcCommentWrapper">
                 <?php if ($this->can_comment): ?>

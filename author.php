@@ -265,8 +265,8 @@ class Polc_Author
                             <span></span>
 
                             <p id="addFavouriteText">
-                                <?php $author_list = Polc_Header::$curr_user->data->favorite_author_list;
-
+                                <?php
+                                $author_list = Polc_Header::$curr_user->data->favorite_author_list;
                                 if (is_array($author_list) && array_key_exists($this->author->ID, $author_list)) {
                                     echo __('Remove author from favorites', 'polc');
                                 } else {

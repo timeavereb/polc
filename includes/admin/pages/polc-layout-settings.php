@@ -62,20 +62,26 @@ class Polc_Layout_Settings_Page
                         <button onclick="change_setion(2,this);"
                                 class="section_btn"><?= __('Author page', 'polc'); ?></button>
                     </td>
+                    <td>
+                        <button onclick="change_setion(3,this);"
+                                class="section_btn"><?= __('Top-lists page', 'polc'); ?></button>
+                    </td>
                 </tr>
             </table>
 
             <div id="sections_wrapper">
 
+                <!-- main page settings-->
                 <div id="section_1" class="section">
 
+                    <!-- stories settings-->
+                    <p class="polc-settings-element">
+                        <label><?= __('Number of stroies', 'polc') ?></label>
+                        <input type="number" name="stories[count]"
+                               value="<?= !isset($layout_settings["stories"]["count"]) ? 10 : $layout_settings["stories"]["count"] ?>">
+                    </p>
+
                     <?php
-
-                    echo '<p class="polc-settings-element">' . PHP_EOL;
-                    echo '<label>'. __('Number of stroies', 'polc') .'</label>';
-                    echo '<input type="number" name="stories[count]" value="' . (!isset($layout_settings["stories"]["count"]) ? 10 : $layout_settings["stories"]["count"]) . '">' . PHP_EOL;
-                    echo '</p>';
-
                     $args = array(
                         "show_option_none" => __("No category selected", 'polc'),
                         "hide_empty" => false,
@@ -86,32 +92,66 @@ class Polc_Layout_Settings_Page
 
                     $args["selected"] = !isset($layout_settings["news"]["term_id"]) ? 3 : $layout_settings["news"]["term_id"];
                     $args["name"] = "news[term_id]";
-
-                    echo '<p class="polc-settings-element">' . PHP_EOL;
-                    echo '<label>'. __('Number of news', 'polc') .'</label>';
-                    echo '<input type="number" name="news[count]" value="' . (!isset($layout_settings["news"]["count"]) ? 0 : $layout_settings["news"]["count"]) . '">' . PHP_EOL;
-
-                    echo '<label>'. __('News category', 'polc') .'</label>';
-                    wp_dropdown_categories($args);
-                    echo '</p>' . PHP_EOL;
-
-
-                    echo '<p class="polc-settings-element">' . PHP_EOL;
-                    echo '<label>'. __('Number of recommendation', 'polc') .'</label>';
-                    echo '<input type="number" name="recommend[count]" value="' . (!isset($layout_settings["recommend"]["count"]) ? 0 : $layout_settings["recommend"]["count"]) . '">' . PHP_EOL;
-
-                    $args["selected"] = !isset($layout_settings["recommend"]["term_id"]) ? 3 : $layout_settings["recommend"]["term_id"];
-                    $args["name"] = "recommend[term_id]";
-
-                    echo '<label>'. __('Recommendation category', 'polc') .'</label>';
-                    wp_dropdown_categories($args);
-                    echo '</p>' . PHP_EOL;
-
                     ?>
-                </div>
 
+                    <!-- news settings -->
+                    <p class="polc-settings-element">
+                        <label><?= __('Number of news', 'polc'); ?></label>
+                        <input type="number" name="news[count]"
+                               value="<?= !isset($layout_settings["news"]["count"]) ? 0 : $layout_settings["news"]["count"] ?>">
+
+                        <label><?= __('News category', 'polc'); ?></label>
+                        <?php
+                        wp_dropdown_categories($args);
+                        ?>
+                    </p>
+
+                    <!-- recommendations settings -->
+                    <p class="polc-settings-element">
+                        <label><?= __('Number of recommendation', 'polc'); ?></label>
+                        <input type="number" name="recommend[count]"
+                               value="<?= !isset($layout_settings["recommend"]["count"]) ? 0 : $layout_settings["recommend"]["count"]; ?>">
+                        <?php
+                        $args["selected"] = !isset($layout_settings["recommend"]["term_id"]) ? 3 : $layout_settings["recommend"]["term_id"];
+                        $args["name"] = "recommend[term_id]";
+                        ?>
+                        <label><?= __('Recommendation category', 'polc'); ?></label>
+                        <?php
+                        wp_dropdown_categories($args);
+                        ?>
+                    </p>
+
+                </div>
+                <!-- author page settings-->
                 <div id="section_2" class="section" style="display: none;">
                     author layout settings
+                </div>
+
+                <!-- top-lists page settings-->
+                <div id="section_3" class="section" style="display: none;">
+
+                    <!-- toplist limit settings-->
+                    <p>
+                        <label><?= __( 'Favorite authors limit', 'polc' );?></label>
+                        <input type="number" min="1" name="toplists[authors_cnt]" value="<?= !isset($layout_settings["toplists"]["authors_cnt"]) ? 10 : $layout_settings["toplists"]["authors_cnt"]; ?>">
+
+                        <label><?= __( 'Top commenters limit', 'polc' );?></label>
+                        <input type="number" min="1" name="toplists[commenters_cnt]" value="<?= !isset($layout_settings["toplists"]["commenters_cnt"]) ? 10 : $layout_settings["toplists"]["commenters_cnt"]; ?>">
+
+                        <label><?= __( 'Favorite stories limit', 'polc' );?></label>
+                        <input type="number" min="1" name="toplists[stories_cnt]" value="<?= !isset($layout_settings["toplists"]["stories_cnt"]) ? 10 : $layout_settings["toplists"]["stories_cnt"]; ?>">
+                    </p>
+
+                    <!-- toplist cache settings-->
+                    <p>
+                        <label><?= __("Top-lists cache"); ?></label>
+                        <input type="checkbox" name="toplists[cache]"
+                               <?= !isset($layout_settings["toplists"]["cache"]) || $layout_settings["toplists"]["cache"] != "" ? "checked" : ""; ?>>
+
+                        <label><?= __("Top-lists cache time in seconds"); ?></label>
+                        <input type="number" name="toplists[cache_time]"
+                               value="<?= !isset($layout_settings["toplists"]["cache_time"]) ? 120 : $layout_settings["toplists"]["cache_time"]; ?>">
+                    </p>
                 </div>
             </div>
 
@@ -123,7 +163,9 @@ class Polc_Layout_Settings_Page
     public static function save()
     {
         $update = array();
-        $allowed = array("stories", "news", "recommend");
+        $allowed = array("stories", "news", "recommend", "toplists");
+
+        $_REQUEST["toplists"]["cache"] = !isset($_REQUEST["toplists"]["cache"]) ? "" : $_REQUEST["toplists"]["cache"];
 
         foreach ($_REQUEST as $key => $value) {
             if (in_array($key, $allowed)) {

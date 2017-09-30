@@ -33,6 +33,7 @@ class Polc_Header
     {
         if(empty(self::$curr_user_meta) && is_user_logged_in()){
             self::$curr_user->data->favorite_author_list = Polc_Favorite_Helper_Module::get_favorite_users(self::$curr_user->ID, "authors");
+            self::$curr_user->data->favorite_content_list = Polc_Favorite_Helper_Module::get_favorite_stories(self::$curr_user->ID);
             self::$curr_user->data->user_birth_date = get_user_meta(self::$curr_user->ID, 'user_birth_date', true);
         }
 
@@ -207,8 +208,16 @@ class Polc_Header
             </div>
             <?php
 
-            foreach (wp_get_nav_menu_items('polc-main-menu', array('order' => 'ASC', 'orderby' => 'menu_order', 'post_type' => 'nav_menu_item',
-                'post_status' => 'publish', 'output' => ARRAY_A, 'output_key' => 'menu_order', 'nopaging' => true)) as $menu_element) {
+            foreach (wp_get_nav_menu_items('polc-main-menu',
+                array(
+                    'order' => 'ASC',
+                    'orderby' => 'menu_order',
+                    'post_type' => 'nav_menu_item',
+                    'post_status' => 'publish',
+                    'output' => ARRAY_A,
+                    'output_key' => 'menu_order',
+                    'nopaging' => true
+                )) as $menu_element) {
                 ?>
                 <a href="<?= $menu_element->url; ?>"
                    class="plc_navigation_item_wrapper <?= sanitize_title($menu_element->title); ?>">
@@ -217,7 +226,6 @@ class Polc_Header
                 <?php
             }
             ?>
-
         </div>
         <?php
     }

@@ -17,12 +17,7 @@ if (!isset($_REQUEST["action"]) || !isset($_REQUEST["mode"])) {
 }
 
 $manager = new Polc_Favorite_Subscribe_Module();
-
-switch ($_REQUEST["action"]) {
-    case "favorite":
-        $manager::favorite($_REQUEST);
-        break;
-}
+$manager->favorite($_REQUEST);
 
 /**
  * Favorite and subscribe handler class.
@@ -42,37 +37,49 @@ class Polc_Favorite_Subscribe_Module
     /**
      * @param $data
      */
-    public static function favorite($data)
+    public function favorite($data)
     {
+        global $wpdb;
+
         if ($data["mode"] == "author") {
-
-            global $wpdb;
             $table = $wpdb->prefix . "polc_favorite_authors";
-
-            $result = $wpdb->get_results(
-                $wpdb->prepare(
-                    "SELECT Id FROM {$table} WHERE UserId = %d AND AuthorId = %d",
-                    (int)self::$user->ID,
-                    (int)$data["obj_id"]
-                )
+            $key = "AuthorId";
+            $messages = array(
+                "add" => __('Add author to favorites', 'polc'),
+                "remove" => __('Remove author from favorites', 'polc')
             );
-            //If we found the author ID among the list, then it is "unlike", so we delete it from the list.
-            if(count($result) > 0){
-                $wpdb->delete($table, array("Id" => $result[0]->Id));
-                $msg = __('Add author to favorites', 'polc');
-            }
-            //Otherwise we add the author id to the list
-            else{
-                $wpdb->insert(
-                    $table,
-                    array('UserId' => (int)self::$user->ID, 'AuthorId' => (int)$data["obj_id"]),
-                    array('%d', '%d')
-                );
-
-                $msg = __('Remove author from favorites', 'polc');
-            }
-
-            wp_send_json(array("success" => $msg));
+        } else {
+            $table = $wpdb->prefix . "polc_favorite_stories";
+            $key = "PostId";
+            $messages = array(
+                "add" => __('Add to favorites', 'polc'),
+                "remove" => __('Remove from favorites', 'polc')
+            );
         }
+
+        $result = $wpdb->get_results(
+            $wpdb->prepare(
+                "SELECT Id FROM {$table} WHERE UserId = %d AND {$key} = %d",
+                (int)self::$user->ID,
+                (int)$data["obj_id"]
+            )
+        );
+
+        //If we found the author ID among the list, then it is "unlike", so we delete it from the list.
+        if (count($result) > 0) {
+            $wpdb->delete($table, array("Id" => $result[0]->Id));
+            $msg = $messages["add"];
+        }
+        //Otherwise we add the author id to the list
+        else {
+            $wpdb->insert(
+                $table,
+                array('UserId' => (int)self::$user->ID, $key => (int)$data["obj_id"]),
+                array('%d', '%d')
+            );
+            $msg = $messages["remove"];
+        }
+
+        wp_send_json(array("success" => $msg));
     }
 }

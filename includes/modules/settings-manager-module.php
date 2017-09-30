@@ -95,4 +95,7 @@ class Polc_Settings_Manager
         return self::$categories;
     }
 
+    public static function top_lists(){
+        return self::layout()["toplists"];
+    }
 }

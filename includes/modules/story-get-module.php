@@ -57,12 +57,14 @@ class Polc_Get_Module
     {
         $tag = get_queried_object();
 
+        $ppp = 10;
+
         $paged = (get_query_var('page')) ? get_query_var('page') : 1;
 
         $args = [
             "post_type" => "story",
             "paged" => $paged,
-            "posts_per_page" => 20,
+            "posts_per_page" => $ppp,
             "post_status" => "publish",
             'tax_query' => [
                 [
@@ -73,8 +75,19 @@ class Polc_Get_Module
             ]
         ];
 
-        $posts = get_posts($args);
+        ?>
+        <form id="plcSearchForm" method="POST">
+            <input type="hidden" id="page" name="page" value="<?= $paged; ?>">
+        </form>
+        <?php
+
+        $query = new WP_Query($args);
+        $posts = $query->get_posts();
+
+        $total_items = $query->found_posts;
+        $total_pages = round($total_items / $ppp);
+
         Polc_Helper_Module::search_list($posts, $animate);
-        echo paginate_links();
+        Polc_Helper_Module::pagination($total_pages, $paged);
     }
 }

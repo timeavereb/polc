@@ -39,7 +39,7 @@ class Polc_Search
         <div id="plcSearchMainWrapper">
             <?php
             $this->form();
-            $this->pagination();
+            Polc_Helper_Module::pagination($this->total_pages, $this->paged);
             ?>
         </div>
         <?php
@@ -48,15 +48,6 @@ class Polc_Search
     private function form()
     {
         ?>
-        <script>
-            jQuery(document).ready(function () {
-                jQuery(".plcPagerBtn").click(function () {
-                    jQuery("#page").val(jQuery(this).attr("data-page"));
-                    jQuery("#plcSearchForm").submit();
-                });
-            });
-        </script>
-
         <div class="plcSearchWrapper">
             <form id="plcSearchForm" method="POST">
 
@@ -193,47 +184,6 @@ class Polc_Search
     private function render()
     {
         Polc_Helper_Module::search_list($this->items->posts, true);
-    }
-
-    private function pagination()
-    {
-        if ($this->total_pages == 1):
-            return;
-        endif;
-        ?>
-
-        <div class="plcPagerWrapper">
-            <div class="plcPagerInnerWrapper">
-                <?php if ($this->paged > 4): ?>
-                    <button class="plcPagerBtn" data-page="1"><?= __('First page', 'polc'); ?></button>
-                <?php endif;
-
-                //display backwards
-                if ($this->paged > 1):
-                    for ($i = max(1, $this->paged - 3); $i < $this->paged; $i++):
-                        ?>
-                        <button class="plcPagerBtn" data-page="<?= $i ?>"><?= $i; ?></button>
-                        <?php
-                    endfor;
-                endif;
-
-                //display current page
-                ?>
-                <button class="current_page"><?= $this->paged; ?></button>
-                <?php for ($i = $this->paged + 1; $i <= min($this->paged + 3, $this->total_pages); $i++): ?>
-                    <button class="plcPagerBtn" data-page="<?= $i ?>"><?= $i; ?></button>
-                    <?php
-                endfor;
-
-                if ($this->paged < $this->total_pages - 3): ?>
-                    <button class="plcPagerBtn"
-                            data-page="<?= $this->total_pages ?>"><?= __('Last page', 'polc'); ?></button>
-                    <?php
-                endif;
-                ?>
-            </div>
-        </div>
-        <?php
     }
 }
 

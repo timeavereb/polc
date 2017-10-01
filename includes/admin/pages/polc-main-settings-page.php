@@ -170,6 +170,20 @@ class Polc_Main_Settings_Page
                 ]);
                 ?>
             </p>
+
+            <p>
+                <label for="news-list"><?= __('News list page', 'polc'); ?></label>
+                <?php
+                wp_dropdown_pages([
+                    "id" => "news-list",
+                    "name" => "pages[news-list]",
+                    "show_option_none" => __('None selected', 'polc'),
+                    "option_none_value" => 0,
+                    "selected" => isset($pages["news-list"]) ? $pages["news-list"] : 0
+                ]);
+                ?>
+            </p>
+
             <?php submit_button(); ?>
         </form>
         <?php

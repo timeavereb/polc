@@ -238,6 +238,7 @@ class Polc_Helper_Module
                     </div>
                     <div class="plcNewsText">
                         <h1><?= $post->post_title; ?></h1>
+
                         <p class="date"><?= get_the_date(); ?></p>
                     </div>
                 </article>
@@ -247,56 +248,56 @@ class Polc_Helper_Module
     }
 
     /**
-     * @param string $pages
-     * @param int $range
+     * @param $total_pages
+     * @param $paged
      */
-    public static function pagination($pages = '', $range = 4)
+    public static function pagination($total_pages, $paged)
     {
-        $show_items = ($range * 2) + 1;
-
-        global $paged;
-
-        if (empty($paged)):
-            $paged = 1;
+        if ($total_pages == 1):
+            return;
         endif;
+        ?>
 
-        if ($pages == ''):
-            global $wp_query;
-            $pages = $wp_query->max_num_pages;
-            if (!$pages) {
-                $pages = 1;
-            }
-        endif;
+        <script>
+            jQuery(document).ready(function () {
+                jQuery(".plcPagerBtn").click(function () {
+                    jQuery("#page").val(jQuery(this).attr("data-page"));
+                    jQuery("#plcSearchForm").submit();
+                });
+            });
+        </script>
 
-        if (1 != $pages):
-            if ($paged > 2 && $paged > $range + 1 && $show_items < $pages):
-                ?>
-                <a href="<?= get_pagenum_link(1); ?>">&laquo; <?= __('First', 'polc'); ?></a>
-                <?php
-            endif;
+        <div class="plcPagerWrapper">
+            <div class="plcPagerInnerWrapper">
+                <?php if ($paged > 4): ?>
+                    <button class="plcPagerBtn" data-page="1"><?= __('First page', 'polc'); ?></button>
+                <?php endif;
 
-            if ($paged > 1 && $show_items < $pages):
-                ?>
-                <a href="<?= get_pagenum_link($paged - 1); ?>">&lsaquo; <?= __('Previous', 'polc'); ?></a>
-                <?php
-            endif;
-
-            for ($i = 1; $i <= $pages; $i++):
-                if (1 != $pages && (!($i >= $paged + $range + 1 || $i <= $paged - $range - 1) || $pages <= $show_items)):
-                    echo ($paged == $i) ? "<span class=\"current\">" . $i . "</span>" : "<a href='" . get_pagenum_link($i) . "' class=\"inactive\">" . $i . "</a>";
+                //display backwards
+                if ($paged > 1):
+                    for ($i = max(1, $paged - 3); $i < $paged; $i++):
+                        ?>
+                        <button class="plcPagerBtn" data-page="<?= $i ?>"><?= $i; ?></button>
+                        <?php
+                    endfor;
                 endif;
-            endfor;
 
-            if ($paged < $pages && $show_items < $pages):
+                //display current page
                 ?>
-                <a href="<?= get_pagenum_link($paged + 1); ?>"><?= __('Next', 'polc'); ?> &rsaquo;</a>
-                <?php
-            endif;
+                <button class="current_page"><?= $paged; ?></button>
+                <?php for ($i = $paged + 1; $i <= min($paged + 3, $total_pages); $i++): ?>
+                    <button class="plcPagerBtn" data-page="<?= $i ?>"><?= $i; ?></button>
+                    <?php
+                endfor;
 
-            if ($paged < $pages - 1 && $paged + $range - 1 < $pages && $show_items < $pages):
+                if ($paged < $total_pages - 3): ?>
+                    <button class="plcPagerBtn"
+                            data-page="<?= $total_pages ?>"><?= __('Last page', 'polc'); ?></button>
+                    <?php
+                endif;
                 ?>
-                <a href="<?= get_pagenum_link($pages); ?>"><?= __('Last', 'polc'); ?> &raquo;</a>
-            <?php endif;
-        endif;
+            </div>
+        </div>
+        <?php
     }
 }

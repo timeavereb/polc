@@ -6,6 +6,14 @@
  * Date: 2017. 06. 29.
  * Time: 20:03
  */
+
+if (!defined("ABSPATH")):
+    exit();
+endif;
+
+/**
+ * Class Polc_Password_Reset_Layout_Handler
+ */
 class Polc_Password_Reset_Layout_Handler extends Polc_Layout_Handler_Base
 {
     CONST POLC_LAYOUT = "polc-reset-password";

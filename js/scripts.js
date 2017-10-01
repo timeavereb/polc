@@ -124,13 +124,13 @@ function polc_header_handler() {
         return jQuery("#plc_password_reset_form").valid();
     };
 
-    this.change_section = function(id){
+    this.change_section = function (id) {
 
         jQuery(".section").hide();
         jQuery("#section_" + id).show();
 
         jQuery(".section_btn").removeClass("active");
-        jQuery("#section_"+ id +"_btn").addClass("active");
+        jQuery("#section_" + id + "_btn").addClass("active");
     };
 
     /**
@@ -153,7 +153,7 @@ function polc_header_handler() {
      * Datepicker config.
      * @returns {{clearText: string, clearStatus: string, closeText: string, prevText: string, nextText: string, currentText: string, monthNames: string[], monthNamesShort: string[], dayNames: string[], dayNamesShort: string[], dayNamesMin: string[], dateFormat: string, firstDay: number, changeYear: boolean, changeMonth: boolean, yearRange: string}}
      */
-    this.datepicker_config = function(){
+    this.datepicker_config = function () {
 
         return {
             clearText: 'Effacer',
@@ -180,8 +180,13 @@ function polc_header_handler() {
      */
     jQuery(document).ready(function () {
 
-        jQuery(document).keypress(function(event){
-            if(jQuery("#plc_login_popup").is(":visible") && event.keyCode == 13){
+        //navigation
+        jQuery('.plc_side_naviagtion').click(function () {
+            jQuery(this).toggleClass('opened');
+        });
+
+        jQuery(document).keypress(function (event) {
+            if (jQuery("#plc_login_popup").is(":visible") && event.keyCode == 13) {
                 event.preventDefault();
                 jQuery("#plc_login_btn").click();
             }
@@ -479,6 +484,30 @@ function polc_content_handler() {
 
     jQuery(document).ready(function () {
 
+        //Favorite handler
+        jQuery(document).on("click", "#plcFavoriteBtn", function () {
+            jQuery.ajax({
+                url: "/wp-content/themes/polc/includes/modules/favorite-subscribe-module.php",
+                method: "POST",
+                data: {
+                    action: "favorite",
+                    mode: "story",
+                    obj_id: jQuery("#plcFavoriteBtn").attr("data-post-id")
+                },
+                success: function (response) {
+                    if (response.error) {
+                        jQuery.event.trigger("polc_alert", {title: "Hiba", msg: response.error});
+                        return false;
+                    }
+                    if (response.success) {
+                        jQuery("#plcFavoriteBtn").fadeOut(500, function () {
+                            jQuery(this).text(response.success).fadeIn(500);
+                        });
+                    }
+                }
+            });
+        });
+
         jQuery(".plcChapterSelect").change(function () {
             window.location.href = jQuery(this).find(':selected').attr("data-link");
         });
@@ -501,13 +530,19 @@ function polc_content_handler() {
             if (jQuery(this).hasClass('day')) {
                 jQuery(this).removeClass('day').addClass('night');
                 jQuery('.plc_story_content').addClass('nightstyle');
+                jQuery('.polcCommentWrapper').addClass('nightstyle');
+                jQuery('.polcSocialShareAndTags').addClass('nightstyle');
             }
             else {
                 jQuery(this).removeClass('night').addClass('day');
                 jQuery('.plc_story_content').removeClass('nightstyle');
+                jQuery('.polcCommentWrapper').removeClass('nightstyle');
+                jQuery('.polcSocialShareAndTags').removeClass('nightstyle');
             }
 
         });
+
+
 
         //justify or left
         jQuery('.text_alignment').click(function () {

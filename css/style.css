@@ -18,6 +18,7 @@ a{text-decoration:none;}
 *{box-sizing:border-box;}
 body{font-family: 'Titillium', sans-serif;}
 html, body {height: 100%;}
+.ui-dialog:focus{outline:none;}
 
 /*POLC HEADER*/
 .plc_header{
@@ -234,6 +235,7 @@ html, body {height: 100%;}
     background-image:url('../img/navigation/registration_black.svg');
 }
 /*POLC NAVIAGATION END*/
+
 /*POLC FOOTER*/
 footer {
     width: 100%;
@@ -640,7 +642,13 @@ footer {
     padding: 0 10px 15px 10px;
 }
 #plcUserDataSaveBtn,#plc_login_btn,
-#plc_register_btn{
+#plcUserDataSaveBtn,#plc_login_btn:focus,
+#plc_register_btn,
+#plc_register_btn:focus,
+#plcChapterDeleteInner .plcPopupButtonBar button,
+#plcChapterDeleteInner .plcPopupButtonBar button:focus,
+.editorContainerRow.bttons input[type="submit"],
+#polc-story-form input[type="submit"]{
     border: solid 2px white;
     padding: 8px 20px;
     background-color: transparent;
@@ -648,10 +656,15 @@ footer {
     color: white;
     cursor: pointer;
     float: right;
+    outline:none;
 }
 #plcUserDataSaveBtn:hover,
 #plc_login_btn:hover,
-#plc_register_btn:hover{
+#plc_register_btn:hover,
+#plcChapterDeleteInner .plcPopupButtonBar button:hover,
+#plcChapterDeleteInner #chapterDeleteSubmit:hover,
+.editorContainerRow.bttons input[type="submit"]:hover,
+#polc-story-form input[type="submit"]:hover{
     color:#fb5c43;
     background-color: white;
     -webkit-transition: all 200ms ease-in-out;
@@ -659,6 +672,9 @@ footer {
     -ms-transition: all 200ms ease-in-out;
     -o-transition: all 200ms ease-in-out;
     transition: all 200ms ease-in-out;
+}
+#plc_login_btn:focus{
+    float:none;
 }
 #ui-datepicker-div {
     -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6);
@@ -980,6 +996,9 @@ ul.plc_user_menu a{
 .addedFavourite {
     margin-left: 10px;
 }
+.plcUserFavoriteElement a {
+    color: #fb5c43;
+}
 
 
 /*SOCIAL,TAGS,COMMENTS*/
@@ -988,12 +1007,13 @@ ul.plc_user_menu a{
     float: left;
 }
 .polcCommentInnerWrapper {
-    width: 50%;
-    margin: 0 auto;
+    width: 75%;
+    margin: 30px auto;
 }
 .polcSocialShareAndTags{
-    width:75%;
-    margin:0 auto;
+    width: 100%;
+    margin: 0 auto;
+    display: table;
 }
 .polcCommentInnerWrapper textarea {
     width: 100%;
@@ -1006,10 +1026,12 @@ ul.plc_user_menu a{
 .polcSocialShare {
     width: 30%;
     float: right;
+    padding-right: 12.5%;
 }
 .polcTagsWrapper {
     float: left;
     width: 70%;
+    padding-left: 12.5%;
 }
 .fb_share_wrapper,.fb_like_wrapper,.gplus_share_wrapper,.twitter_share_wrapper {
     width: 30px;
@@ -1083,7 +1105,8 @@ ul.plc_user_menu a{
 }
 #addStoryPopup,#plc_reg_popup,#plc_login_popup,
 .ui-dialog[aria-describedby="plc_alert_popup"],
-.ui-dialog[aria-describedby="plc_lost_password_popup"]{
+.ui-dialog[aria-describedby="plc_lost_password_popup"],
+.ui-dialog[aria-describedby="polc-chapter-delete"]{
     width: 100%!important;
     max-width: 500px;
     position: absolute;
@@ -1110,7 +1133,11 @@ ul.plc_user_menu a{
 .show.plcreg .plc_poup_wrapper.registration{
     display:block;
 }
-#plc_popup_wrapper h1, #plc_login_form h1,#plc_reg_form h1,#plc_alert_popup h1 {
+#plc_popup_wrapper h1,
+#plc_login_form h1,
+#plc_reg_form h1,
+#plc_alert_popup h1,
+#polc-chapter-delete h1{
     color: white;
     font-size: 20px;
     margin: 20px 0;
@@ -1307,10 +1334,13 @@ ul.plc_user_menu a{
     border: none;
     margin: 10px 0;
     padding: 0 15px;
+    font-family: 'Titillium', sans-serif;
 }
 .newStoryData_row textarea{
     height:150px;
     resize:none;
+    font-family: 'Titillium', sans-serif;
+    font-size: 14px;
 }
 .form_info {
     color: white;
@@ -1460,7 +1490,7 @@ ul.plc_user_menu a{
     width:100%;
     height:40px;
 }
-.addChapter,.editStory,
+.addChapter,.editContent,
 .listElement p{
     font-size: 14px!important;
     float: left;
@@ -1474,11 +1504,11 @@ ul.plc_user_menu a{
     line-height: normal;
     font-family: 'Titillium', sans-serif;
 }
-.editStory:before{
+.editContent:before{
     content:'|';
     margin-right:10px;
 }
-.plc_latest_item:hover .addChapter ,.plc_latest_item:hover .editStory{
+.plc_latest_item:hover .addChapter ,.plc_latest_item:hover .editContent{
     display:block;
 }
 .plc_reg h1,#addStoryForm h1 {
@@ -1859,18 +1889,25 @@ ul.plc_user_menu a{
     float: left;
     position: relative;
 }
-.listElement p{
+.listElement input[type="submit"],
+.listElement input[type="submit"]:focus{
     margin:0;
-    padding-right:30px;
     width:30%;
     float:right;
     text-align: right;
+    border:none;
+    background-color:transparent;
+    cursor:pointer;
+    color:#fb5c43;
+    display:none;
+    outline:none;
+    padding: 2px 30px 2px 0;
 }
 .contentList .listElement h2 {
     width: 70%;
     float: left;
 }
-.contentList .listElement:hover p,
+.contentList .listElement:hover input[type="submit"],
 .contentList .listElement:hover span{
     display:block;
 }
@@ -1907,7 +1944,123 @@ ul.plc_user_menu a{
     color:#fb5c43;
     font-weight: 700;
 }
+.plcPopupButtonBar {
+    width: 100%;
+    float: left;
+    padding: 0;
+    margin: 20px 0 20px 0;
+}
+.plcPopupButtonBar button:first-of-type {
+    float: left!important;
+}
+#plcChapterDeleteInner {
+    padding: 0 20px;
+    width: 100%;
+    float: left;
+}
+#plcChapterDeleteInner .plcConfirmMsg,
+#plcChapterDeleteInner #plcChapterName{
+    color: white;
+    display: block;
+    text-align: center;
+}
+#plcChapterDeleteInner #plcChapterName{
+    font-style:italic;
+}
 /*EDITOR END*/
+
+/*COMMENT*/
+#plcSendComment,
+#plcSendComment:focus{
+    border-radius: 50px;
+    border: solid 2px #fb5c43;
+    background-color: transparent;
+    padding: 10px 15px 10px 40px;
+    color: #fb5c43;
+    cursor: pointer;
+    outline: none;
+    background-size: 30px 30px;
+    background-image:url('../img/settings/pen.svg');
+    background-position: 3px;
+    background-repeat: no-repeat;
+}
+#plcSendComment:hover{
+    color:white;
+    background-color:#fb5c43;
+    background-image:url('../img/settings/pen_white.svg');
+    -webkit-transition: all 250ms ease-in-out;
+    -moz-transition: all 250ms ease-in-out;
+    -ms-transition: all 250ms ease-in-out;
+    -o-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+}
+.plcCommentListWrapper {
+    width: 75%;
+    margin: 0 auto;
+    padding: 0;
+    display: table;
+}
+.plcCommentWrapper a{
+    color:#fb5c43;
+    float:left;
+    font-size: 14px;
+    line-height: 30px;
+}
+.plcCommentWrapper span {
+    font-size: 14px;
+    color: grey;
+    padding-left: 5px;
+    line-height: 30px;
+}
+.plcCommentWrapper {
+    width: 100%;
+    float: left;
+    background-color: #f8f8f6;
+    border: solid 1px #e4e2e2;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    line-height: normal!important;
+}
+.plcCommentContent {
+    width: 100%;
+    float: left;
+    color: black!important;
+    font-size: 16px;
+    padding: 10px 0!important;
+}
+.plcCommentReplyBtn {
+    padding: 0;
+    cursor: pointer;
+    width:30px;
+    height:30px;
+    background-size: 30px 30px;
+    background-image:url('../img/settings/pen.svg');
+    display:block;
+    color:transparent!important;
+    overflow: hidden;
+    float:right;
+}
+.plcCommentReplyWrapper {
+    float: right;
+    margin-bottom: 10px;
+}
+.nightstyle .plcCommentWrapper {
+    background-color: transparent;
+    border: solid 1px #2b2b2b;
+}
+.nightstyle .plcCommentContent{
+    color:#afafaf!important;
+}
+.nightstyle .polcCommentInnerWrapper textarea{
+    background-color: #1d1d1d;
+    border: solid 1px #2b2b2b;
+    color: white;
+}
+.plcCommentWrapper.lvl-1 {
+    margin-left: 5%;
+    width: 95%;
+}
+/*COMMENT END*/
 
 
 /*RESPONSIVE BREAKPOINTS*/
@@ -1959,7 +2112,7 @@ ul.plc_user_menu a{
     .plc_story_content h1,
     .plc_story_content h2,
     .plc_story_content h3 {font-size: 18px;}
-    .contentList .listElement p,
+    .listElement input[type="submit"],
     .contentList .listElement span{display:block;}
     .plcHeaderSearch input,
     .plcHeaderSearch input:focus{width:90%;border: solid 1px rgb(251, 92, 67);background-color:white;display:table;margin: 5px auto 15px auto; padding: 0 15px;}
@@ -1967,6 +2120,8 @@ ul.plc_user_menu a{
     .plcProfileTabMenu button:focus{padding:5px;}
     .plcDataChangeElement label, .plcDataChangeElement input{width:100%;}
     .plcDataChangeElement{padding:0;}
+    .listElement input[type="submit"],
+    .listElement input[type="submit"]:hover{width:100%; float:left;padding:10px 0 0 0;text-align: left;}
 }
 
 @media all and (max-width: 480px) {

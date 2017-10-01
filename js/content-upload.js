@@ -222,6 +222,12 @@ function polc_chapter_delete_handler() {
 
     jQuery(document).ready(function () {
 
+        jQuery(document).on("click", "#plcDeleteVolume", function () {
+            jQuery("#plcChapterName").html(jQuery("#plc-volume-title").val());
+            jQuery("#chapter-id").val(jQuery("#volume-id").val());
+            jQuery("#polc-chapter-delete").dialog("open");
+        });
+
         jQuery(document).on("click", ".delete-chapter", function () {
             jQuery("#plcChapterName").html(jQuery(this).attr("data-name"));
             jQuery("#chapter-id").val(jQuery(this).attr("data-id"));
@@ -248,8 +254,15 @@ function polc_chapter_delete_handler() {
                         return false;
                     }
 
-                    jQuery(".contentList").find('span[data-id="' + removed_id + '"]').parent().remove();
                     jQuery.event.trigger("polc_alert", {title: "Sikeres törlés", msg: response.success});
+
+                    if (response.hasOwnProperty("chapter_delete")) {
+                        jQuery(document).on("plc_alert_closed", function () {
+                            document.location.href = "/";
+                        });
+                    } else {
+                        jQuery(".contentList").find('span[data-id="' + removed_id + '"]').parent().remove();
+                    }
                 }
             })
         });

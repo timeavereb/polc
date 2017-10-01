@@ -1,10 +1,15 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Pali
  * Date: 2017. 06. 17.
  * Time: 7:50
  */
+
+if (!defined("ABSPATH")):
+    exit();
+endif;
 
 /**
  * Class Polc_Layout_Handler

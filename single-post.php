@@ -11,17 +11,17 @@ get_header();
 global $post;
 setup_postdata($post);
 
-$args = array(
-    "post_type" => array("post"),
+$args = [
+    "post_type" => ["post"],
     "posts_per_page" => 3,
     "post_status" => "publish",
-    "post__not_in" => array($post->ID),
-    "category__in" => array(Polc_Settings_Manager::layout()["recommend"]["term_id"])
-);
+    "post__not_in" => [$post->ID],
+    "category__in" => [Polc_Settings_Manager::layout()["recommend"]["term_id"]]
+];
 
 $article_category = wp_get_post_categories($post->ID)[0];
 $recommend_articles = get_posts($args);
-$args["category__in"] = array(Polc_Settings_Manager::layout()["news"]["term_id"]);
+$args["category__in"] = [Polc_Settings_Manager::layout()["news"]["term_id"]];
 $news = get_posts($args);
 ?>
 
@@ -77,13 +77,14 @@ $news = get_posts($args);
             </section>
             <div class="right">
                 <div class="currentChategory">
-                    <?php if ($article_category == Polc_Settings_Manager::layout()["news"]["term_id"]) {
+                    <?php
+                    if ($article_category == Polc_Settings_Manager::layout()["news"]["term_id"]):
                         $current = $news;
                         $other = $recommend_articles;
-                    } else {
+                    else:
                         $current = $recommend_articles;
                         $other = $news;
-                    }
+                    endif;
 
                     foreach ($current as $value):
                         ?>

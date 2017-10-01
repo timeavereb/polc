@@ -484,6 +484,30 @@ function polc_content_handler() {
 
     jQuery(document).ready(function () {
 
+        //Favorite handler
+        jQuery(document).on("click", "#plcFavoriteBtn", function () {
+            jQuery.ajax({
+                url: "/wp-content/themes/polc/includes/modules/favorite-subscribe-module.php",
+                method: "POST",
+                data: {
+                    action: "favorite",
+                    mode: "story",
+                    obj_id: jQuery("#plcFavoriteBtn").attr("data-post-id")
+                },
+                success: function (response) {
+                    if (response.error) {
+                        jQuery.event.trigger("polc_alert", {title: "Hiba", msg: response.error});
+                        return false;
+                    }
+                    if (response.success) {
+                        jQuery("#plcFavoriteBtn").fadeOut(500, function () {
+                            jQuery(this).text(response.success).fadeIn(500);
+                        });
+                    }
+                }
+            });
+        });
+
         jQuery(".plcChapterSelect").change(function () {
             window.location.href = jQuery(this).find(':selected').attr("data-link");
         });

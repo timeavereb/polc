@@ -117,6 +117,31 @@ class Polc_Story_Content_Module
             </div>
             <article class="plc_story_content">
                 <div class="plc_article_inner_wrapper">
+                    <div class="storyBar">
+                        <?php
+                        if (class_exists("Post_Views_Counter")):
+                        if ($this->post->post_parent != 0 || get_post_meta($this->post->ID, "single", true) == 1):
+                        ?>
+                        <div class="plcContentViews">
+                            <span><?= pvc_get_post_views($this->post->ID); ?></span>
+                        </div>
+                        <?php
+                        endif;
+                        endif;
+
+                         if (is_user_logged_in()): ?>
+                        <div class="favoriteBtnWrapper">
+                            <?php
+                            $favorite_list = Polc_Header::$curr_user->data->favorite_content_list;
+                            $text = is_array($favorite_list) && count($favorite_list) > 0 && array_key_exists($this->post->ID, $favorite_list) ? __('Remove from favorites', 'polc') : __('Add to favorites', 'polc');;
+                            ?>
+                            <span id="plcFavoriteBtn" data-post-id="<?= $this->post->ID; ?>"><?= $text; ?></span>
+                        </div>
+                        <?php
+                        endif;
+                        ?>
+
+                    </div>
                     <h1><?= $this->main_title; ?></h1>
 
                     <address class="author"><a rel="author"
@@ -150,27 +175,7 @@ class Polc_Story_Content_Module
                 </div>
             </article>
             <div class="polcSocialShareAndTags">
-                <?php if (is_user_logged_in()): ?>
-                    <div class="favoriteBtnWrapper">
-                        <?php
-                        $favorite_list = Polc_Header::$curr_user->data->favorite_content_list;
-                        $text = is_array($favorite_list) && count($favorite_list) > 0 && array_key_exists($this->post->ID, $favorite_list) ? __('Remove from favorites', 'polc') : __('Add to favorites', 'polc');;
-                        ?>
-                        <span id="plcFavoriteBtn" data-post-id="<?= $this->post->ID; ?>"><?= $text; ?></span>
-                    </div>
-                    <?php
-                endif;
-
-                if (class_exists("Post_Views_Counter")):
-                    if ($this->post->post_parent != 0 || get_post_meta($this->post->ID, "single", true) == 1):
-                        ?>
-                        <div class="plcContentViews">
-                            <span><?= pvc_get_post_views($this->post->ID); ?></span>
-                        </div>
-                        <?php
-                    endif;
-                endif;
-
+                <?php
                 new Polc_Social_Share_Module();
                 $tags = get_the_tags($this->post->ID);
                 if ($tags):

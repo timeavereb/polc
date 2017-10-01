@@ -23,7 +23,6 @@ class Polc_Social_Share_Module
     public function __construct($custom_args = [])
     {
         $default_args = [
-            "fb_share",
             "fb_like",
             "tw_share",
             "g_share",
@@ -70,9 +69,7 @@ class Polc_Social_Share_Module
         ?>
         <div class="fb_like_wrapper">
             <span></span>
-
-            <div class="fb-like" data-layout="box_count" data-action="like" data-size="small" data-show-faces="false"
-                 data-share="false"></div>
+            <div class="fb-like" data-layout="button_count" data-action="like" data-size="small" data-show-faces="false" data-share="true"></div>
         </div>
         <?php
     }
@@ -81,7 +78,7 @@ class Polc_Social_Share_Module
     {
         $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
         ?>
-        <a href="https://twitter.com/share?url=<?= $actual_link; ?>" target="_blank" class="twitterShareAnchor">
+        <a href="https://twitter.com/share?url=<?= $actual_link; ?>" target="_blank" class="twitterShareAnchor twitter-share-button" data-size="default">
             <div class="twitter_share_wrapper"><span></span>
             </div>
         </a>

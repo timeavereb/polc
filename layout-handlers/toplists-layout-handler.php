@@ -23,11 +23,29 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
     private $top_favorited_contents;
     private $top_commenters;
 
+    private $top_views;
+
+    private $cache;
+    private $cache_time;
+
     public function render()
     {
+        //most favorited authors
         $this->top_favorited_authors = Polc_Favorite_Helper_Module::get_top_favorites(Polc_Settings_Manager::top_lists()["authors_cnt"], "author");
+
+        //most active commenters
         $this->top_commenters = $this->top_comment_authors(Polc_Settings_Manager::top_lists()["commenters_cnt"]);
+
+        //top favorited contents
         $this->top_favorited_contents = Polc_Favorite_Helper_Module::get_top_favorites(Polc_Settings_Manager::top_lists()["stories_cnt"], "story");
+
+        if (class_exists("Post_Views_Counter")):
+            //most viewed contents ( with chapters )
+            $this->top_views = $this->top_views(Polc_Settings_Manager::top_lists()["top_views_cnt"]);
+        endif;
+
+        $this->cache = !isset(Polc_Settings_Manager::top_lists()["cache"]) || Polc_Settings_Manager::top_lists()["cache"] != "" ? true : false;
+        $this->cache_time = is_numeric(Polc_Settings_Manager::top_lists()["cache_time"]) ? Polc_Settings_Manager::top_lists()["cache_time"] : 120;
         ?>
 
         <div class="plcToplistsWrapper">
@@ -105,85 +123,34 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
                 </div>
             </div>
 
-            <div class="toplistsItem  view">
-                <div class="innerItem">
-                    <h1>Legolvasottabb tartalmak</h1>
+            <?php if (class_exists("Post_Views_Counter")): ?>
+                <?php foreach ($this->top_views as $key => $value): ?>
+                    <div class="toplistsItem  view">
+                        <div class="innerItem">
+                            <h1>
+                                <?= $key == "with_chapter" ? __('The most read stories (with sequels)', 'polc') : __('The most read stories (without sequels)', 'polc'); ?>
+                            </h1>
+                            <div class="list">
+                                <?php
+                                $cnt = 1;
+                                foreach ($value as $v): ?>
+                                    <div class="contentItem">
+                                        <a href="<?= $v["url"]; ?>"><span><?= $cnt; ?>.</span>
 
-                    <div class="list">
-                        <div class="contentItem">
-                            <a href=""><span>1.</span>
-
-                                <h2>Aki kapja marja - Stephen King</h2></a>
-
-                            <p>12 300 megtekintés</p>
+                                            <h2><?= $v["name"]; ?></h2></a>
+                                        <p><?= $v["cnt"] . " " . __('views', 'polc'); ?></p>
+                                    </div>
+                                    <?php
+                                    $cnt++;
+                                endforeach; ?>
+                            </div>
                         </div>
-                        <div class="contentItem">
-                            <a href=""><span>2.</span>
-
-                                <h2>Valami, aminek nem egy soros a címe - Valaki, akinek hosszú a neve</h2></a>
-
-                            <p>11 029 megtekintés</p>
-                        </div>
-                        <div class="contentItem">
-                            <a href=""><span>3.</span>
-
-                                <h2>Vesztegzár - Joe Schreiber</h2></a>
-
-                            <p>10 921 megtekintés</p>
-                        </div>
-                        <div class="contentItem">
-                            <a href=""><span>4.</span>
-
-                                <h2>Naruto és az ezer arcú rókakölyök - Mosttaláltamki</h2></a>
-
-                            <p>8320 megtekintés</p>
-                        </div>
-                        <div class="contentItem">
-                            <a href=""><span>5.</span>
-
-                                <h2>Harry Potter és a kitalált karakterek fanfictionja - Kitalált szerző</h2></a>
-
-                            <p>5123 megtekintés</p>
-                        </div>
-                        <div class="contentItem">
-                            <a href=""><span>6.</span>
-
-                                <h2>Rám zuhant a háztető - Anonymus</h2></a>
-
-                            <p>1231 megtekintés</p>
-                        </div>
-                        <div class="contentItem">
-                            <a href=""><span>7.</span>
-
-                                <h2>Darth Vader és a legjobb apukák csoportköre - Luke</h2></a>
-
-                            <p>902 megtekintés</p>
-                        </div>
-                        <div class="contentItem">
-                            <a href=""><span>8.</span>
-
-                                <h2>Nem hinném, hogy jó vagyok - Egy jó ember</h2></a>
-
-                            <p>123 megtekintés</p>
-                        </div>
-                        <div class="contentItem">
-                            <a href=""><span>9.</span>
-
-                                <h2>Altató és kloroform - Drogériás</h2></a>
-
-                            <p>122 megtekintés</p>
-                        </div>
-                        <div class="contentItem">
-                            <a href=""><span>10.</span>
-
-                                <h2>Hogy múlik az idő - Óra</h2></a>
-
-                            <p>99 megtekintés</p>
-                        </div>
-
                     </div>
-                </div>
-            </div>
+                    <?php
+                endforeach;
+            endif;
+            ?>
+
         </div>
 
         <?php
@@ -195,9 +162,7 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
      */
     private function top_comment_authors($limit = 10)
     {
-        $cache = !isset(Polc_Settings_Manager::top_lists()["cache"]) || Polc_Settings_Manager::top_lists()["cache"] != "" ? true : false;
-
-        if ($cache):
+        if ($this->cache):
             $result = get_transient("top_comment_authors");
             if ($result):
                 return $result;
@@ -227,8 +192,67 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
             $list[] = ["url" => $url, "name" => $user->data->display_name, "cnt" => $value->CommentCnt];
         endforeach;
 
-        if ($cache):
-            set_transient("top_comment_authors", $list, Polc_Settings_Manager::top_lists()["cache_time"]);
+        if ($this->cache):
+            set_transient("top_comment_authors", $list, $this->cache_time);
+        endif;
+
+        return $list;
+    }
+
+    private function top_views($limit = 10)
+    {
+        $list = [];
+
+        if ($this->cache):
+            $result = get_transient("top_views");
+            if ($result):
+                return $result;
+            endif;
+        endif;
+
+        global $wpdb;
+        $count_table = $wpdb->prefix . "post_views";
+        $post_table = $wpdb->prefix . "posts";
+        $post_meta_table = $wpdb->prefix . "postmeta";
+
+        //Get top x volumes with it's sum of children views.
+        $with_chapters = $wpdb->get_results("
+                SELECT SUM(pw.count) as VolumeTotal , p.post_parent
+                FROM {$count_table} pw
+                JOIN {$post_table} p ON pw.id = p.ID
+                WHERE pw.type = 4
+                AND p.post_status = 'publish' AND p.post_type = 'story'
+                AND p.post_parent != 0
+                GROUP BY p.post_parent
+                ORDER BY VolumeTotal DESC
+                LIMIT {$limit}
+        ");
+
+        $no_chapters = $wpdb->get_results("
+            SELECT pw.count, pw.id, p.post_title
+            FROM {$count_table} pw
+            JOIN {$post_table} p ON p.ID = pw.id
+            JOIN {$post_meta_table} pm ON p.ID = pm.post_id
+            WHERE pw.type = 4
+            AND p.post_type = 'story'
+            AND p.post_status = 'publish'
+            AND pm.meta_key = 'single'
+            ORDER BY pw.count DESC
+            LIMIT {$limit}
+        ");
+
+        foreach ($with_chapters as $story):
+            $post = get_post($story->post_parent);
+            $list["with_chapter"][] = ["cnt" => $story->VolumeTotal, "name" => $post->post_title, "url" => get_permalink($story->post_parent)];
+        endforeach;
+
+        foreach ($no_chapters as $story):
+            $post = get_post($story->id);
+            $list["no_chapter"][] = ["cnt" => $story->count, "name" => $post->post_title, "url" => get_permalink($story->id)];
+        endforeach;
+
+        if ($this->cache):
+            set_transient("top_views", $list, $this->cache_time);
         endif;
 
         return $list;

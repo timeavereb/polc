@@ -150,15 +150,16 @@ class Polc_Story_Content_Module
                 </div>
             </article>
             <div class="polcSocialShareAndTags">
-                <div class="favoriteBtnWrapper">
-
+                <?php if (is_user_logged_in()): ?>
+                    <div class="favoriteBtnWrapper">
+                        <?php
+                        $favorite_list = Polc_Header::$curr_user->data->favorite_content_list;
+                        $text = is_array($favorite_list) && count($favorite_list) > 0 && array_key_exists($this->post->ID, $favorite_list) ? __('Remove from favorites', 'polc') : __('Add to favorites', 'polc');;
+                        ?>
+                        <span id="plcFavoriteBtn" data-post-id="<?= $this->post->ID; ?>"><?= $text; ?></span>
+                    </div>
                     <?php
-                    $favorite_list = Polc_Header::$curr_user->data->favorite_content_list;
-                    $text = is_array($favorite_list) && array_key_exists($this->post->ID, $favorite_list) ? __('Remove from favorites', 'polc') : __('Add to favorites', 'polc');;
-                    ?>
-                    <span id="plcFavoriteBtn" data-post-id="<?= $this->post->ID; ?>"><?= $text; ?></span>
-                </div>
-                <?php
+                endif;
                 new Polc_Social_Share_Module();
                 $tags = get_the_tags($this->post->ID);
                 if ($tags):

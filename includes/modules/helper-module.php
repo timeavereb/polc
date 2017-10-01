@@ -157,7 +157,7 @@ class Polc_Helper_Module
                 if ($post->post_parent != 0):
                     $parent_post = get_post($post->post_parent);
                     global $wpdb;
-                    $select = "SELECT ID FROM wp_posts WHERE post_parent = " . $post->post_parent . " ORDER BY post_date ASC";
+                    $select = "SELECT ID FROM wp_posts WHERE post_parent = " . $post->post_parent . " AND post_status = 'publish' ORDER BY post_date ASC";
                     $result = $wpdb->get_results($select);
                     $cnt = 1;
                     foreach ($result as $res):

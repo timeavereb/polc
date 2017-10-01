@@ -135,6 +135,10 @@ class Polc_Layout_Settings_Page
                         <label><?= __('Favorite stories limit', 'polc'); ?></label>
                         <input type="number" min="1" name="toplists[stories_cnt]"
                                value="<?= !isset($layout_settings["toplists"]["stories_cnt"]) ? 10 : $layout_settings["toplists"]["stories_cnt"]; ?>">
+
+                        <label><?= __('Most viewed stories', 'polc'); ?></label>
+                        <input type="number" min="1" name="toplists[top_views_cnt]"
+                               value="<?= !isset($layout_settings["toplists"]["top_views_cnt"]) ? 10 : $layout_settings["toplists"]["top_views_cnt"]; ?>">
                     </p>
 
                     <!-- toplist cache settings-->

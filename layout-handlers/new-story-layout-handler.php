@@ -185,7 +185,7 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
      */
     public function init_upload()
     {
-        if (count($_REQUEST["post_tag"]) > 8):
+        if (isset($_REQUEST["post_tag"]) && count($_REQUEST["post_tag"]) > 8):
             echo __('The maximum number of tags is 8.', 'polc');
             return false;
         endif;
@@ -243,6 +243,10 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
         endif;
 
         $this->insert_id = wp_insert_post($args);
+
+        if ($_REQUEST["content_type"] == "single"):
+            update_post_meta($this->insert_id, 'single', true);
+        endif;
 
         wp_set_object_terms($this->insert_id, (int)$_REQUEST["genre"], 'genre');
 

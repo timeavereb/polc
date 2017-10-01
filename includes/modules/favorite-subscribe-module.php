@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Pali
@@ -8,13 +9,13 @@
 
 require_once $_SERVER["DOCUMENT_ROOT"] . "/wp-load.php";
 
-if (!is_user_logged_in()) {
-    wp_send_json(array("error" => __('You\'ve not signed in!', 'polc')));
-}
+if (!is_user_logged_in()):
+    wp_send_json(["error" => __('You\'ve not signed in!', 'polc')]);
+endif;
 
-if (!isset($_REQUEST["action"]) || !isset($_REQUEST["mode"])) {
-    wp_send_json(array("error" => __('Invalid action!', 'polc')));
-}
+if (!isset($_REQUEST["action"]) || !isset($_REQUEST["mode"])):
+    wp_send_json(["error" => __('Invalid action!', 'polc')]);
+endif;
 
 $manager = new Polc_Favorite_Subscribe_Module();
 $manager->favorite($_REQUEST);
@@ -41,21 +42,21 @@ class Polc_Favorite_Subscribe_Module
     {
         global $wpdb;
 
-        if ($data["mode"] == "author") {
+        if ($data["mode"] == "author"):
             $table = $wpdb->prefix . "polc_favorite_authors";
             $key = "AuthorId";
-            $messages = array(
+            $messages = [
                 "add" => __('Add author to favorites', 'polc'),
                 "remove" => __('Remove author from favorites', 'polc')
-            );
-        } else {
+            ];
+        else:
             $table = $wpdb->prefix . "polc_favorite_stories";
             $key = "PostId";
-            $messages = array(
+            $messages = [
                 "add" => __('Add to favorites', 'polc'),
                 "remove" => __('Remove from favorites', 'polc')
-            );
-        }
+            ];
+        endif;
 
         $result = $wpdb->get_results(
             $wpdb->prepare(
@@ -66,20 +67,19 @@ class Polc_Favorite_Subscribe_Module
         );
 
         //If we found the author ID among the list, then it is "unlike", so we delete it from the list.
-        if (count($result) > 0) {
-            $wpdb->delete($table, array("Id" => $result[0]->Id));
+        if (count($result) > 0):
+            $wpdb->delete($table, ["Id" => $result[0]->Id]);
             $msg = $messages["add"];
-        }
         //Otherwise we add the author id to the list
-        else {
+        else:
             $wpdb->insert(
                 $table,
-                array('UserId' => (int)self::$user->ID, $key => (int)$data["obj_id"]),
-                array('%d', '%d')
+                ['UserId' => (int)self::$user->ID, $key => (int)$data["obj_id"]],
+                ['%d', '%d']
             );
             $msg = $messages["remove"];
-        }
+        endif;
 
-        wp_send_json(array("success" => $msg));
+        wp_send_json(["success" => $msg]);
     }
 }

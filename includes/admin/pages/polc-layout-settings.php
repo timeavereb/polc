@@ -23,17 +23,15 @@ class Polc_Layout_Settings_Page
 
     public static function render()
     {
-        if (isset($_REQUEST["submit"])) {
+        if (isset($_REQUEST["submit"])):
             self::save();
-        }
+        endif;
 
         $layout_settings = Polc_Settings_Manager::layout();
-
-        echo '<h1>' . __('Layout settings', 'polc') . '</h1>';
         ?>
 
+        <h1><?= __('Layout settings', 'polc'); ?></h1>
         <script type="text/javascript">
-
             jQuery(document).ready(function () {
                 jQuery(".section_btn").click(function (e) {
                     e.preventDefault();
@@ -47,11 +45,9 @@ class Polc_Layout_Settings_Page
                 jQuery(".section_btn").removeClass("active");
                 jQuery(sender).addClass("active");
             }
-
         </script>
 
         <form action="<?= admin_url() . "admin.php?page=" . POLC_LAYOUT_SETTINGS; ?>" method="POST">
-
             <table>
                 <tr>
                     <td>
@@ -70,35 +66,31 @@ class Polc_Layout_Settings_Page
             </table>
 
             <div id="sections_wrapper">
-
                 <!-- main page settings-->
                 <div id="section_1" class="section">
-
                     <!-- stories settings-->
                     <p class="polc-settings-element">
-                        <label><?= __('Number of stroies', 'polc') ?></label>
+                        <label><?= __('Number of stroies', 'polc'); ?></label>
                         <input type="number" name="stories[count]"
-                               value="<?= !isset($layout_settings["stories"]["count"]) ? 10 : $layout_settings["stories"]["count"] ?>">
+                               value="<?= !isset($layout_settings["stories"]["count"]) ? 10 : $layout_settings["stories"]["count"]; ?>">
                     </p>
-
                     <?php
-                    $args = array(
+                    $args = [
                         "show_option_none" => __("No category selected", 'polc'),
                         "hide_empty" => false,
                         "hierarchical" => true,
                         "class" => "polc-category-selector",
                         "option_none_value" => 0
-                    );
+                    ];
 
                     $args["selected"] = !isset($layout_settings["news"]["term_id"]) ? 3 : $layout_settings["news"]["term_id"];
                     $args["name"] = "news[term_id]";
                     ?>
-
                     <!-- news settings -->
                     <p class="polc-settings-element">
                         <label><?= __('Number of news', 'polc'); ?></label>
                         <input type="number" name="news[count]"
-                               value="<?= !isset($layout_settings["news"]["count"]) ? 0 : $layout_settings["news"]["count"] ?>">
+                               value="<?= !isset($layout_settings["news"]["count"]) ? 0 : $layout_settings["news"]["count"]; ?>">
 
                         <label><?= __('News category', 'polc'); ?></label>
                         <?php
@@ -132,21 +124,24 @@ class Polc_Layout_Settings_Page
 
                     <!-- toplist limit settings-->
                     <p>
-                        <label><?= __( 'Favorite authors limit', 'polc' );?></label>
-                        <input type="number" min="1" name="toplists[authors_cnt]" value="<?= !isset($layout_settings["toplists"]["authors_cnt"]) ? 10 : $layout_settings["toplists"]["authors_cnt"]; ?>">
+                        <label><?= __('Favorite authors limit', 'polc'); ?></label>
+                        <input type="number" min="1" name="toplists[authors_cnt]"
+                               value="<?= !isset($layout_settings["toplists"]["authors_cnt"]) ? 10 : $layout_settings["toplists"]["authors_cnt"]; ?>">
 
-                        <label><?= __( 'Top commenters limit', 'polc' );?></label>
-                        <input type="number" min="1" name="toplists[commenters_cnt]" value="<?= !isset($layout_settings["toplists"]["commenters_cnt"]) ? 10 : $layout_settings["toplists"]["commenters_cnt"]; ?>">
+                        <label><?= __('Top commenters limit', 'polc'); ?></label>
+                        <input type="number" min="1" name="toplists[commenters_cnt]"
+                               value="<?= !isset($layout_settings["toplists"]["commenters_cnt"]) ? 10 : $layout_settings["toplists"]["commenters_cnt"]; ?>">
 
-                        <label><?= __( 'Favorite stories limit', 'polc' );?></label>
-                        <input type="number" min="1" name="toplists[stories_cnt]" value="<?= !isset($layout_settings["toplists"]["stories_cnt"]) ? 10 : $layout_settings["toplists"]["stories_cnt"]; ?>">
+                        <label><?= __('Favorite stories limit', 'polc'); ?></label>
+                        <input type="number" min="1" name="toplists[stories_cnt]"
+                               value="<?= !isset($layout_settings["toplists"]["stories_cnt"]) ? 10 : $layout_settings["toplists"]["stories_cnt"]; ?>">
                     </p>
 
                     <!-- toplist cache settings-->
                     <p>
                         <label><?= __("Top-lists cache"); ?></label>
                         <input type="checkbox" name="toplists[cache]"
-                               <?= !isset($layout_settings["toplists"]["cache"]) || $layout_settings["toplists"]["cache"] != "" ? "checked" : ""; ?>>
+                            <?= !isset($layout_settings["toplists"]["cache"]) || $layout_settings["toplists"]["cache"] != "" ? "checked" : ""; ?>>
 
                         <label><?= __("Top-lists cache time in seconds"); ?></label>
                         <input type="number" name="toplists[cache_time]"
@@ -162,16 +157,16 @@ class Polc_Layout_Settings_Page
 
     public static function save()
     {
-        $update = array();
-        $allowed = array("stories", "news", "recommend", "toplists");
+        $update = [];
+        $allowed = ["stories", "news", "recommend", "toplists"];
 
         $_REQUEST["toplists"]["cache"] = !isset($_REQUEST["toplists"]["cache"]) ? "" : $_REQUEST["toplists"]["cache"];
 
-        foreach ($_REQUEST as $key => $value) {
-            if (in_array($key, $allowed)) {
+        foreach ($_REQUEST as $key => $value):
+            if (in_array($key, $allowed)):
                 $update[$key] = $value;
-            }
-        }
+            endif;
+        endforeach;
 
         update_option("polc-layout-settings", $update);
     }

@@ -1,10 +1,15 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Timi
  * Date: 2017. 06. 09.
  * Time: 19:51
  */
+
+if (!defined("ABSPATH")):
+    exit();
+endif;
 
 require_once "helper-module.php";
 require_once "editor-helper-module.php";

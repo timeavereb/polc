@@ -13,9 +13,9 @@ class Polc_Header
      */
     public function __construct()
     {
-        if (is_user_logged_in()) {
+        if (is_user_logged_in()):
             self::$curr_user = wp_get_current_user();
-        }
+        endif;
 
         $this->init_head();
         $this->register_handler();
@@ -31,11 +31,11 @@ class Polc_Header
      */
     public static function current_user()
     {
-        if(empty(self::$curr_user_meta) && is_user_logged_in()){
+        if (empty(self::$curr_user_meta) && is_user_logged_in()):
             self::$curr_user->data->favorite_author_list = Polc_Favorite_Helper_Module::get_favorite_users(self::$curr_user->ID, "authors");
             self::$curr_user->data->favorite_content_list = Polc_Favorite_Helper_Module::get_favorite_stories(self::$curr_user->ID);
             self::$curr_user->data->user_birth_date = get_user_meta(self::$curr_user->ID, 'user_birth_date', true);
-        }
+        endif;
 
         return self::$curr_user;
     }
@@ -60,8 +60,11 @@ class Polc_Header
         <script>var polc_header_handler = new polc_header_handler();</script>
         <header class="plc_header">
             <a href="http://polc.eu/"><span class="site_id"></span></a>
+
             <form id="plc_searchform" action="<?= home_url(); ?>" method="POST">
-            <div class="plcHeaderSearch"><input type="text" name="s" placeholder="Search..." onkeypress="if(event.keyCode == 13){ jQuery('#plc_searchform').submit();) }"></div>
+                <div class="plcHeaderSearch"><input type="text" name="s" placeholder="Search..."
+                                                    onkeypress="if(event.keyCode == 13){ jQuery('#plc_searchform').submit();) }">
+                </div>
             </form>
         </header>
         <?php
@@ -149,7 +152,7 @@ class Polc_Header
                                placeholder="<?= __('Password', 'polc'); ?>">
                     </div>
                     <div class="polc_lostpass-wrapper">
-                        <button id="plc_lost_password_btn"><?= __( 'Forgot your password?', 'polc' );?></button>
+                        <button id="plc_lost_password_btn"><?= __('Forgot your password?', 'polc'); ?></button>
                     </div>
                     <div class="regbox_row submit">
                         <button id="plc_login_btn"><?= __('Sign In', 'polc'); ?></button>
@@ -186,30 +189,33 @@ class Polc_Header
 
             <div class="plc_regnlogin">
                 <?php
-                if (!self::current_user()) {
+                if (!self::current_user()):
                     ?>
                     <a href="#" class="signup" id="plc_registration"><?= __('Registration', 'polc'); ?></a>
                     <a href="#" class="login" id="plc_sign_up"><?= __('Login', 'polc'); ?></a>
                     <?php
-                } else {
+                else:
                     ?>
                     <a href="#" class="logout" id="plc_logout"><?= __('Logout', 'polc'); ?></a>
+                    <div class="plc_user_info_wrapper">
+                        <div class="welcome-wrapper">
+                            <span class="plc_welcome_text"><?= __('Welcome', 'polc'); ?></span>
+                            <span class="name"><?= self::$curr_user->user_nicename; ?></span>
+                        </div>
+                        <ul class="plc_user_menu">
+                            <li>
+                                <a href="<?= get_author_posts_url(self::$curr_user->ID); ?>"><?= __('My profile', 'polc'); ?></a>
+                            </li>
+                        </ul>
+                    </div>
                     <?php
-                    echo '<div class="plc_user_info_wrapper">';
-                    echo '<div class="welcome-wrapper">';
-                    echo '<span class="plc_welcome_text">' . __('Welcome', 'polc') . '</span>';
-                    echo '<span class="name">' . self::$curr_user->user_nicename . '</span>';
-                    echo '</div>';
-                    echo '<ul class="plc_user_menu">';
-                    echo '<li><a href="' . get_author_posts_url(self::$curr_user->ID) . '">' . __('My profile', 'polc') . '</a></li>';
-                    echo '</ul>';
-                    echo '</div>';
-                } ?>
+                endif;
+                ?>
             </div>
             <?php
 
             foreach (wp_get_nav_menu_items('polc-main-menu',
-                array(
+                [
                     'order' => 'ASC',
                     'orderby' => 'menu_order',
                     'post_type' => 'nav_menu_item',
@@ -217,25 +223,27 @@ class Polc_Header
                     'output' => ARRAY_A,
                     'output_key' => 'menu_order',
                     'nopaging' => true
-                )) as $menu_element) {
+                ]) as $menu_element):
                 ?>
                 <a href="<?= $menu_element->url; ?>"
                    class="plc_navigation_item_wrapper <?= sanitize_title($menu_element->title); ?>">
                     <div class="plc_navigation_item"><?= $menu_element->title; ?></div>
                 </a>
                 <?php
-            }
+            endforeach;
             ?>
         </div>
         <?php
     }
 
-    private function lost_password_handler(){
+    private function lost_password_handler()
+    {
         ?>
         <div id="plc_lost_password_popup" class="popup" style="display:none;">
             <span class="plc_lost_password_msg">
-                <?= __("Forgot your password? Enter the email address or username to retrieve your account", "polc");?>
+                <?= __("Forgot your password? Enter the email address or username to retrieve your account", "polc"); ?>
             </span>
+
             <form id="plc_lost_password_form">
                 <input id="lost_password_login" name="lost_password_login">
             </form>

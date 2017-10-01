@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Pali
@@ -6,10 +7,9 @@
  * Time: 13:39
  */
 
-
 require_once $_SERVER["DOCUMENT_ROOT"] . "/wp-load.php";
 
-if(is_user_logged_in()){
+if(is_user_logged_in()):
     wp_logout();
-    wp_send_json(array("success" => "true"));
-}
+    wp_send_json(["success" => "true"]);
+endif;

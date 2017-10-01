@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Pali
@@ -27,18 +28,18 @@ class Polc_Author
     public function __construct()
     {
         $this->author = get_queried_object();
-        if (is_user_logged_in()) {
+        if (is_user_logged_in()):
             $this->can_edit = Polc_Header::current_user()->ID == $this->author->ID ? true : false;
-        }
+        endif;
 
         $avatar = get_user_meta($this->author->ID, "polc_current_avatar");
 
-        $this->user_favorite_list = Polc_Favorite_Helper_Module::get_favorite_users($this->author->ID, "users");
+        $this->user_favorite_list = (array)Polc_Favorite_Helper_Module::get_favorite_users($this->author->ID, "users");
         $this->user_favorite_cnt = count($this->user_favorite_list);
 
         $this->avatar = !empty($avatar) ? $avatar[0]["src"] : "";
         wp_enqueue_script("author-handler", PLC_THEME_PATH . '/js/author-handler.js');
-        wp_enqueue_script( 'jquery-ui-datepicker' );
+        wp_enqueue_script('jquery-ui-datepicker');
         ?>
 
         <script type="text/javascript">
@@ -49,7 +50,7 @@ class Polc_Author
         </script>
         <?php
 
-        if ($this->can_edit) {
+        if ($this->can_edit):
 
             ?>
             <div id="plc_image_selection_wrapper" style="display:none;">
@@ -58,11 +59,10 @@ class Polc_Author
                 </form>
             </div>
             <?php
-
             $this->story_selection_popup();
-        }
+        endif;
 
-        $args = array(
+        $args = [
             "post_type" => "story",
             "author" => $this->author->ID,
             "posts_per_page" => -1,
@@ -70,26 +70,28 @@ class Polc_Author
             "post_status" => "publish",
             "order_by" => "modified",
             "order" => "desc",
-        );
+        ];
 
         $this->user_stories = get_posts($args);
+        ?>
+        <div class="plc_profile_wrapper">
+            <?php
 
-        echo '<div class="plc_profile_wrapper">';
+            if ($this->can_edit):
+                $this->profile_admin_bar();
+            endif;
 
-        if ($this->can_edit):
-            $this->profile_admin_bar();
-        endif;
+            $this->profile_left_stories();
+            $this->profile_left_favorite_users();
 
-        $this->profile_left_stories();
-        $this->profile_left_favorite_users();
+            if ($this->can_edit):
+                $this->profile_left_data_change();
+            endif;
 
-        if ($this->can_edit) {
-            $this->profile_left_data_change();
-        }
-
-        $this->profile_right();
-
-        echo '</div>';
+            $this->profile_right();
+            ?>
+        </div>
+        <?php
     }
 
     /**
@@ -235,7 +237,8 @@ class Polc_Author
                      style="background-image:url('<?= $this->avatar; ?>');">
                     <?php if ($this->can_edit): ?>
                         <div class="changeImage"><p><?= __('Change profile picture', 'polc') ?></p>
-                        </div> <?php endif; ?>
+                        </div>
+                    <?php endif; ?>
                 </div>
                 <div class="plcUserDefault">
                     <p><?= $this->author->user_email; ?></p>
@@ -267,16 +270,15 @@ class Polc_Author
                             <p id="addFavouriteText">
                                 <?php
                                 $author_list = Polc_Header::$curr_user->data->favorite_author_list;
-                                if (is_array($author_list) && array_key_exists($this->author->ID, $author_list)) {
+                                if (is_array($author_list) && array_key_exists($this->author->ID, $author_list)):
                                     echo __('Remove author from favorites', 'polc');
-                                } else {
+                                else:
                                     echo __('Add author to favorites', 'polc');
-                                }
+                                endif;
                                 ?>
                             </p>
                         </div>
-                        <?php
-                    endif; ?>
+                    <?php endif; ?>
                 </div>
             </div>
             <!--<div class="plcWriterLatestActivities">
@@ -351,7 +353,7 @@ class Polc_Author
                         <h4><?= __('Category', 'polc'); ?></h4>
                         <?php
 
-                        wp_dropdown_categories(array(
+                        wp_dropdown_categories([
                             "id" => "content-category",
                             "name" => "content-category",
                             "taxonomy" => "category",
@@ -361,14 +363,14 @@ class Polc_Author
                             'hide_empty' => 0,
                             'order' => 'ASC',
                             'option_none_value' => 0
-                        ));
+                        ]);
                         ?>
                     </div>
                     <div class="newStoryData_row storySubCategory" style="display:none;">
                         <h4><?= __('Sub-category', 'polc'); ?></h4>
                         <?php
 
-                        wp_dropdown_categories(array(
+                        wp_dropdown_categories([
                             "id" => "content-subcategory",
                             "name" => "content-subcategory",
                             "taxonomy" => "category",
@@ -378,12 +380,12 @@ class Polc_Author
                             'hide_empty' => 0,
                             'order' => 'ASC',
                             'option_none_value' => 0
-                        )); ?>
+                        ]); ?>
                     </div>
                     <div class="newStoryData_row storyGenre" style="display:none;">
                         <h4><?= __('Genre', 'polc'); ?></h4>
                         <?php
-                        wp_dropdown_categories(array(
+                        wp_dropdown_categories([
                             "id" => "content-genre",
                             "name" => "content-genre",
                             "taxonomy" => "genre",
@@ -392,7 +394,7 @@ class Polc_Author
                             'hide_empty' => 0,
                             'order' => 'ASC',
                             'option_none_value' => 0
-                        )); ?>
+                        ]); ?>
                     </div>
                     <div class="newStoryData_row submit" style="display:none;">
                         <?= wp_nonce_field('volume-box', 'new-volume-nonce'); ?>

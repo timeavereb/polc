@@ -204,7 +204,7 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
             endif;
         endif;
 
-        if (!is_numeric($limit)) :
+        if (!is_numeric($limit)):
             return false;
         endif;
 
@@ -219,13 +219,13 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
         LIMIT {$limit}
         ");
 
-        $list = array();
+        $list = [];
 
-        foreach ($results as $value) {
+        foreach ($results as $value):
             $user = get_user_by('ID', $value->UserId);
             $url = get_author_posts_url($value->UserId);
-            $list[] = array("url" => $url, "name" => $user->data->display_name, "cnt" => $value->CommentCnt);
-        }
+            $list[] = ["url" => $url, "name" => $user->data->display_name, "cnt" => $value->CommentCnt];
+        endforeach;
 
         if ($cache):
             set_transient("top_comment_authors", $list, Polc_Settings_Manager::top_lists()["cache_time"]);

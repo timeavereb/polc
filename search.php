@@ -29,19 +29,21 @@ class Polc_Search
         $this->category = isset($_REQUEST["category"]) ? $_REQUEST["category"] : "";
         $this->subcategory = isset($_REQUEST["sub-category"]) ? $_REQUEST["sub-category"] : "";
         $this->genre = isset($_REQUEST["genre"]) ? $_REQUEST["genre"] : "";
-        $this->ppp = 10;
+        $this->ppp = 3;
 
         $this->search();
 
         $this->total_items = $this->items->found_posts;
         $this->total_pages = round($this->total_items / $this->ppp);
-
-        echo '<div id="plcSearchMainWrapper">';
-        $this->form();
-        $this->pagination();
-        echo '</div>';
+        ?>
+        <div id="plcSearchMainWrapper">
+            <?php
+            $this->form();
+            $this->pagination();
+            ?>
+        </div>
+        <?php
     }
-
 
     private function form()
     {
@@ -66,7 +68,7 @@ class Polc_Search
                             <input type="text" placeholder="<?= __('Search phrase', 'polc'); ?>" id="plcSearchPhrase"
                                    name="s"
                                    value="<?= $this->phrase; ?>">
-                                   <input type="submit" value="<?= __('Filter', 'polc'); ?>">
+                            <input type="submit" value="<?= __('Filter', 'polc'); ?>">
                         </div>
                     </div>
                     <div class="plcTotalHitsWrapper">
@@ -82,12 +84,12 @@ class Polc_Search
                         <p class="plcSearchFilter">
                             <?php
 
-                            $args = array(
+                            $args = [
                                 "taxonomy" => "category",
                                 'orderby' => 'name',
                                 'hide_empty' => 0,
                                 'order' => 'ASC'
-                            );
+                            ];
 
                             $args["child_of"] = Polc_Settings_Manager::categories()["story-main"];
                             echo '<span>' . __('Choose category', 'polc') . '</span>';
@@ -113,109 +115,79 @@ class Polc_Search
                             ?>
                         </p>
                     </div>
-                    </form>
-                    <div class="plcHitsWrapper">
-                        <?php $this->render(); ?>
-                    </div>
-                </div>
+            </form>
+            <div class="plcHitsWrapper">
+                <?php $this->render(); ?>
+            </div>
         </div>
         <?php
     }
 
     private function search()
     {
-        $args = array(
+        $args = [
             "post_type" => "story",
             "s" => $this->phrase,
             "posts_per_page" => $this->ppp,
             "paged" => $this->paged,
             "orderby" => "date",
             "order" => "desc"
-        );
+        ];
 
-        $tax_query = array();
+        $tax_query = [];
 
-        if (isset($_REQUEST["category"])) {
-            $cat = array(
+        if (isset($_REQUEST["category"])):
+            $cat = [
                 "taxonomy" => "category",
                 "field" => "term_id",
                 "terms" => $_REQUEST["category"],
                 "operator" => "IN"
-            );
+            ];
             $tax_query[] = $cat;
-        }
+        endif;
 
-        if (isset($_REQUEST["sub-category"])) {
-            $sub_cat = array(
+        if (isset($_REQUEST["sub-category"])):
+            $sub_cat = [
                 "taxonomy" => "category",
                 "field" => "term_id",
                 "terms" => $_REQUEST["sub-category"],
                 "operator" => "IN"
-            );
+            ];
             $tax_query[] = $sub_cat;
-        }
+        endif;
 
-        if (isset($_REQUEST["genre"])) {
-            $genre = array(
+        if (isset($_REQUEST["genre"])):
+            $genre = [
                 "taxonomy" => "genre",
                 "field" => "term_id",
                 "terms" => $_REQUEST["genre"],
                 "operator" => "IN"
-            );
+            ];
             $tax_query[] = $genre;
-        }
+        endif;
 
-        if (count($tax_query) > 0) {
+        if (count($tax_query) > 0):
             $tax_query["relation"] = "AND";
             $args["tax_query"] = $tax_query;
-        }
+        endif;
 
- /*       global $wpdb;
-        $stmt = "SELECT pp.ID, pp.post_name, pp.post_author";
-
-        $stmt .= " FROM ".$wpdb->prefix . "posts pp";
-
-        $stmt .= " JOIN ".$wpdb->prefix . "posts p ON pp.Id = p.post_parent";
-
-        if(isset($_REQUEST["category"])){
-            $stmt .= " JOIN " . $wpdb->prefix . "term_relationships ctrs ON ctrs.object_id = pp.ID";
-            $stmt .= " JOIN " . $wpdb->prefix . "term_taxonomy ctt ON ctt.term_id = ctrs.term_taxonomy_id";
-        }
-
-        $stmt .= " WHERE p.post_parent != 0 AND p.post_type = 'story' AND p.post_status = 'publish' AND pp.post_status = 'publish'";
-
-        $stmt .= " AND ( p.post_content LIKE '%". $this->phrase . "%' OR p.post_title LIKE '%" . $this->phrase ."%' )";
-        if(isset($_REQUEST["category"])){
-            $stmt .= " AND ctt.taxonomy = 'category' AND ctt.term_id IN (". implode(",", $_REQUEST["category"]) .")";
-        }
-
-        $stmt .= "GROUP BY p.post_parent";
-
-        $result = $wpdb->get_results($stmt);
-
-        print_r($_REQUEST);
-        echo "<br><br>";
-
-        echo $stmt . "<br><br>";
-
-        print_r($result);
-*/
         $this->items = new WP_Query($args);
     }
 
     private function render_checkboxes($terms, $name)
     {
-        foreach ($terms as $term) {
-
+        foreach ($terms as $term):
             $selected = isset($_REQUEST[$name]) && is_array($_REQUEST[$name]) && in_array($term->term_id, $_REQUEST[$name]) ? "checked" : "";
-            echo '<div class="plcCheckBoxWrapper">';
-            echo '<div class="plcCheckbox">';
-            echo '<input type="checkbox" name="' . $name . '[]" value="' . $term->term_id . '" ' . $selected . '>';
-            echo '<label></label>';
-            echo '</div>';
-            echo '<p>' . $term->name . '</p>';
-            echo '</div>';
-        }
+            ?>
+            <div class="plcCheckBoxWrapper">
+                <div class="plcCheckbox">
+                    <input type="checkbox" name="<?= $name; ?>[]" value="<?= $term->term_id; ?>" <?= $selected; ?>>
+                    <label></label>
+                </div>
+                <p><?= $term->name ?></p>
+            </div>
+            <?php
+        endforeach;
     }
 
     private function render()
@@ -225,36 +197,43 @@ class Polc_Search
 
     private function pagination()
     {
-        if ($this->total_pages == 1) return;
+        if ($this->total_pages == 1):
+            return;
+        endif;
+        ?>
 
-        echo '<div class="plcPagerWrapper">';
-            echo '<div class="plcPagerInnerWrapper">';
+        <div class="plcPagerWrapper">
+            <div class="plcPagerInnerWrapper">
+                <?php if ($this->paged > 4): ?>
+                    <button class="plcPagerBtn" data-page="1"><?= __('First page', 'polc'); ?></button>
+                <?php endif;
 
+                //display backwards
+                if ($this->paged > 1):
+                    for ($i = max(1, $this->paged - 3); $i < $this->paged; $i++):
+                        ?>
+                        <button class="plcPagerBtn" data-page="<?= $i ?>"><?= $i; ?></button>
+                        <?php
+                    endfor;
+                endif;
 
-            if ($this->paged > 4) {
-                echo '<button class="plcPagerBtn" data-page="1">' . __('First page', 'polc') . '</button>';
-            }
+                //display current page
+                ?>
+                <button class="current_page"><?= $this->paged; ?></button>
+                <?php for ($i = $this->paged + 1; $i <= min($this->paged + 3, $this->total_pages); $i++): ?>
+                    <button class="plcPagerBtn" data-page="<?= $i ?>"><?= $i; ?></button>
+                    <?php
+                endfor;
 
-            //display backwards
-            if ($this->paged > 1) {
-                for ($i = max(1, $this->paged - 3); $i < $this->paged; $i++) {
-                    echo '<button class="plcPagerBtn" data-page="' . $i . '">' . $i . '</button>';
-                }
-            }
-
-            //display current page
-            echo '<button class="current_page">' . $this->paged . '</button>';
-
-            for ($i = $this->paged + 1; $i <= min($this->paged + 3, $this->total_pages); $i++) {
-                echo '<button class="plcPagerBtn" data-page="' . $i . '">' . $i . '</button>';
-            }
-
-            if ($this->paged < $this->total_pages - 3) {
-                echo '<button class="plcPagerBtn" data-page="' . $this->total_pages . '">' . __('Last page', 'polc') . '</button>';
-            }
-
-            echo '</div>';
-        echo '</div>';
+                if ($this->paged < $this->total_pages - 3): ?>
+                    <button class="plcPagerBtn"
+                            data-page="<?= $this->total_pages ?>"><?= __('Last page', 'polc'); ?></button>
+                    <?php
+                endif;
+                ?>
+            </div>
+        </div>
+        <?php
     }
 }
 

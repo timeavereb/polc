@@ -7,9 +7,9 @@
  * Time: 14:27
  */
 
-if(!defined("ABSPATH")){
+if(!defined("ABSPATH")):
     exit();
-}
+endif;
 
 /**
  * Class Polc_Install_Tables

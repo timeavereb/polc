@@ -6,6 +6,14 @@
  * Date: 2017. 08. 27.
  * Time: 16:00
  */
+
+if (!defined("ABSPATH")):
+    exit();
+endif;
+
+/**
+ * Class Polc_Comment_List_Layout_Handler
+ */
 class Polc_Comment_List_Layout_Handler extends Polc_Layout_Handler_Base
 {
     CONST POLC_LAYOUT = "polc-comment-list";
@@ -48,17 +56,17 @@ class Polc_Comment_List_Layout_Handler extends Polc_Layout_Handler_Base
     private function init()
     {
         $slug = get_query_var("comment_post_slug");
-        if ($slug == "") {
+        if ($slug == ""):
             return false;
-        }
+        endif;
 
-        $post = get_posts(array('name' => $slug,
+        $post = get_posts(['name' => $slug,
             'post_type' => 'story',
-            'post_status' => 'publish'));
+            'post_status' => 'publish']);
 
-        if (empty($post)) {
+        if (empty($post)):
             return false;
-        }
+        endif;
 
         $this->post = $post[0];
 

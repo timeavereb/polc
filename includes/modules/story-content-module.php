@@ -1,10 +1,15 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Pali
  * Date: 2017. 06. 10.
  * Time: 9:07
  */
+
+if (!defined("ABSPATH")):
+    exit();
+endif;
 
 /**
  * Content display module.
@@ -28,22 +33,22 @@ class Polc_Story_Content_Module
 
         $this->restrictions = new StdClass();
 
-        $chapter_args = array(
+        $chapter_args = [
             "post_type" => "story",
             "posts_per_page" => -1,
             "orderby" => "date",
             "order" => "asc"
-        );
+        ];
 
-        if ($this->post->post_parent != 0) {
+        if ($this->post->post_parent != 0):
             $this->main_title = get_post($this->post->post_parent)->post_title;
             $volume_id = $this->post->post_parent;
             $chapter_args["post_parent"] = $this->post->post_parent;
-        } else {
+        else:
             $volume_id = $this->post->ID;
             $chapter_args["post_parent"] = $this->post->ID;
             $this->main_title = $this->post->post_title;
-        }
+        endif;
 
         $this->restrictions->only_registered = get_post_meta($volume_id, "only-registered", true);
         $this->restrictions->agelimit = get_post_meta($volume_id, "agelimit", true);
@@ -52,16 +57,18 @@ class Polc_Story_Content_Module
         $this->restrictions->erotic = get_post_meta($volume_id, "erotic-content", true);
 
 
-        if (!$logged && $this->restrictions->only_registered == "on") {
-            echo '<div class="plcOnlyRegisteredWarning">';
-            echo __('Sorry, this content is only available to registered users!Please register or sign in if you\'re already a member', 'polc');
-            echo '</div>';
+        if (!$logged && $this->restrictions->only_registered == "on"):
+            ?>
+            <div class="plcOnlyRegisteredWarning">
+                <?= __('Sorry, this content is only available to registered users!Please register or sign in if you\'re already a member', 'polc'); ?>
+            </div>
+            <?php
             return false;
-        }
+        endif;
 
-        if ($logged) {
+        if ($logged):
             $this->can_comment = true;
-        }
+        endif;
 
         $this->chapters = get_posts($chapter_args);
 
@@ -121,17 +128,20 @@ class Polc_Story_Content_Module
 
 
                     if ($this->post->post_parent != 0):
-                        echo '<h3>' . $this->post->post_title . '</h3>';
-                    endif; ?>
+                        ?>
+                        <h3><?= $this->post->post_title; ?></h3>
+                        <?php
+                    endif;
+                    ?>
                     <time pubdate datetime="2017-04-19"
                           title="April 19th, 2017"><?= mysql2date("Y F j", strtotime($this->post->post_date)); ?></time>
                     <p>
                         <?php
-                        if ($this->post->post_parent == 0) {
+                        if ($this->post->post_parent == 0):
                             the_excerpt();
-                        } else {
+                        else:
                             the_content();
-                        }
+                        endif;
                         ?>
                     </p>
                     <?php
@@ -144,7 +154,7 @@ class Polc_Story_Content_Module
 
                     <?php
                     $favorite_list = Polc_Header::$curr_user->data->favorite_content_list;
-                    $text = is_array($favorite_list) && array_key_exists($this->post->ID, $favorite_list) ? __('Remove from favorites', 'polc') : __( 'Add to favorites', 'polc' );;
+                    $text = is_array($favorite_list) && array_key_exists($this->post->ID, $favorite_list) ? __('Remove from favorites', 'polc') : __('Add to favorites', 'polc');;
                     ?>
                     <span id="plcFavoriteBtn" data-post-id="<?= $this->post->ID; ?>"><?= $text; ?></span>
                 </div>
@@ -196,11 +206,11 @@ class Polc_Story_Content_Module
 
                 <select class="plcChapterSelect">
                     <?php
-                    if ($this->post->post_parent == 0) {
+                    if ($this->post->post_parent == 0):
                         $volume_link = get_permalink($this->post->ID);
-                    } else {
+                    else:
                         $volume_link = get_permalink($this->post->post_parent);
-                    }
+                    endif;
                     ?>
                     <option data-link="<?= $volume_link; ?>"><?= __('Volume', 'polc') ?></option>
                     <?php

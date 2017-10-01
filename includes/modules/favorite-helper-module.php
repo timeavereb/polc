@@ -7,6 +7,10 @@
  * Time: 15:14
  */
 
+if (!defined("ABSPATH")):
+    exit();
+endif;
+
 /**
  * Class Polc_Favorite_Helper_Module
  */
@@ -20,22 +24,24 @@ class Polc_Favorite_Helper_Module
      */
     public static function get_favorite_users($user_id, $mode = "authors")
     {
-        $list = array();
-
-        if (!is_numeric($user_id)) {
-            return $list;
-        }
+        if (!is_numeric($user_id)):
+            return false;
+        endif;
 
         global $wpdb;
         $table = $wpdb->prefix . "polc_favorite_authors";
 
-        if ($mode == "authors") {
+        if ($mode == "authors"):
             $select = "AuthorId";
             $where = "UserId";
-        } else {
+        elseif ($mode == "users"):
             $select = "UserId";
             $where = "AuthorId";
-        }
+        else:
+            return false;
+        endif;
+
+        $list = [];
 
         $result = $wpdb->get_results(
             $wpdb->prepare(
@@ -44,24 +50,29 @@ class Polc_Favorite_Helper_Module
             )
         );
 
-        if (count($result) == 0) {
+        if (count($result) == 0):
             return $list;
-        }
+        endif;
 
-        foreach ($result as $value) {
+        foreach ($result as $value):
             $list[$value->$select] = $value->$select;
-        }
+        endforeach;
 
         return $list;
     }
 
-    public static function get_favorite_stories($user_id){
+    /**
+     * Retrieves the list of favorited post ids by user id.
+     * @param $user_id
+     * @return array
+     */
+    public static function get_favorite_stories($user_id)
+    {
+        $list = [];
 
-        $list = array();
-
-        if (!is_numeric($user_id)) {
+        if (!is_numeric($user_id)):
             return $list;
-        }
+        endif;
 
         global $wpdb;
         $table = $wpdb->prefix . "polc_favorite_stories";
@@ -73,9 +84,9 @@ class Polc_Favorite_Helper_Module
             )
         );
 
-        foreach ($results as $value) {
+        foreach ($results as $value):
             $list[$value->PostId] = $value->PostId;
-        }
+        endforeach;
 
         return $list;
     }
@@ -91,15 +102,17 @@ class Polc_Favorite_Helper_Module
         $cache = !isset(Polc_Settings_Manager::top_lists()["cache"]) || Polc_Settings_Manager::top_lists()["cache"] != "" ? true : false;
         global $wpdb;
 
-        if($mode == "author"){
+        if ($mode == "author"):
             $cache_key = "top_favorite_authors";
             $table = $wpdb->prefix . "polc_favorite_authors";
             $select = "AuthorId";
-        }else{
+        elseif ($mode == "story"):
             $cache_key = "top_favorite_contents";
             $table = $wpdb->prefix . "polc_favorite_stories";
             $select = "PostId";
-        }
+        else:
+            return false;
+        endif;
 
         if ($cache):
             $result = get_transient($cache_key);
@@ -108,7 +121,7 @@ class Polc_Favorite_Helper_Module
             endif;
         endif;
 
-        $results =  $wpdb->get_results(
+        $results = $wpdb->get_results(
             "SELECT {$select} , COUNT(UserId) as FavoriteCnt
             FROM {$table}
             GROUP BY {$select}
@@ -116,21 +129,21 @@ class Polc_Favorite_Helper_Module
             LIMIT {$limit}"
         );
 
-        $list = array();
+        $list = [];
 
-        if($mode == "author"){
-            foreach($results as $result){
+        if ($mode == "author"):
+            foreach ($results as $result):
                 $user = get_user_by('ID', $result->AuthorId);
                 $author_url = get_author_posts_url($result->AuthorId);
-                $list[] = array("cnt" => $result->FavoriteCnt, "url" => $author_url, "name" => $user->data->display_name);
-            }
-        }else{
-            foreach($results as $result){
+                $list[] = ["cnt" => $result->FavoriteCnt, "url" => $author_url, "name" => $user->data->display_name];
+            endforeach;
+        else:
+            foreach ($results as $result):
                 $user = get_post($result->PostId);
                 $post_url = get_permalink($result->PostId);
-                $list[] = array("cnt" => $result->FavoriteCnt, "url" => $post_url, "name" => $user->post_title);
-            }
-        }
+                $list[] = ["cnt" => $result->FavoriteCnt, "url" => $post_url, "name" => $user->post_title];
+            endforeach;
+        endif;
 
         if ($cache):
             set_transient($cache_key, $list, Polc_Settings_Manager::top_lists()["cache_time"]);

@@ -7,6 +7,10 @@
  * Time: 13:29
  */
 
+if (!defined("ABSPATH")):
+    exit();
+endif;
+
 /**
  * Class Polc_Editor_Helper_Module
  */
@@ -21,7 +25,6 @@ class Polc_Editor_Helper_Module
         ?>
         <div class="newStoryData_row">
             <textarea name="blurb" placeholder="<?= __('Blurb', 'polc'); ?>*" id="blurb"><?= $value; ?></textarea>
-
             <p class="form_info"><?= __('The bulrb character limit is 1200 characters.', 'polc'); ?></p>
         </div>
         <?php
@@ -31,9 +34,9 @@ class Polc_Editor_Helper_Module
      * Displays the content warning section.
      * @param array $params
      */
-    public static function content_warnings($params = array())
+    public static function content_warnings($params = [])
     {
-        $default = array("obscene" => false, "violent" => false, "erotic" => false);
+        $default = ["obscene" => false, "violent" => false, "erotic" => false];
         $warnings = wp_parse_args($params, $default);
         ?>
 
@@ -167,7 +170,7 @@ class Polc_Editor_Helper_Module
         ?>
         <div class="newStoryData_row">
             <?php
-            wp_editor($value, 'story_content', array("media_buttons" => false, "teeny" => true, "quicktags" => false));
+            wp_editor($value, 'story_content', ["media_buttons" => false, "teeny" => true, "quicktags" => false]);
             ?>
             <label id="story_content-error" for="story_content"
                    style="display: none;"><?= __('Content is empty!', 'polc'); ?></label>
@@ -181,7 +184,7 @@ class Polc_Editor_Helper_Module
      * Displays the content tags.
      * @param array $tags
      */
-    public static function content_tags($tags = array())
+    public static function content_tags($tags = [])
     {
         ?>
         <div class="newStoryData_row tag">

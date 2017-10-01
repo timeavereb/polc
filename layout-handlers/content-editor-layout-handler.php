@@ -7,6 +7,10 @@
  * Time: 20:17
  */
 
+if (!defined("ABSPATH")):
+    exit();
+endif;
+
 /**
  * Class Polc_Toplists_Layout_Handler
  */
@@ -20,7 +24,7 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
     private $user;
     private $update;
     private $post;
-    private $post_meta = array();
+    private $post_meta = [];
     private $child_contents;
     private $tags;
     private $has_child;
@@ -30,19 +34,18 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
 
     public function render()
     {
-        if (!$this->validate()) {
+        if (!$this->validate()):
             return false;
-        }
+        endif;
 
         //If the save button has been triggered.
-        if (isset($_REQUEST["update"])) {
-            if (!$this->update()) {
+        if (isset($_REQUEST["update"])):
+            if (!$this->update()):
                 echo __("Error at updating story!", "polc");
                 return false;
-            }
-
+            endif;
             $this->update = true;
-        }
+        endif;
 
         wp_enqueue_script("polc-story-handler", PLC_THEME_PATH . "/js/content-upload.js");
         ?>
@@ -55,43 +58,43 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
         <?php
 
         //If the content was updated we have to get it again.
-        if ($this->update) {
+        if ($this->update):
             $this->post = get_post($this->id);
-        }
+        endif;
 
-        $keys = array("author-comment");
+        $keys = ["author-comment"];
 
         //If it's a volume, we extend the meta key collection.
-        if ($this->mode == "volume") {
-            $volume_metas = array("volume-sub-title", "obscene-content", "violent-content", "erotic-content", "agelimit", "only-registered");
+        if ($this->mode == "volume"):
+            $volume_metas = ["volume-sub-title", "obscene-content", "violent-content", "erotic-content", "agelimit", "only-registered"];
             $keys = array_merge($keys, $volume_metas);
-        }
+        endif;
 
-        $this->child_contents = get_children(array("post_parent" => $this->post->ID, "post_type" => "story"));
+        $this->child_contents = get_children(["post_parent" => $this->post->ID, "post_type" => "story"]);
         $this->has_child = count($this->child_contents) > 0 ? true : false;
-        $this->tags = wp_get_post_tags($this->post->ID, array("fields" => "names"));
+        $this->tags = wp_get_post_tags($this->post->ID, ["fields" => "names"]);
 
-        if ($this->has_child) {
+        if ($this->has_child):
             $this->content_editor = get_permalink(Polc_Settings_Manager::pages()["content-editor-page"]);
-        }
+        endif;
 
         foreach ($keys as $meta) {
             $this->post_meta[$meta] = get_post_meta($this->post->ID, $meta, true);
         }
 
-        if ($this->mode == "volume") {
+        if ($this->mode == "volume"):
 
-            $this->warnings = array(
+            $this->warnings = [
                 "obscene" => $this->post_meta["obscene-content"],
                 "erotic" => $this->post_meta["erotic-content"],
                 "violent" => $this->post_meta["violent-content"]
-            );
+            ];
 
             $this->volume_editor();
             $this->delete_confirm();
-        } else {
+        else:
             $this->chapter_editor();
-        }
+        endif;
     }
 
     /**
@@ -119,10 +122,10 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
                     Polc_Editor_Helper_Module::content_age_limit((int)$this->post_meta["agelimit"]);
                     Polc_Editor_Helper_Module::content_restriction((bool)$this->post_meta["only-registered"]);
 
-                    if (!$this->has_child) {
+                    if (!$this->has_child):
                         Polc_Editor_Helper_Module::content_author_comment((string)$this->post_meta["author-comment"]);
                         Polc_Editor_Helper_Module::content_editor($this->post->post_content);
-                    }
+                    endif;
 
                     Polc_Editor_Helper_Module::content_tags($this->tags);
                     ?>
@@ -156,7 +159,7 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
                 <?php
             endif; ?>
         </div>
-        <button id="plcDeleteVolume"><?= __( "Delete volume", "polc" );?></button>
+        <button id="plcDeleteVolume"><?= __("Delete volume", "polc"); ?></button>
         <?php
     }
 
@@ -217,16 +220,16 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
 
     private function validate()
     {
-        if (!is_user_logged_in()) {
+        if (!is_user_logged_in()):
             return false;
-        }
+        endif;
 
         if ((!isset($_REQUEST["volume-id"]) || !is_numeric($_REQUEST["volume-id"])) &&
             (!isset($_REQUEST["chapter-id"]) || !is_numeric($_REQUEST["chapter-id"]))
-        ) {
+        ):
             echo __("Invalid content identifier!", "polc");
             return false;
-        }
+        endif;
 
         $this->id = isset($_REQUEST["volume-id"]) ? $_REQUEST["volume-id"] : $_REQUEST["chapter-id"];
         $this->mode = isset($_REQUEST["volume-id"]) ? "volume" : "chapter";
@@ -234,29 +237,28 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
         $this->user = Polc_Header::current_user();
         $this->post = get_post($this->id);
 
-        if($this->post->post_status != "publish"){
+        if ($this->post->post_status != "publish"):
             echo __("Invalid content identifier!", "polc");
             return false;
-        }
-
+        endif;
 
         //If someone would try to send a volume id with a chapter id paramter we throw error.
-        if ($this->post->post_parent == 0 && $this->mode == "chapter") {
+        if ($this->post->post_parent == 0 && $this->mode == "chapter"):
             $this->auth_error();
             return false;
-        }
+        endif;
 
         //check, that the content belongs to the current user
-        if ($this->post->post_author != $this->user->ID) {
+        if ($this->post->post_author != $this->user->ID):
             $this->auth_error();
             return false;
-        }
+        endif;
 
         //validate the content
-        if (!$this->post || $this->post->post_type != "story") {
+        if (!$this->post || $this->post->post_type != "story"):
             echo __("Invalid content identifier!", "polc");
             return false;
-        }
+        endif;
 
         return true;
     }
@@ -271,28 +273,28 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
      */
     private function update()
     {
-        if (!wp_verify_nonce($_REQUEST["polc-edit"], "polc-editor-validate")) {
+        if (!wp_verify_nonce($_REQUEST["polc-edit"], "polc-editor-validate")):
             return false;
-        }
+        endif;
 
-        $meta_keys = array("author-comment");
+        $meta_keys = ["author-comment"];
 
-        if ($_REQUEST["mode"] == "new-volume") {
+        if ($_REQUEST["mode"] == "new-volume"):
             $id = $_REQUEST["volume-id"];
             $args["post_excerpt"] = $_REQUEST["blurb"];
             $args["post_title"] = $_REQUEST["volume_title"];
-            $volume_meta = array("volume-sub-title", "obscene-content", "violent-content", "erotic-content", "agelimit", "only-registered", "");
+            $volume_meta = ["volume-sub-title", "obscene-content", "violent-content", "erotic-content", "agelimit", "only-registered", ""];
             $meta_keys = array_merge($meta_keys, $volume_meta);
-        } else {
+        else:
             $id = $_REQUEST["chapter-id"];
             $args["post_title"] = $_REQUEST["chapter_title"];
-        }
+        endif;
 
         $args["ID"] = $id;
 
-        if (isset($_REQUEST["story_content"])) {
+        if (isset($_REQUEST["story_content"])):
             $args["post_content"] = $_REQUEST["story_content"];
-        }
+        endif;
 
         wp_update_post($args);
 
@@ -308,8 +310,8 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
 
     private function update_tags($id)
     {
-        if (isset($_REQUEST["post_tag"]) && count($_REQUEST["post_tag"]) > 0) {
+        if (isset($_REQUEST["post_tag"]) && count($_REQUEST["post_tag"]) > 0):
             wp_set_post_tags($id, $_REQUEST["post_tag"]);
-        }
+        endif;
     }
 }

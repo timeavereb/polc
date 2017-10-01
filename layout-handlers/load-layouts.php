@@ -1,10 +1,15 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Pali
  * Date: 2017. 06. 17.
  * Time: 8:04
  */
+
+if (!defined("ABSPATH")):
+    exit();
+endif;
 
 require_once "layout-handler-if.php";
 require_once "layout-handler-base.php";

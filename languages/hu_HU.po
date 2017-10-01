@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Polc\n"
-"POT-Creation-Date: 2017-08-27 16:34+0200\n"
-"PO-Revision-Date: 2017-08-27 16:48+0200\n"
+"POT-Creation-Date: 2017-10-01 16:26+0200\n"
+"PO-Revision-Date: 2017-10-01 16:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu_HU\n"
@@ -20,120 +20,120 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: author.php:106
+#: author.php:108
 msgid "My contents"
 msgstr "Tartalmaim"
 
-#: author.php:109
+#: author.php:111
 msgid "Favorited by"
 msgstr "Kedvenchez adott"
 
-#: author.php:112
+#: author.php:114
 msgid "Data change"
 msgstr "Adatmódosítás"
 
-#: author.php:118
+#: author.php:120
 msgid "Add new volume"
 msgstr "Új tartalom hozzáadása"
 
-#: author.php:135
+#: author.php:137
 msgid "Email (can't be modified)"
 msgstr "Email cím (nem módosítható)"
 
-#: author.php:141
+#: author.php:143
 msgid "Username (can't be modified)"
 msgstr "Felhasználónév (nem módosítható)"
 
-#: author.php:147
+#: author.php:149
 msgid "Name"
 msgstr "Név"
 
-#: author.php:153
+#: author.php:155
 msgid "Webpage"
 msgstr "Weboldal"
 
-#: author.php:159
+#: author.php:161
 msgid "Date of birth"
 msgstr "Születési dátum"
 
-#: author.php:169
+#: author.php:171
 msgid "Old password"
 msgstr "Régi jelszó"
 
-#: author.php:174
+#: author.php:176
 msgid "New password"
 msgstr "Új jelszó"
 
-#: author.php:179
+#: author.php:181
 msgid "New password confirmation"
 msgstr "Új jelszó újra"
 
-#: author.php:184 layout-handlers/content-editor-layout-handler.php:129
-#: layout-handlers/content-editor-layout-handler.php:179
+#: author.php:186 layout-handlers/content-editor-layout-handler.php:133
+#: layout-handlers/content-editor-layout-handler.php:184
 msgid "Save"
 msgstr "Mentés"
 
-#: author.php:237
+#: author.php:239
 msgid "Change profile picture"
 msgstr "Profilkép feltöltése"
 
-#: author.php:250
+#: author.php:253
 msgid "people's  favourite author"
 msgstr "kedvenc szerzője"
 
-#: author.php:255
+#: author.php:258
 msgid "stories"
 msgstr "történet"
 
-#: author.php:259
+#: author.php:262
 msgid "followers"
 msgstr "követő"
 
-#: author.php:270 includes/modules/favorite-subscribe-module.php:81
+#: author.php:274 includes/modules/favorite-subscribe-module.php:50
 msgid "Remove author from favorites"
 msgstr "Szerző törlése a kedvencekből"
 
-#: author.php:272 includes/modules/favorite-subscribe-module.php:90
+#: author.php:276 includes/modules/favorite-subscribe-module.php:49
 msgid "Add author to favorites"
 msgstr "Szerző kedvencekhez adása"
 
-#: author.php:338
+#: author.php:340
 msgid "Genre and category selections"
 msgstr "Műfaj és kategória választása"
 
-#: author.php:343
+#: author.php:345
 msgid "Type"
 msgstr "Típus"
 
-#: author.php:345
+#: author.php:347
 msgid "Single"
 msgstr "Egyrészes"
 
-#: author.php:346
+#: author.php:348
 msgid "Sequels"
 msgstr "Folytatásos"
 
-#: author.php:351
+#: author.php:353
 msgid "Category"
 msgstr "Kategória"
 
-#: author.php:358 search.php:93
+#: author.php:360 search.php:86
 msgid "Choose category"
 msgstr "Válasz kategóriát"
 
-#: author.php:368
+#: author.php:370
 msgid "Sub-category"
 msgstr "Alkategória"
 
-#: author.php:375
+#: author.php:377
 msgid "Choose subcategory"
 msgstr "Válassz alkategóriát"
 
-#: author.php:384 includes/taxonomies/genre.php:14
+#: author.php:386 includes/taxonomies/genre.php:21
 msgid "Genre"
 msgstr "Műfaj"
 
-#: author.php:390 search.php:111
+#: author.php:392 search.php:104
 msgid "Choose genre"
 msgstr "Válassz műfajt"
 
@@ -141,103 +141,103 @@ msgstr "Válassz műfajt"
 msgid "author-slug"
 msgstr "szerzo"
 
-#: header.php:80 header.php:112 header.php:190
+#: header.php:84 header.php:116 header.php:194
 msgid "Registration"
 msgstr "Regisztráció"
 
-#: header.php:83
+#: header.php:87
 msgid "Username"
 msgstr "Felhasználónév"
 
-#: header.php:87
+#: header.php:91
 msgid "Email"
 msgstr "Email cím"
 
-#: header.php:92
+#: header.php:96
 msgid "Email confirmation"
 msgstr "Email cím megerősítése"
 
-#: header.php:97 header.php:148
-#: layout-handlers/password-reset-layout-handler.php:24
+#: header.php:101 header.php:152
+#: layout-handlers/password-reset-layout-handler.php:32
 msgid "Password"
 msgstr "Jelszó"
 
-#: header.php:102 layout-handlers/password-reset-layout-handler.php:28
+#: header.php:106 layout-handlers/password-reset-layout-handler.php:36
 msgid "Password confirmation"
 msgstr "Jelszó megerősítése"
 
-#: header.php:107
+#: header.php:111
 msgid "I accept the"
 msgstr "Elfogadom a"
 
-#: header.php:108
+#: header.php:112
 msgid "tems of use"
 msgstr "Felhasználási feltételeket."
 
-#: header.php:117
+#: header.php:121
 msgid "Already registered?"
 msgstr "Már regisztráltál?"
 
-#: header.php:118
+#: header.php:122
 msgid "Sign in!"
 msgstr "Regisztrálj!"
 
-#: header.php:139
+#: header.php:143
 msgid "Sign in"
 msgstr "Bejelentkezés"
 
-#: header.php:144
+#: header.php:148
 msgid "Username or email"
 msgstr "Felhasználónév vagy email cím"
 
-#: header.php:151
+#: header.php:155
 msgid "Forgot your password?"
 msgstr "Elfelejtetted a jelészavad?"
 
-#: header.php:154
+#: header.php:158
 msgid "Sign In"
 msgstr "Regisztráció"
 
-#: header.php:158
+#: header.php:162
 msgid "Still not part of the team?"
 msgstr "Még nem vagy a csapat tagja?"
 
-#: header.php:159
+#: header.php:163
 msgid "Sign up now!"
 msgstr "Regisztrálj most!"
 
-#: header.php:162
+#: header.php:166
 msgid "Sign in with your social account"
 msgstr "Jelentkezz be közösségi fiókoddal"
 
-#: header.php:191
+#: header.php:195
 msgid "Login"
 msgstr "Bejelentkezés"
 
-#: header.php:195
+#: header.php:199
 msgid "Logout"
 msgstr "Kijelentkezés"
 
-#: header.php:199
+#: header.php:202
 msgid "Welcome"
 msgstr "Üdvözlünk"
 
-#: header.php:203
+#: header.php:207
 msgid "My profile"
 msgstr "Profilom"
 
-#: header.php:229
+#: header.php:244
 msgid ""
 "Forgot your password? Enter the email address or username to retrieve your "
 "account"
 msgstr "Elfelejtetted a jelszavad? Írd be email címed vagy felhasználóneved"
 
-#: includes/admin/pages/layout-selection.php:14
+#: includes/admin/pages/layout-selection.php:22
 msgid "Layout selection"
 msgstr "Layout választó"
 
-#: includes/admin/pages/layout-selection.php:36
-#: includes/modules/story-content-module.php:92
+#: includes/admin/pages/layout-selection.php:48
+#: includes/modules/story-content-module.php:109
 msgid "Default"
 msgstr "Alapértelmezett"
 
@@ -248,88 +248,92 @@ msgstr "Alapértelmezett"
 msgid "Polc"
 msgstr "Polc"
 
-#: includes/admin/pages/polc-email-settings-page.php:33
+#: includes/admin/pages/polc-email-settings-page.php:34
 #: includes/admin/pages/polc-main-settings-page.php:34
 msgid "Email settings"
 msgstr "Email beállítások"
 
-#: includes/admin/pages/polc-email-settings-page.php:60
+#: includes/admin/pages/polc-email-settings-page.php:56
 msgid "Register mail"
 msgstr "Regisztrációs email"
 
-#: includes/admin/pages/polc-email-settings-page.php:64
+#: includes/admin/pages/polc-email-settings-page.php:60
 msgid "LostPass mail"
 msgstr "Elfelejtett jelszó email"
 
-#: includes/admin/pages/polc-email-settings-page.php:77
-#: includes/admin/pages/polc-email-settings-page.php:136
+#: includes/admin/pages/polc-email-settings-page.php:74
+#: includes/admin/pages/polc-email-settings-page.php:134
 msgid "The following placeholder can be used in the message body"
-msgstr ""
+msgstr "A alábbi placeholderek használhatóak az üzenet szövegében."
 
-#: includes/admin/pages/polc-email-settings-page.php:81
-#: includes/admin/pages/polc-email-settings-page.php:140
+#: includes/admin/pages/polc-email-settings-page.php:78
+#: includes/admin/pages/polc-email-settings-page.php:138
 msgid "User's e-mail address"
 msgstr "Felhasználó e-mail címe"
 
-#: includes/admin/pages/polc-email-settings-page.php:85
+#: includes/admin/pages/polc-email-settings-page.php:82
 msgid "User's username"
 msgstr "Felhasználó neve"
 
-#: includes/admin/pages/polc-email-settings-page.php:89
+#: includes/admin/pages/polc-email-settings-page.php:86
 msgid "User's registration date"
 msgstr "Felhasználó regisztráció ideje"
 
-#: includes/admin/pages/polc-email-settings-page.php:93
+#: includes/admin/pages/polc-email-settings-page.php:90
 msgid "Activation url"
 msgstr "Aktivációs linke"
 
-#: includes/admin/pages/polc-email-settings-page.php:98
-#: includes/admin/pages/polc-email-settings-page.php:157
+#: includes/admin/pages/polc-email-settings-page.php:95
+#: includes/admin/pages/polc-email-settings-page.php:151
 msgid "Sender's name"
 msgstr "Küldő neve"
 
-#: includes/admin/pages/polc-email-settings-page.php:105
-#: includes/admin/pages/polc-email-settings-page.php:166
+#: includes/admin/pages/polc-email-settings-page.php:102
+#: includes/admin/pages/polc-email-settings-page.php:160
 msgid "Sender's email address"
 msgstr "Küldő e-mail címe"
 
-#: includes/admin/pages/polc-email-settings-page.php:112
-#: includes/admin/pages/polc-email-settings-page.php:174
+#: includes/admin/pages/polc-email-settings-page.php:109
+#: includes/admin/pages/polc-email-settings-page.php:168
 msgid "Subject"
 msgstr "Tárgy"
 
-#: includes/admin/pages/polc-email-settings-page.php:119
-#: includes/admin/pages/polc-email-settings-page.php:182
-#: includes/types/story.php:154 includes/types/story.php:155
+#: includes/admin/pages/polc-email-settings-page.php:116
+#: includes/admin/pages/polc-email-settings-page.php:176
+#: includes/types/story.php:177 includes/types/story.php:178
 msgid "Content"
 msgstr "Tartalom"
 
-#: includes/admin/pages/polc-email-settings-page.php:144
+#: includes/admin/pages/polc-email-settings-page.php:142
 msgid "User's display name"
 msgstr ""
 
-#: includes/admin/pages/polc-email-settings-page.php:148
+#: includes/admin/pages/polc-email-settings-page.php:146
 msgid "Password-reset url"
 msgstr "Jelszó visszaállító link"
 
-#: includes/admin/pages/polc-layout-settings.php:32
+#: includes/admin/pages/polc-layout-settings.php:33
 #: includes/admin/pages/polc-main-settings-page.php:39
 msgid "Layout settings"
 msgstr "Layout beállítások"
 
-#: includes/admin/pages/polc-layout-settings.php:59
+#: includes/admin/pages/polc-layout-settings.php:55
 msgid "Main page"
 msgstr "Főoldal"
 
-#: includes/admin/pages/polc-layout-settings.php:63
+#: includes/admin/pages/polc-layout-settings.php:59
 msgid "Author page"
 msgstr "Szerző oldala"
 
-#: includes/admin/pages/polc-layout-settings.php:75
+#: includes/admin/pages/polc-layout-settings.php:63
+msgid "Top-lists page"
+msgstr "Sikerlisták oldal"
+
+#: includes/admin/pages/polc-layout-settings.php:73
 msgid "Number of stroies"
 msgstr "Történetek száma"
 
-#: includes/admin/pages/polc-layout-settings.php:80
+#: includes/admin/pages/polc-layout-settings.php:79
 msgid "No category selected"
 msgstr "Nincs kategória kiválasztva"
 
@@ -337,276 +341,351 @@ msgstr "Nincs kategória kiválasztva"
 msgid "Number of news"
 msgstr "Hírek száma"
 
-#: includes/admin/pages/polc-layout-settings.php:94
+#: includes/admin/pages/polc-layout-settings.php:95
 msgid "News category"
-msgstr ""
+msgstr "Hírek kategória"
 
-#: includes/admin/pages/polc-layout-settings.php:100
+#: includes/admin/pages/polc-layout-settings.php:103
 msgid "Number of recommendation"
-msgstr ""
+msgstr "Ajánlók száma"
 
-#: includes/admin/pages/polc-layout-settings.php:106
+#: includes/admin/pages/polc-layout-settings.php:110
 msgid "Recommendation category"
-msgstr ""
+msgstr "Ajánlók kategória"
+
+#: includes/admin/pages/polc-layout-settings.php:127
+msgid "Favorite authors limit"
+msgstr "Kedvenc szerzők limit"
+
+#: includes/admin/pages/polc-layout-settings.php:131
+msgid "Top commenters limit"
+msgstr "Legaktívabb kommentelők limit"
+
+#: includes/admin/pages/polc-layout-settings.php:135
+msgid "Favorite stories limit"
+msgstr "Kedvenc történetek limit"
+
+#: includes/admin/pages/polc-layout-settings.php:139
+msgid "Most viewed stories"
+msgstr "Legolvasottabb történetek"
+
+#: includes/admin/pages/polc-layout-settings.php:146
+msgid "Top-lists cache"
+msgstr "Sikerlisták cache"
+
+#: includes/admin/pages/polc-layout-settings.php:150
+msgid "Top-lists cache time in seconds"
+msgstr "Toplisták cache limit másodpercben"
 
 #: includes/admin/pages/polc-main-settings-page.php:29
 #: includes/admin/pages/polc-main-settings-page.php:77
 msgid "Main settings"
 msgstr "Főbeállítások"
 
-#: includes/admin/pages/polc-main-settings-page.php:82
+#: includes/admin/pages/polc-main-settings-page.php:80
 msgid "Story content main category"
-msgstr ""
+msgstr "Tartalom főkategória"
 
-#: includes/admin/pages/polc-main-settings-page.php:87
-#: includes/admin/pages/polc-main-settings-page.php:101
+#: includes/admin/pages/polc-main-settings-page.php:85
+#: includes/admin/pages/polc-main-settings-page.php:100
 #: includes/admin/pages/polc-main-settings-page.php:115
 #: includes/admin/pages/polc-main-settings-page.php:128
 #: includes/admin/pages/polc-main-settings-page.php:141
 #: includes/admin/pages/polc-main-settings-page.php:154
+#: includes/admin/pages/polc-main-settings-page.php:167
+#: includes/admin/pages/polc-main-settings-page.php:180
 msgid "None selected"
 msgstr "Nincs kiválasztva"
 
-#: includes/admin/pages/polc-main-settings-page.php:96
+#: includes/admin/pages/polc-main-settings-page.php:95
 msgid "Story content sub-category"
-msgstr ""
+msgstr "Tartalom alkategória"
 
 #: includes/admin/pages/polc-main-settings-page.php:110
 msgid "New story content page"
-msgstr ""
+msgstr "Új tartalom oldal"
 
 #: includes/admin/pages/polc-main-settings-page.php:123
+msgid "Comment list page"
+msgstr "Kommentek lista oldal"
+
+#: includes/admin/pages/polc-main-settings-page.php:136
 msgid "Content editor page"
 msgstr "Tartalom szerkesztő oldal"
 
-#: includes/admin/pages/polc-main-settings-page.php:136
+#: includes/admin/pages/polc-main-settings-page.php:149
 msgid "Activation page"
 msgstr "Aktivációs oldal"
 
-#: includes/admin/pages/polc-main-settings-page.php:149
+#: includes/admin/pages/polc-main-settings-page.php:162
 msgid "Password-reset page"
 msgstr "Jelszó visszaállítás oldal"
 
-#: includes/modules/data-change-module.php:12
-#: includes/modules/favorite-subscribe-module.php:12
-#: includes/modules/story-delete-module.php:12
-msgid "You've not signed in!"
-msgstr "Nem vagy bejelentkezve!"
+#: includes/admin/pages/polc-main-settings-page.php:175
+msgid "News list page"
+msgstr "Hírek listaoldal."
 
-#: includes/modules/data-change-module.php:55
-msgid "You've successfully changed your data!"
-msgstr "Sikeresen megváltoztattad az adataid!"
-
-#: includes/modules/data-change-module.php:58
-#: includes/modules/lost-password-module.php:108
-msgid "Your password has been changed!"
-msgstr "A jelszavad megváltozott!"
-
-#: includes/modules/data-change-module.php:76
-msgid "You have to confirm your new password!"
-msgstr "Meg kell erősítened az új jelszavad!"
-
-#: includes/modules/data-change-module.php:82
-msgid "The two passwords are not equal!"
-msgstr "A két jelszó nem egyezik!"
-
-#: includes/modules/data-change-module.php:88
-msgid "Your old password is not valid!"
-msgstr ""
-
-#: includes/modules/data-change-module.php:93
-msgid "The password has to be at least 6 characters long!"
-msgstr "A jelszónak minimum 6 karakter hosszúnak kell lennie!"
-
-#: includes/modules/data-change-module.php:108
-#: includes/modules/data-change-module.php:113
-msgid "Invalid birth date format!"
-msgstr "Érvénytelen születésnap formátum!"
-
-#: includes/modules/data-change-module.php:118
-msgid "Your birth date can't be farther than the current date!"
-msgstr "A születésnapod nem lehet később a mai dátumnál!"
-
-#: includes/modules/favorite-subscribe-module.php:16
+#: includes/modules/comment-module.php:15
+#: includes/modules/comment-module.php:38
+#: includes/modules/favorite-subscribe-module.php:17
 msgid "Invalid action!"
 msgstr "Érvénytelen művelet!"
 
-#: includes/modules/helper-module.php:40 includes/modules/helper-module.php:58
-#: includes/modules/helper-module.php:147
-msgid "Comment"
-msgstr "komment"
+#: includes/modules/comment-module.php:75
+msgid "Empty comment!"
+msgstr "Üres komment!"
 
-#: includes/modules/helper-module.php:66
-msgid "Add chapter"
-msgstr "Fejezet hosszáadása"
+#: includes/modules/comment-module.php:117
+msgid "wrote at"
+msgstr "írta"
 
-#: includes/modules/helper-module.php:73
-msgid "Edit story"
-msgstr "Tartalom szerkesztése"
+#: includes/modules/comment-module.php:122
+msgid "Reply"
+msgstr "Válasz"
 
-#: includes/modules/helper-module.php:135
-msgid "Chapter"
-msgstr "Fejezet"
+#: includes/modules/comment-module.php:125
+msgid "Write your reply.."
+msgstr "Szólj hozzá..."
 
-#: includes/modules/helper-module.php:229
+#: includes/modules/comment-module.php:138
+msgid "All comments"
+msgstr "Minden komment"
+
+#: includes/modules/data-change-module.php:62
+msgid "You've successfully changed your data!"
+msgstr "Sikeresen megváltoztattad az adataid!"
+
+#: includes/modules/data-change-module.php:65
+#: includes/modules/lost-password-module.php:109
+msgid "Your password has been changed!"
+msgstr "A jelszavad megváltozott!"
+
+#: includes/modules/data-change-module.php:83
+msgid "You have to confirm your new password!"
+msgstr "Meg kell erősítened az új jelszavad!"
+
+#: includes/modules/data-change-module.php:89
+msgid "The two passwords are not equal!"
+msgstr "A két jelszó nem egyezik!"
+
+#: includes/modules/data-change-module.php:95
+msgid "Your old password is not valid!"
+msgstr "A régi jelszavad nem érvényes!"
+
+#: includes/modules/data-change-module.php:100
+msgid "The password has to be at least 6 characters long!"
+msgstr "A jelszónak minimum 6 karakter hosszúnak kell lennie!"
+
+#: includes/modules/data-change-module.php:115
+#: includes/modules/data-change-module.php:120
+msgid "Invalid birth date format!"
+msgstr "Érvénytelen születésnap formátum!"
+
+#: includes/modules/data-change-module.php:125
+msgid "Your birth date can't be farther than the current date!"
+msgstr "A születésnapod nem lehet később a mai dátumnál!"
+
+#: includes/modules/editor-helper-module.php:27
 msgid "Blurb"
 msgstr "Fülszöveg"
 
-#: includes/modules/helper-module.php:231
+#: includes/modules/editor-helper-module.php:28
 msgid "The bulrb character limit is 1200 characters."
 msgstr "A fülszöveg maximális hosszúsága 1200 karakter"
 
-#: includes/modules/helper-module.php:247
+#: includes/modules/editor-helper-module.php:44
 msgid "Warnings"
 msgstr "Figyelmeztetések"
 
-#: includes/modules/helper-module.php:255 includes/types/story.php:93
+#: includes/modules/editor-helper-module.php:52 includes/types/story.php:106
 msgid "Obscene content"
 msgstr "Obszcén tartalom"
 
-#: includes/modules/helper-module.php:263 includes/types/story.php:97
+#: includes/modules/editor-helper-module.php:60 includes/types/story.php:110
 msgid "Violent content"
 msgstr "Erőszakos tartalom"
 
-#: includes/modules/helper-module.php:271 includes/types/story.php:101
+#: includes/modules/editor-helper-module.php:68 includes/types/story.php:114
 msgid "Erotic content"
 msgstr "Erotikus tartalom"
 
-#: includes/modules/helper-module.php:286 includes/types/story.php:105
+#: includes/modules/editor-helper-module.php:83 includes/types/story.php:118
 msgid "Age limit"
 msgstr "Korhatár"
 
-#: includes/modules/helper-module.php:320
+#: includes/modules/editor-helper-module.php:117
 msgid "No age limit"
 msgstr "Nincs korhtár"
 
-#: includes/modules/helper-module.php:335
+#: includes/modules/editor-helper-module.php:132
 msgid "Restrictions"
 msgstr "Korlátozások"
 
-#: includes/modules/helper-module.php:343 includes/types/story.php:109
+#: includes/modules/editor-helper-module.php:140 includes/types/story.php:122
 msgid "Content only for registered users"
 msgstr "Csak regisztráltaknak elérhető tartalom"
 
-#: includes/modules/helper-module.php:346
+#: includes/modules/editor-helper-module.php:143
 msgid "Warning! Content under 18+ available only for registered users!"
 msgstr ""
 "Figyelem! A 18-as korhatár besorolásba eső történetek, automatikusan csak "
 "bejelentkezett felhasználóknak elérhető."
 
-#: includes/modules/helper-module.php:361 includes/types/story.php:113
+#: includes/modules/editor-helper-module.php:158 includes/types/story.php:126
 msgid "Author's comment"
 msgstr "Szerző megjegyzése"
 
-#: includes/modules/helper-module.php:379
+#: includes/modules/editor-helper-module.php:176
 msgid "Content is empty!"
 msgstr "Üres tartalom!"
 
-#: includes/modules/helper-module.php:381
+#: includes/modules/editor-helper-module.php:178
 msgid "The content maximum character limit is 28 000 characters."
 msgstr "Tartalom maximális hossza: 28 000 karakter."
 
-#: includes/modules/helper-module.php:394
+#: includes/modules/editor-helper-module.php:191
 msgid "Add tags"
 msgstr "Címke hozzáadása."
 
-#: includes/modules/helper-module.php:411
-#: layout-handlers/new-story-layout-handler.php:182
+#: includes/modules/editor-helper-module.php:208
+#: layout-handlers/new-story-layout-handler.php:189
 msgid "The maximum number of tags is 8."
 msgstr "Maximum 8 címke adható hozzá."
 
-#: includes/modules/helper-module.php:426
+#: includes/modules/editor-helper-module.php:223
 msgid "Chapter's title"
 msgstr "Fejezet címe"
 
-#: includes/modules/helper-module.php:439
+#: includes/modules/editor-helper-module.php:236
 msgid "Volume title"
 msgstr "Főcím"
 
-#: includes/modules/helper-module.php:452 includes/types/story.php:89
+#: includes/modules/editor-helper-module.php:250 includes/types/story.php:102
 msgid "Volume sub-title"
 msgstr "Alcím"
 
-#: includes/modules/login-module.php:30
-msgid "Login Invalid"
-msgstr ""
+#: includes/modules/favorite-subscribe-module.php:13
+#: includes/modules/helper-module.php:25
+#: includes/modules/story-delete-module.php:13
+msgid "You've not signed in!"
+msgstr "Nem vagy bejelentkezve!"
 
-#: includes/modules/login-module.php:48
+#: includes/modules/favorite-subscribe-module.php:56
+#: includes/modules/story-content-module.php:157
+msgid "Add to favorites"
+msgstr "Kedvencekhez adás"
+
+#: includes/modules/favorite-subscribe-module.php:57
+#: includes/modules/story-content-module.php:157
+msgid "Remove from favorites"
+msgstr "Eltávolítás a kedvencekből"
+
+#: includes/modules/helper-module.php:69 includes/modules/helper-module.php:88
+#: includes/modules/helper-module.php:198
+msgid "Comment"
+msgstr "komment"
+
+#: includes/modules/helper-module.php:104
+msgid "Add chapter"
+msgstr "Fejezet hosszáadása"
+
+#: includes/modules/helper-module.php:112
+msgid "Edit story"
+msgstr "Tartalom szerkesztése"
+
+#: includes/modules/helper-module.php:186
+#: includes/modules/story-content-module.php:234
+msgid "Chapter"
+msgstr "Fejezet"
+
+#: includes/modules/helper-module.php:273
+msgid "First page"
+msgstr "Első oldal"
+
+#: includes/modules/helper-module.php:295
+msgid "Last page"
+msgstr "Utolsó oldal"
+
+#: includes/modules/login-module.php:31
+msgid "Login Invalid"
+msgstr "Érvénytelen belépés"
+
+#: includes/modules/login-module.php:49
 msgid "Invalid login credentials"
 msgstr "Érvénytelen belépési adatok"
 
-#: includes/modules/login-module.php:58
+#: includes/modules/login-module.php:59
 msgid "Your account is not active!"
-msgstr ""
+msgstr "A fiókod nem aktív!"
 
 #: includes/modules/lost-password-module.php:33
 msgid "Invalid credentials"
-msgstr ""
+msgstr "Érvénytelen hitelesítő adatok"
 
-#: includes/modules/lost-password-module.php:44
+#: includes/modules/lost-password-module.php:43
 msgid "The e-mail address or username does not exists."
-msgstr ""
+msgstr "Az e-mail cím vagy felhasználónév nem létezik."
 
-#: includes/modules/lost-password-module.php:51
+#: includes/modules/lost-password-module.php:50
 msgid "The account you're trying to retrieve is not yet active."
-msgstr ""
+msgstr "A fiók, amit megpróbálsz visszaállítani, még nem aktív."
 
-#: includes/modules/lost-password-module.php:78
+#: includes/modules/lost-password-module.php:77
 msgid ""
 "The information to reset your password has been sent to your e-mail address."
 msgstr ""
 "A jelszavad helyreállításához szükséges információkat kiküldtük e-mail "
 "címedre."
 
-#: includes/modules/lost-password-module.php:86
+#: includes/modules/lost-password-module.php:87
 msgid "Invalid data"
 msgstr "Érvénytelen adat"
 
-#: includes/modules/lost-password-module.php:90
+#: includes/modules/lost-password-module.php:91
 msgid "The two must password has to be the same"
 msgstr "A két jelszónak meg kell egyeznie"
 
-#: includes/modules/lost-password-module.php:95
+#: includes/modules/lost-password-module.php:97
 msgid "The activation code is invalid."
 msgstr "Érvénytelen aktiváló kód."
 
-#: includes/modules/lost-password-module.php:100
+#: includes/modules/lost-password-module.php:103
 msgid "The activation code is has been expired."
 msgstr "Az aktiváló kód lejárt."
 
-#: includes/modules/register-module.php:36
+#: includes/modules/register-module.php:37
 msgid "Email Invalid"
 msgstr "Érvénytelen felhasználónév."
 
-#: includes/modules/register-module.php:40
+#: includes/modules/register-module.php:41
 msgid "Username Invalid"
 msgstr "Érvénytelen felhasználónév."
 
-#: includes/modules/register-module.php:44
+#: includes/modules/register-module.php:45
 msgid "Username Taken"
 msgstr "Ez a felhasználónév már foglalt."
 
-#: includes/modules/register-module.php:48
+#: includes/modules/register-module.php:49
 msgid "Email Taken"
 msgstr "Az email cím már regisztrált."
 
-#: includes/modules/register-module.php:52
+#: includes/modules/register-module.php:53
 msgid "Invalid Password"
 msgstr "Helytelen jelszó."
 
-#: includes/modules/register-module.php:56
+#: includes/modules/register-module.php:57
 msgid "Passwords Are Not The Same"
 msgstr "A jelszavak nem egyeznek"
 
-#: includes/modules/register-module.php:60
+#: includes/modules/register-module.php:61
 msgid "Emails Are Not The Same"
 msgstr "Az e-mail címek nem egyeznek"
 
-#: includes/modules/register-module.php:87
+#: includes/modules/register-module.php:89
 msgid "Register Success Message"
 msgstr "Sikeres regisztrációs üzenet"
 
-#: includes/modules/story-content-module.php:56
+#: includes/modules/story-content-module.php:63
 msgid ""
 "Sorry, this content is only available to registered users!Please register or "
 "sign in if you're already a member"
@@ -614,254 +693,301 @@ msgstr ""
 "Sajnáljuk! A tartalom csak regisztrált felhasználók számára elérhető! "
 "Regisztrálj vagy jelentkezz be, ha már tag vagy."
 
-#: includes/modules/story-content-module.php:164
-msgid "wrote at"
-msgstr "írta"
+#: includes/modules/story-content-module.php:196
+#: layout-handlers/comment-list-layout-handler.php:43
+msgid "Share your thoughts..."
+msgstr "Oszd meg, mit gondolsz...."
 
-#: includes/modules/story-content-module.php:189 includes/types/story.php:25
+#: includes/modules/story-content-module.php:198
+#: layout-handlers/comment-list-layout-handler.php:45
+msgid "Send comment"
+msgstr "Elküldés"
+
+#: includes/modules/story-content-module.php:227 includes/types/story.php:35
 msgid "Volume"
 msgstr "Kötet"
 
-#: includes/modules/story-delete-module.php:16
-#: includes/modules/story-delete-module.php:39
-#: layout-handlers/content-editor-layout-handler.php:225
-#: layout-handlers/content-editor-layout-handler.php:249
+#: includes/modules/story-delete-module.php:17
+#: includes/modules/story-delete-module.php:43
+#: layout-handlers/content-editor-layout-handler.php:230
+#: layout-handlers/content-editor-layout-handler.php:241
+#: layout-handlers/content-editor-layout-handler.php:259
 msgid "Invalid content identifier!"
-msgstr ""
+msgstr "Érvénytelen tartalom azonosító!"
 
-#: includes/modules/story-delete-module.php:47
+#: includes/modules/story-delete-module.php:54
 msgid "The chapter has been deleted!"
-msgstr ""
+msgstr "A fejezet törölve!"
 
-#: includes/modules/story-delete-module.php:51
+#: includes/modules/story-delete-module.php:58
 msgid "The volume with all it's chapters has been deleted!"
-msgstr ""
+msgstr "A tartalom és a hozzá tartozó összes fejezet törölve!"
 
-#: includes/modules/upload-avatar.php:14
+#: includes/modules/upload-avatar.php:15
 msgid "The file your're trying to upload isn't a valid image type"
-msgstr ""
+msgstr "Az általad feltöltött kép kiterjesztése nem megfelelő."
 
-#: includes/taxonomies/genre.php:12
+#: includes/taxonomies/genre.php:19
 msgctxt "Taxonomy General Name"
 msgid "Genres"
 msgstr ""
 
-#: includes/taxonomies/genre.php:13
+#: includes/taxonomies/genre.php:20
 msgctxt "Taxonomy Singular Name"
 msgid "Genre"
 msgstr ""
 
-#: includes/taxonomies/genre.php:15
+#: includes/taxonomies/genre.php:22
 msgid "All Genres"
 msgstr "Összes műfaj"
 
-#: includes/taxonomies/genre.php:16
+#: includes/taxonomies/genre.php:23
 msgid "Parent Genre"
-msgstr ""
+msgstr "Szülő műfaja"
 
-#: includes/taxonomies/genre.php:17
+#: includes/taxonomies/genre.php:24
 msgid "Parent Genre:"
-msgstr ""
+msgstr "Szülő műfaja:"
 
-#: includes/taxonomies/genre.php:18
+#: includes/taxonomies/genre.php:25
 msgid "New Genre Name"
 msgstr "Új műfaj neve"
 
-#: includes/taxonomies/genre.php:19
+#: includes/taxonomies/genre.php:26
 msgid "Add New Genre"
 msgstr "Új műfaj hozzáadása"
 
-#: includes/taxonomies/genre.php:20
+#: includes/taxonomies/genre.php:27
 msgid "Edit Genre"
 msgstr "Műfaj szerkesztése"
 
-#: includes/taxonomies/genre.php:21
+#: includes/taxonomies/genre.php:28
 msgid "Update Genre"
 msgstr "Műfaj frissítése"
 
-#: includes/taxonomies/genre.php:22
+#: includes/taxonomies/genre.php:29
 msgid "View Genre"
-msgstr ""
+msgstr "Műfaj megtekintése"
 
-#: includes/taxonomies/genre.php:23
+#: includes/taxonomies/genre.php:30
 msgid "Separate genres with commas"
-msgstr ""
+msgstr "Műfajok elkülönítése vesszőkkel"
 
-#: includes/taxonomies/genre.php:24
+#: includes/taxonomies/genre.php:31
 msgid "Add or remove genres"
-msgstr ""
+msgstr "Műfaj hozzáadása vagy törlése"
 
-#: includes/taxonomies/genre.php:25
+#: includes/taxonomies/genre.php:32
 msgid "Choose from the most used"
-msgstr ""
+msgstr "Választás a legtöbbet használtak közül"
 
-#: includes/taxonomies/genre.php:26
+#: includes/taxonomies/genre.php:33
 msgid "Popular Genres"
-msgstr ""
+msgstr "Népszerű műfajok"
 
-#: includes/taxonomies/genre.php:27
+#: includes/taxonomies/genre.php:34
 msgid "Search Genres"
 msgstr "Műfaj keresése"
 
-#: includes/taxonomies/genre.php:28
+#: includes/taxonomies/genre.php:35
 msgid "Not Found"
 msgstr "Nincs találat"
 
-#: includes/taxonomies/genre.php:29
+#: includes/taxonomies/genre.php:36
 msgid "No genres"
-msgstr ""
+msgstr "Nincs műfaj"
 
-#: includes/taxonomies/genre.php:30
+#: includes/taxonomies/genre.php:37
 msgid "Genres list"
-msgstr ""
+msgstr "Műfaj lista"
 
-#: includes/taxonomies/genre.php:31
+#: includes/taxonomies/genre.php:38
 msgid "Genres list navigation"
-msgstr ""
+msgstr "Műfaj lista navigáció"
 
-#: includes/types/story.php:26
+#: includes/types/story.php:36
 msgid "Volume details"
 msgstr "Tartalom adatai"
 
-#: includes/types/story.php:69
+#: includes/types/story.php:82
 msgid "(no parent)"
 msgstr "(nincs szülő)"
 
-#: includes/types/story.php:156 includes/types/story.php:157
+#: includes/types/story.php:179 includes/types/story.php:180
 msgid "Contents"
 msgstr "Tartalmak"
 
-#: includes/types/story.php:158
+#: includes/types/story.php:181
 msgid "Add New"
 msgstr "Új hozzáadása"
 
-#: includes/types/story.php:159
+#: includes/types/story.php:182
 msgid "Add New Item"
 msgstr "Új tartalom hozzáadása"
 
-#: includes/types/story.php:160
+#: includes/types/story.php:183
 msgid "New Item"
 msgstr "Új elem"
 
-#: includes/types/story.php:161
+#: includes/types/story.php:184
 msgid "Content Edit"
 msgstr "Tartalom szerkesztése"
 
-#: includes/types/story.php:162
+#: includes/types/story.php:185
 msgid "View Content"
 msgstr "Tartalom megtekintése"
 
-#: includes/types/story.php:163
+#: includes/types/story.php:186
 msgid "All Content"
 msgstr "Összes tartalom"
 
-#: includes/types/story.php:164
+#: includes/types/story.php:187
 msgid "Search Content"
 msgstr "Tartalom keresése"
 
-#: includes/types/story.php:166
+#: includes/types/story.php:189
 msgid "Content Not Found"
 msgstr "Nem található tartalom"
 
-#: includes/types/story.php:167
+#: includes/types/story.php:190
 msgid "Content Not Found In Trash"
 msgstr "Nem található tartalom a lomtárban"
 
-#: includes/types/story.php:178
+#: includes/types/story.php:201
 msgid "content-slug"
 msgstr "tartalom"
 
-#: layout-handlers/activation-layout-handler.php:28
+#: layout-handlers/activation-layout-handler.php:34
 msgid "Your account has been succesfuly confirmed!"
 msgstr "Regisztrációd sikeresen megerősítetted!"
 
-#: layout-handlers/content-editor-layout-handler.php:40
+#: layout-handlers/content-editor-layout-handler.php:44
 msgid "Error at updating story!"
 msgstr "Hiba a feltöltésben!"
 
-#: layout-handlers/content-editor-layout-handler.php:145
+#: layout-handlers/content-editor-layout-handler.php:149
 msgid "Edit chapter"
 msgstr "Fejezet szerkesztése"
 
-#: layout-handlers/content-editor-layout-handler.php:149
+#: layout-handlers/content-editor-layout-handler.php:153
 msgid "Delete chapter"
 msgstr "Fejezet törlése"
 
-#: layout-handlers/content-editor-layout-handler.php:200
+#: layout-handlers/content-editor-layout-handler.php:162
+msgid "Delete volume"
+msgstr "Kötet törlése"
+
+#: layout-handlers/content-editor-layout-handler.php:205
 msgid "Confirmation"
 msgstr "Megerősítés"
 
-#: layout-handlers/content-editor-layout-handler.php:204
-msgid "Are you sure you want to delete this chapter?"
-msgstr "Biztosan törölni szeretnéd ezt a fejezetet?"
+#: layout-handlers/content-editor-layout-handler.php:209
+msgid "Are you sure you want to delete this?"
+msgstr "Biztosan törölni akarod?"
 
-#: layout-handlers/content-editor-layout-handler.php:208
+#: layout-handlers/content-editor-layout-handler.php:213
 msgid "Cancel"
 msgstr "Mégse"
 
-#: layout-handlers/content-editor-layout-handler.php:209
+#: layout-handlers/content-editor-layout-handler.php:214
 msgid "Delete"
 msgstr "Törlés"
 
-#: layout-handlers/content-editor-layout-handler.php:258
+#: layout-handlers/content-editor-layout-handler.php:268
 msgid "You're not authorized to access this page!"
 msgstr "Nincs jogosultságod az oldal megtekintéséhez!"
 
-#: layout-handlers/index-layout-handler.php:38
+#: layout-handlers/index-layout-handler.php:42
 msgid "News"
 msgstr "Hírek"
 
-#: layout-handlers/index-layout-handler.php:48
+#: layout-handlers/index-layout-handler.php:52
 msgid "Recommendation"
 msgstr "Ajánlók"
 
-#: layout-handlers/new-story-layout-handler.php:112
+#: layout-handlers/new-story-layout-handler.php:117
 msgid "Fields marked with * are required."
 msgstr "A csillaggal jelölt mezők kitöltése kötelező."
 
-#: layout-handlers/new-story-layout-handler.php:116
+#: layout-handlers/new-story-layout-handler.php:121
 msgid "Upload"
 msgstr "Feltöltés"
 
-#: layout-handlers/new-story-layout-handler.php:137
+#: layout-handlers/new-story-layout-handler.php:142
 msgid "Story details"
 msgstr "Tartalom adatai"
 
-#: layout-handlers/new-story-layout-handler.php:161
+#: layout-handlers/new-story-layout-handler.php:168
 msgid "Chapter details"
 msgstr "Fejezet adatai"
 
-#: layout-handlers/new-story-layout-handler.php:189
+#: layout-handlers/new-story-layout-handler.php:196
 msgid "Error while uploading!"
 msgstr "Hiba történt a feltöltés közben!"
 
-#: layout-handlers/password-reset-layout-handler.php:31
+#: layout-handlers/password-reset-layout-handler.php:39
 msgid "Ok"
 msgstr "Ok"
 
-#: search.php:66
+#: layout-handlers/toplists-layout-handler.php:55
+msgid "Most favorited authors"
+msgstr "Kedvenc szerzők"
+
+#: layout-handlers/toplists-layout-handler.php:68
+msgid "person's favorite author"
+msgstr "ember kedvenc szerzője"
+
+#: layout-handlers/toplists-layout-handler.php:68
+msgid "people's favorite author"
+msgstr "ember kedvenc szerzője"
+
+#: layout-handlers/toplists-layout-handler.php:79
+msgid "Most active comment writers"
+msgstr "Legaktívabb kommentelők"
+
+#: layout-handlers/toplists-layout-handler.php:93
+msgid "comments"
+msgstr "Kommentek"
+
+#: layout-handlers/toplists-layout-handler.php:107
+msgid "Most favorite stories"
+msgstr "Kedvenc történetek"
+
+#: layout-handlers/toplists-layout-handler.php:119
+msgid "person's favorite content"
+msgstr "ember kedvence"
+
+#: layout-handlers/toplists-layout-handler.php:119
+msgid "people's favorite content"
+msgstr "ember kedvence"
+
+#: layout-handlers/toplists-layout-handler.php:133
+msgid "The most read stories (with sequels)"
+msgstr "Legolvasottabb folytatásos történetek"
+
+#: layout-handlers/toplists-layout-handler.php:133
+msgid "The most read stories (without sequels)"
+msgstr "Legolvasottabb egyrészes történetek"
+
+#: layout-handlers/toplists-layout-handler.php:143
+msgid "views"
+msgstr "Megtekintések"
+
+#: search.php:59
 msgid "Search phrase"
 msgstr "Keresendő kifejezés"
 
-#: search.php:69
+#: search.php:62
 msgid "Filter"
 msgstr "Keresés"
 
-#: search.php:74
+#: search.php:67
 msgid "Total hits found"
 msgstr "Összes találat"
 
-#: search.php:102
+#: search.php:95
 msgid "Choose sub-category"
 msgstr "Válassz alkategóriát"
-
-#: search.php:235
-msgid "First page"
-msgstr "Első oldal"
-
-#: search.php:253
-msgid "Last page"
-msgstr "Utolsó oldal"
 
 #. Description of the plugin/theme
 msgid "Polc.eu téma leírása."
@@ -874,6 +1000,9 @@ msgstr "polc.eu"
 #. Author URI of the plugin/theme
 msgid "http://polc.eu"
 msgstr "http://polc.eu"
+
+#~ msgid "Are you sure you want to delete this chapter?"
+#~ msgstr "Biztosan törölni szeretnéd ezt a fejezetet?"
 
 #~ msgid "Description."
 #~ msgstr "Leírás"

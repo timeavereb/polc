@@ -36,6 +36,20 @@ class Polc_Helper_Module
     }
 
     /**
+     * @param $text
+     * @param $limit
+     * @return string
+     */
+    public static function limit_text($text, $limit) {
+
+        if (strlen($text) > $limit) {
+            $text = substr($text,0,$limit) . '...';
+        }
+
+        return $text;
+    }
+
+    /**
      * @param $posts
      * @param bool|false $animate
      */
@@ -240,7 +254,7 @@ class Polc_Helper_Module
                                 ?>
                             </h2>
 
-                            <p><?= $post->post_excerpt; ?></p>
+                            <p><?= $post->post_parent != 0 ? Polc_Helper_Module::limit_text(strip_tags($post->post_content), 600) : strip_tags($post->post_excerpt); ?></p>
                         </a>
 
                         <div class="plc_article_datas bottom">

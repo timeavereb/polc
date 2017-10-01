@@ -160,6 +160,17 @@ class Polc_Story_Content_Module
                     </div>
                     <?php
                 endif;
+
+                if (class_exists("Post_Views_Counter")):
+                    if ($this->post->post_parent != 0 || get_post_meta($this->post->ID, "single", true) == 1):
+                        ?>
+                        <div class="plcContentViews">
+                            <span><?= pvc_get_post_views($this->post->ID); ?></span>
+                        </div>
+                        <?php
+                    endif;
+                endif;
+
                 new Polc_Social_Share_Module();
                 $tags = get_the_tags($this->post->ID);
                 if ($tags):

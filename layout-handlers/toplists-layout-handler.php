@@ -84,13 +84,15 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
                             $cnt = 1;
                             foreach ($this->top_commenters as $value):
                                 ?>
-                                <a href="<?= $value["url"]; ?>">
-                                    <span><?= $cnt; ?>.</span>
+                                <div class="toplistListItem">
+                                    <a href="<?= $value["url"]; ?>">
+                                        <span><?= $cnt; ?>.</span>
 
-                                    <h2><?= $value["name"]; ?></h2>
-                                    <a href="#"
-                                       class="plcCommentCnt"><?= $value["cnt"] . " " . __('comments', 'polc'); ?></a>
-                                </a>
+                                        <h2><?= $value["name"]; ?></h2>
+                                        <a href="#"
+                                           class="plcCommentCnt"><?= $value["cnt"] . " " . __('comments', 'polc'); ?></a>
+                                    </a>
+                                </div>
                                 <?php
                                 $cnt++;
                             endforeach;

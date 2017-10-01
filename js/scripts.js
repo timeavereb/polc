@@ -502,6 +502,11 @@ function polc_content_handler() {
                     if (response.success) {
                         jQuery("#plcFavoriteBtn").fadeOut(500, function () {
                             jQuery(this).text(response.success).fadeIn(500);
+                            if(jQuery(this).hasClass("favorited")){
+                                jQuery(this).removeClass("favorited");
+                            }else{
+                                jQuery(this).addClass("favorited");
+                            }
                         });
                     }
                 }

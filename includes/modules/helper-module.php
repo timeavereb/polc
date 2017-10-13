@@ -303,7 +303,7 @@ class Polc_Helper_Module
                     <div class="plcNewsText">
                         <h1><?= $post->post_title; ?></h1>
 
-                        <p class="date"><?= get_the_date(); ?></p>
+                        <p class="date"><?= get_the_date('',$post); ?></p>
                     </div>
                 </article>
             </a>

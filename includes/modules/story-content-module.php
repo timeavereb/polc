@@ -144,7 +144,15 @@ class Polc_Story_Content_Module
                                     $class = "";
                                 endif;
                                 ?>
-                                <span id="plcFavoriteBtn" class="<?= $class; ?>" data-post-id="<?= $this->post->ID; ?>"><?= $text; ?></span>
+                                <span id="plcFavoriteBtn" class="<?= $class; ?>"
+                                      data-post-id="<?= $this->post->ID; ?>"><?= $text; ?></span>
+                            </div>
+                            <?php
+                        else:
+                            ?>
+                            <div class="favoriteBtnWrapper">
+                                <span id="plcFavoriteBtnLogout"
+                                      data-post-id="<?= $this->post->ID; ?>"><?= __('Add to favorites', 'polc'); ?></span>
                             </div>
                             <?php
                         endif;
@@ -152,7 +160,9 @@ class Polc_Story_Content_Module
                     </div>
 
                     <h1><?= $this->main_title; ?></h1>
-                    <address class="author"><a rel="author" href="<?= get_author_posts_url($this->post->post_author); ?>"><?php the_author(); ?></a></address>
+                    <address class="author"><a rel="author"
+                                               href="<?= get_author_posts_url($this->post->post_author); ?>"><?php the_author(); ?></a>
+                    </address>
                     <?php
                     $this->chapter_selection();
 

@@ -164,6 +164,14 @@ class Polc_Layout_Settings_Page
         $update = [];
         $allowed = ["stories", "news", "recommend", "toplists"];
 
+        //If toplists settings has been changed then we clear the cache.
+        if ((get_option("polc-layout-settings")["toplists"] == $_REQUEST["toplists"]) === false):
+            delete_transient("top_comment_authors");
+            delete_transient("top_views");
+            delete_transient("top_favorite_authors");
+            delete_transient("top_favorite_contents");
+        endif;
+
         $_REQUEST["toplists"]["cache"] = !isset($_REQUEST["toplists"]["cache"]) ? "" : $_REQUEST["toplists"]["cache"];
 
         foreach ($_REQUEST as $key => $value):

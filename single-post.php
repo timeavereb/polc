@@ -68,7 +68,8 @@ $news = get_posts($args);
                     </div>
                 </div>
                 <article>
-                    <?php the_excerpt();
+                    <p class="newsLead"><?= $post->post_excerpt; ?></p>
+                   <?php
                     the_content(); ?>
                 </article>
                 <div>

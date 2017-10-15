@@ -539,6 +539,7 @@ function polc_content_handler() {
                 jQuery('.plc_story_content').addClass('nightstyle');
                 jQuery('.polcCommentWrapper').addClass('nightstyle');
                 jQuery('.polcSocialShareAndTags').addClass('nightstyle');
+                jQuery('.plcArticleInnerWrapper').addClass('nightstyle');
             }
             else {
                 jQuery(this).removeClass('night').addClass('day');

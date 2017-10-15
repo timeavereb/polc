@@ -36,7 +36,7 @@ class Polc_News_List_Layout_Handler extends Polc_Layout_Handler_Base
 
         $this->max = 999999999;
         $this->paged = (get_query_var('page')) ? get_query_var('page') : 1;
-        $this->ppp = 1;
+        $this->ppp = 2;
 
         $args = [
             "post_type" => "post",
@@ -52,12 +52,32 @@ class Polc_News_List_Layout_Handler extends Polc_Layout_Handler_Base
         $this->total_items = $query->found_posts;
         $this->total_pages = round($this->total_items / $this->ppp);
 
-        foreach ($posts as $post):
-            echo $post->post_title . "<br>";
-        endforeach;
-
         ?>
+        <div class="plcNewsListWrapper">
+            <div class="listInnerWrapper">
+                <?php
+                foreach ($posts as $post):
 
+                    $img = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'large');
+                    $img = isset($img[0]) && $img[0] != "" ? $img[0] : "http:/defaultimg.jpg";
+                    ?>
+                    <a href="<?= get_permalink($post->ID); ?>">
+                        <article>
+                            <div class="articleImageWrapper">
+                                <div class="articleImage" style="background-image:url('<?= $img; ?>');"></div>
+                            </div>
+                            <div class="articleDatas">
+                                <h1><?= $post->post_title; ?></h1>
+                                <p class="lead"><?= $post->post_excerpt; ?></p>
+                                <p class="newsDate"><?= get_the_date('',$post); ?></p>
+                            </div>
+                        </article>
+                    </a>
+                    <?php
+                endforeach;
+                ?>
+            </div>
+        </div>
         <form id="plcSearchForm" method="POST">
             <input type="hidden" id="page" name="page" value="<?= $this->paged; ?>">
         </form>

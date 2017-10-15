@@ -39,7 +39,6 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
 
         //most active commenters
         $this->top_commenters = $this->top_comment_authors(Polc_Settings_Manager::top_lists()["commenters_cnt"]);
-
         //top favorited contents
         $this->top_favorited_contents = Polc_Favorite_Helper_Module::get_top_favorites(Polc_Settings_Manager::top_lists()["stories_cnt"], "story");
 
@@ -183,7 +182,7 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
         $results = $wpdb->get_results("
         SELECT COUNT(comment_ID) as CommentCnt, user_id as UserId
         FROM {$wpdb->comments}
-        WHERE comment_approved = 1
+        WHERE comment_approved = 1 AND UserId > 0
         GROUP BY user_id
         ORDER BY CommentCnt DESC
         LIMIT {$limit}

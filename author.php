@@ -109,13 +109,14 @@ class Polc_Author
                     <?php if ($this->user_favorite_cnt > 0): ?>
                         <button id="section_2_btn" class="section_btn favorited_by_btn"
                                 onclick="polc_header_handler.change_section(2);"><?= __('Favorited by', 'polc'); ?></button>
-
-                        <button id="section_3_btn" class="section_btn favorite_authors_btn"
-                                onclick="polc_header_handler.change_section(3);"><?= __('Favorited Authors', 'polc'); ?></button>
-
-                        <button id="section_4_btn" class="section_btn favorite_stories_btn"
-                                onclick="polc_header_handler.change_section(4);"><?= __('Favorited Contents', 'polc'); ?></button>
                     <?php endif; ?>
+
+                    <button id="section_3_btn" class="section_btn favorite_authors_btn"
+                            onclick="polc_header_handler.change_section(3);"><?= __('Favorited Authors', 'polc'); ?></button>
+
+                    <button id="section_4_btn" class="section_btn favorite_stories_btn"
+                            onclick="polc_header_handler.change_section(4);"><?= __('Favorited Contents', 'polc'); ?></button>
+
                     <button id="section_5_btn" class="section_btn datachange_btn"
                             onclick="polc_header_handler.change_section(5);"><?= __('Data change', 'polc'); ?></button>
                 </div>
@@ -246,7 +247,7 @@ class Polc_Author
                 endforeach;
             else:
                 ?>
-                <span class="plcEmptyContent"><?=__('You didn\'t add any author as favorite.', 'polc'); ?></span>
+                <span class="plcEmptyContent"><?= __('You didn\'t add any author as favorite.', 'polc'); ?></span>
                 <?php
             endif;
             ?>
@@ -266,7 +267,7 @@ class Polc_Author
                 Polc_Helper_Module::simple_list($posts, true);
             else:
                 ?>
-                <span class="plcEmptyContent"><?=__('You didn\'t add any content as favorite.', 'polc'); ?></span>
+                <span class="plcEmptyContent"><?= __('You didn\'t add any content as favorite.', 'polc'); ?></span>
                 <?php
             endif;
             ?>

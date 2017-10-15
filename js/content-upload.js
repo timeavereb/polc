@@ -162,7 +162,7 @@ function polc_content_editor_handler() {
                     },
                     success: function (data) {
 
-                        if (data.length == 0) {
+                        if (data.length == 0 || data == '-1') {
                             return [];
                         }
 

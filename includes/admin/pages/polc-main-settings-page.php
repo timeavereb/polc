@@ -113,6 +113,21 @@ class Polc_Main_Settings_Page
             </p>
 
             <p>
+                <label><?= __('Help category', 'polc'); ?></label>
+                <?php
+                wp_dropdown_categories([
+                    "id" => "help-category",
+                    "name" => "categories[help-category]",
+                    "show_option_none" => __('None selected', 'polc'),
+                    "option_none_value" => 0,
+                    "hierarchical" => true,
+                    "hide_empty" => false,
+                    "selected" => isset($categories["help-category"]) ? $categories["help-category"] : 0
+                ]);
+                ?>
+            </p>
+
+            <p>
                 <label for="new-story-page"><?= __('New story content page', 'polc'); ?></label>
                 <?php
                 wp_dropdown_pages([

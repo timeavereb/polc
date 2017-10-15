@@ -25,6 +25,7 @@ class Polc_Story_Post_Type
         add_action('add_meta_boxes', [$this, 'meta_box_init']);
         add_filter('post_type_link', [$this, 'polc_story_author_tag'], 10, 4);
         add_action('save_post', [$this, 'save'], 1, 2);
+        add_action('publish_story', [$this, 'publish'], 1, 2);
     }
 
     /**
@@ -63,10 +64,22 @@ class Polc_Story_Post_Type
                 update_post_meta($id, $key, $meta_value);
             endif;
         endforeach;
+    }
 
-        if ($post->post_type == "story" && $_REQUEST["parent_id"] != ""):
-            //TODO::szülő utolsó módosítás dátum frissítése.
-            //wp_update_post(["ID" => $_REQUEST["parent_id"]]);
+    /**
+     * Modifies parent's story modified date if any child is being published.
+     * @param $post_id
+     * @param $post
+     */
+    public function publish($post_id, $post)
+    {
+        //Refreshing parent's post modofied if child was published
+        if ($post->post_type == "story" && $post->post_status == "publish" && is_numeric($post->post_parent) && $post->post_parent != 0):
+            //Removing save post action avoiding infinite loop before we update parent post
+            remove_action('save_post', 'wpse51363_save_post');
+            $args = ["ID" => $post->post_parent, "post_modified" => $post->post_modified, "post_modified_gmt" => $post->post_modified_gmt];
+            wp_update_post($args);
+            add_action('save_post', [$this, 'save'], 1, 2);
         endif;
     }
 
@@ -166,6 +179,18 @@ class Polc_Story_Post_Type
                 </tr>
                 <?php
             endforeach;
+            if (current_user_can("manage_options")):
+                ?>
+                <tr>
+                    <td>
+                        <?= __('Content was last modofied by :'); ?>
+                    </td>
+                    <td>
+                        <?php the_modified_author(); ?>
+                    </td>
+                </tr>
+                <?php
+            endif;
             ?>
         </table>
         <?php
@@ -199,7 +224,19 @@ class Polc_Story_Post_Type
             'show_in_menu' => true,
             'query_var' => true,
             'rewrite' => ['slug' => __('content-slug', 'polc')],
-            'capability_type' => 'post',
+            'capabilities' => [
+                'edit_post' => 'edit_story',
+                'edit_posts' => 'edit_stories',
+                'edit_others_posts' => 'edit_other_stories',
+                'edit_published_posts' => 'edit_published_stories',
+                'publish_posts' => 'publish_stories',
+                'read_post' => 'read_story',
+                'read_private_posts' => 'read_private_stories',
+                'delete_posts' => 'delete_stories',
+                'delete_others_posts' => 'delete_others_stories',
+                'delete_published_posts' => 'delete_published_stories',
+            ],
+            'map_meta_cap' => true,
             'has_archive' => true,
             'hierarchical' => true,
             'menu_position' => 5,

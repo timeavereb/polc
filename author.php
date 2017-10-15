@@ -19,7 +19,7 @@ class Polc_Author
     private $can_edit = false;
     private $avatar;
     private $user_favorite_cnt;
-    private $user_favorite_list;
+    private $favorited_by;
     private $user_subscribe_cnt;
 
     /**
@@ -33,9 +33,8 @@ class Polc_Author
         endif;
 
         $avatar = get_user_meta($this->author->ID, "polc_current_avatar");
-
-        $this->user_favorite_list = (array)Polc_Favorite_Helper_Module::get_favorite_users($this->author->ID, "users");
-        $this->user_favorite_cnt = count($this->user_favorite_list);
+        $this->favorited_by = $this->favorited_by = (array)Polc_Favorite_Helper_Module::get_favorite_users($this->author->ID, "users");
+        $this->user_favorite_cnt = count($this->favorited_by);
 
         $this->avatar = !empty($avatar) ? $avatar[0]["src"] : "";
         wp_enqueue_script("author-handler", PLC_THEME_PATH . '/js/author-handler.js');
@@ -51,7 +50,6 @@ class Polc_Author
         <?php
 
         if ($this->can_edit):
-
             ?>
             <div id="plc_image_selection_wrapper" style="display:none;">
                 <form id="uploadimage" action="" method="post" enctype="multipart/form-data">
@@ -82,9 +80,11 @@ class Polc_Author
             endif;
 
             $this->profile_left_stories();
-            $this->profile_left_favorite_users();
+            $this->profile_left_favorited_by();
 
             if ($this->can_edit):
+                $this->profile_left_favorite_authors();
+                $this->profile_left_favorite_contents();
                 $this->profile_left_data_change();
             endif;
 
@@ -109,9 +109,15 @@ class Polc_Author
                     <?php if ($this->user_favorite_cnt > 0): ?>
                         <button id="section_2_btn" class="section_btn favorited_by_btn"
                                 onclick="polc_header_handler.change_section(2);"><?= __('Favorited by', 'polc'); ?></button>
+
+                        <button id="section_3_btn" class="section_btn favorite_authors_btn"
+                                onclick="polc_header_handler.change_section(3);"><?= __('Favorited Authors', 'polc'); ?></button>
+
+                        <button id="section_4_btn" class="section_btn favorite_stories_btn"
+                                onclick="polc_header_handler.change_section(4);"><?= __('Favorited Contents', 'polc'); ?></button>
                     <?php endif; ?>
-                    <button id="section_3_btn" class="section_btn datachange_btn"
-                            onclick="polc_header_handler.change_section(3);"><?= __('Data change', 'polc'); ?></button>
+                    <button id="section_5_btn" class="section_btn datachange_btn"
+                            onclick="polc_header_handler.change_section(5);"><?= __('Data change', 'polc'); ?></button>
                 </div>
 
                 <div class="addStoryWrapper">
@@ -130,7 +136,7 @@ class Polc_Author
     private function profile_left_data_change()
     {
         ?>
-        <div class="plcProfileLeft section" id="section_3" style="display: none;">
+        <div class="plcProfileLeft section" id="section_5" style="display: none;">
             <div id="plcDataChangeWrapper">
                 <form id="plcDataChangeForm">
                     <p class="plcDataChangeElement">
@@ -206,17 +212,62 @@ class Polc_Author
     /**
      * Users list who favorited the author section.
      */
-    private function profile_left_favorite_users()
+    private function profile_left_favorited_by()
     {
         ?>
         <div class="plcProfileLeft section" id="section_2" style="display: none;">
             <?php
             if ($this->user_favorite_cnt > 0):
-                foreach ($this->user_favorite_list as $user) {
-                    echo '<div class="plcUserFavoriteElement">';
-                    echo '<a href="' . get_author_posts_url($user) . '">' . get_user_by('id', $user)->display_name . '</a>';
-                    echo '</div>';
-                }
+                foreach ($this->favorited_by as $user):
+                    ?>
+                    <div class="plcUserFavoriteElement">
+                        <a href="<?= get_author_posts_url($user); ?>"><?= get_user_by('id', $user)->display_name; ?></a>
+                    </div>
+                    <?php
+                endforeach;
+            endif;
+            ?>
+        </div>
+        <?php
+    }
+
+    private function profile_left_favorite_authors()
+    {
+        $favorite_authors = (array)Polc_Favorite_Helper_Module::get_favorite_users(Polc_Header::current_user()->ID);
+        ?>
+        <div class="plcProfileLeft section" id="section_3" style="display: none;">
+            <?php
+            if (count($favorite_authors) > 0):
+                foreach ($favorite_authors as $user): ?>
+                    <div class="plcUserFavoriteElement">
+                        <a href="<?= get_author_posts_url($user); ?>"><?= get_user_by('id', $user)->display_name ?></a>
+                    </div>
+                    <?php
+                endforeach;
+            else:
+                ?>
+                <span class="plcEmptyContent"><?=__('You didn\'t add any author as favorite.', 'polc'); ?></span>
+                <?php
+            endif;
+            ?>
+        </div>
+        <?php
+    }
+
+    private function profile_left_favorite_contents()
+    {
+        $favorite_contents = (array)Polc_Favorite_Helper_Module::get_favorite_stories(Polc_Header::current_user()->ID);
+        $post_ids = array_keys($favorite_contents);
+        ?>
+        <div class="plcProfileLeft section" id="section_4" style="display: none;">
+            <?php
+            if (count($favorite_contents) > 0):
+                $posts = get_posts(["post__in" => $post_ids, "post_type" => "story", "posts_per_page" => -1]);
+                Polc_Helper_Module::simple_list($posts, true);
+            else:
+                ?>
+                <span class="plcEmptyContent"><?=__('You didn\'t add any content as favorite.', 'polc'); ?></span>
+                <?php
             endif;
             ?>
         </div>

@@ -229,8 +229,8 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
         $args = [
             'post_author' => $this->user->ID,
             'post_content' => "",
-            'post_title' => $_REQUEST["volume_title"],
-            'post_excerpt' => $_REQUEST["blurb"],
+            'post_title' => strip_tags($_REQUEST["volume_title"]),
+            'post_excerpt' => strip_tags($_REQUEST["blurb"]),
             'post_status' => 'pending',
             'post_type' => 'story',
             'post_parent' => 0,
@@ -239,7 +239,7 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
 
         //If it's a single story let's set the post content
         if ($_REQUEST["content_type"] == "single"):
-            $args["post_content"] = $_REQUEST["story_content"];
+            $args["post_content"] = strip_tags($_REQUEST["story_content"],'<h1><h2><b><i><p>');
         endif;
 
         $this->insert_id = wp_insert_post($args);
@@ -280,8 +280,8 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
 
         $args = [
             'post_author' => $this->user->ID,
-            'post_title' => $_REQUEST["chapter_title"],
-            'post_content' => $_REQUEST["story_content"],
+            'post_title' => strip_tags($_REQUEST["chapter_title"]),
+            'post_content' => strip_tags($_REQUEST["story_content"], '<h1><h2><b><i><p>'),
             'post_parent' => $parent_id,
             'post_type' => "story",
             'post_status' => "pending"

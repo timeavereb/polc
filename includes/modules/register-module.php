@@ -101,7 +101,7 @@ class Polc_Register_Module
             "user_pass" => $_REQUEST["password"],
             "user_registered" => date("Y-m-d H:i:s"),
             "show_admin_bar_front" => false,
-            "role" => "pending"
+            "role" => "polc_frontend_user"
         ];
 
         try {

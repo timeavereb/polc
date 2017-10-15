@@ -17,7 +17,7 @@ if (!defined("ABSPATH")) {
 class Polc_News_List_Layout_Handler extends Polc_Layout_Handler_Base
 {
     CONST POLC_LAYOUT = "polc-news";
-    CONST POLC_LAYOUT_NAME = "Hírek";
+    CONST POLC_LAYOUT_NAME = "Hírek/Ajánlók";
 
     private $paged;
     private $max;
@@ -27,19 +27,21 @@ class Polc_News_List_Layout_Handler extends Polc_Layout_Handler_Base
 
     public function render()
     {
+        global $post;
+        if ($post->ID == Polc_Settings_Manager::pages()["news-list"]):
+            $category = Polc_Settings_Manager::layout()["news"]["term_id"];
+        else:
+            $category = Polc_Settings_Manager::layout()["recommend"]["term_id"];
+        endif;
+
         $this->max = 999999999;
         $this->paged = (get_query_var('page')) ? get_query_var('page') : 1;
         $this->ppp = 1;
 
-        $categories = [
-            Polc_Settings_Manager::layout()["news"]["term_id"],
-            Polc_Settings_Manager::layout()["recommend"]["term_id"]
-        ];
-
         $args = [
             "post_type" => "post",
-            "category__in" => $categories,
             "post_status" => "publish",
+            "category__in" => [$category],
             "posts_per_page" => $this->ppp,
             "paged" => $this->paged
         ];

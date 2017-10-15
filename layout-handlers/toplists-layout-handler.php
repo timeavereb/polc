@@ -30,6 +30,10 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
 
     public function render()
     {
+
+        $this->cache = !isset(Polc_Settings_Manager::top_lists()["cache"]) || Polc_Settings_Manager::top_lists()["cache"] != "" ? true : false;
+        $this->cache_time = is_numeric(Polc_Settings_Manager::top_lists()["cache_time"]) ? Polc_Settings_Manager::top_lists()["cache_time"] : 120;
+
         //most favorited authors
         $this->top_favorited_authors = Polc_Favorite_Helper_Module::get_top_favorites(Polc_Settings_Manager::top_lists()["authors_cnt"], "author");
 
@@ -43,9 +47,6 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
             //most viewed contents ( with chapters )
             $this->top_views = $this->top_views(Polc_Settings_Manager::top_lists()["top_views_cnt"]);
         endif;
-
-        $this->cache = !isset(Polc_Settings_Manager::top_lists()["cache"]) || Polc_Settings_Manager::top_lists()["cache"] != "" ? true : false;
-        $this->cache_time = is_numeric(Polc_Settings_Manager::top_lists()["cache_time"]) ? Polc_Settings_Manager::top_lists()["cache_time"] : 120;
         ?>
 
         <div class="plcToplistsWrapper">
@@ -132,6 +133,7 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
                             <h1>
                                 <?= $key == "with_chapter" ? __('The most read stories (with sequels)', 'polc') : __('The most read stories (without sequels)', 'polc'); ?>
                             </h1>
+
                             <div class="list">
                                 <?php
                                 $cnt = 1;
@@ -140,6 +142,7 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
                                         <a href="<?= $v["url"]; ?>"><span><?= $cnt; ?>.</span>
 
                                             <h2><?= $v["name"]; ?></h2></a>
+
                                         <p><?= $v["cnt"] . " " . __('views', 'polc'); ?></p>
                                     </div>
                                     <?php
@@ -204,7 +207,6 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
     private function top_views($limit = 10)
     {
         $list = [];
-
         if ($this->cache):
             $result = get_transient("top_views");
             if ($result):

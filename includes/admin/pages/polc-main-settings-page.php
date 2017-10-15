@@ -6,9 +6,15 @@
  * Date: 2017. 06. 11.
  * Time: 16:44
  */
+
+/**
+ * Class Polc_Main_Settings_Page
+ */
 class Polc_Main_Settings_Page
 {
-
+    /**
+     * Polc_Main_Settings_Page constructor.
+     */
     public function __construct()
     {
         add_action("admin_menu", function () {
@@ -50,7 +56,7 @@ class Polc_Main_Settings_Page
 
     public static function settings()
     {
-        switch ($_REQUEST["page"]) {
+        switch ($_REQUEST["page"]):
             case POLC_SETTINGS_PAGE:
                 self::render();
                 break;
@@ -60,14 +66,13 @@ class Polc_Main_Settings_Page
             case POLC_LAYOUT_SETTINGS:
                 Polc_Layout_Settings_Page::render();
                 break;
-        }
+        endswitch;
     }
 
     public static function render()
     {
         if (isset($_REQUEST["submit"])):
-            update_option("polc-page-settings", $_REQUEST["pages"]);
-            update_option("polc-category-settings", $_REQUEST["categories"]);
+            self::save();
         endif;
 
         $pages = Polc_Settings_Manager::pages();
@@ -184,9 +189,28 @@ class Polc_Main_Settings_Page
                 ?>
             </p>
 
+            <p>
+                <label for="recommendation-list"><?= __('Recommendation list page', 'polc'); ?></label>
+                <?php
+                wp_dropdown_pages([
+                    "id" => "recommendation-list",
+                    "name" => "pages[recommendation-list]",
+                    "show_option_none" => __('None selected', 'polc'),
+                    "option_none_value" => 0,
+                    "selected" => isset($pages["recommendation-list"]) ? $pages["recommendation-list"] : 0
+                ]);
+                ?>
+            </p>
+
             <?php submit_button(); ?>
         </form>
         <?php
+    }
+
+    private static function save()
+    {
+        update_option("polc-page-settings", $_REQUEST["pages"], true);
+        update_option("polc-category-settings", $_REQUEST["categories"], true);
     }
 }
 

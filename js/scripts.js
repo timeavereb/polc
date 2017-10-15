@@ -194,8 +194,6 @@ function polc_header_handler() {
 
         animation_wrapper = jQuery(document).find(".animate");
 
-        console.log(animation_wrapper);
-
         self.isScrolledIntoView();
 
         jQuery(document).on("scroll", function () {
@@ -261,7 +259,6 @@ function polc_header_handler() {
                     if (response.error) {
                         if (response.error) {
                             jQuery.each(response.error, function (k, v) {
-                                console.log(k);
                                 jQuery.each(v, function (key, value) {
                                     jQuery("#" + k + "-error-msg").show();
                                     jQuery("#" + k + "-error-msg").append(value + "<br>");
@@ -349,7 +346,8 @@ function polc_header_handler() {
         /**
          * Logout event.
          */
-        jQuery("#plc_logout").click(function () {
+        jQuery("#plc_logout").click(function (event) {
+
             event.preventDefault();
 
             jQuery.ajax({
@@ -502,10 +500,19 @@ function polc_content_handler() {
                     if (response.success) {
                         jQuery("#plcFavoriteBtn").fadeOut(500, function () {
                             jQuery(this).text(response.success).fadeIn(500);
+                            if(jQuery(this).hasClass("favorited")){
+                                jQuery(this).removeClass("favorited");
+                            }else{
+                                jQuery(this).addClass("favorited");
+                            }
                         });
                     }
                 }
             });
+        });
+
+        jQuery(document).on("click", "#plcFavoriteBtnLogout", function(){
+            jQuery("#plc_login_popup").dialog("open");
         });
 
         jQuery(".plcChapterSelect").change(function () {
@@ -556,16 +563,18 @@ function polc_content_handler() {
             }
 
         });
+
         //font style
-        jQuery('.fontstyle').click(function () {
-            if (jQuery('.fontstyle_list').hasClass('show')) {
-                jQuery('.fontstyle_list').removeClass('show');
-            }
-            else {
+       jQuery('.fontstyle').click(function () {
+           if (jQuery('.fontstyle_list').hasClass('show')) {
+               jQuery('.fontstyle_list').removeClass('show');
+           }
+           else {
                 jQuery('.fontstyle_list').addClass('show');
             }
 
         });
+
         jQuery('.select_ptserif').click(function () {
             if (jQuery('.plc_story_content').hasClass('font_pt_serif')) {
                 jQuery('.plc_story_content').removeClass('font_pt_serif');

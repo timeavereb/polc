@@ -34,8 +34,8 @@ $news = get_posts($args);
                     <h4><?= get_term($article_category)->name; ?></h4>
                     <h1><?php the_title(); ?></h1>
                     <div class="articleDatas">
-                        <a hre="#"><h2><?php the_author(); ?></h2></a>
-                        <h3>2017.szeptember 07</h3>
+                        <a href="<?= get_author_posts_url($post->post_author); ?>"><h2><?php the_author(); ?></h2></a>
+                        <h3><?= get_the_date(); ?></h3>
                     </div>
                 </hgroup>
             </header>
@@ -59,7 +59,7 @@ $news = get_posts($args);
                         <div class="fontsizeselector">
                             <span class="fontsize"></span>
                             <ul class="fontsize_list">
-                                <li class="fontsizeDefault">Alapértelmezett</li>
+                                <li class="fontsizeDefault"><?= __( 'Default', 'polc' ); ?></li>
                                 <li class="fontsizeBig">AAA</li>
                                 <li class="fontsizeMedium">AAA</li>
                                 <li class="fontsizeSmall">AAA</li>
@@ -81,9 +81,17 @@ $news = get_posts($args);
                     if ($article_category == Polc_Settings_Manager::layout()["news"]["term_id"]):
                         $current = $news;
                         $other = $recommend_articles;
+                        $current_btn_link = Polc_Settings_Manager::pages()["news-list"];
+                        $other_btn_link = Polc_Settings_Manager::pages()["recommendation-list"];
+                        $current_btn_text = __( 'More news', 'polc');
+                        $other_btn_text = __( 'More recommendations', 'polc' );
                     else:
                         $current = $recommend_articles;
                         $other = $news;
+                        $current_btn_link = Polc_Settings_Manager::pages()["recommendation-list"];
+                        $other_btn_link = Polc_Settings_Manager::pages()["news-list"];
+                        $current_btn_text = __( 'More recommendations', 'polc');
+                        $other_btn_text = __( 'More news', 'polc' );
                     endif;
 
                     foreach ($current as $value):
@@ -98,7 +106,7 @@ $news = get_posts($args);
                     endforeach;
                     ?>
                     <div class="plcButtonWrapper">
-                        <button>More articles</button>
+                        <a href="<?= get_permalink($current_btn_link); ?>"><button><?= $current_btn_text; ?></button></a>
                     </div>
                 </div>
                 <div class="otherChategory">
@@ -113,7 +121,7 @@ $news = get_posts($args);
                     <?php endforeach; ?>
 
                     <div class="plcButtonWrapper">
-                        <button>More articles</button>
+                        <a href="<?= get_permalink($other_btn_link); ?>"><button><?= $other_btn_text; ?></button></a>
                     </div>
                 </div>
             </div>

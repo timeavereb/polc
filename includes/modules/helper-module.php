@@ -36,6 +36,20 @@ class Polc_Helper_Module
     }
 
     /**
+     * @param $text
+     * @param $limit
+     * @return string
+     */
+    public static function limit_text($text, $limit) {
+
+        if (strlen($text) > $limit) {
+            $text = substr($text,0,$limit) . '...';
+        }
+
+        return $text;
+    }
+
+    /**
      * @param $posts
      * @param bool|false $animate
      */
@@ -54,9 +68,33 @@ class Polc_Helper_Module
                 $user = Polc_Header::current_user();
                 $logged = $user != null ? $user->ID : $user;
 
+                if ($post->post_parent != 0):
+                    $id = $post->post_parent;
+                else:
+                    $id = $post->ID;
+                endif;
+
+                $keys = [
+                    "obscene-content" => __('Obscene content', 'polc'),
+                    "violent-content" => __('Violent content', 'polc'),
+                    "erotic-content" => __('Erotic content', 'polc')
+                ];
+
+                $restriction = "";
+                foreach ($keys as $key => $value):
+                    if (get_post_meta($id, $key, true) == "on"):
+                        $restriction .= '<span class="warning ' . $key . '" title="' . $value . '"></span>';
+                    endif;
+                endforeach;
+
+                if (strlen($restriction) > 0):
+                    $restriction = '<div class="plcContentWarningWrapper">'. $restriction . '</div>';
+                endif;
+
                 ?>
                 <div class="latest_item <?= ($animate) ? "animate" : ""; ?>">
                     <article class="plc_latest_item">
+
                         <div class="plc_article_datas top">
                             <?php if ($post->post_author != $logged):
                                 ?>
@@ -69,6 +107,8 @@ class Polc_Helper_Module
                                         class="comments"><?= wp_count_comments($post->ID)->total_comments . ' ' . __('Comment', 'polc'); ?>
                                 </span></a>
                                 <?php
+
+                                echo $restriction;
                             endif;
                             ?>
                             <span class="date"><?= mysql2date("F j", $post->post_date); ?></span>
@@ -88,6 +128,7 @@ class Polc_Helper_Module
                                         class="comments"><?= wp_count_comments($post->ID)->total_comments . " " . __('Comment', 'polc'); ?></span>
                                 </a>
                                 <?php
+                                echo $restriction;
                             else:
                                 if (count(get_children($args = [
                                         'post_parent' => $post->ID,
@@ -152,6 +193,29 @@ class Polc_Helper_Module
             <?php
             foreach ($posts as $post) {
 
+                if ($post->post_parent != 0):
+                    $id = $post->post_parent;
+                else:
+                    $id = $post->ID;
+                endif;
+
+                $keys = [
+                    "obscene-content" => __('Obscene content', 'polc'),
+                    "violent-content" => __('Violent content', 'polc'),
+                    "erotic-content" => __('Erotic content', 'polc')
+                ];
+
+                $restriction = "";
+                foreach ($keys as $key => $value):
+                    if (get_post_meta($id, $key, true) == "on"):
+                        $restriction .= '<span class="warning ' . $key . '" title="' . $value . '"></span>';
+                    endif;
+                endforeach;
+
+                if (strlen($restriction) > 0):
+                    $restriction = '<div class="plcContentWarningWrapper">'. $restriction . '</div>';
+                endif;
+
                 $parent_post = [];
 
                 if ($post->post_parent != 0):
@@ -190,14 +254,14 @@ class Polc_Helper_Module
                                 ?>
                             </h2>
 
-                            <p><?= $post->post_excerpt; ?></p>
+                            <p><?= $post->post_parent != 0 ? Polc_Helper_Module::limit_text(strip_tags($post->post_content), 600) : strip_tags($post->post_excerpt); ?></p>
                         </a>
 
                         <div class="plc_article_datas bottom">
                             <a href="#"><span
                                     class="comments"><?= wp_count_comments($post->ID)->total_comments . " " . __('Comment', 'polc'); ?>
                         </span></a>
-
+                            <?php echo $restriction; ?>
                             <div class="plcTagsWrapper">
                                 <?php
                                 if ($tags):
@@ -239,7 +303,7 @@ class Polc_Helper_Module
                     <div class="plcNewsText">
                         <h1><?= $post->post_title; ?></h1>
 
-                        <p class="date"><?= get_the_date(); ?></p>
+                        <p class="date"><?= get_the_date('',$post); ?></p>
                     </div>
                 </article>
             </a>

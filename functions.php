@@ -33,6 +33,10 @@ remove_action('admin_print_scripts', 'print_emoji_detection_script');
 remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('admin_print_scripts', 'print_emoji_detection_script');
 
+
+add_action('admin_init', 'add_theme_caps');
+
+
 //nav menus
 register_nav_menus([
     'header-menu' => 'Header menu',
@@ -145,7 +149,7 @@ function polc_setup_head()
             }(document, 'script', 'facebook-jssdk'));</script>
 
 
-        <script>window.twttr = (function(d, s, id) {
+        <script>window.twttr = (function (d, s, id) {
                 var js, fjs = d.getElementsByTagName(s)[0],
                     t = window.twttr || {};
                 if (d.getElementById(id)) return t;
@@ -155,7 +159,7 @@ function polc_setup_head()
                 fjs.parentNode.insertBefore(js, fjs);
 
                 t._e = [];
-                t.ready = function(f) {
+                t.ready = function (f) {
                     t._e.push(f);
                 };
 
@@ -174,6 +178,64 @@ function polc_setup_head()
     endif;
 }
 
+/**
+ * Managing custom capabilites
+ */
+function add_theme_caps()
+{
+    $admin = get_role("administrator");
+    $recommendation_writer = get_role("polc_recommendation_writer");
+
+    $content_censor = get_role("polc_content_censor");
+
+    $admin->add_cap("edit_story");
+    $admin->add_cap("edit_stories");
+    $admin->add_cap("edit_other_stories");
+    $admin->add_cap("edit_published_stories");
+    $admin->add_cap("publish_stories");
+    $admin->add_cap("read_story");
+    $admin->add_cap("read_private_stories");
+    $admin->add_cap("delete_stories");
+    $admin->add_cap("delete_others_stories");
+    $admin->add_cap("delete_published_stories");
+
+    $content_censor->add_cap("read");
+    $content_censor->add_cap("edit_story");
+    $content_censor->add_cap("edit_stories");
+    $content_censor->add_cap("edit_published_stories");
+    $content_censor->add_cap("edit_other_stories");
+    $content_censor->add_cap("publish_stories");
+    $content_censor->add_cap("read_story");
+    $content_censor->add_cap("delete_stories");
+    $content_censor->add_cap("delete_others_stories");
+
+    $recommendation_writer->add_cap("read");
+    $recommendation_writer->add_cap("edit_post");
+    $recommendation_writer->add_cap("edit_posts");
+    $recommendation_writer->add_cap("upload_files");
+}
+
+add_filter('list_terms_exclusions', 'polc_category_exclusion', 10, 2);
+
+/**
+ * For recommendation writers only allows the selected category.
+ * @param $exclusions
+ * @param $args
+ * @return string
+ */
+function polc_category_exclusion($exclusions, $args)
+{
+    $current_user = wp_get_current_user();
+    $recommendation_writer = isset($current_user->roles[1]) && $current_user->roles[1] == "polc_recommendation_writer" ? true : false;
+    if ($recommendation_writer):
+        $recommend_cat = Polc_Settings_Manager::layout()["recommend"]["term_id"];
+        if (isset($recommend_cat) && is_numeric($recommend_cat) && $recommend_cat > 0):
+            $exclusions = " {$exclusions} AND t.term_id IN (" . $recommend_cat . ")";
+        endif;
+    endif;
+    return $exclusions;
+}
+
 add_action('after_switch_theme', 'polc_theme_setup');
 
 function polc_theme_setup()
@@ -183,4 +245,9 @@ function polc_theme_setup()
         $install = new Polc_Install_Tables();
         $install->init();
     endif;
+
+    //Creating custom roles if they don't exist.
+    add_role('polc_recommendation_writer', __('Recommendation Writer', 'polc'));
+    add_role('polc_content_censor', __('Content Censor', 'polc'));
+    add_role('polc_frontend_user', __('Frontend User', 'polc'), ["read" => false]);
 }

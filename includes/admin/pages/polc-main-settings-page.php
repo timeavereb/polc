@@ -77,6 +77,7 @@ class Polc_Main_Settings_Page
 
         $pages = Polc_Settings_Manager::pages();
         $categories = Polc_Settings_Manager::categories();
+        $common = Polc_Settings_Manager::common();
         ?>
 
         <h1><?= __('Main settings', 'polc'); ?></h1>
@@ -202,6 +203,11 @@ class Polc_Main_Settings_Page
                 ?>
             </p>
 
+            <p>
+                <label for="plc_ga_id"><?= __( 'Google analytics tracking ID', 'polc' );?></label>
+                <input type="text" id="plc_ga_id" name="common[ga_id]" size="50" value="<?= isset($common["ga_id"]) ? $common["ga_id"] : ""; ?>">
+            </p>
+
             <?php submit_button(); ?>
         </form>
         <?php
@@ -211,6 +217,7 @@ class Polc_Main_Settings_Page
     {
         update_option("polc-page-settings", $_REQUEST["pages"], true);
         update_option("polc-category-settings", $_REQUEST["categories"], true);
+        update_option("polc-common-settings", $_REQUEST["common"], true);
     }
 }
 

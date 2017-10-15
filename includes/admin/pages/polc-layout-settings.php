@@ -28,6 +28,7 @@ class Polc_Layout_Settings_Page
         endif;
 
         $layout_settings = Polc_Settings_Manager::layout();
+        $author_settings = isset($layout_settings["author"]) ? $layout_settings["author"] : [];
         ?>
 
         <h1><?= __('Layout settings', 'polc'); ?></h1>
@@ -116,7 +117,8 @@ class Polc_Layout_Settings_Page
                 </div>
                 <!-- author page settings-->
                 <div id="section_2" class="section" style="display: none;">
-                    author layout settings
+                    <label for="successful_upload_message"><?= __( 'Successful content upload message', 'polc' );?></label>
+                    <input type="text" id="successful_upload_message" name="author[successful_upload_msg]" size="70" value="<?= isset($author_settings["successful_upload_msg"]) ? $author_settings["successful_upload_msg"] : ""; ?>">
                 </div>
 
                 <!-- top-lists page settings-->
@@ -162,7 +164,7 @@ class Polc_Layout_Settings_Page
     public static function save()
     {
         $update = [];
-        $allowed = ["stories", "news", "recommend", "toplists"];
+        $allowed = ["stories", "news", "recommend", "toplists", "author"];
 
         //If toplists settings has been changed then we clear the cache.
         if ((get_option("polc-layout-settings")["toplists"] == $_REQUEST["toplists"]) === false):

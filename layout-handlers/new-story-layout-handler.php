@@ -204,10 +204,21 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
         if ($_REQUEST["content_type"] == "sequel" || $_REQUEST["mode"] == "new-chapter"):
             $this->upload_chapter();
         endif;
-        ?>
 
-        <script>
-            location.href = "<?php echo get_author_posts_url($this->user->ID); ?>";
+        $upload_success = isset(Polc_Settings_Manager::layout()["author"]["successful_upload_msg"]) ? Polc_Settings_Manager::layout()["author"]["successful_upload_msg"] : "";
+        ?>
+        <script type="text/javascript">
+
+            jQuery(document).ready(function () {
+                jQuery.event.trigger("polc_alert", {
+                    title: "<?= __( 'Successful upload', 'polc');?>",
+                    msg: "<?= $upload_success; ?>"
+                });
+
+                jQuery(document).on("plc_alert_closed", function () {
+                    location.href = "<?php echo get_author_posts_url($this->user->ID); ?>";
+                });
+            });
         </script>
         <?php
     }
@@ -239,7 +250,7 @@ class Polc_New_Story_Layout_Handler extends Polc_Layout_Handler_Base
 
         //If it's a single story let's set the post content
         if ($_REQUEST["content_type"] == "single"):
-            $args["post_content"] = strip_tags($_REQUEST["story_content"],'<h1><h2><b><i><p>');
+            $args["post_content"] = strip_tags($_REQUEST["story_content"], '<h1><h2><b><i><p>');
         endif;
 
         $this->insert_id = wp_insert_post($args);

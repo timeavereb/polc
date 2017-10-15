@@ -21,6 +21,7 @@ class Polc_Settings_Manager
     public static $layout;
     public static $genres;
     public static $categories;
+    public static $common;
 
     /**
      * Layout settings.
@@ -117,6 +118,15 @@ class Polc_Settings_Manager
         endif;
 
         return self::$categories;
+    }
+
+    public static function common(){
+
+        if (empty(self::$common)):
+            self::$common = get_option("polc-common-settings");
+        endif;
+
+        return self::$common;
     }
 
     /**

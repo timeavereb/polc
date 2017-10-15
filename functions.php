@@ -34,9 +34,6 @@ remove_action('wp_head', 'print_emoji_detection_script', 7);
 remove_action('admin_print_scripts', 'print_emoji_detection_script');
 
 
-add_action('admin_init', 'add_theme_caps');
-
-
 //nav menus
 register_nav_menus([
     'header-menu' => 'Header menu',
@@ -111,6 +108,29 @@ add_action("wp_head", "polc_setup_head");
  */
 function polc_setup_head()
 {
+    if (isset(Polc_Settings_Manager::common()["ga_id"])):
+        ?>
+        <!-- Google Analytics -->
+        <script type="text/javascript">
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                        (i[r].q = i[r].q || []).push(arguments)
+                    }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', '<?= Polc_Settings_Manager::common()["ga_id"]; ?>', 'auto');
+            ga('send', 'pageview');
+        </script>
+        <!-- End Google Analytics -->
+        <?php
+    endif;
+
     global $post;
 
     if (isset($post->post_type) && ($post->post_type == "story" || $post->post_type == "post")):
@@ -132,8 +152,8 @@ function polc_setup_head()
             $width = $featured_img[1];
             $height = $featured_img[2];
         endif;
-        ?>
 
+        ?>
         <!--g+ sdk-->
         <script src="https://apis.google.com/js/platform.js" async defer></script>
 
@@ -185,8 +205,8 @@ function add_theme_caps()
 {
     $admin = get_role("administrator");
     $recommendation_writer = get_role("polc_recommendation_writer");
-
     $content_censor = get_role("polc_content_censor");
+    $help_writer = get_role("polc_help_writer");
 
     $admin->add_cap("edit_story");
     $admin->add_cap("edit_stories");
@@ -213,6 +233,11 @@ function add_theme_caps()
     $recommendation_writer->add_cap("edit_post");
     $recommendation_writer->add_cap("edit_posts");
     $recommendation_writer->add_cap("upload_files");
+
+    $help_writer->add_cap("read");
+    $help_writer->add_cap("edit_post");
+    $help_writer->add_cap("edit_posts");
+    $help_writer->add_cap("upload_files");
 }
 
 add_filter('list_terms_exclusions', 'polc_category_exclusion', 10, 2);
@@ -225,14 +250,20 @@ add_filter('list_terms_exclusions', 'polc_category_exclusion', 10, 2);
  */
 function polc_category_exclusion($exclusions, $args)
 {
-    $current_user = wp_get_current_user();
-    $recommendation_writer = isset($current_user->roles[1]) && $current_user->roles[1] == "polc_recommendation_writer" ? true : false;
-    if ($recommendation_writer):
+    if (is_admin() && current_user_can("polc_recommendation_writer")):
         $recommend_cat = Polc_Settings_Manager::layout()["recommend"]["term_id"];
         if (isset($recommend_cat) && is_numeric($recommend_cat) && $recommend_cat > 0):
             $exclusions = " {$exclusions} AND t.term_id IN (" . $recommend_cat . ")";
         endif;
     endif;
+
+    if (is_admin() && current_user_can("polc_help_writer")):
+        $help_cat = Polc_Settings_Manager::categories()["help-category"];
+        if (isset($help_cat) && is_numeric($help_cat) && $help_cat > 0):
+            $exclusions = " {$exclusions} AND t.term_id IN (" . $help_cat . ")";
+        endif;
+    endif;
+
     return $exclusions;
 }
 
@@ -248,6 +279,9 @@ function polc_theme_setup()
 
     //Creating custom roles if they don't exist.
     add_role('polc_recommendation_writer', __('Recommendation Writer', 'polc'));
+    add_role('polc_help_writer', __('Help Writer', 'polc'));
     add_role('polc_content_censor', __('Content Censor', 'polc'));
     add_role('polc_frontend_user', __('Frontend User', 'polc'), ["read" => false]);
+
+    add_theme_caps();
 }

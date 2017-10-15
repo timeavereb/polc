@@ -214,16 +214,17 @@ class Polc_Header
             </div>
             <?php
 
-            foreach (wp_get_nav_menu_items('polc-main-menu',
-                [
-                    'order' => 'ASC',
-                    'orderby' => 'menu_order',
-                    'post_type' => 'nav_menu_item',
-                    'post_status' => 'publish',
-                    'output' => ARRAY_A,
-                    'output_key' => 'menu_order',
-                    'nopaging' => true
-                ]) as $menu_element):
+            $menu = wp_get_nav_menu_items('polc-main-menu', [
+                'order' => 'ASC',
+                'orderby' => 'menu_order',
+                'post_type' => 'nav_menu_item',
+                'post_status' => 'publish',
+                'output' => ARRAY_A,
+                'output_key' => 'menu_order',
+                'nopaging' => true
+            ]);
+
+            foreach ($menu as $menu_element):
                 ?>
                 <a href="<?= $menu_element->url; ?>"
                    class="plc_navigation_item_wrapper <?= sanitize_title($menu_element->title); ?>">

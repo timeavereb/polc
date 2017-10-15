@@ -40,9 +40,14 @@ class Polc_Story_Post_Type
     /**
      * @param $post_id
      * @param $post
+     * @return bool|void
      */
     public function save($post_id, $post)
     {
+        if ($post->post_type != "story"):
+            return;
+        endif;
+
         if (!is_admin() || (isset($post->post_status) && 'auto-draft' == $post->post_status)):
             return;
         endif;
@@ -52,7 +57,11 @@ class Polc_Story_Post_Type
         if (isset($_REQUEST["parent_id"]) && $_REQUEST["parent_id"] != ""):
             $id = $_REQUEST["parent_id"];
         else:
-            $id = $_REQUEST["post_ID"];
+            $id = isset($_REQUEST["post_ID"]) && is_numeric($_REQUEST["post_ID"]) ? $_REQUEST["post_ID"] : false;
+        endif;
+
+        if (!$id):
+            return false;
         endif;
 
         foreach ($keys as $key => $value):
@@ -183,7 +192,7 @@ class Polc_Story_Post_Type
                 ?>
                 <tr>
                     <td>
-                        <?= __('Content was last modofied by :'); ?>
+                        <?= __('Content was last modified by :'); ?>
                     </td>
                     <td>
                         <?php the_modified_author(); ?>

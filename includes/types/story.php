@@ -192,7 +192,7 @@ class Polc_Story_Post_Type
                 ?>
                 <tr>
                     <td>
-                        <?= __('Content was last modofied by :'); ?>
+                        <?= __('Content was last modified by :'); ?>
                     </td>
                     <td>
                         <?php the_modified_author(); ?>

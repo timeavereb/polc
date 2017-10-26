@@ -274,6 +274,7 @@ class Polc_Story_Content_Module
         $options->id = $post->ID;
         $options->number = 5;
         $options->parent = 0;
+        $options->author = $post->post_author;
 
         return $options;
     }

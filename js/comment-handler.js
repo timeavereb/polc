@@ -23,7 +23,8 @@ function polc_comment_handler(params) {
                 params: {
                     post_id: settings.id,
                     number: settings.number,
-                    parent : settings.parent
+                    parent : settings.parent,
+                    author: settings.author
                 }
             },
             success: function (response) {

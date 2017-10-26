@@ -78,6 +78,7 @@ class Polc_Comment_List_Layout_Handler extends Polc_Layout_Handler_Base
     {
         $options = new stdClass();
         $options->id = $this->post->ID;
+        $options->author = $this->post->post_author;
 
         return $options;
     }

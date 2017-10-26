@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Polc\n"
-"POT-Creation-Date: 2017-10-15 14:40+0200\n"
-"PO-Revision-Date: 2017-10-15 14:42+0200\n"
+"POT-Creation-Date: 2017-10-26 22:43+0200\n"
+"PO-Revision-Date: 2017-10-26 22:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu_HU\n"
@@ -20,152 +20,160 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: author.php:108
+#: author.php:109 author.php:126
 msgid "My contents"
 msgstr "Tartalmaim"
 
-#: author.php:111
+#: author.php:113
 msgid "Favorited by"
 msgstr "Kedvenchez adott"
 
-#: author.php:114
+#: author.php:117
 msgid "Favorited Authors"
 msgstr "Kedvenc szerzők"
 
-#: author.php:117
+#: author.php:120
 msgid "Favorited Contents"
 msgstr "Kedvenc tartalmak"
 
-#: author.php:120
+#: author.php:123
 msgid "Data change"
 msgstr "Adatmódosítás"
 
-#: author.php:126
+#: author.php:133
 msgid "Add new volume"
 msgstr "Új tartalom hozzáadása"
 
-#: author.php:143
+#: author.php:150
 msgid "Email (can't be modified)"
 msgstr "Email cím (nem módosítható)"
 
-#: author.php:149
+#: author.php:156
 msgid "Username (can't be modified)"
 msgstr "Felhasználónév (nem módosítható)"
 
-#: author.php:155
+#: author.php:162
 msgid "Name"
 msgstr "Név"
 
-#: author.php:161
+#: author.php:168
 msgid "Webpage"
 msgstr "Weboldal"
 
-#: author.php:167
+#: author.php:174
 msgid "Date of birth"
 msgstr "Születési dátum"
 
-#: author.php:177
+#: author.php:184
 msgid "Old password"
 msgstr "Régi jelszó"
 
-#: author.php:182
+#: author.php:189
 msgid "New password"
 msgstr "Új jelszó"
 
-#: author.php:187
+#: author.php:194
 msgid "New password confirmation"
 msgstr "Új jelszó újra"
 
-#: author.php:192 layout-handlers/content-editor-layout-handler.php:133
+#: author.php:199 layout-handlers/content-editor-layout-handler.php:133
 #: layout-handlers/content-editor-layout-handler.php:184
 msgid "Save"
 msgstr "Mentés"
 
-#: author.php:249
+#: author.php:219
+msgid "You didn't upload any content yet!"
+msgstr "Nincs feltöltött tartalom!"
+
+#: author.php:266
 msgid "You didn't add any author as favorite."
 msgstr "Még nem adtál egyetlen szerzőt sem a kedvenceid közé."
 
-#: author.php:269
+#: author.php:286
 msgid "You didn't add any content as favorite."
 msgstr "Még nem adtál egyetlen tartalmat sem a kedvenceid közé."
 
-#: author.php:290
+#: author.php:307
 msgid "Change profile picture"
 msgstr "Profilkép feltöltése"
 
-#: author.php:304
+#: author.php:321
 msgid "people's  favourite author"
 msgstr "kedvenc szerzője"
 
-#: author.php:309
+#: author.php:326
 msgid "stories"
 msgstr "történet"
 
-#: author.php:313
+#: author.php:330
 msgid "followers"
 msgstr "követő"
 
-#: author.php:325 includes/modules/favorite-subscribe-module.php:50
+#: author.php:342 includes/modules/favorite-subscribe-module.php:50
 msgid "Remove author from favorites"
 msgstr "Szerző törlése a kedvencekből"
 
-#: author.php:327 includes/modules/favorite-subscribe-module.php:49
+#: author.php:344 includes/modules/favorite-subscribe-module.php:49
 msgid "Add author to favorites"
 msgstr "Szerző kedvencekhez adása"
 
-#: author.php:391
+#: author.php:408
 msgid "Genre and category selections"
 msgstr "Műfaj és kategória választása"
 
-#: author.php:396
+#: author.php:413
 msgid "Type"
 msgstr "Típus"
 
-#: author.php:398
+#: author.php:415
 msgid "Single"
 msgstr "Egyrészes"
 
-#: author.php:399
+#: author.php:416
 msgid "Sequels"
 msgstr "Folytatásos"
 
-#: author.php:404
+#: author.php:421
 msgid "Category"
 msgstr "Kategória"
 
-#: author.php:411 search.php:86
+#: author.php:428 search.php:86
 msgid "Choose category"
 msgstr "Válasz kategóriát"
 
-#: author.php:421
+#: author.php:438
 msgid "Sub-category"
 msgstr "Alkategória"
 
-#: author.php:428
+#: author.php:445
 msgid "Choose subcategory"
 msgstr "Válassz alkategóriát"
 
-#: author.php:437 includes/taxonomies/genre.php:21
+#: author.php:454 includes/taxonomies/genre.php:21
 msgid "Genre"
 msgstr "Műfaj"
 
-#: author.php:443 search.php:104
+#: author.php:460 search.php:104
 msgid "Choose genre"
 msgstr "Válassz műfajt"
 
-#: functions.php:76
+#: functions.php:73
 msgid "author-slug"
 msgstr "szerzo"
 
-#: functions.php:250
+#: functions.php:281
 msgid "Recommendation Writer"
 msgstr "Ajánló író"
 
-#: functions.php:251
+#: functions.php:282
+msgid "Help Writer"
+msgstr "Segítség író"
+
+#: functions.php:283
 msgid "Content Censor"
 msgstr "Tartalom lektor"
 
-#: functions.php:252
+#: functions.php:284
 msgid "Frontend User"
 msgstr "Frontend felhasználó"
 
@@ -254,7 +262,7 @@ msgstr "Üdvözlünk"
 msgid "My profile"
 msgstr "Profilom"
 
-#: header.php:244
+#: header.php:245
 msgid ""
 "Forgot your password? Enter the email address or username to retrieve your "
 "account"
@@ -328,135 +336,148 @@ msgstr "Tárgy"
 
 #: includes/admin/pages/polc-email-settings-page.php:116
 #: includes/admin/pages/polc-email-settings-page.php:176
-#: includes/types/story.php:202 includes/types/story.php:203
+#: includes/types/story.php:211 includes/types/story.php:212
 msgid "Content"
 msgstr "Tartalom"
 
 #: includes/admin/pages/polc-email-settings-page.php:142
 msgid "User's display name"
-msgstr ""
+msgstr "Felhasználó frontend neve"
 
 #: includes/admin/pages/polc-email-settings-page.php:146
 msgid "Password-reset url"
 msgstr "Jelszó visszaállító link"
 
-#: includes/admin/pages/polc-layout-settings.php:33
+#: includes/admin/pages/polc-layout-settings.php:34
 #: includes/admin/pages/polc-main-settings-page.php:45
 msgid "Layout settings"
 msgstr "Layout beállítások"
 
-#: includes/admin/pages/polc-layout-settings.php:55
+#: includes/admin/pages/polc-layout-settings.php:56
 msgid "Main page"
 msgstr "Főoldal"
 
-#: includes/admin/pages/polc-layout-settings.php:59
+#: includes/admin/pages/polc-layout-settings.php:60
 msgid "Author page"
 msgstr "Szerző oldala"
 
-#: includes/admin/pages/polc-layout-settings.php:63
+#: includes/admin/pages/polc-layout-settings.php:64
 msgid "Top-lists page"
 msgstr "Sikerlisták oldal"
 
-#: includes/admin/pages/polc-layout-settings.php:73
+#: includes/admin/pages/polc-layout-settings.php:74
 msgid "Number of stroies"
 msgstr "Történetek száma"
 
-#: includes/admin/pages/polc-layout-settings.php:79
+#: includes/admin/pages/polc-layout-settings.php:80
 msgid "No category selected"
 msgstr "Nincs kategória kiválasztva"
 
-#: includes/admin/pages/polc-layout-settings.php:91
+#: includes/admin/pages/polc-layout-settings.php:92
 msgid "Number of news"
 msgstr "Hírek száma"
 
-#: includes/admin/pages/polc-layout-settings.php:95
+#: includes/admin/pages/polc-layout-settings.php:96
 msgid "News category"
 msgstr "Hírek kategória"
 
-#: includes/admin/pages/polc-layout-settings.php:103
+#: includes/admin/pages/polc-layout-settings.php:104
 msgid "Number of recommendation"
 msgstr "Ajánlók száma"
 
-#: includes/admin/pages/polc-layout-settings.php:110
+#: includes/admin/pages/polc-layout-settings.php:111
 msgid "Recommendation category"
 msgstr "Ajánlók kategória"
 
-#: includes/admin/pages/polc-layout-settings.php:127
+#: includes/admin/pages/polc-layout-settings.php:120
+msgid "Successful content upload message"
+msgstr "Sikeres tartalom feltöltés üzenet"
+
+#: includes/admin/pages/polc-layout-settings.php:129
 msgid "Favorite authors limit"
 msgstr "Kedvenc szerzők limit"
 
-#: includes/admin/pages/polc-layout-settings.php:131
+#: includes/admin/pages/polc-layout-settings.php:133
 msgid "Top commenters limit"
 msgstr "Legaktívabb kommentelők limit"
 
-#: includes/admin/pages/polc-layout-settings.php:135
+#: includes/admin/pages/polc-layout-settings.php:137
 msgid "Favorite stories limit"
 msgstr "Kedvenc történetek limit"
 
-#: includes/admin/pages/polc-layout-settings.php:139
+#: includes/admin/pages/polc-layout-settings.php:141
 msgid "Most viewed stories"
 msgstr "Legolvasottabb történetek"
 
-#: includes/admin/pages/polc-layout-settings.php:146
+#: includes/admin/pages/polc-layout-settings.php:148
 msgid "Top-lists cache"
 msgstr "Sikerlisták cache"
 
-#: includes/admin/pages/polc-layout-settings.php:150
+#: includes/admin/pages/polc-layout-settings.php:152
 msgid "Top-lists cache time in seconds"
 msgstr "Toplisták cache limit másodpercben"
 
 #: includes/admin/pages/polc-main-settings-page.php:35
-#: includes/admin/pages/polc-main-settings-page.php:82
+#: includes/admin/pages/polc-main-settings-page.php:83
 msgid "Main settings"
 msgstr "Főbeállítások"
 
-#: includes/admin/pages/polc-main-settings-page.php:85
+#: includes/admin/pages/polc-main-settings-page.php:86
 msgid "Story content main category"
 msgstr "Tartalom főkategória"
 
-#: includes/admin/pages/polc-main-settings-page.php:90
-#: includes/admin/pages/polc-main-settings-page.php:105
-#: includes/admin/pages/polc-main-settings-page.php:120
-#: includes/admin/pages/polc-main-settings-page.php:133
-#: includes/admin/pages/polc-main-settings-page.php:146
-#: includes/admin/pages/polc-main-settings-page.php:159
-#: includes/admin/pages/polc-main-settings-page.php:172
-#: includes/admin/pages/polc-main-settings-page.php:185
-#: includes/admin/pages/polc-main-settings-page.php:198
+#: includes/admin/pages/polc-main-settings-page.php:91
+#: includes/admin/pages/polc-main-settings-page.php:106
+#: includes/admin/pages/polc-main-settings-page.php:121
+#: includes/admin/pages/polc-main-settings-page.php:136
+#: includes/admin/pages/polc-main-settings-page.php:149
+#: includes/admin/pages/polc-main-settings-page.php:162
+#: includes/admin/pages/polc-main-settings-page.php:175
+#: includes/admin/pages/polc-main-settings-page.php:188
+#: includes/admin/pages/polc-main-settings-page.php:201
+#: includes/admin/pages/polc-main-settings-page.php:214
 msgid "None selected"
 msgstr "Nincs kiválasztva"
 
-#: includes/admin/pages/polc-main-settings-page.php:100
+#: includes/admin/pages/polc-main-settings-page.php:101
 msgid "Story content sub-category"
 msgstr "Tartalom alkategória"
 
-#: includes/admin/pages/polc-main-settings-page.php:115
+#: includes/admin/pages/polc-main-settings-page.php:116
+msgid "Help category"
+msgstr "Segítség kategória"
+
+#: includes/admin/pages/polc-main-settings-page.php:131
 msgid "New story content page"
 msgstr "Új tartalom oldal"
 
-#: includes/admin/pages/polc-main-settings-page.php:128
+#: includes/admin/pages/polc-main-settings-page.php:144
 msgid "Comment list page"
 msgstr "Kommentek lista oldal"
 
-#: includes/admin/pages/polc-main-settings-page.php:141
+#: includes/admin/pages/polc-main-settings-page.php:157
 msgid "Content editor page"
 msgstr "Tartalom szerkesztő oldal"
 
-#: includes/admin/pages/polc-main-settings-page.php:154
+#: includes/admin/pages/polc-main-settings-page.php:170
 msgid "Activation page"
 msgstr "Aktivációs oldal"
 
-#: includes/admin/pages/polc-main-settings-page.php:167
+#: includes/admin/pages/polc-main-settings-page.php:183
 msgid "Password-reset page"
 msgstr "Jelszó visszaállítás oldal"
 
-#: includes/admin/pages/polc-main-settings-page.php:180
+#: includes/admin/pages/polc-main-settings-page.php:196
 msgid "News list page"
 msgstr "Hírek listaoldal."
 
-#: includes/admin/pages/polc-main-settings-page.php:193
+#: includes/admin/pages/polc-main-settings-page.php:209
 msgid "Recommendation list page"
 msgstr "Ajánló lista oldal"
+
+#: includes/admin/pages/polc-main-settings-page.php:222
+msgid "Google analytics tracking ID"
+msgstr ""
 
 #: includes/modules/comment-module.php:15
 #: includes/modules/comment-module.php:38
@@ -468,19 +489,19 @@ msgstr "Érvénytelen művelet!"
 msgid "Empty comment!"
 msgstr "Üres komment!"
 
-#: includes/modules/comment-module.php:117
+#: includes/modules/comment-module.php:118
 msgid "wrote at"
 msgstr "írta"
 
-#: includes/modules/comment-module.php:122
+#: includes/modules/comment-module.php:123
 msgid "Reply"
 msgstr "Válasz"
 
-#: includes/modules/comment-module.php:125
+#: includes/modules/comment-module.php:126
 msgid "Write your reply.."
 msgstr "Szólj hozzá..."
 
-#: includes/modules/comment-module.php:138
+#: includes/modules/comment-module.php:139
 msgid "All comments"
 msgstr "Minden komment"
 
@@ -532,23 +553,23 @@ msgstr "Figyelmeztetések"
 
 #: includes/modules/editor-helper-module.php:52
 #: includes/modules/helper-module.php:78 includes/modules/helper-module.php:203
-#: includes/types/story.php:119
+#: includes/types/story.php:128
 msgid "Obscene content"
 msgstr "Obszcén tartalom"
 
 #: includes/modules/editor-helper-module.php:60
 #: includes/modules/helper-module.php:79 includes/modules/helper-module.php:204
-#: includes/types/story.php:123
+#: includes/types/story.php:132
 msgid "Violent content"
 msgstr "Erőszakos tartalom"
 
 #: includes/modules/editor-helper-module.php:68
 #: includes/modules/helper-module.php:80 includes/modules/helper-module.php:205
-#: includes/types/story.php:127
+#: includes/types/story.php:136
 msgid "Erotic content"
 msgstr "Erotikus tartalom"
 
-#: includes/modules/editor-helper-module.php:83 includes/types/story.php:131
+#: includes/modules/editor-helper-module.php:83 includes/types/story.php:140
 msgid "Age limit"
 msgstr "Korhatár"
 
@@ -560,7 +581,7 @@ msgstr "Nincs korhtár"
 msgid "Restrictions"
 msgstr "Korlátozások"
 
-#: includes/modules/editor-helper-module.php:140 includes/types/story.php:135
+#: includes/modules/editor-helper-module.php:140 includes/types/story.php:144
 msgid "Content only for registered users"
 msgstr "Csak regisztráltaknak elérhető tartalom"
 
@@ -570,7 +591,7 @@ msgstr ""
 "Figyelem! A 18-as korhatár besorolásba eső történetek, automatikusan csak "
 "bejelentkezett felhasználóknak elérhető."
 
-#: includes/modules/editor-helper-module.php:158 includes/types/story.php:139
+#: includes/modules/editor-helper-module.php:158 includes/types/story.php:148
 msgid "Author's comment"
 msgstr "Szerző megjegyzése"
 
@@ -599,7 +620,7 @@ msgstr "Fejezet címe"
 msgid "Volume title"
 msgstr "Főcím"
 
-#: includes/modules/editor-helper-module.php:250 includes/types/story.php:115
+#: includes/modules/editor-helper-module.php:250 includes/types/story.php:124
 msgid "Volume sub-title"
 msgstr "Alcím"
 
@@ -850,55 +871,55 @@ msgstr "Műfaj lista navigáció"
 msgid "Volume details"
 msgstr "Tartalom adatai"
 
-#: includes/types/story.php:95
+#: includes/types/story.php:104
 msgid "(no parent)"
 msgstr "(nincs szülő)"
 
-#: includes/types/story.php:186
-msgid "Content was last modofied by :"
-msgstr "Utoljára módosítva:"
+#: includes/types/story.php:195
+msgid "Content was last modified by :"
+msgstr "Utoljára szerekesztve:"
 
-#: includes/types/story.php:204 includes/types/story.php:205
+#: includes/types/story.php:213 includes/types/story.php:214
 msgid "Contents"
 msgstr "Tartalmak"
 
-#: includes/types/story.php:206
+#: includes/types/story.php:215
 msgid "Add New"
 msgstr "Új hozzáadása"
 
-#: includes/types/story.php:207
+#: includes/types/story.php:216
 msgid "Add New Item"
 msgstr "Új tartalom hozzáadása"
 
-#: includes/types/story.php:208
+#: includes/types/story.php:217
 msgid "New Item"
 msgstr "Új elem"
 
-#: includes/types/story.php:209
+#: includes/types/story.php:218
 msgid "Content Edit"
 msgstr "Tartalom szerkesztése"
 
-#: includes/types/story.php:210
+#: includes/types/story.php:219
 msgid "View Content"
 msgstr "Tartalom megtekintése"
 
-#: includes/types/story.php:211
+#: includes/types/story.php:220
 msgid "All Content"
 msgstr "Összes tartalom"
 
-#: includes/types/story.php:212
+#: includes/types/story.php:221
 msgid "Search Content"
 msgstr "Tartalom keresése"
 
-#: includes/types/story.php:214
+#: includes/types/story.php:223
 msgid "Content Not Found"
 msgstr "Nem található tartalom"
 
-#: includes/types/story.php:215
+#: includes/types/story.php:224
 msgid "Content Not Found In Trash"
 msgstr "Nem található tartalom a lomtárban"
 
-#: includes/types/story.php:226
+#: includes/types/story.php:235
 msgid "content-slug"
 msgstr "tartalom"
 
@@ -969,6 +990,10 @@ msgstr "Fejezet adatai"
 #: layout-handlers/new-story-layout-handler.php:196
 msgid "Error while uploading!"
 msgstr "Hiba történt a feltöltés közben!"
+
+#: layout-handlers/new-story-layout-handler.php:214
+msgid "Successful upload"
+msgstr "Sikeres feltöltés!"
 
 #: layout-handlers/password-reset-layout-handler.php:39
 msgid "Ok"
@@ -1053,6 +1078,9 @@ msgstr "polc.eu"
 #. Author URI of the plugin/theme
 msgid "http://polc.eu"
 msgstr "http://polc.eu"
+
+#~ msgid "Content was last modofied by :"
+#~ msgstr "Utoljára módosítva:"
 
 #~ msgid "Are you sure you want to delete this chapter?"
 #~ msgstr "Biztosan törölni szeretnéd ezt a fejezetet?"

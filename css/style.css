@@ -133,6 +133,7 @@ html, body {height: 100%;background-color: #f8f8f6;}
     display: block;
     width: 100%;
     float: left;
+    line-height: 25px;
 }
 .plc_navigation_item a{
     border-bottom: solid 1px rgba(255,255,255,0.2);
@@ -163,6 +164,7 @@ html, body {height: 100%;background-color: #f8f8f6;}
     float: left;
     border: none;
     padding: 15px 0;
+    line-height: 25px;
 }
 .plc_navigation_item:before, .login:before, .signup:before,.logout:before,ul.plc_user_menu a:before {
     content: '';
@@ -674,6 +676,15 @@ h2.articleAuthor{
     float: left;
     margin-top: 10px;
 }
+span.plcEmptyContent {
+    display: block;
+    background-color: white;
+    padding: 20px;
+    width: 100%;
+    float: left;
+    font-size: 15px;
+    border: solid 1px #e4e2e2;
+}
 .plcProfileTabMenu button,
 .plcProfileTabMenu button:focus{
     border: solid 1px #fb5c43;
@@ -774,6 +785,9 @@ h2.articleAuthor{
     float: right;
     outline:none;
 }
+#plc_register_btn, #plc_register_btn:focus{
+    float:none;
+}
 #plcUserDataSaveBtn:hover,
 #plc_login_btn:hover,
 #plc_register_btn:hover,
@@ -856,6 +870,7 @@ h2.articleAuthor{
 .plc_profile_wrapper{
     width:80%;
     margin:0 auto;
+    min-height: 100%;
 }
 .plcDataChangeElement {
     width: 100%;
@@ -888,7 +903,7 @@ h2.articleAuthor{
     width:75%;
 }
 .plcProfileRight{
-    float:left;
+    float:right;
     width:25%;
 }
 .plcUserInformation{
@@ -906,6 +921,7 @@ h2.articleAuthor{
     position:relative;
     overflow: hidden;
     background-size: cover;
+    border: solid 1px #e4e2e2;
 }
 .admin .plcUserImage:hover .changeImage{
     opacity:1;
@@ -1120,15 +1136,47 @@ ul.plc_user_menu a{
 .plcUserFavoriteElement a {
     color: #fb5c43;
 }
-.plcContentViews span:before {
+.favoriteBtnWrapper span#plcFavoriteBtn:before,
+.plcContentViews span:before{
     width: 20px;
     height: 20px;
     content: '';
     display: block;
     float: left;
-    background-image: url('../img/settings/eye.svg');
     background-size: 20px 20px;
     margin-right: 5px;
+}
+.favoriteBtnWrapper span#plcFavoriteBtn:before{
+    background-size: 25px 25px;
+    width: 25px;
+    height: 25px;
+}
+.plcContentViews span:before {
+      background-image: url('../img/settings/eye.svg');
+}
+.nightstyle .plcContentViews span:before{
+    background-image: url('../img/settings/eye_grey.svg');
+}
+.favoriteBtnWrapper span#plcFavoriteBtn:before{
+    background-image: url('../img/settings/add_favourite_star.svg');
+    opacity:0.5;
+}
+.nightstyle .favoriteBtnWrapper span#plcFavoriteBtn:before{
+    background-image: url('../img/settings/add_favourite_star_grey.svg');
+}
+.favoriteBtnWrapper #plcFavoriteBtn.favorited:before,
+.nightstyle .favoriteBtnWrapper #plcFavoriteBtn.favorited:before{
+    background-image: url('../img/settings/remove_favourite_star.svg');
+    opacity:1;
+}
+.favoriteBtnWrapper span {
+    cursor: pointer;
+    font-size: 13px;
+    width: 25px;
+    overflow: hidden;
+    display: block;
+    height: 25px;
+    color: transparent;
 }
 .plcContentViews span {
     line-height: 20px;
@@ -1142,6 +1190,10 @@ ul.plc_user_menu a{
     float: right;
     opacity: 0.5;
     margin-left: 10px;
+    padding: 3px 0;
+}
+.nightstyle .plcContentViews {
+    color: #9b9b9b;
 }
 .favoriteBtnWrapper {
     float: right;
@@ -1841,6 +1893,11 @@ ul.plc_user_menu a{
 .plcToplistsWrapper{
     max-width:90%;
     margin:0 auto;
+    min-height: 100%;
+    margin-bottom: -25px;
+}
+.toplistsItem h2 {
+    line-height: 25px;
 }
 .toplistsItem {
     width: 50%;
@@ -2616,7 +2673,22 @@ h2.articleAuthor {
     margin: 15px 0;
 }
 /*HELP END*/
-
+/**/
+.plcSuccessNotification {
+    min-height: 100%;
+    margin-bottom: -95px;
+    text-align: center;
+    padding: 40px 0 0 0;
+    width: 100%;
+    float: left;
+    font-size: 20px;
+}
+/**/
+.plcTagSearchWrapper {
+    width: 90%;
+    margin: 0 auto 0 auto;
+    min-height: 100%;
+}
 /*RESPONSIVE BREAKPOINTS*/
 @media all and (max-width: 1600px){
 }

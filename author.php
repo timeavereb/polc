@@ -32,11 +32,12 @@ class Polc_Author
             $this->can_edit = Polc_Header::current_user()->ID == $this->author->ID ? true : false;
         endif;
 
-        $avatar = get_user_meta($this->author->ID, "polc_current_avatar");
+        $avatar = get_user_meta($this->author->ID, "polc_current_avatar", true);
         $this->favorited_by = $this->favorited_by = (array)Polc_Favorite_Helper_Module::get_favorite_users($this->author->ID, "users");
         $this->user_favorite_cnt = count($this->favorited_by);
 
-        $this->avatar = !empty($avatar) ? $avatar[0]["src"] : "";
+        $this->avatar = isset($avatar["src"]) && $avatar["src"] != "" ? $avatar["src"] : PLC_THEME_PATH . "/img/settings/default_profile_image.png";
+
         wp_enqueue_script("author-handler", PLC_THEME_PATH . '/js/author-handler.js');
         wp_enqueue_script('jquery-ui-datepicker');
         ?>

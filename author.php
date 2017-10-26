@@ -104,8 +104,10 @@ class Polc_Author
             <?php if ($this->can_edit): ?>
 
                 <div class="plcProfileTabMenu">
-                    <button id="section_1_btn" class="section_btn active my_content_btn"
-                            onclick="polc_header_handler.change_section(1);"><?= __('My contents', 'polc'); ?></button>
+                    <?php if (count($this->user_stories) > 0): ?>
+                        <button id="section_1_btn" class="section_btn active my_content_btn"
+                                onclick="polc_header_handler.change_section(1);"><?= __('My contents', 'polc'); ?></button>
+                    <?php endif; ?>
                     <?php if ($this->user_favorite_cnt > 0): ?>
                         <button id="section_2_btn" class="section_btn favorited_by_btn"
                                 onclick="polc_header_handler.change_section(2);"><?= __('Favorited by', 'polc'); ?></button>
@@ -119,6 +121,10 @@ class Polc_Author
 
                     <button id="section_5_btn" class="section_btn datachange_btn"
                             onclick="polc_header_handler.change_section(5);"><?= __('Data change', 'polc'); ?></button>
+                    <?php if (count($this->user_stories) == 0): ?>
+                        <button id="section_1_btn" class="section_btn active my_content_btn"
+                                onclick="polc_header_handler.change_section(1);"><?= __('My contents', 'polc'); ?></button>
+                    <?php endif; ?>
                 </div>
 
                 <div class="addStoryWrapper">
@@ -204,7 +210,17 @@ class Polc_Author
         ?>
         <div class="plcProfileLeft section" id="section_1">
             <div class="plcUserStories">
-                <?php Polc_Helper_Module::simple_list($this->user_stories, true); ?>
+                <?php
+                if (count($this->user_stories) > 0):
+                    Polc_Helper_Module::simple_list($this->user_stories, true);
+                else:
+                    ?>
+                    <span class="plcEmptyContent">
+                        <?= __("You didn't upload any content yet!", "polc"); ?>
+                    </span>
+                    <?php
+                endif;
+                ?>
             </div>
         </div>
         <?php

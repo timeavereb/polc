@@ -7,5 +7,11 @@
  */
 
 get_header();
-Polc_Get_Module::search_by_tag(true);
+?>
+    <div class="plcTagSearchWrapper">
+        <?php
+        Polc_Get_Module::search_by_tag(true);
+        ?>
+    </div>
+<?php
 get_footer();

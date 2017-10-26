@@ -54,7 +54,7 @@ class Polc_Comment_Module
             $more_link = get_permalink(Polc_Settings_Manager::pages()["comment_page"]) . get_post($args["post_id"])->post_name . "/";
         endif;
 
-        $this->draw_comments(get_comments($args), $more, $more_link);
+        $this->draw_comments(get_comments($args), $more, $more_link, $args["author"]);
     }
 
     /**
@@ -84,8 +84,9 @@ class Polc_Comment_Module
      * @param $comments
      * @param bool|false $more
      * @param string $more_link
+     * @param int $author_id
      */
-    private function draw_comments($comments, $more = false, $more_link = "")
+    private function draw_comments($comments, $more = false, $more_link = "", $author_id = 0)
     {
         $logged = is_user_logged_in();
         $authors = [];
@@ -111,7 +112,7 @@ class Polc_Comment_Module
             endif;
 
             ?>
-            <div class="plcCommentWrapper <?= $child; ?>">
+            <div class="plcCommentWrapper<?= $author_id == $comment->user_id ? " author_comment " : ""; ?> <?= $child; ?>">
                 <span class="plcCommentContent"><?= $comment->comment_content; ?></span>
                 <a href="<?= get_author_posts_url($comment->user_id) ?>"><?= $authors[$comment->user_id]; ?></a>
                 <span><?= __('wrote at', 'polc') . ' ' . mysql2date('Y F j', strtotime($comment->comment_date)); ?></span>

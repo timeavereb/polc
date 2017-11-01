@@ -36,8 +36,9 @@ class Polc_Story_Content_Module
         $chapter_args = [
             "post_type" => "story",
             "posts_per_page" => -1,
-            "orderby" => "date",
-            "order" => "asc"
+            "orderby" => "ID",
+            "order" => "ASC",
+            "post_status" => "publish"
         ];
 
         if ($this->post->post_parent != 0):
@@ -172,9 +173,11 @@ class Polc_Story_Content_Module
                         <h3><?= $this->post->post_title; ?></h3>
                         <?php
                     endif;
+
+                    $date = mysql2date("Y F j", $this->post->post_date);
                     ?>
-                    <time pubdate datetime="2017-04-19"
-                          title="April 19th, 2017"><?= mysql2date("Y F j", strtotime($this->post->post_date)); ?></time>
+                    <time datetime="<?= date("Y-m-d", strtotime($this->post->post_date)); ?>" pubdate="pubdate"
+                          title="<?= $date;?>"><?= $date; ?></time>
                     <p>
                         <?php
                         if ($this->post->post_parent == 0):

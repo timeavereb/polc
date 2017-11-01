@@ -70,7 +70,7 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
             $keys = array_merge($keys, $volume_metas);
         endif;
 
-        $this->child_contents = get_children(["post_parent" => $this->post->ID, "post_type" => "story"]);
+        $this->child_contents = get_children(["post_parent" => $this->post->ID, "post_type" => "story", "post_status" => "publish", "orderby" => "ID", "order" => "ASC"]);
         $this->has_child = count($this->child_contents) > 0 ? true : false;
         $this->tags = wp_get_post_tags($this->post->ID, ["fields" => "names"]);
 

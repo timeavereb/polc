@@ -25,6 +25,22 @@ class Polc_Index_Layout_Handler extends Polc_Layout_Handler_Base
     {
         $this->layout_settings = Polc_Settings_Manager::layout();
         ?>
+		<div class="primePartWrapper">
+            <div class="innerContainer">
+				<div class="textPart">
+					 <h1>Üdvözlünk a Polcon!</h1>
+                    <h2>Csatlakozz olvasást kedvelő közösségünkhöz! Légy tagja egy olyan csapatnak, ahol akár íróként is kipróbálhatod magad.
+                        Regisztrálj és tedd fel a polcra te is saját történeted, vagy csak böngészd másokét, akár tableteden vagy mobilodon is.
+						Olvasó felületünket személyre szabhatod, hogy minden helyzetben kényelmesen ugorhass kedvenc történetedbe.</h2>
+				</div>
+				<div class="imagePart">
+					<div class="innerImage">
+					</div>
+				</div>
+
+            </div>
+        </div>
+		
         <div class="plcNewStoriesWrapper">
 
             <div class="plcLatestStoriesWrapper">

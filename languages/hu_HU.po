@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Polc\n"
 "POT-Creation-Date: 2017-10-26 22:43+0200\n"
-"PO-Revision-Date: 2017-10-26 22:44+0200\n"
+"PO-Revision-Date: 2017-10-26 23:02+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu_HU\n"
@@ -228,7 +228,7 @@ msgstr "Felhasználónév vagy email cím"
 
 #: header.php:155
 msgid "Forgot your password?"
-msgstr "Elfelejtetted a jelészavad?"
+msgstr "Elfelejtetted a jelszavad?"
 
 #: header.php:158
 msgid "Sign In"

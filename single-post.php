@@ -42,7 +42,7 @@ $news = get_posts($args);
             <section class="left">
                 <div class="socialElements">
                 </div>
-                <div class="plc_story_content_settings">
+                <!--<div class="plc_story_content_settings">
                     <div class="plc_text_settings">
                         <span class="plc_text_contrast day"></span>
                         <span class="text_alignment left"></span>
@@ -66,7 +66,7 @@ $news = get_posts($args);
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>-->
                 <article>
                     <p class="newsLead"><?= $post->post_excerpt; ?></p>
                    <?php

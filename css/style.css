@@ -254,16 +254,45 @@ html, body {height: 100%;background-color: #f8f8f6;}
 footer {
     width: 100%;
     float: left;
-	height:25px;
+    background-color: #444446;
 }
 .cpright {
     font-size: 10px;
     text-align: center;
 	line-height:25px;
     color: white;
-    background-color: #2d2d2d;
+    background-color: #2e2e2f;
 }
-
+.plc_footer_navigation_item {
+    font-size: 13px;
+    color: #929292;
+    display: inline-block;
+    padding: 15px 5px;
+}
+.footer_menu_container {
+    margin: 0 auto;
+    width: auto;
+    display: table;
+}
+.plc_footer_navigation_item:after {
+    content: '|';
+    display: inline-block;
+    padding-left: 10px;
+}
+.footer_menu_container a:last-of-type .plc_footer_navigation_item:after{
+    display:none;
+}
+.socialBlock .email {
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    color: #929292;
+    font-size: 13px;
+    padding-top: 10px;
+}
+span.email strong {
+    color: #c3c3c3;
+}
 /*POLC FOOTER*/
 
 /*CONTENT WRAPPER*/
@@ -2895,6 +2924,8 @@ h2.articleAuthor {
     .listInnerWrapper .articleDatas h1 {font-size: 16px;}
     .articleDatas .lead{font-size:14px;}
     .listInnerWrapper article{padding:10px;}
+    .plc_footer_navigation_item{display:block;width:100%;text-align: center;}
+    .plc_footer_navigation_item:after{display:none;}
 }
 @media all and (max-width: 375px) {
     .agelimit div {width: 50%;}

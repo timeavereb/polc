@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Polc\n"
-"POT-Creation-Date: 2017-10-26 22:43+0200\n"
-"PO-Revision-Date: 2017-10-26 23:02+0200\n"
+"POT-Creation-Date: 2017-11-22 21:50+0100\n"
+"PO-Revision-Date: 2017-11-22 21:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: hu_HU\n"
@@ -20,140 +20,140 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: author.php:109 author.php:126
+#: author.php:110 author.php:127
 msgid "My contents"
 msgstr "Tartalmaim"
 
-#: author.php:113
+#: author.php:114
 msgid "Favorited by"
 msgstr "Kedvenchez adott"
 
-#: author.php:117
+#: author.php:118
 msgid "Favorited Authors"
 msgstr "Kedvenc szerzők"
 
-#: author.php:120
+#: author.php:121
 msgid "Favorited Contents"
 msgstr "Kedvenc tartalmak"
 
-#: author.php:123
+#: author.php:124
 msgid "Data change"
 msgstr "Adatmódosítás"
 
-#: author.php:133
+#: author.php:134
 msgid "Add new volume"
 msgstr "Új tartalom hozzáadása"
 
-#: author.php:150
+#: author.php:151
 msgid "Email (can't be modified)"
 msgstr "Email cím (nem módosítható)"
 
-#: author.php:156
+#: author.php:157
 msgid "Username (can't be modified)"
 msgstr "Felhasználónév (nem módosítható)"
 
-#: author.php:162
+#: author.php:163
 msgid "Name"
 msgstr "Név"
 
-#: author.php:168
+#: author.php:169
 msgid "Webpage"
 msgstr "Weboldal"
 
-#: author.php:174
+#: author.php:175
 msgid "Date of birth"
 msgstr "Születési dátum"
 
-#: author.php:184
+#: author.php:185
 msgid "Old password"
 msgstr "Régi jelszó"
 
-#: author.php:189
+#: author.php:190
 msgid "New password"
 msgstr "Új jelszó"
 
-#: author.php:194
+#: author.php:195
 msgid "New password confirmation"
 msgstr "Új jelszó újra"
 
-#: author.php:199 layout-handlers/content-editor-layout-handler.php:133
+#: author.php:200 layout-handlers/content-editor-layout-handler.php:133
 #: layout-handlers/content-editor-layout-handler.php:184
 msgid "Save"
 msgstr "Mentés"
 
-#: author.php:219
+#: author.php:220
 msgid "You didn't upload any content yet!"
 msgstr "Nincs feltöltött tartalom!"
 
-#: author.php:266
+#: author.php:267
 msgid "You didn't add any author as favorite."
 msgstr "Még nem adtál egyetlen szerzőt sem a kedvenceid közé."
 
-#: author.php:286
+#: author.php:287
 msgid "You didn't add any content as favorite."
 msgstr "Még nem adtál egyetlen tartalmat sem a kedvenceid közé."
 
-#: author.php:307
+#: author.php:308
 msgid "Change profile picture"
 msgstr "Profilkép feltöltése"
 
-#: author.php:321
+#: author.php:322
 msgid "people's  favourite author"
 msgstr "kedvenc szerzője"
 
-#: author.php:326
+#: author.php:327
 msgid "stories"
 msgstr "történet"
 
-#: author.php:330
+#: author.php:331
 msgid "followers"
 msgstr "követő"
 
-#: author.php:342 includes/modules/favorite-subscribe-module.php:50
+#: author.php:343 includes/modules/favorite-subscribe-module.php:50
 msgid "Remove author from favorites"
 msgstr "Szerző törlése a kedvencekből"
 
-#: author.php:344 includes/modules/favorite-subscribe-module.php:49
+#: author.php:345 includes/modules/favorite-subscribe-module.php:49
 msgid "Add author to favorites"
 msgstr "Szerző kedvencekhez adása"
 
-#: author.php:408
+#: author.php:409
 msgid "Genre and category selections"
 msgstr "Műfaj és kategória választása"
 
-#: author.php:413
+#: author.php:414
 msgid "Type"
 msgstr "Típus"
 
-#: author.php:415
+#: author.php:416
 msgid "Single"
 msgstr "Egyrészes"
 
-#: author.php:416
+#: author.php:417
 msgid "Sequels"
 msgstr "Folytatásos"
 
-#: author.php:421
+#: author.php:422
 msgid "Category"
 msgstr "Kategória"
 
-#: author.php:428 search.php:86
+#: author.php:429 search.php:86
 msgid "Choose category"
 msgstr "Válasz kategóriát"
 
-#: author.php:438
+#: author.php:439
 msgid "Sub-category"
 msgstr "Alkategória"
 
-#: author.php:445
+#: author.php:446
 msgid "Choose subcategory"
 msgstr "Válassz alkategóriát"
 
-#: author.php:454 includes/taxonomies/genre.php:21
+#: author.php:455 includes/taxonomies/genre.php:21
 msgid "Genre"
 msgstr "Műfaj"
 
-#: author.php:460 search.php:104
+#: author.php:461 search.php:104
 msgid "Choose genre"
 msgstr "Válassz műfajt"
 
@@ -273,7 +273,7 @@ msgid "Layout selection"
 msgstr "Layout választó"
 
 #: includes/admin/pages/layout-selection.php:48
-#: includes/modules/story-content-module.php:109 single-post.php:62
+#: includes/modules/story-content-module.php:110 single-post.php:62
 msgid "Default"
 msgstr "Alapértelmezett"
 
@@ -631,13 +631,13 @@ msgid "You've not signed in!"
 msgstr "Nem vagy bejelentkezve!"
 
 #: includes/modules/favorite-subscribe-module.php:56
-#: includes/modules/story-content-module.php:143
-#: includes/modules/story-content-module.php:155
+#: includes/modules/story-content-module.php:144
+#: includes/modules/story-content-module.php:156
 msgid "Add to favorites"
 msgstr "Kedvencekhez adás"
 
 #: includes/modules/favorite-subscribe-module.php:57
-#: includes/modules/story-content-module.php:140
+#: includes/modules/story-content-module.php:141
 msgid "Remove from favorites"
 msgstr "Eltávolítás a kedvencekből"
 
@@ -649,14 +649,14 @@ msgstr "komment"
 
 #: includes/modules/helper-module.php:145
 msgid "Add chapter"
-msgstr "Fejezet hosszáadása"
+msgstr "Fejezet hozzáadása"
 
 #: includes/modules/helper-module.php:153
 msgid "Edit story"
 msgstr "Tartalom szerkesztése"
 
 #: includes/modules/helper-module.php:250
-#: includes/modules/story-content-module.php:254
+#: includes/modules/story-content-module.php:257
 msgid "Chapter"
 msgstr "Fejezet"
 
@@ -747,7 +747,7 @@ msgstr "Az e-mail címek nem egyeznek"
 msgid "Register Success Message"
 msgstr "Sikeres regisztrációs üzenet"
 
-#: includes/modules/story-content-module.php:63
+#: includes/modules/story-content-module.php:64
 msgid ""
 "Sorry, this content is only available to registered users!Please register or "
 "sign in if you're already a member"
@@ -755,17 +755,17 @@ msgstr ""
 "Sajnáljuk! A tartalom csak regisztrált felhasználók számára elérhető! "
 "Regisztrálj vagy jelentkezz be, ha már tag vagy."
 
-#: includes/modules/story-content-module.php:216
+#: includes/modules/story-content-module.php:219
 #: layout-handlers/comment-list-layout-handler.php:43
 msgid "Share your thoughts..."
 msgstr "Oszd meg, mit gondolsz...."
 
-#: includes/modules/story-content-module.php:218
+#: includes/modules/story-content-module.php:221
 #: layout-handlers/comment-list-layout-handler.php:45
 msgid "Send comment"
 msgstr "Elküldés"
 
-#: includes/modules/story-content-module.php:247 includes/types/story.php:36
+#: includes/modules/story-content-module.php:250 includes/types/story.php:36
 msgid "Volume"
 msgstr "Kötet"
 
@@ -963,11 +963,11 @@ msgstr "Törlés"
 msgid "You're not authorized to access this page!"
 msgstr "Nincs jogosultságod az oldal megtekintéséhez!"
 
-#: layout-handlers/index-layout-handler.php:42
+#: layout-handlers/index-layout-handler.php:58
 msgid "News"
 msgstr "Hírek"
 
-#: layout-handlers/index-layout-handler.php:52
+#: layout-handlers/index-layout-handler.php:68
 msgid "Recommendation"
 msgstr "Ajánlók"
 

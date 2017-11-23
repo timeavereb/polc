@@ -49,6 +49,7 @@ add_action("wp_enqueue_scripts", function () {
     wp_enqueue_style('fonts-style', PLC_THEME_PATH . '/css/fonts.css');
     wp_enqueue_script('jquery-ui-dialog');
     wp_enqueue_script('polc-scripts', PLC_THEME_PATH . '/js/scripts.js');
+    wp_enqueue_script('polc-recaptcha', 'https://www.google.com/recaptcha/api.js?onload=recaptcha_loaded&render=explicit', [], false, true);
 });
 
 //jquery migare fix
@@ -62,8 +63,6 @@ function polc_set_content_type()
 {
     return "text/html";
 }
-
-add_filter('wp_mail_content_type', 'polc_set_content_type');
 
 add_theme_support('post-thumbnails');
 
@@ -89,9 +88,10 @@ add_filter('query_vars', function ($vars) {
 add_filter('pre_get_posts', 'polc_tag_query');
 show_admin_bar(false);
 
+/*
 function polc_tag_query($query)
 {
-    if ($query->is_main_query() && ($query->is_paged() || is_tag())):
+    if ($query->is_main_query() && ($query->is_paged() && is_tag())):
         $query->set('post_type', 'story');
         $query->set('posts_per_page', 20);
         $query->set('post_parent', 0);
@@ -99,7 +99,7 @@ function polc_tag_query($query)
     endif;
 
     return $query;
-}
+}*/
 
 add_action("wp_head", "polc_setup_head");
 

@@ -33,6 +33,10 @@ class Polc_Register_Module
      */
     public function validate()
     {
+        if (!isset($_REQUEST["recaptcha_response"]) || $_REQUEST["recaptcha_response"] == "" || !$this->recaptcha_validate()) {
+            $this->error["recaptcha"]["invalid"] = __('Invalid recaptcha response', 'polc');
+        }
+
         if (!is_email($_REQUEST["email"])):
             $this->error["email"]["invalid"] = __('Email Invalid', 'polc');
         endif;
@@ -127,8 +131,30 @@ class Polc_Register_Module
         $body = preg_replace("~#USERNAME#~", $_REQUEST["username"], $body);
         $body = preg_replace("~#REGISTERDATE#~", date("Y.m.d."), $body);
         $body = preg_replace("~#ACTIVATIONURL#~", $activation_link, $body);
-
+        add_filter('wp_mail_content_type', 'polc_set_content_type');
         wp_mail($this->data['user_email'], $register["subject"], $body, $headers);
+    }
+
+    private function recaptcha_validate()
+    {
+        $data = array(
+            'secret' => Polc_Settings_Manager::common()["recaptcha_secret"],
+            'response' => $_REQUEST["recaptcha_response"]
+        );
+
+        $verify = curl_init();
+        curl_setopt($verify, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($verify, CURLOPT_POST, true);
+        curl_setopt($verify, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($verify, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($verify, CURLOPT_RETURNTRANSFER, true);
+        $response = json_decode(curl_exec($verify));
+
+        if(!$response):
+            return false;
+        endif;
+
+        return (bool)$response->success;
     }
 }
 

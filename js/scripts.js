@@ -1,10 +1,12 @@
 /**
  * Header handler js.
  */
-function polc_header_handler() {
+function polc_header_handler(params) {
 
     var self = this,
-        animation_wrapper = "";
+        animation_wrapper = "",
+        register_recaptcha,
+        settings = params;
 
     /**
      * Registration form validation.
@@ -31,6 +33,9 @@ function polc_header_handler() {
                 },
                 terms: {
                     required: true
+                },
+                recaptcha_response : {
+                    required: true
                 }
             },
             messages: {
@@ -48,6 +53,9 @@ function polc_header_handler() {
                 },
                 terms: {
                     required: "Nem fogadtad ez az adatkezelési nyilatkozatot!"
+                },
+                recaptcha_response : {
+                    required: "Az ellenőrző kód kitöltése kötelező!"
                 }
             }
         });
@@ -180,6 +188,11 @@ function polc_header_handler() {
      */
     jQuery(document).ready(function () {
 
+        jQuery.validator.setDefaults({
+            ignore: []
+            // any other default options and/or rules
+        });
+
         //navigation
         jQuery('.plc_side_naviagtion').click(function () {
             jQuery(this).toggleClass('opened');
@@ -252,25 +265,32 @@ function polc_header_handler() {
                     'email': jQuery("#plc_reg_popup input[name=\"email\"]").val(),
                     'password': jQuery("#plc_reg_popup input[name=\"password\"]").val(),
                     'password-conf': jQuery("#plc_reg_popup input[name=\"password-conf\"]").val(),
-                    'email-conf': jQuery("#plc_reg_popup input[name=\"email-conf\"]").val()
+                    'email-conf': jQuery("#plc_reg_popup input[name=\"email-conf\"]").val(),
+                    'recaptcha_response' : jQuery("#recaptcha_response").val()
                 },
                 success: function (response) {
                     //If there any error we display it to the user.
                     if (response.error) {
-                        if (response.error) {
-                            jQuery.each(response.error, function (k, v) {
-                                jQuery.each(v, function (key, value) {
-                                    jQuery("#" + k + "-error-msg").show();
-                                    jQuery("#" + k + "-error-msg").append(value + "<br>");
-                                });
+                        jQuery.each(response.error, function (k, v) {
+                            jQuery.each(v, function (key, value) {
+                                jQuery("#" + k + "-error-msg").show();
+                                jQuery("#" + k + "-error-msg").append(value + "<br>");
                             });
+                        });
+
+                        if(response.error.hasOwnProperty("recaptcha")){
+                            grecaptcha.reset();
                         }
+
+                        return false;
                     }
 
                     if (response.success) {
                         jQuery.event.trigger("polc_alert", {title: "Siker", msg: response.success});
+                        jQuery(document).on("plc_alert_closed", function(){
+                            jQuery("#plc_reg_popup").dialog("close");
+                        });
                     }
-
                     //If everything is okay at this point, the registration was successful.
                     else {
                         jQuery("#plc_reg_popup").dialog("close");
@@ -444,6 +464,17 @@ function polc_header_handler() {
             });
         });
 
+        /****************************
+         ** Recaptcha loaded event
+         ***********************/
+        jQuery(document).on("recaptcha_loaded", function () {
+
+            register_recaptcha = grecaptcha.render(document.getElementById('register_recaptcha'), {
+                'sitekey': settings.recaptcha_key,
+                'callback': recaptcha_verify
+            });
+
+        });
 
         /****************************
          **Alert event
@@ -500,9 +531,9 @@ function polc_content_handler() {
                     if (response.success) {
                         jQuery("#plcFavoriteBtn").fadeOut(500, function () {
                             jQuery(this).text(response.success).fadeIn(500);
-                            if(jQuery(this).hasClass("favorited")){
+                            if (jQuery(this).hasClass("favorited")) {
                                 jQuery(this).removeClass("favorited");
-                            }else{
+                            } else {
                                 jQuery(this).addClass("favorited");
                             }
                         });
@@ -511,7 +542,7 @@ function polc_content_handler() {
             });
         });
 
-        jQuery(document).on("click", "#plcFavoriteBtnLogout", function(){
+        jQuery(document).on("click", "#plcFavoriteBtnLogout", function () {
             jQuery("#plc_login_popup").dialog("open");
         });
 
@@ -551,7 +582,6 @@ function polc_content_handler() {
         });
 
 
-
         //justify or left
         jQuery('.text_alignment').click(function () {
             if (jQuery(this).hasClass('left')) {
@@ -566,11 +596,11 @@ function polc_content_handler() {
         });
 
         //font style
-       jQuery('.fontstyle').click(function () {
-           if (jQuery('.fontstyle_list').hasClass('show')) {
-               jQuery('.fontstyle_list').removeClass('show');
-           }
-           else {
+        jQuery('.fontstyle').click(function () {
+            if (jQuery('.fontstyle_list').hasClass('show')) {
+                jQuery('.fontstyle_list').removeClass('show');
+            }
+            else {
                 jQuery('.fontstyle_list').addClass('show');
             }
 
@@ -664,3 +694,11 @@ function polc_content_handler() {
         });
     });
 }
+
+var recaptcha_loaded = function () {
+    jQuery.event.trigger("recaptcha_loaded");
+};
+
+var recaptcha_verify = function (response) {
+    jQuery("#recaptcha_response").val(response);
+};

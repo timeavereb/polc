@@ -57,7 +57,7 @@ class Polc_Header
         </head>
 
         <body>
-        <script>var polc_header_handler = new polc_header_handler();</script>
+        <script>var polc_header_handler = new polc_header_handler(<?= json_encode($this->settings()); ?>);</script>
         <header class="plc_header">
             <a href="http://polc.eu/"><span class="site_id"></span></a>
 
@@ -111,6 +111,11 @@ class Polc_Header
                         <label><?= __('I accept the', 'polc'); ?> <a
                                 href=""><?= __('tems of use', 'polc'); ?></a></label>
                         <span class="plcErrorText" id="terms-error-msg"></span>
+                    </div>
+                    <div class="regbox_row recaptcha">
+                        <span class="plcErrorText" id="recaptcha-error-msg"></span>
+                        <input type="hidden" id="recaptcha_response" name="recaptcha_response">
+                        <div id="register_recaptcha"></div>
                     </div>
                     <div class="regbox_row submit">
                         <button id="plc_register_btn"><?= __('Registration', 'polc'); ?></button>
@@ -259,6 +264,18 @@ class Polc_Header
             <span class="quit"></span>
         </div>
         <?php
+    }
+
+    /**
+     * Custom settings for js.
+     * @return stdClass
+     */
+    private function settings(){
+
+        $settings = new stdClass();
+        $settings->recaptcha_key = Polc_Settings_Manager::common()["recaptcha_key"];
+
+        return $settings;
     }
 }
 

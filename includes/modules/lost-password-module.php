@@ -72,6 +72,7 @@ class Polc_Lost_Password_Module
         $body = preg_replace("~#USERDISPLAYNAME#~", $user_data->display_name, $body);
         $body = preg_replace("~#RESETURL#~", $activation_link, $body);
 
+        add_filter('wp_mail_content_type', 'polc_set_content_type');
         //send mail and send response back to the js
         if (wp_mail($user_data->user_email, $lost_pass_email["subject"], $body, $headers)):
             wp_send_json(["success" => __('The information to reset your password has been sent to your e-mail address.', 'polc')]);

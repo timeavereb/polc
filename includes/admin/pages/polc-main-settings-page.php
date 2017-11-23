@@ -223,6 +223,16 @@ class Polc_Main_Settings_Page
                 <input type="text" id="plc_ga_id" name="common[ga_id]" size="50" value="<?= isset($common["ga_id"]) ? $common["ga_id"] : ""; ?>">
             </p>
 
+            <p>
+                <label for="plc_recaptcha_key"><?= __( 'reCaptcha site key', 'polc' );?></label>
+                <input type="text" id="plc_recaptcha_key" name="common[recaptcha_key]" size="50" value="<?= isset($common["recaptcha_key"]) ? $common["recaptcha_key"] : ""; ?>">
+            </p>
+
+            <p>
+                <label for="plc_recaptcha_secret"><?= __( 'reCaptcha site secret', 'polc' );?></label>
+                <input type="password" id="plc_recaptcha_secret" name="common[recaptcha_secret]" size="50" value="<?= isset($common["recaptcha_secret"]) ? $common["recaptcha_secret"] : ""; ?>">
+            </p>
+
             <?php submit_button(); ?>
         </form>
         <?php

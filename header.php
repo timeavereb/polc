@@ -106,12 +106,12 @@ class Polc_Header
                                placeholder="<?= __('Password confirmation', 'polc'); ?>">
                         <span class="plcErrorText" id=""></span>
                     </div>
-                    <div class="regbox_row termsouse">
+                    <!--<div class="regbox_row termsouse">
                         <input type="checkbox" id="terms" name="terms">
-                        <label><?= __('I accept the', 'polc'); ?> <a
-                                href=""><?= __('tems of use', 'polc'); ?></a></label>
+                        <label><?php  //__('I accept the', 'polc'); ?> <a
+                                href=""><?php // __('tems of use', 'polc'); ?></a></label>
                         <span class="plcErrorText" id="terms-error-msg"></span>
-                    </div>
+                    </div>-->
                     <div class="regbox_row recaptcha">
                         <span class="plcErrorText" id="recaptcha-error-msg"></span>
                         <input type="hidden" id="recaptcha_response" name="recaptcha_response">

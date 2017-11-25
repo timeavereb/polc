@@ -31,9 +31,9 @@ function polc_header_handler(params) {
                 'password-conf': {
                     equalTo: jQuery("#password")
                 },
-                terms: {
+                /*terms: {
                     required: true
-                },
+                },*/
                 recaptcha_response : {
                     required: true
                 }
@@ -51,9 +51,9 @@ function polc_header_handler(params) {
                 'password-conf': {
                     equalTo: "A két jelszó nem egyezik!"
                 },
-                terms: {
+                /*terms: {
                     required: "Nem fogadtad ez az adatkezelési nyilatkozatot!"
-                },
+                },*/
                 recaptcha_response : {
                     required: "Az ellenőrző kód kitöltése kötelező!"
                 }

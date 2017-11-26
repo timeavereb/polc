@@ -182,6 +182,8 @@ class Polc_Story_Content_Module
                         <?php
                         if ($this->post->post_parent == 0):
                             the_excerpt();
+
+                            the_content();
                         else:
                             the_content();
                         endif;

@@ -194,7 +194,7 @@ class Polc_Toplists_Layout_Handler extends Polc_Layout_Handler_Base
         foreach ($results as $value):
             $user = get_user_by('ID', $value->UserId);
             $url = get_author_posts_url($value->UserId);
-            $list[] = ["url" => $url, "name" => $user->data->user_login, "cnt" => $value->CommentCnt];
+            $list[] = ["url" => $url, "name" => $user->data->user_nicename, "cnt" => $value->CommentCnt];
         endforeach;
 
         if ($this->cache):

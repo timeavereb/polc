@@ -135,7 +135,7 @@ class Polc_Favorite_Helper_Module
             foreach ($results as $result):
                 $user = get_user_by('ID', $result->AuthorId);
                 $author_url = get_author_posts_url($result->AuthorId);
-                $list[] = ["cnt" => $result->FavoriteCnt, "url" => $author_url, "name" => $user->data->user_login];
+                $list[] = ["cnt" => $result->FavoriteCnt, "url" => $author_url, "name" => $user->data->user_nicename];
             endforeach;
         else:
             foreach ($results as $result):

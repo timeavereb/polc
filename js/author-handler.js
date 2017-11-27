@@ -12,13 +12,13 @@ function polc_author_handler() {
         params.rules = {};
         params.messages = {};
 
-        params.rules = {
+        /*params.rules = {
             'plc_user_display_name': "required"
         };
 
         params.messages = {
             'plc_user_display_name': "A név kötelező!"
-        };
+        };*/
 
         var $form = jQuery("#plcDataChangeForm");
         $form.validate(params);

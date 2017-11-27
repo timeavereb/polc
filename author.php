@@ -159,11 +159,11 @@ class Polc_Author
                                disabled="disabled">
                     </p>
 
-                    <p class="plcDataChangeElement">
-                        <label for="plc_user_display_name"><?= __("Name", "polc"); ?>*</label>
+                    <!---<p class="plcDataChangeElement">
+                        <label for="plc_user_display_name"><?php //__("Name", "polc"); ?>*</label>
                         <input type="text" id="plc_user_display_name" name="plc_user_display_name"
-                               value="<?= Polc_Header::$curr_user->data->display_name; ?>">
-                    </p>
+                               value="<?php // Polc_Header::$curr_user->data->display_name; ?>">
+                    </p>-->
 
                     <p class="plcDataChangeElement">
                         <label for="plc_user_url"><?= __("Webpage", "polc"); ?></label>
@@ -258,7 +258,7 @@ class Polc_Author
             if (count($favorite_authors) > 0):
                 foreach ($favorite_authors as $user): ?>
                     <div class="plcUserFavoriteElement">
-                        <a href="<?= get_author_posts_url($user); ?>"><?= get_user_by('id', $user)->display_name ?></a>
+                        <a href="<?= get_author_posts_url($user); ?>"><?= get_user_by('id', $user)->user_login ?></a>
                     </div>
                     <?php
                 endforeach;

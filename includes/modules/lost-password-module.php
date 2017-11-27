@@ -69,7 +69,7 @@ class Polc_Lost_Password_Module
         $headers = ['From: ' . $lost_pass_email['sender_name'] . ' <' . $lost_pass_email['sender_email'] . '>'];
         $body = $lost_pass_email["body"];
         $body = preg_replace("~#EMAIL#~", $user_data->user_email, $body);
-        $body = preg_replace("~#USERDISPLAYNAME#~", $user_data->display_name, $body);
+        $body = preg_replace("~#USERDISPLAYNAME#~", $user_data->user_login, $body);
         $body = preg_replace("~#RESETURL#~", $activation_link, $body);
 
         add_filter('wp_mail_content_type', 'polc_set_content_type');

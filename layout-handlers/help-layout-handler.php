@@ -21,7 +21,7 @@ class Polc_Help_Layout_Handler extends Polc_Layout_Handler_Base
                 <div class="helpArticle">
                     <h1 class="articleTitle"><?= $post->post_title; ?></h1>
 
-                    <h2 class="articleAuthor"><?= get_user_by("id", $post->post_author)->display_name; ?></h2>
+                    <h2 class="articleAuthor"><?= get_user_by("id", $post->post_author)->user_login; ?></h2>
 
                     <div class="helpArticleLead">
                         <?= $post->post_excerpt; ?>

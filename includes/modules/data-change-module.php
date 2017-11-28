@@ -133,7 +133,7 @@ class Polc_Data_Change_Module
     {
         $data = [
             "ID" => self::$user->ID,
-            "display_name" => $_REQUEST["plc_user_display_name"],
+            //"display_name" => $_REQUEST["plc_user_display_name"],
             "user_url" => $_REQUEST["plc_user_url"]
         ];
 

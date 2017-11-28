@@ -133,7 +133,7 @@ function polc_setup_head()
 
     global $post;
 
-    if (isset($post->post_type) && ($post->post_type == "story" || $post->post_type == "post")):
+    if (isset($post->post_type) && ($post->post_type == "story" || $post->post_type == "post") && !is_search()):
 
         if ($post->post_parent == 0):
             $content = wp_trim_words(strip_tags($post->post_excerpt), 40, "...");

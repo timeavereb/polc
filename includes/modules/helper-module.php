@@ -115,8 +115,7 @@ class Polc_Helper_Module
                         </div>
                         <a href="<?= get_permalink($post->ID); ?>">
                             <h2><?= $post->post_title; ?></h2>
-
-                            <p><?= $post->post_excerpt; ?></p>
+                            <p><?= apply_filters('the_content', $post->post_excerpt); ?></p>
                         </a>
 
                         <div class="plc_article_datas bottom">

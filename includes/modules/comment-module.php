@@ -100,7 +100,7 @@ class Polc_Comment_Module
 
             if (!array_key_exists($comment->user_id, $authors)):
                 $recent_author = get_user_by('ID', $comment->user_id);
-                $authors[$comment->user_id] = $recent_author->display_name;
+                $authors[$comment->user_id] = $recent_author->user_login;
             endif;
 
             if ($comment->comment_parent != 0 && $comment_list[$comment->comment_parent]->comment_parent != 0):

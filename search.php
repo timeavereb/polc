@@ -29,7 +29,7 @@ class Polc_Search
         $this->category = isset($_REQUEST["category"]) ? $_REQUEST["category"] : "";
         $this->subcategory = isset($_REQUEST["sub-category"]) ? $_REQUEST["sub-category"] : "";
         $this->genre = isset($_REQUEST["genre"]) ? $_REQUEST["genre"] : "";
-        $this->ppp = 3;
+        $this->ppp = 10;
 
         $this->search();
 

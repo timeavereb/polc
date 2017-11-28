@@ -14,7 +14,7 @@ class Polc_Help_Layout_Handler extends Polc_Layout_Handler_Base
 
     public function render()
     {
-        $post = get_posts(["posts_per_page" => 1, "category__in" => [Polc_Settings_Manager::categories()["help-category"]]])[0];
+        global $post;
         ?>
         <div class="helpWrapper">
             <div class="helpInnerWrapper">

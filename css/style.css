@@ -2351,18 +2351,21 @@ label#story_content-error{
 .plcCommentWrapper {
     width: 100%;
     float: left;
-    background-color: #f8f8f6;
+    background-color: white;
     border: solid 1px #e4e2e2;
     margin-bottom: 10px;
     padding: 0 10px;
     line-height: normal!important;
+	border-left: solid 2px #fb5c43;
+	position:relative;
+	overflow: hidden;
 }
 .plcCommentContent {
     width: 100%;
     float: left;
     color: black!important;
     font-size: 16px;
-    padding: 10px 0!important;
+    padding: 10px 0 0 0 !important;
 }
 .plcCommentReplyBtn {
     padding: 0;
@@ -2375,6 +2378,19 @@ label#story_content-error{
     color:transparent!important;
     overflow: hidden;
     float:right;
+}
+.author_comment::after {
+    display: block;
+    content: '';
+    position: absolute;
+	width: 20px;
+	height: 100px;
+	right: 15px;
+	top: -30px;
+	background-color: #fb5c43;
+	-ms-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
 }
 .plcCommentReplyWrapper {
     float: right;
@@ -2999,6 +3015,9 @@ h2.articleAuthor {
 }
 .plc_article_datas.bottom a {
     pointer-events: none;
+}
+.editStory {
+    pointer-events: auto!important;
 }
 .plcTagsWrapper a {
     pointer-events: auto!important;

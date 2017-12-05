@@ -290,13 +290,35 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
             $args["post_title"] = $_REQUEST["chapter_title"];
         endif;
 
+        $post = get_post($id);
+        $post_modified = $post->post_modified;
+        $post_modified_gmt = $post->post_modified_gmt;
+
         $args["ID"] = $id;
 
         if (isset($_REQUEST["story_content"])):
             $args["post_content"] = $_REQUEST["story_content"];
         endif;
 
+        //Somehow post_modified values don't apply at wp_update_post, it's allways updates to the current time
         wp_update_post($args);
+
+        //So we update it manually with wpdb.
+        global $wpdb;
+
+        $wpdb->update(
+            $wpdb->posts,
+            array(
+                'post_modified' => $post_modified,
+                'post_modified_gmt' => $post_modified_gmt
+            ),
+            array( 'ID' => $id ),
+            array(
+                '%s',
+                '%s'
+            ),
+            array( '%d' )
+        );
 
         foreach ($meta_keys as $key) {
             $value = isset($_REQUEST[$key]) ? $_REQUEST[$key] : "";

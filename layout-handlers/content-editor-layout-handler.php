@@ -290,9 +290,7 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
             $args["post_title"] = $_REQUEST["chapter_title"];
         endif;
 
-        $post = get_post($id);
-        $post_modified = $post->post_modified;
-        $post_modified_gmt = $post->post_modified_gmt;
+        $volume = get_post($_REQUEST["volume-id"]);
 
         $args["ID"] = $id;
 
@@ -303,22 +301,7 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
         //Somehow post_modified values don't apply at wp_update_post, it's allways updates to the current time
         wp_update_post($args);
 
-        //So we update it manually with wpdb.
-        global $wpdb;
-
-        $wpdb->update(
-            $wpdb->posts,
-            array(
-                'post_modified' => $post_modified,
-                'post_modified_gmt' => $post_modified_gmt
-            ),
-            array( 'ID' => $id ),
-            array(
-                '%s',
-                '%s'
-            ),
-            array( '%d' )
-        );
+        $this->update_modidified_date($volume->ID, $volume->post_modified, $volume->post_modified_gmt);
 
         foreach ($meta_keys as $key) {
             $value = isset($_REQUEST[$key]) ? $_REQUEST[$key] : "";
@@ -328,6 +311,25 @@ class Polc_Content_Editor_Layout_Handler extends Polc_Layout_Handler_Base
         $this->update_tags($id);
 
         return true;
+    }
+
+    private function update_modidified_date($id, $post_modified, $post_modified_gmt)
+    {
+        global $wpdb;
+
+        $wpdb->update(
+            $wpdb->posts,
+            array(
+                'post_modified' => $post_modified,
+                'post_modified_gmt' => $post_modified_gmt
+            ),
+            array('ID' => $id),
+            array(
+                '%s',
+                '%s'
+            ),
+            array('%d')
+        );
     }
 
     private function update_tags($id)

@@ -106,7 +106,7 @@ class Polc_Email_Settings_Page
             <div id="sections_wrapper">
                 <?php foreach ($templates as $key => $template):
                     ?>
-                    <div id="section_<?= $template["section"]; ?>" class="section">
+                    <div id="section_<?= $template["section"]; ?>" class="section" style="<?= $template["section"] != 1 ? "display:none;": ""; ?>">
 
                         <!-- register template -->
                         <div class="polc-email-setting-element">

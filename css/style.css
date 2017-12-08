@@ -367,10 +367,11 @@ span.email strong {
 .plc_latest_item p,
 .articleDatas .lead{
     font-size: 15px;
-    color: #737373;
-    font-weight: 300;
+    color: #2d2d2d;
+    font-weight: 400;
     padding-bottom: 20px;
     padding-left: 10px;
+    padding-right: 10px;
 }
 .category,.tag {
     color: white;
@@ -1014,6 +1015,7 @@ span.plcEmptyContent {
 }
 .plcUserDefault a{
     font-weight:700;
+    word-wrap: break-word;
 }
 .plcUserStat,.plcUserStatElement div,.plcUserInformation,
 .plcWriterLatestActivities,.activitiesItem {
@@ -2322,11 +2324,23 @@ label#story_content-error{
     padding: 0;
     display: table;
 }
-.plcCommentWrapper a{
-    color:#fb5c43;
-    float:left;
+.plcCommentListWrapper a:last-of-type {
+    color: #444446;
+    border: solid 2px #444446;
+    border-radius: 30px;
+    padding: 3px 15px;
+    margin: 10px auto;
+    display: table;
     font-size: 14px;
+}
+.plcCommentWrapper a{
+    color:#fb5c43!important;
+    float:left;
+    font-size: 14px!important;
     line-height: 30px;
+    margin:0!important;
+    padding:0!important;
+    border:none!important;
 }
 .plcCommentWrapper span {
     font-size: 14px;
@@ -2337,18 +2351,21 @@ label#story_content-error{
 .plcCommentWrapper {
     width: 100%;
     float: left;
-    background-color: #f8f8f6;
+    background-color: white;
     border: solid 1px #e4e2e2;
     margin-bottom: 10px;
     padding: 0 10px;
     line-height: normal!important;
+	border-left: solid 2px #fb5c43;
+	position:relative;
+	overflow: hidden;
 }
 .plcCommentContent {
     width: 100%;
     float: left;
     color: black!important;
     font-size: 16px;
-    padding: 10px 0!important;
+    padding: 10px 0 0 0 !important;
 }
 .plcCommentReplyBtn {
     padding: 0;
@@ -2361,6 +2378,19 @@ label#story_content-error{
     color:transparent!important;
     overflow: hidden;
     float:right;
+}
+.author_comment::after {
+    display: block;
+    content: '';
+    position: absolute;
+	width: 20px;
+	height: 100px;
+	right: 15px;
+	top: -30px;
+	background-color: #fb5c43;
+	-ms-transform: rotate(-45deg);
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
 }
 .plcCommentReplyWrapper {
     float: right;
@@ -2623,11 +2653,15 @@ img.alignright {
     -o-transition: all 250ms ease-in-out;
     transition: all 250ms ease-in-out;
 }
+.help .listInnerWrapper article {
+    width: 50%;
+    margin-top: 15px;
+}
 .articleImage {
     width: 100%;
     padding-bottom: 56.25%;
     background-size: cover;
-    background-position: top center;
+    background-position: center center;
 }
 .listInnerWrapper .articleDatas {
     float: left;
@@ -2677,6 +2711,9 @@ img.alignright {
     -ms-transition: all 250ms ease-in-out;
     -o-transition: all 250ms ease-in-out;
     transition: all 250ms ease-in-out;
+}
+.help .listInnerWrapper article:before{
+    width:5px;
 }
 .listInnerWrapper article:hover:before {
     height: 50px;
@@ -2976,6 +3013,15 @@ h2.articleAuthor {
 .part:nth-of-type(1):hover h1:after{
     width: 150px;
 }
+.plc_article_datas.bottom a {
+    pointer-events: none;
+}
+.editStory {
+    pointer-events: auto!important;
+}
+.plcTagsWrapper a {
+    pointer-events: auto!important;
+}
 /*RESPONSIVE BREAKPOINTS*/
 @media all and (max-width: 1600px){
 }
@@ -3034,6 +3080,7 @@ h2.articleAuthor {
 	.textPart h1{text-align:center;font-size: 24px;}
 	.textPart h2{margin-bottom:20px; font-size: 15px;text-align: center;}
 	.textPart{padding:0 20px;}
+    .help .listInnerWrapper article {width: 100%;}
 }
 
 @media all and (max-width: 640px){

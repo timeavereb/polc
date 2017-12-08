@@ -19,7 +19,8 @@ class Polc_Layout_Selection
     public function __construct()
     {
         add_action("admin_init", function () {
-            add_meta_box("polc-layout-selection", __("Layout selection", "polc"), [$this, "render_meta_box"], "page", "side", "high");
+            add_meta_box("polc-layout-selection-page", __("Layout selection", "polc"), [$this, "render_meta_box"], "page", "side", "high");
+            add_meta_box("polc-layout-selection-post", __("Layout selection", "polc"), [$this, "render_meta_box"], "post", "side", "high");
         });
 
         add_action("save_post", [$this, "save"]);

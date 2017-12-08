@@ -14,10 +14,10 @@ if (!defined("ABSPATH")) {
 /**
  * Class Polc_Toplists_Layout_Handler
  */
-class Polc_News_List_Layout_Handler extends Polc_Layout_Handler_Base
+class Polc_Help_List_Layout_Handler extends Polc_Layout_Handler_Base
 {
-    CONST POLC_LAYOUT = "polc-news";
-    CONST POLC_LAYOUT_NAME = "Hírek/Ajánlók";
+    CONST POLC_LAYOUT = "polc-helps";
+    CONST POLC_LAYOUT_NAME = "Segítség lista";
 
     private $paged;
     private $max;
@@ -28,15 +28,10 @@ class Polc_News_List_Layout_Handler extends Polc_Layout_Handler_Base
     public function render()
     {
         global $post;
-        if ($post->ID == Polc_Settings_Manager::pages()["news-list"]):
-            $category = Polc_Settings_Manager::layout()["news"]["term_id"];
-        else:
-            $category = Polc_Settings_Manager::layout()["recommend"]["term_id"];
-        endif;
-
+        $category = (int)Polc_Settings_Manager::categories()["help-category"];
         $this->max = 999999999;
         $this->paged = (get_query_var('page')) ? get_query_var('page') : 1;
-        $this->ppp = 2;
+        $this->ppp = 10;
 
         $args = [
             "post_type" => "post",
@@ -53,7 +48,7 @@ class Polc_News_List_Layout_Handler extends Polc_Layout_Handler_Base
         $this->total_pages = round($this->total_items / $this->ppp);
 
         ?>
-        <div class="plcNewsListWrapper">
+        <div class="plcNewsListWrapper help">
             <div class="listInnerWrapper">
                 <?php
                 foreach ($posts as $post):

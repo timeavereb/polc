@@ -42,6 +42,7 @@ register_nav_menus([
 
 //enqueue style and scripts
 add_action("wp_enqueue_scripts", function () {
+
     wp_enqueue_script('jquery');
     wp_enqueue_script('jquery-ui-autocomplete');
     wp_enqueue_script('jquery-validate', 'https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.16.0/jquery.validate.js');
@@ -50,6 +51,14 @@ add_action("wp_enqueue_scripts", function () {
     wp_enqueue_script('jquery-ui-dialog');
     wp_enqueue_script('polc-scripts', PLC_THEME_PATH . '/js/scripts.js');
     wp_enqueue_script('polc-recaptcha', 'https://www.google.com/recaptcha/api.js?onload=recaptcha_loaded&render=explicit', [], false, true);
+});
+
+add_action("admin_enqueue_scripts", function(){
+
+    wp_enqueue_style('polc-admin-style', PLC_THEME_PATH . '/css/admin_style.css');
+    wp_enqueue_style('jquery-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
+    wp_enqueue_script('polc-admin-scripts', PLC_THEME_PATH . '/js/admin-handler.js');
+    wp_enqueue_script('jquery-ui-dialog');
 });
 
 //jquery migare fix

@@ -35,6 +35,7 @@ class Polc_Story_Post_Type
     {
         add_meta_box('story-parent', __('Volume', 'polc'), [$this, 'story_parent_meta_box'], 'story', 'side', 'high');
         add_meta_box('story-details', __('Volume details', 'polc'), [$this, 'story_details_meta_box'], 'story', 'normal', 'high');
+        add_meta_box('email-notification', __('E-mail notification', 'polc'), [$this, 'story_email_notification'], 'story', 'normal', 'high');
     }
 
     /**
@@ -83,7 +84,7 @@ class Polc_Story_Post_Type
     public function publish($post_id, $post)
     {
         //FRONTEND CONTENT EDIT
-        if(isset($_REQUEST["polc-edit"])){
+        if (isset($_REQUEST["polc-edit"])) {
             return;
         }
 
@@ -207,6 +208,94 @@ class Polc_Story_Post_Type
             endif;
             ?>
         </table>
+        <?php
+    }
+
+    /**
+     * @param $post
+     */
+    public function story_email_notification($post)
+    {
+        $user_data = get_user_by('id', $post->post_author);
+        $user_name = $user_data->user_login;
+
+        $editor_settings = [
+            "media_buttons" => false,
+            "quicktags" => false,
+            "teeny" => true,
+            "textarea_name" => "body"
+        ];
+
+        $email_templates = Polc_Settings_Manager::email();
+
+        $templates = [
+            "acceptance" => $email_templates["acceptance"],
+            "rejection" => $email_templates["rejection"]
+        ];
+
+        foreach ($templates as $key => &$value):
+            $value["body"] = preg_replace('~#USERDISPLAYNAME#~', $user_name, $value["body"]);
+            $value["body"] = preg_replace('~#TITLE#~', $post->post_title, $value["body"]);
+        endforeach;
+
+        ?>
+        <div class="plcNotificationTabWrapper">
+            <div class="plcNotificationTab"
+                 onclick="jQuery('#plcAcceptanceWrapper').show(); jQuery('#plcRejectionWrapper').hide();"><?= __('Acceptance', 'polc'); ?></div>
+            <div class="plcNotificationTab"
+                 onclick="jQuery('#plcAcceptanceWrapper').hide(); jQuery('#plcRejectionWrapper').show();"><?= __('Rejection', 'polc'); ?></div>
+        </div>
+
+        <div class="plcEmailMessagesWrapper">
+            <!-- acceptance-->
+            <div id="plcAcceptanceWrapper">
+                <div id="plcAcceptanceForm">
+                    <div
+                        class="plcNotificationBodyWrapper"><?php wp_editor($templates["acceptance"]["body"], 'plc_acceptance', $editor_settings); ?></div>
+                    <input type="hidden" name="subject" value="<?= $templates["acceptance"]["subject"]; ?>">
+                    <input type="hidden" name="sender_email" value="<?= $templates["acceptance"]["sender_email"]; ?>">
+                    <input type="hidden" name="sender_name" value="<?= $templates["acceptance"]["sender_name"]; ?>">
+                    <input type="hidden" name="recipient" value="<?= $user_data->user_email; ?>">
+                    <div
+                        id="plcNotificationNonce"><?php wp_nonce_field('plc_notification', 'plc_notification_nonce'); ?></div>
+                </div>
+                <div class="plcNotificationController">
+                    <button class="plcSendEmailNotification"><?= __("Send e-mail", 'polc'); ?></button>
+                </div>
+            </div>
+
+            <!-- rejection -->
+            <div id="plcRejectionWrapper" style="display: none;">
+                <div id="plcRejectionForm">
+
+                    <div class="plcNotificationBodyWrapper">
+                        <?php wp_editor($templates["rejection"]["body"], 'plc_rejection', $editor_settings); ?>
+                    </div>
+                    <input type="hidden" name="subject" value="<?= $templates["rejection"]["subject"]; ?>">
+                    <input type="hidden" name="sender_email" value="<?= $templates["rejection"]["sender_email"]; ?>">
+                    <input type="hidden" name="sender_name" value="<?= $templates["rejection"]["sender_name"]; ?>">
+                    <input type="hidden" name="recipient" value="<?= $user_data->user_email; ?>">
+
+                    <div id="plcNotificationNonce">
+                        <?php wp_nonce_field('plc_notification', 'plc_notification_nonce'); ?>
+                    </div>
+                </div>
+                <div class="plcNotificationController">
+                    <button class="plcSendEmailNotification"><?= __("Send e-mail", 'polc'); ?></button>
+                </div>
+            </div>
+        </div>
+
+        <div id="confirmationDialog" style="display: none;" title="<?= __('Confirmation', 'polc'); ?>">
+            <?= __('Are you sure you want to send this e-mail?', 'polc'); ?>
+        </div>
+
+        <script type="text/javascript">
+            var notifiation_handler;
+            jQuery(document).ready(function () {
+                notifiation_handler = new polc_email_notification_handler();
+            });
+        </script>
         <?php
     }
 

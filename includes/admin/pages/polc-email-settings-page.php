@@ -27,8 +27,46 @@ class Polc_Email_Settings_Page
             self::save();
         endif;
 
-        $reg_email = Polc_Settings_Manager::register_email();
-        $lost_pass_email = Polc_Settings_Manager::lost_password_email();
+        $email = Polc_Settings_Manager::email();
+
+        $templates = [
+            "register" => [
+                "section" => 1,
+                "button_text" => __('Register mail', 'polc'),
+                "placeholders" => [
+                    ["id" => '#EMAIL#', "desc" => __("User's e-mail address", 'polc')],
+                    ["id" => '#USERNAME#', "desc" => __("User's username", 'polc')],
+                    ["id" => '#REGISTERDATE#', "desc" => __("User's registration date", 'polc')],
+                    ["id" => '#ACTIVATIONURL#', "desc" => __("Activation url", 'polc')],
+                ]
+            ],
+            "lost_password" => [
+                "section" => 2,
+                "button_text" => __('LostPass mail', 'polc'),
+                "placeholders" => [
+                    ["id" => '#EMAIL#', "desc" => __("User's e-mail address", 'polc')],
+                    ["id" => '#USERDISPLAYNAME#', "desc" => __("User's display name", 'polc')],
+                    ["id" => '#RESETURL#', "desc" => __("Password-reset url", 'polc')]
+                ]
+            ],
+            "acceptance" => [
+                "section" => 3,
+                "button_text" => __('Content acceptance mail', 'polc'),
+                "placeholders" => [
+                    ["id" => '#TITLE#', "desc" => __('Content\'s title')],
+                    ["id" => '#USERDISPLAYNAME#', "desc" => __("User's display name", 'polc')]
+                ]
+            ],
+            "rejection" => [
+                "section" => 4,
+                "button_text" => __('Content rejection mail', 'polc'),
+                "placeholders" => [
+                    ["id" => '#TITLE#', "desc" => __('Content\'s title')],
+                    ["id" => '#USERDISPLAYNAME#', "desc" => __("User's display name", 'polc')]
+                ]
+            ]
+        ];
+
         ?>
 
         <h1><?= __('Email settings', 'polc'); ?></h1>
@@ -48,153 +86,100 @@ class Polc_Email_Settings_Page
             }
         </script>
 
+
         <form action="<?= admin_url() . "admin.php?page=" . POLC_EMAIL_SETTINGS; ?>" method="POST">
             <table>
                 <tr>
-                    <td>
-                        <button onclick="change_setion(1,this);"
-                                class="section_btn active"><?= __('Register mail', 'polc'); ?></button>
-                    </td>
-                    <td>
-                        <button onclick="change_setion(2,this);"
-                                class="section_btn"><?= __('LostPass mail', 'polc'); ?></button>
-                    </td>
+                    <?php
+                    foreach ($templates as $template):
+                        ?>
+                        <td>
+                            <button onclick="change_setion(<?= $template["section"]; ?>,this);"
+                                    class="section_btn <?= $template["section"] == 1 ? "active" : ""; ?>"><?= $template["button_text"]; ?></button>
+                        </td>
+                        <?php
+                    endforeach;
+                    ?>
                 </tr>
             </table>
 
             <div id="sections_wrapper">
+                <?php foreach ($templates as $key => $template):
+                    ?>
+                    <div id="section_<?= $template["section"]; ?>" class="section" style="<?= $template["section"] != 1 ? "display:none;": ""; ?>">
 
-                <div id="section_1" class="section">
+                        <!-- register template -->
+                        <div class="polc-email-setting-element">
 
-                    <!-- register template -->
-                    <div class="polc-email-setting-element">
+                            <div class="polc-placeholder-wrapper">
 
-                        <div class="polc-placeholder-wrapper">
-
-                            <p><?= __("The following placeholder can be used in the message body", 'polc'); ?></p>
-
-                            <div class="polc-placeholder">
-                                <span>#EMAIL#</span>
-                                <span class="polc-placeholder-desc"><?= __("User's e-mail address", 'polc') ?></span>
+                                <p><?= __("The following placeholder can be used in the message body", 'polc'); ?></p>
+                                <?php
+                                foreach ($template["placeholders"] as $placeholder):
+                                    ?>
+                                    <div class="polc-placeholder">
+                                        <span><?= $placeholder["id"]; ?></span>
+                                        <span class="polc-placeholder-desc"><?= $placeholder["desc"]; ?></span>
+                                    </div>
+                                    <?php
+                                endforeach;
+                                ?>
                             </div>
-                            <div class="polc-placeholder">
-                                <span>#USERNAME#</span>
-                                <span class="polc-placeholder-desc"><?= __("User's username", 'polc') ?></span>
+
+                            <div class="polc-email-element">
+                                <label for="polc_<?= $key; ?>_sender-name"><?= __("Sender's name", 'polc'); ?></label>
+                                <input type="text" id="polc_<?= $key; ?>_sender-name"
+                                       name="polc_emails[<?= $key; ?>][sender_name]"
+                                       value="<?= isset($email[$key]["sender_name"]) ? $email[$key]["sender_name"] : ""; ?>"
+                                       size="70">
                             </div>
-                            <div class="polc-placeholder">
-                                <span>#REGISTERDATE#</span>
-                                <span class="polc-placeholder-desc"><?= __("User's registration date", 'polc') ?></span>
+
+                            <div class="polc-email-element">
+                                <label
+                                    for="polc_<?= $key; ?>_sender-email"><?= __("Sender's email address", 'polc'); ?></label>
+                                <input type="text" id="polc-reg-sender-email"
+                                       name="polc_emails[<?= $key; ?>][sender_email]"
+                                       value="<?= isset($email[$key]["sender_email"]) ? $email[$key]["sender_email"] : ""; ?>"
+                                       size="70">
                             </div>
-                            <div class="polc-placeholder">
-                                <span>#ACTIVATIONURL#</span>
-                                <span class="polc-placeholder-desc"><?= __("Activation url", 'polc') ?></span>
+
+                            <div class="polc-email-element">
+                                <label for="polc_<?= $key; ?>_subject"><?= __("Subject", 'polc'); ?></label>
+                                <input type="text" id="polc_<?= $key; ?>_subject"
+                                       name="polc_emails[<?= $key; ?>][subject]"
+                                       value="<?= isset($email[$key]["subject"]) ? $email[$key]["subject"] : ""; ?>"
+                                       size="70">
                             </div>
-                        </div>
 
-                        <div class="polc-email-element">
-                            <label for="polc-reg-sender-name"><?= __("Sender's name", 'polc'); ?></label>
-                            <input type="text" id="polc-reg-sender-name" name="polc_emails[register][sender_name]"
-                                   value="<?= isset($reg_email["sender_name"]) ? $reg_email["sender_name"] : ""; ?>"
-                                   size="70">
-                        </div>
-
-                        <div class="polc-email-element">
-                            <label for="polc-reg-sender-email"><?= __("Sender's email address", 'polc'); ?></label>
-                            <input type="text" id="polc-reg-sender-email" name="polc_emails[register][sender_email]"
-                                   value="<?= isset($reg_email["sender_email"]) ? $reg_email["sender_email"] : ""; ?>"
-                                   size="70">
-                        </div>
-
-                        <div class="polc-email-element">
-                            <label for="polc-reg-subject"><?= __("Subject", 'polc'); ?></label>
-                            <input type="text" id="polc-reg-subject" name="polc_emails[register][subject]"
-                                   value="<?= isset($reg_email["subject"]) ? $reg_email["subject"] : ""; ?>"
-                                   size="70">
-                        </div>
-
-                        <div class="polc-email-element">
-                            <label for="polc-reg-body"><?= __("Content", 'polc'); ?></label>
-                            <?php
-                            $body = isset($reg_email["body"]) ? $reg_email["body"] : "";
-                            wp_editor($body, "polc-reg-body", [
-                                "media_buttons" => false,
-                                "textarea_name" => "polc_emails[register][body]",
-                            ]);
-                            ?>
+                            <div class="polc-email-element">
+                                <label for="polc-reg-body"><?= __("Content", 'polc'); ?></label>
+                                <?php
+                                $body = isset($email[$key]["body"]) ? $email[$key]["body"] : "";
+                                wp_editor($body, "polc_" . $key . "_body", [
+                                    "media_buttons" => true,
+                                    "textarea_name" => "polc_emails[" . $key . "][body]",
+                                ]);
+                                ?>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div id="section_2" class="section" style="display: none;">
-                    <div class="polc-email-setting-element">
-
-                        <!-- lostpassword template -->
-                        <div class="polc-placeholder-wrapper">
-
-                            <p><?= __("The following placeholder can be used in the message body", 'polc'); ?></p>
-
-                            <div class="polc-placeholder">
-                                <span>#EMAIL#</span>
-                                <span class="polc-placeholder-desc"><?= __("User's e-mail address", 'polc'); ?></span>
-                            </div>
-                            <div class="polc-placeholder">
-                                <span>#USERDISPLAYNAME#</span>
-                                <span class="polc-placeholder-desc"><?= __("User's display name", 'polc'); ?></span>
-                            </div>
-                            <div class="polc-placeholder">
-                                <span>#RESETURL#</span>
-                                <span class="polc-placeholder-desc"><?= __("Password-reset url", 'polc'); ?></span>
-                            </div>
-                        </div>
-
-                        <div class="polc-email-element">
-                            <label for="polc-lost-password-sender-name"><?= __("Sender's name", 'polc'); ?></label>
-                            <input type="text" id="polc-lost-pass-sender-name"
-                                   name="polc_emails[lost_password][sender_name]"
-                                   value="<?= (isset($lost_pass_email["sender_name"]) ? $lost_pass_email["sender_name"] : ""); ?>"
-                                   size="70">
-                        </div>
-
-                        <div class="polc-email-element">
-                            <label
-                                for="polc-lost-password-sender-email"><?= __("Sender's email address", 'polc'); ?></label>
-                            <input type="text" id="polc-lost-password-sender-email"
-                                   name="polc_emails[lost_password][sender_email]"
-                                   value="<?= isset($lost_pass_email["sender_email"]) ? $lost_pass_email["sender_email"] : ""; ?>"
-                                   size="70">
-                        </div>
-
-                        <div class="polc-email-element">
-                            <label for="polc-lost-password-subject"><?= __("Subject", 'polc'); ?></label>
-                            <input type="text" id="polc-lost-password-subject"
-                                   name="polc_emails[lost_password][subject]"
-                                   value="<?= isset($lost_pass_email["subject"]) ? $lost_pass_email["subject"] : ""; ?>"
-                                   size="70">
-                        </div>
-
-                        <div class="polc-email-element">
-                            <label for="polc-lost-password-body"><?= __("Content", 'polc'); ?></label>
-                            <?php
-                            $body = isset($lost_pass_email["body"]) ? $lost_pass_email["body"] : "";
-                            wp_editor($body, "polc-lost-password-body", [
-                                "media_buttons" => false,
-                                "textarea_name" => "polc_emails[lost_password][body]",
-                            ]);
-                            ?>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
 
-            <?php submit_button(); ?>
+            <?php
+            submit_button();
+            ?>
         </form>
         <?php
     }
 
     public static function save()
     {
-        $_REQUEST["polc_emails"]["register"]["body"] = apply_filters('the_content', $_REQUEST["polc_emails"]["register"]["body"]);
-        $_REQUEST["polc_emails"]["lost_password"]["body"] = apply_filters('the_content', $_REQUEST["polc_emails"]["lost_password"]["body"]);
+        $_REQUEST["polc_emails"]["register"]["body"] = apply_filters('the_content', stripslashes($_REQUEST["polc_emails"]["register"]["body"]));
+        $_REQUEST["polc_emails"]["lost_password"]["body"] = apply_filters('the_content', stripslashes($_REQUEST["polc_emails"]["lost_password"]["body"]));
+        $_REQUEST["polc_emails"]["acceptance"]["body"] = apply_filters('the_content', stripslashes($_REQUEST["polc_emails"]["acceptance"]["body"]));
+        $_REQUEST["polc_emails"]["rejection"]["body"] = apply_filters('the_content', stripslashes($_REQUEST["polc_emails"]["rejection"]["body"]));
+
         update_option("polc-email-settings", json_encode($_REQUEST["polc_emails"]));
     }
 }

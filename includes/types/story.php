@@ -82,6 +82,11 @@ class Polc_Story_Post_Type
      */
     public function publish($post_id, $post)
     {
+        //FRONTEND CONTENT EDIT
+        if(isset($_REQUEST["polc-edit"])){
+            return;
+        }
+
         //Refreshing parent's post modofied if child was published
         if ($post->post_type == "story" && $post->post_status == "publish" && is_numeric($post->post_parent) && $post->post_parent != 0):
             //Removing save post action avoiding infinite loop before we update parent post

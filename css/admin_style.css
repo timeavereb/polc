@@ -1,3 +1,7 @@
+body,html {
+    min-height: 100%;
+    height: auto;
+}
 .plcNotificationTab,
 .polc-setting-select-element{
     display: inline-block;
@@ -51,27 +55,28 @@
     float: left;
 }
 .ui-widget-overlay.ui-front {
-    min-height: 100%;
+   /* min-height: 100%;
     z-index: 9999;
-    background: rgba(0,0,0,0.9);
+    background: rgba(0,0,0,0.9);*/
+    display:none;
 }
 .ui-dialog-titlebar {
-    background: white;
-    border: none;
+    background: white!important;
+    border: none!important;
 }
 .ui-dialog {
     border-radius: 0;
 }
 .ui-button-icon-only .ui-icon {
-    left: 0;
-    top: 0;
+    left: 0!important;
+    top: 0!important;
 }
 .ui-dialog .ui-dialog-titlebar-close {
-    border: none;
-    background: white;
+    border: none!important;
+    background: white!important;
 }
 .ui-dialog .ui-dialog-buttonpane button {
-    border-radius: 0;
+    border-radius: 0!important;
     background: #d6d6d6;
 }
 .ui-button .ui-button-text{

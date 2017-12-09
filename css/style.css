@@ -216,6 +216,18 @@ html, body {height: 100%;background-color: #f8f8f6;}
 .plc_navigation_item_wrapper:nth-of-type(5):hover .plc_navigation_item:before{
     background-image:url('../img/navigation/help_black.svg');
 }
+.plc_navigation_item_wrapper:nth-of-type(6) .plc_navigation_item:before{
+    background-image:url('../img/navigation/users.svg');
+    background-size: 25px 25px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+.plc_navigation_item_wrapper:nth-of-type(6):hover .plc_navigation_item:before{
+    background-image:url('../img/navigation/users_black.svg');
+    background-size: 25px 25px;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
 .plc_user_menu li:nth-of-type(1) a:before{
     background-image:url('../img/navigation/profile.svg');
     background-size: 30px 30px;
@@ -1257,7 +1269,18 @@ ul.plc_user_menu a{
 .favoriteBtnWrapper {
     float: right;
 }
-
+.polcCommentWrapper h1{
+    width:100%;
+    float:left;
+    text-align:center;
+    margin-bottom:0!important;
+}
+.polcCommentWrapper .author {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom:10px;
+}
 /*SOCIAL,TAGS,COMMENTS*/
 .polcCommentWrapper {
     width: 100%;
@@ -1304,6 +1327,7 @@ ul.plc_user_menu a{
     display: inline-block;
     margin-right:5px;
 }
+
 /*SOCIAL,TAGS,COMMENTS END*/
 
 
@@ -2937,7 +2961,8 @@ h2.articleAuthor {
     border-bottom: solid 1px #e4e2e2;
 }
 .sectionContainer .part h1,
-.membersContainer h1{
+.membersContainer h1,
+.polcCommentWrapper h1{
     font-size: 28px;
     font-weight: 600;
     color: #fb5c43;

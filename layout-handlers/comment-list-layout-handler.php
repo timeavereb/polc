@@ -24,6 +24,7 @@ class Polc_Comment_List_Layout_Handler extends Polc_Layout_Handler_Base
     public function render()
     {
         $this->init();
+        setup_postdata($this->post);
         ?>
         <script>
             var polc_comment_handler,
@@ -36,6 +37,9 @@ class Polc_Comment_List_Layout_Handler extends Polc_Layout_Handler_Base
         </script>
 
         <div class="polcCommentWrapper">
+            <h1><?= $this->post->post_title; ?></h1>
+            <address class="author"><a rel="author" href="<?= get_author_posts_url($this->post->post_author); ?>"><?php the_author(); ?></a>
+            </address>
             <?php if (is_user_logged_in()): ?>
                 <div class="polcCommentInnerWrapper">
                     <div class="Name">

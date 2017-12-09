@@ -5,7 +5,8 @@
 function polc_comment_handler(params) {
 
     var self = this,
-        settings = params;
+        settings = params,
+        sending = false;
 
     this.load_comments = function () {
 
@@ -23,7 +24,7 @@ function polc_comment_handler(params) {
                 params: {
                     post_id: settings.id,
                     number: settings.number,
-                    parent : settings.parent,
+                    parent: settings.parent,
                     author: settings.author
                 }
             },
@@ -41,9 +42,11 @@ function polc_comment_handler(params) {
 
     this.send_comment = function (params) {
 
-        if(params.content.length == 0){
+        if (params.content.length == 0 || sending == true) {
             return false;
         }
+
+        sending = true;
 
         jQuery.ajax({
             url: "/wp-content/themes/polc/includes/modules/comment-module.php",
@@ -58,6 +61,9 @@ function polc_comment_handler(params) {
             },
             success: function (response) {
 
+                sending = false;
+                jQuery("#plcCommentContent").val("");
+
                 if (response.hasOwnProperty("error")) {
                     jQuery.event.trigger("polc_alert", {title: "Hiba", msg: response.error});
                     return false;
@@ -65,6 +71,8 @@ function polc_comment_handler(params) {
 
                 self.load_comments();
             }
+        }).always(function () {
+            sending = false;
         });
     };
 
@@ -75,14 +83,14 @@ function polc_comment_handler(params) {
     jQuery(document).ready(function () {
 
         //New comment
-        jQuery(document).on("click", "#plcSendComment", function(){
+        jQuery(document).on("click", "#plcSendComment", function () {
             var params = {};
             params.content = jQuery("#plcCommentContent").val();
             params.parent = null;
-            if(!self.send_comment(params)){
+            if (!self.send_comment(params)) {
                 return false;
             }
-            jQuery("#plcCommentContent").val("");
+
             self.load_comments();
         });
 
@@ -95,11 +103,12 @@ function polc_comment_handler(params) {
         //Send comment on keypress
         jQuery(document).on("keyup", ".plcReplyText", function (e) {
             if ((e.keyCode || e.which) == 13) {
+                var textarea = this;
                 var params = {};
-                params.parent = jQuery(this).attr("data-id");
-                params.content = jQuery(this).val();
+                params.parent = jQuery(document.activeElement).attr("data-id");
+                params.content = jQuery(document.activeElement).val();
                 self.send_comment(params);
-                jQuery(this).hide();
+                jQuery(textarea).hide();
             }
         });
     });

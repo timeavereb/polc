@@ -37,7 +37,7 @@ class Polc_Authors_Layout_Handler extends Polc_Layout_Handler_Base
         $users = $user_query->get_results();
 
         $total_users = $user_query->get_total();
-        $total_pages = round($total_users / $this->ppp);
+        $total_pages = ceil($total_users / $this->ppp);
 
         ?>
         <div class="membersContainer">

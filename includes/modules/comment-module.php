@@ -125,7 +125,7 @@ class Polc_Comment_Module
             class="plcCommentWrapper<?= $this->author_id == $comment->user_id ? " author_comment " : ""; ?> <?= $custom_depth; ?>">
             <span class="plcCommentContent"><?= $comment->comment_content; ?></span>
             <a href="<?= get_author_posts_url($comment->user_id) ?>"><?= self::$authors[$comment->user_id]; ?></a>
-            <span><?= __('wrote at', 'polc') . ' ' . mysql2date('Y F j', $comment->comment_date); ?></span>
+            <span><?= __('wrote at', 'polc') . ' ' . mysql2date('Y. F j.', $comment->comment_date); ?></span>
             <?php
             if ($this->logged):
                 ?>

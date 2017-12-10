@@ -45,7 +45,7 @@ class Polc_Help_List_Layout_Handler extends Polc_Layout_Handler_Base
         $posts = $query->get_posts();
 
         $this->total_items = $query->found_posts;
-        $this->total_pages = round($this->total_items / $this->ppp);
+        $this->total_pages = ceil($this->total_items / $this->ppp);
 
         ?>
         <div class="plcNewsListWrapper help">
@@ -63,8 +63,10 @@ class Polc_Help_List_Layout_Handler extends Polc_Layout_Handler_Base
                             </div>
                             <div class="articleDatas">
                                 <h1><?= $post->post_title; ?></h1>
+
                                 <p class="lead"><?= $post->post_excerpt; ?></p>
-                                <p class="newsDate"><?= get_the_date('',$post); ?></p>
+
+                                <p class="newsDate"><?= get_the_date('', $post); ?></p>
                             </div>
                         </article>
                     </a>
@@ -77,6 +79,8 @@ class Polc_Help_List_Layout_Handler extends Polc_Layout_Handler_Base
             <input type="hidden" id="page" name="page" value="<?= $this->paged; ?>">
         </form>
         <?php
-        Polc_Helper_Module::pagination($this->total_pages, $this->paged);
+        if ($this->total_pages > 1):
+            Polc_Helper_Module::pagination($this->total_pages, $this->paged);
+        endif;
     }
 }

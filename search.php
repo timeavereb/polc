@@ -34,12 +34,14 @@ class Polc_Search
         $this->search();
 
         $this->total_items = $this->items->found_posts;
-        $this->total_pages = round($this->total_items / $this->ppp);
+        $this->total_pages = ceil($this->total_items / $this->ppp);
         ?>
         <div id="plcSearchMainWrapper">
             <?php
             $this->form();
-            Polc_Helper_Module::pagination($this->total_pages, $this->paged);
+            if ($this->total_pages > 1):
+                Polc_Helper_Module::pagination($this->total_pages, $this->paged);
+            endif;
             ?>
         </div>
         <?php

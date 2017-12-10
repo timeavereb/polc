@@ -124,7 +124,7 @@ class Polc_Helper_Module
                                 echo $restriction;
                             endif;
                             ?>
-                            <span class="date"><?= mysql2date("Y F j", $post->post_modified); ?></span>
+                            <span class="date"><?= mysql2date("Y. F j.", $post->post_modified); ?></span>
                         </div>
                         <a href="<?= get_permalink($post->ID); ?>">
                             <h2><?= $post->post_title; ?></h2>
@@ -253,7 +253,7 @@ class Polc_Helper_Module
                         <div class="plc_article_datas top">
                             <a href="<?= get_author_posts_url($post->post_author); ?>"><span
                                     class="author"><?= get_the_author_meta("display_name", $post->post_author); ?></span></a>
-                            <span class="date"><?= mysql2date("Y F j", $post->post_modified); ?></span>
+                            <span class="date"><?= mysql2date("Y. F j.", $post->post_modified); ?></span>
                         </div>
                         <a href="<?= get_permalink($post->ID) ?>">
                             <h2>

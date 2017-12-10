@@ -36,7 +36,7 @@ class Polc_News_List_Layout_Handler extends Polc_Layout_Handler_Base
 
         $this->max = 999999999;
         $this->paged = (get_query_var('page')) ? get_query_var('page') : 1;
-        $this->ppp = 2;
+        $this->ppp = 10;
 
         $args = [
             "post_type" => "post",

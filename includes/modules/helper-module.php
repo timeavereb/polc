@@ -50,6 +50,19 @@ class Polc_Helper_Module
     }
 
     /**
+     * Return the user's avatar by user id. If user has no avatar, then it returns the default avatar img.
+     * @param $id
+     * @return string
+     */
+    public static function get_user_avatar($id){
+
+        $avatar_meta = get_user_meta($id, "polc_current_avatar", true);
+        $avatar = isset($avatar_meta["src"]) && $avatar_meta["src"] != "" ? $avatar_meta["src"] : PLC_THEME_PATH . "/img/settings/default_profile_image.png";
+
+        return $avatar;
+    }
+
+    /**
      * @param $posts
      * @param bool|false $animate
      */
@@ -111,7 +124,7 @@ class Polc_Helper_Module
                                 echo $restriction;
                             endif;
                             ?>
-                            <span class="date"><?= mysql2date("F j", $post->post_date); ?></span>
+                            <span class="date"><?= mysql2date("Y. F j.", $post->post_modified); ?></span>
                         </div>
                         <a href="<?= get_permalink($post->ID); ?>">
                             <h2><?= $post->post_title; ?></h2>
@@ -190,7 +203,7 @@ class Polc_Helper_Module
         ?>
         <div class="plc_latest">
             <?php
-            foreach ($posts as $post) {
+            foreach ($posts as $post):
 
                 if ($post->post_parent != 0):
                     $id = $post->post_parent;
@@ -240,7 +253,7 @@ class Polc_Helper_Module
                         <div class="plc_article_datas top">
                             <a href="<?= get_author_posts_url($post->post_author); ?>"><span
                                     class="author"><?= get_the_author_meta("display_name", $post->post_author); ?></span></a>
-                            <span class="date"><?= mysql2date("F j", $post->post_date); ?></span>
+                            <span class="date"><?= mysql2date("Y. F j.", $post->post_modified); ?></span>
                         </div>
                         <a href="<?= get_permalink($post->ID) ?>">
                             <h2>
@@ -277,7 +290,7 @@ class Polc_Helper_Module
                     </article>
                 </div>
                 <?php
-            }
+            endforeach;
             ?>
         </div>
         <?php

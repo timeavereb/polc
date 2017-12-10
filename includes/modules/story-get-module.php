@@ -66,6 +66,8 @@ class Polc_Get_Module
             "paged" => $paged,
             "posts_per_page" => $ppp,
             "post_status" => "publish",
+            "orderby" => "modified",
+            "order" => "desc",
             'tax_query' => [
                 [
                     'taxonomy' => 'post_tag',
@@ -85,9 +87,11 @@ class Polc_Get_Module
         $posts = $query->get_posts();
 
         $total_items = $query->found_posts;
-        $total_pages = round($total_items / $ppp);
+        $total_pages = ceil($total_items / $ppp);
 
         Polc_Helper_Module::search_list($posts, $animate);
-        Polc_Helper_Module::pagination($total_pages, $paged);
+        if ($total_pages > 1) {
+            Polc_Helper_Module::pagination($total_pages, $paged);
+        }
     }
 }

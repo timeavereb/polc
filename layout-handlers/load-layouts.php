@@ -24,3 +24,4 @@ require_once "news-list-layout-handler.php";
 require_once "help-layout-handler.php";
 require_once "about-layout-handler.php";
 require_once 'help-list-layout-handler.php';
+require_once 'authors-list-layout-handler.php';

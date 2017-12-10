@@ -21,6 +21,10 @@ endif;
 class Polc_Comment_Module
 {
     private $user;
+    private $author_id;
+    private $logged;
+    public static $authors;
+    private $total_comments;
 
     /**
      * Polc_Comment_Module constructor.
@@ -44,17 +48,34 @@ class Polc_Comment_Module
      */
     private function get_comments($params)
     {
+        $this->author_id = $params["author"];
+        $this->total_comments = wp_count_comments($params["post_id"]);
+        $this->logged = is_user_logged_in();
+        self::$authors = [];
+
         $more = false;
         $more_link = "";
-        $default = ["number" => 0, "hierarchical" => true];
+
+        $default = [
+            "hierarchical" => true,
+            "callback" => [$this, 'comment_view']
+        ];
+
         $args = wp_parse_args($params, $default);
 
-        if ($args["number"] != 0 && $args["number"] < wp_count_comments($args["post_id"])):
+        if ($args["number"] != 0 && $args["number"] < $this->total_comments->approved):
             $more = true;
             $more_link = get_permalink(Polc_Settings_Manager::pages()["comment_page"]) . get_post($args["post_id"])->post_name . "/";
         endif;
 
-        $this->draw_comments(get_comments($args), $more, $more_link, $args["author"]);
+        $pre_args = [
+            "number" => isset($params["number"]) ? $params["number"] : 0,
+            "post_id" => $params["post_id"]
+        ];
+
+        $comments = get_comments($pre_args);
+        wp_list_comments($args,$comments);
+        $this->draw_comment_footer($more, $more_link);
     }
 
     /**
@@ -71,7 +92,7 @@ class Polc_Comment_Module
 
         $args = wp_parse_args($params, $default);
 
-        if ($args["comment_content"] == ""):
+        if (trim($args["comment_content"]) == ""):
             Polc_Helper_Module::error(__("Empty comment!", "polc"));
         endif;
 
@@ -81,60 +102,55 @@ class Polc_Comment_Module
     }
 
     /**
-     * @param $comments
-     * @param bool|false $more
-     * @param string $more_link
-     * @param int $author_id
+     * @param $comment
+     * @param $args
+     * @param $depth
      */
-    private function draw_comments($comments, $more = false, $more_link = "", $author_id = 0)
+    public function comment_view($comment, $args, $depth)
     {
-        $logged = is_user_logged_in();
-        $authors = [];
-        $comment_list = [];
-
-        foreach ($comments as $comment) {
-            $comment_list[$comment->comment_ID] = $comment;
+        $depth--;
+        if ($depth == 0) {
+            $custom_depth = "";
+        } else {
+            $custom_depth = "lvl-" . min($depth,2);
         }
 
-        foreach ($comments as $comment) {
+        if (!array_key_exists($comment->user_id, self::$authors)):
+            $recent_author = get_user_by('ID', $comment->user_id);
+            self::$authors[$comment->user_id] = $recent_author->user_login;
+        endif;
 
-            if (!array_key_exists($comment->user_id, $authors)):
-                $recent_author = get_user_by('ID', $comment->user_id);
-                $authors[$comment->user_id] = $recent_author->user_login;
-            endif;
+        ?>
+        <div
+            class="plcCommentWrapper<?= $this->author_id == $comment->user_id ? " author_comment " : ""; ?> <?= $custom_depth; ?>">
+            <span class="plcCommentContent"><?= $comment->comment_content; ?></span>
+            <a href="<?= get_author_posts_url($comment->user_id) ?>"><?= self::$authors[$comment->user_id]; ?></a>
+            <span><?= __('wrote at', 'polc') . ' ' . mysql2date('Y. F j.', $comment->comment_date); ?></span>
+            <?php
+            if ($this->logged):
+                ?>
+                <div class="plcCommentReplyWrapper">
+                    <span class="plcCommentReplyBtn"><?= __("Reply", "polc"); ?></span>
 
-            if ($comment->comment_parent != 0 && $comment_list[$comment->comment_parent]->comment_parent != 0):
-                $child = "lvl-2";
-            elseif ($comment->comment_parent != 0 && $comment_list[$comment->comment_parent]->comment_parent == 0):
-                $child = "lvl-1";
-            else:
-                $child = "";
-            endif;
-
-            ?>
-            <div class="plcCommentWrapper<?= $author_id == $comment->user_id ? " author_comment " : ""; ?> <?= $child; ?>">
-                <span class="plcCommentContent"><?= $comment->comment_content; ?></span>
-                <a href="<?= get_author_posts_url($comment->user_id) ?>"><?= $authors[$comment->user_id]; ?></a>
-                <span><?= __('wrote at', 'polc') . ' ' . mysql2date('Y F j', $comment->comment_date); ?></span>
-                <?php
-                if ($logged):
-                    ?>
-                    <div class="plcCommentReplyWrapper">
-                        <span class="plcCommentReplyBtn"><?= __("Reply", "polc"); ?></span>
-
-                        <div class="plcCommentTextWrapper" style="display: none;">
+                    <div class="plcCommentTextWrapper" style="display: none;">
                         <textarea placeholder="<?= __("Write your reply..", "polc"); ?>" class="plcReplyText"
                                   data-id="<?= $comment->comment_ID; ?>"></textarea>
-                        </div>
                     </div>
-                    <?php
-                endif;
-                ?>
-            </div>
-            <?php
-        }
+                </div>
+                <?php
+            endif;
+            ?>
+        </div>
+        <?php
+    }
 
-        if ($more && count($comments) > 0):
+    /**
+     * @param $more
+     * @param $more_link
+     */
+    private function draw_comment_footer($more, $more_link)
+    {
+        if ($more && $this->total_comments->approved > 0):
             ?>
             <a href="<?= $more_link; ?>"><?= __("All comments", "polc"); ?></a>
             <?php

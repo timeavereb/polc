@@ -1,0 +1,87 @@
+body,html {
+    min-height: 100%;
+    height: auto;
+}
+.plcNotificationTab,
+.polc-setting-select-element{
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-top: solid 1px #dddddd;
+    border-left: solid 1px #dddddd;
+    border-right: solid 1px #dddddd;
+    cursor:pointer;
+    background-color:white;
+}
+.plcNotificationTab:nth-of-type(1){
+    color: #1cab1c;
+ }
+.plcNotificationTab:nth-of-type(2){
+    color: #fb5c43;
+}
+.polc-setting-select-element a{
+    text-decoration: none;
+    color:black;
+    font-size: 14px;
+}
+.plcEmailMessagesWrapper {
+    border-top: solid 1px #dddddd;
+    padding: 20px 0 0 0;
+}
+.plcSendEmailNotification {
+    border-radius: 30px;
+    padding: 5px 15px;
+    border: solid 2px #fb5c43;
+    background-color: white;
+    color: #fb5c43;
+    font-weight: 700;
+    margin-top: 10px;
+    cursor:pointer;
+}
+.polc-settings-wrapper {
+    background-color: white;
+    padding:20px;
+}
+.polc-settings-wrapper h1{
+    margin: 0;
+    color: black;
+    font-size: 18px;
+}
+.polc-settings-wrapper p label {
+    min-width: 200px;
+    display: block;
+    float: left;
+}
+.ui-widget-overlay.ui-front {
+   /* min-height: 100%;
+    z-index: 9999;
+    background: rgba(0,0,0,0.9);*/
+    display:none;
+}
+.ui-dialog-titlebar {
+    background: white!important;
+    border: none!important;
+}
+.ui-dialog {
+    border-radius: 0;
+}
+.ui-button-icon-only .ui-icon {
+    left: 0!important;
+    top: 0!important;
+}
+.ui-dialog .ui-dialog-titlebar-close {
+    border: none!important;
+    background: white!important;
+}
+.ui-dialog .ui-dialog-buttonpane button {
+    border-radius: 0!important;
+    background: #d6d6d6;
+}
+.ui-button .ui-button-text{
+    font-size:12px;
+}
+.plcNotificationBodyWrapper iframe {
+    min-height: 400px;
+}

@@ -66,6 +66,8 @@ class Polc_Get_Module
             "paged" => $paged,
             "posts_per_page" => $ppp,
             "post_status" => "publish",
+            "orderby" => "modified",
+            "order" => "desc",
             'tax_query' => [
                 [
                     'taxonomy' => 'post_tag',

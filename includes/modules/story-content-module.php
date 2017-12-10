@@ -174,9 +174,9 @@ class Polc_Story_Content_Module
                         <?php
                     endif;
 
-                    $date = mysql2date("Y F j", $this->post->post_date);
+                    $date = mysql2date("Y F j", $this->post->post_modified);
                     ?>
-                    <time datetime="<?= date("Y-m-d", strtotime($this->post->post_date)); ?>" pubdate="pubdate"
+                    <time datetime="<?= date("Y-m-d", strtotime($this->post->post_modified)); ?>" pubdate="pubdate"
                           title="<?= $date;?>"><?= $date; ?></time>
                     <p>
                         <?php

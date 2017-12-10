@@ -121,7 +121,7 @@ class Polc_Search
             "s" => $this->phrase,
             "posts_per_page" => $this->ppp,
             "paged" => $this->paged,
-            "orderby" => "date",
+            "orderby" => "modified",
             "order" => "desc"
         ];
 

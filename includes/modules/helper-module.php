@@ -50,6 +50,19 @@ class Polc_Helper_Module
     }
 
     /**
+     * Return the user's avatar by user id. If user has no avatar, then it returns the default avatar img.
+     * @param $id
+     * @return string
+     */
+    public static function get_user_avatar($id){
+
+        $avatar_meta = get_user_meta($id, "polc_current_avatar", true);
+        $avatar = isset($avatar_meta["src"]) && $avatar_meta["src"] != "" ? $avatar_meta["src"] : PLC_THEME_PATH . "/img/settings/default_profile_image.png";
+
+        return $avatar;
+    }
+
+    /**
      * @param $posts
      * @param bool|false $animate
      */

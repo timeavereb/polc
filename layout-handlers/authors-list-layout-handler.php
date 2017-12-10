@@ -29,7 +29,6 @@ class Polc_Authors_Layout_Handler extends Polc_Layout_Handler_Base
 
         $args = [
             'number' => $this->ppp,
-            'role' => 'polc_frontend_user',
             'paged' => $this->paged
         ];
 
@@ -53,9 +52,17 @@ class Polc_Authors_Layout_Handler extends Polc_Layout_Handler_Base
                             <div class="innerItem">
                                 <div class="memberImage" style="background-image:url('<?= $avatar; ?>');"></div>
                                 <h2><?= $user->data->user_login; ?></h2>
-                                <?php if (count_user_posts($user->data->ID, 'story') > 0): ?>
+                                <?php
+                                if ($user->roles[0] == "polc_frontend_user" && count_user_posts($user->data->ID, 'story') > 0):
+                                    ?>
                                     <span class="hasContent"></span>
-                                <?php endif; ?>
+                                    <?php
+                                elseif ($user->roles[0] != "polc_frontend_user"):
+                                    ?>
+                                    <span class="customUser <?= $user->roles[0]; ?>"></span>
+                                    <?php
+                                endif;
+                                ?>
                             </div>
                         </div>
                     </a>

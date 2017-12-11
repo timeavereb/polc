@@ -40,10 +40,11 @@ class Polc_Helper_Module
      * @param $limit
      * @return string
      */
-    public static function limit_text($text, $limit) {
+    public static function limit_text($text, $limit)
+    {
 
         if (strlen($text) > $limit) {
-            $text = substr($text,0,$limit) . '...';
+            $text = substr($text, 0, $limit) . '...';
         }
 
         return $text;
@@ -54,7 +55,8 @@ class Polc_Helper_Module
      * @param $id
      * @return string
      */
-    public static function get_user_avatar($id){
+    public static function get_user_avatar($id)
+    {
 
         $avatar_meta = get_user_meta($id, "polc_current_avatar", true);
         $avatar = isset($avatar_meta["src"]) && $avatar_meta["src"] != "" ? $avatar_meta["src"] : PLC_THEME_PATH . "/img/settings/default_profile_image.png";
@@ -76,6 +78,28 @@ class Polc_Helper_Module
             $editor_page = get_permalink($pages["content-editor-page"]);
 
             foreach ($posts as $post):
+
+                $total_comments = wp_count_comments($post->ID)->total_comments;
+                $has_child = false;
+
+                if ($post->post_parent == 0 && get_post_meta($post->ID, "single", true) != 1) {
+
+                    $child_ids = array_keys(get_children([
+                        'post_parent' => $post->ID,
+                        'post_type' => 'story',
+                        'numberposts' => -1,
+                        'post_status' => 'publish'
+                    ]));
+
+                    if(count($child_ids) > 0){
+                        $has_child = true;
+                    }
+
+                    foreach($child_ids as $id){
+                        $total_comments = $total_comments + intval(wp_count_comments($id)->total_comments);
+                    }
+                }
+
 
                 $tags = get_the_tags($post->ID);
                 $user = Polc_Header::current_user();
@@ -101,7 +125,7 @@ class Polc_Helper_Module
                 endforeach;
 
                 if (strlen($restriction) > 0):
-                    $restriction = '<div class="plcContentWarningWrapper">'. $restriction . '</div>';
+                    $restriction = '<div class="plcContentWarningWrapper">' . $restriction . '</div>';
                 endif;
 
                 ?>
@@ -117,7 +141,7 @@ class Polc_Helper_Module
                             else:
                                 ?>
                                 <a href="#"><span
-                                        class="comments"><?= wp_count_comments($post->ID)->total_comments . ' ' . __('Comment', 'polc'); ?>
+                                        class="comments"><?= $total_comments . ' ' . __('Comment', 'polc'); ?>
                                 </span></a>
                                 <?php
 
@@ -128,6 +152,7 @@ class Polc_Helper_Module
                         </div>
                         <a href="<?= get_permalink($post->ID); ?>">
                             <h2><?= $post->post_title; ?></h2>
+
                             <p><?= apply_filters('the_content', $post->post_excerpt); ?></p>
                         </a>
 
@@ -137,18 +162,12 @@ class Polc_Helper_Module
                                 ?>
                                 <a href="#">
                                     <span
-                                        class="comments"><?= wp_count_comments($post->ID)->total_comments . " " . __('Comment', 'polc'); ?></span>
+                                        class="comments"><?= $total_comments . " " . __('Comment', 'polc'); ?></span>
                                 </a>
                                 <?php
                                 echo $restriction;
                             else:
-                                if (count(get_children($args = [
-                                        'post_parent' => $post->ID,
-                                        'post_type' => 'story',
-                                        'numberposts' => 1,
-                                        'post_status' => 'publish'
-                                    ])) > 0
-                                ):
+                                if ($has_child):
                                     ?>
                                     <form action="<?= $new_story_page; ?>" method="POST">
                                         <input type="hidden" name="volume-id" value="<?= $post->ID; ?>">
@@ -225,7 +244,7 @@ class Polc_Helper_Module
                 endforeach;
 
                 if (strlen($restriction) > 0):
-                    $restriction = '<div class="plcContentWarningWrapper">'. $restriction . '</div>';
+                    $restriction = '<div class="plcContentWarningWrapper">' . $restriction . '</div>';
                 endif;
 
                 $parent_post = [];
@@ -315,7 +334,7 @@ class Polc_Helper_Module
                     <div class="plcNewsText">
                         <h1><?= $post->post_title; ?></h1>
 
-                        <p class="date"><?= get_the_date('',$post); ?></p>
+                        <p class="date"><?= get_the_date('', $post); ?></p>
                     </div>
                 </article>
             </a>

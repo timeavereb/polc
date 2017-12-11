@@ -101,15 +101,13 @@ function polc_comment_handler(params) {
         });
 
         //Send comment on keypress
-        jQuery(document).on("keyup", ".plcReplyText", function (e) {
-            if ((e.keyCode || e.which) == 13) {
-                var textarea = this;
-                var params = {};
-                params.parent = jQuery(document.activeElement).attr("data-id");
-                params.content = jQuery(document.activeElement).val();
-                self.send_comment(params);
-                jQuery(textarea).hide();
-            }
+        jQuery(document).on("click", ".plcSendComment", function (e) {
+            var textarea = jQuery(this).prev();
+            var params = {};
+            params.parent = jQuery(textarea).attr("data-id");
+            params.content = jQuery(textarea).val();
+            self.send_comment(params);
+            jQuery(textarea).hide();
         });
     });
 }

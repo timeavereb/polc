@@ -135,6 +135,7 @@ class Polc_Comment_Module
                     <div class="plcCommentTextWrapper" style="display: none;">
                         <textarea placeholder="<?= __("Write your reply..", "polc"); ?>" class="plcReplyText"
                                   data-id="<?= $comment->comment_ID; ?>"></textarea>
+                        <button class="plcSendComment"><?= __("Send comment", "polc"); ?></button>
                     </div>
                 </div>
                 <?php

@@ -25,6 +25,7 @@ class Polc_Editor_Helper_Module
         ?>
         <div class="newStoryData_row">
             <textarea name="blurb" placeholder="<?= __('Blurb', 'polc'); ?>*" id="blurb"><?= $value; ?></textarea>
+
             <p class="form_info"><?= __('The bulrb character limit is 1200 characters.', 'polc'); ?></p>
         </div>
         <?php
@@ -189,7 +190,11 @@ class Polc_Editor_Helper_Module
         ?>
         <div class="newStoryData_row tag">
             <label for="polc_tag_handler"><?= __('Add tags', 'polc'); ?></label>
-            <input type="text" id="polc_tag_handler">
+            <div class="plc_tag_handler_wrapper">
+                <input type="text" id="polc_tag_handler">
+                <span style="display: none;" id="plc_tag_error"><?= __('You must provide 1 tag at least!', 'polc'); ?></span>
+            </div>
+            <button id="addTag"><?= __('Add tag', 'polc'); ?></button>
 
             <div class="plcTagContainer">
                 <?php

@@ -32,9 +32,15 @@ function polc_content_editor_handler() {
             }
         }
 
+        console.log(jQuery(".plcTagContainer div").length);
+        if (jQuery(".plcTagContainer div").length == 0) {
+            jQuery("#plc_tag_error").css("display", "block");
+            jQuery("#polc_tag_handler").addClass("error");
+        }
+
         var validation = jQuery("#polc-story-form").valid();
 
-        if (!validation || jQuery("#story_content").val() == "") {
+        if (!validation || jQuery("#story_content").val() == "" || jQuery(".plcTagContainer div").length == 0) {
             return false;
         } else {
             return true;
@@ -140,9 +146,11 @@ function polc_content_editor_handler() {
         });
 
         jQuery("#submit").click(function (event) {
-            jQuery("#story_content-error").hide();
-            tinyMCE.triggerSave();
-
+            jQuery("#story_content-error, #plc_tag_error").hide();
+            jQuery("#polc_tag_handler").removeClass("error");
+            if (typeof tinyMCE !== 'undefined') {
+                tinyMCE.triggerSave();
+            }
             if (!self.validate_content()) {
                 event.preventDefault();
                 return false;
@@ -199,20 +207,17 @@ function polc_content_editor_handler() {
             }
         });
 
-        jQuery("#polc_tag_handler").keypress(function (event) {
+        jQuery("#addTag").click(function (event) {
 
-            if (event.keyCode == 13) {
+            event.preventDefault();
 
-                event.preventDefault();
+            if (self.selected_tag_list().length == 8) {
+                jQuery.event.trigger("polc_alert", {title: "Figyelmeztetés", msg: "Maximum 8 címke adható meg!"});
+                return false;
+            }
 
-                if (self.selected_tag_list().length == 8) {
-                    jQuery.event.trigger("polc_alert", {title: "Figyelmeztetés", msg: "Maximum 8 címke adható meg!"});
-                    return false;
-                }
-
-                if (jQuery.inArray(jQuery(this).val(), self.selected_tag_list()) < 0 && jQuery.trim(jQuery(this).val()).length > 0) {
-                    self.add_tag_element(self.get_tag_element(jQuery(this).val()));
-                }
+            if (jQuery.inArray(jQuery("#polc_tag_handler").val(), self.selected_tag_list()) < 0 && jQuery.trim(jQuery("#polc_tag_handler").val()).length > 0) {
+                self.add_tag_element(self.get_tag_element(jQuery("#polc_tag_handler").val()));
             }
         });
     });

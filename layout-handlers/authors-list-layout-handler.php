@@ -29,7 +29,9 @@ class Polc_Authors_Layout_Handler extends Polc_Layout_Handler_Base
 
         $args = [
             'number' => $this->ppp,
-            'paged' => $this->paged
+            'paged' => $this->paged,
+            'orderby' => 'user_login',
+            'order' => 'ASC'
         ];
 
         $user_query = new WP_User_Query($args);

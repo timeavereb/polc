@@ -2157,22 +2157,19 @@ label#story_content-error{
 }
 .plcPagerInnerWrapper button {
     background-color: #fb5c43;
-    border: 1px solid white;
+    border: 1px solid #fb5c43;
     color: white;
     width: 30px;
     height: 30px;
     cursor: pointer;
     font-family: "Titillium",sans-serif;
     float:left;
+    margin-right:-1px;
 }
 .current_page,.plcPagerInnerWrapper button:hover {
     border: solid 1px #fb5c43!important;
     background-color: white!important;
     color: #fb5c43!important;
-}
-.plcPagerInnerWrapper button:first-of-type,
-.plcPagerInnerWrapper button:last-of-type{
-    width:auto;
 }
 /*SEARCH PAGE END*/
 
@@ -3149,7 +3146,15 @@ span.hasContent:before{
     background-repeat: no-repeat;
     background-position: center bottom;
 }
-
+.membersContainer .plcUserListPaginationWrapper {
+    width: 100%;
+    float: left;
+}
+.membersContainer .plcPagerWrapper {
+    margin: 0 auto;
+    width: auto;
+    display: table;
+}
 /*MEMBERS END*/
 
 /*RESPONSIVE BREAKPOINTS*/

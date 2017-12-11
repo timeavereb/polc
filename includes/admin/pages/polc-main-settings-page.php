@@ -219,11 +219,6 @@ class Polc_Main_Settings_Page
             </p>
 
             <p>
-                <label for="plc_fb_page"><?= __( 'Facebook Page', 'polc' );?></label>
-                <input type="text" id="plc_fb_page" name="common[fb_page]" size="50" value="<?= isset($common["fb_page"]) ? $common["fb_page"] : ""; ?>">
-            </p>
-
-            <p>
                 <label for="plc_ga_id"><?= __( 'Google analytics tracking ID', 'polc' );?></label>
                 <input type="text" id="plc_ga_id" name="common[ga_id]" size="50" value="<?= isset($common["ga_id"]) ? $common["ga_id"] : ""; ?>">
             </p>

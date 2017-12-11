@@ -141,7 +141,8 @@ function polc_setup_head()
     endif;
 
     global $post;
-    if (isset($post->post_type) && !is_search()):
+
+    if (isset($post->post_type) && ($post->post_type == "story" || $post->post_type == "post") && !is_search()):
 
         if ($post->post_parent == 0):
             $content = wp_trim_words(strip_tags($post->post_excerpt), 40, "...");
@@ -161,9 +162,6 @@ function polc_setup_head()
             $height = $featured_img[2];
         endif;
 
-        if(trim($content) == ''){
-            $content = get_bloginfo('description');
-        }
         ?>
         <!--g+ sdk-->
         <script src="https://apis.google.com/js/platform.js" async defer></script>

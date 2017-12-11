@@ -209,25 +209,26 @@ html, body {height: 100%;background-color: #f8f8f6;}
     background-image:url('../img/navigation/toplist_black.svg');
 }
 .plc_navigation_item_wrapper:nth-of-type(5) .plc_navigation_item:before{
-    background-image:url('../img/navigation/help.svg');
-    background-size: 30px 30px;
-    background-position: center center;
-}
-.plc_navigation_item_wrapper:nth-of-type(5):hover .plc_navigation_item:before{
-    background-image:url('../img/navigation/help_black.svg');
-}
-.plc_navigation_item_wrapper:nth-of-type(6) .plc_navigation_item:before{
     background-image:url('../img/navigation/users.svg');
     background-size: 25px 25px;
     background-position: center center;
     background-repeat: no-repeat;
 }
-.plc_navigation_item_wrapper:nth-of-type(6):hover .plc_navigation_item:before{
+.plc_navigation_item_wrapper:nth-of-type(5):hover .plc_navigation_item:before{
     background-image:url('../img/navigation/users_black.svg');
     background-size: 25px 25px;
     background-position: center center;
     background-repeat: no-repeat;
 }
+.plc_navigation_item_wrapper:nth-of-type(6) .plc_navigation_item:before{
+    background-image:url('../img/navigation/help.svg');
+    background-size: 30px 30px;
+    background-position: center center;
+}
+.plc_navigation_item_wrapper:nth-of-type(6):hover .plc_navigation_item:before{
+    background-image:url('../img/navigation/help_black.svg');
+}
+
 .plc_user_menu li:nth-of-type(1) a:before{
     background-image:url('../img/navigation/profile.svg');
     background-size: 30px 30px;
@@ -734,7 +735,12 @@ h2.articleAuthor{
 .plc_story_content p em {
     font-style: italic;
 }
-
+.plc_story_content p[align="center"] {
+    text-align: center;
+}
+.plc_story_content p[align="right"] {
+    text-align: right;
+}
 /*CONTENT*/
 
 /*PROFILE*/
@@ -880,7 +886,7 @@ span.plcEmptyContent {
     -webkit-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6);
     -moz-box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6);
     box-shadow: 0 5px 10px 0 rgba(0,0,0,0.6);
-    padding: 10px;
+    padding: 0;
     background-color: white;
     min-width: 260px;
     width: 100%;
@@ -1059,6 +1065,7 @@ span.plcEmptyContent {
     color: #fb5c43;
     width: 20%;
     float: left;
+    cursor: pointer;
 }
 .plcUserStat {
     padding: 10px 0;
@@ -1526,11 +1533,18 @@ ul.plc_user_menu a{
     text-transform: uppercase;
 }
 .newStoryData_row label.error,
-label#story_content-error{
+label#story_content-error,
+span#plc_tag_error{
     background-color: #444446;
     padding: 0 10px 5px 10px;
     margin-top: -10px;
     display: inline-block;
+    font-size: 12px;
+}
+#plc_tag_error {
+    width: auto;
+    float: left;
+    margin-top: 0!important;
 }
 label#story_content-error{
     padding: 5px 10px!important;
@@ -1540,7 +1554,9 @@ label#story_content-error{
 .plcErrorText,.error {
     font-size: 13px;
 }
-.newStoryData_row input.error {
+.newStoryData_row input.error,
+.newStoryData_row textarea.error,
+#polc_tag_handler .error{
     border-bottom: solid 5px #444446!important;
 }
 .ui-widget-overlay.ui-front {
@@ -1805,21 +1821,24 @@ label#story_content-error{
     float: left;
     padding-bottom: 20px;
 }
+.plc_tag_handler_wrapper {
+    width: 30%;
+    float: left;
+}
 #polc_tag_handler {
     height: 40px;
     border: none;
     padding: 0 10px;
     float: left;
-    width:30%;
+    width:100%;
     margin: 0;
 }
 #polc_tag_handler:focus {
     outline: none;
 }
 .plcTagContainer {
-    width: 70%;
+    width: auto;
     float: left;
-    padding-left: 15px;
 }
 .plcTagElement {
     border: solid 1px white;
@@ -1897,6 +1916,34 @@ label#story_content-error{
     background-color: #f8f8f6;
     border-top: solid 1px #e4e2e2;
     padding-top: 10px;
+}
+#addTag:before {
+    background-image: url('../img/settings/add_story.svg');
+    width: 40px;
+    height: 40px;
+    background-size: 40px 40px;
+    content:'';
+    display:block;
+    float:left;
+    margin-right:10px;
+    background-color: white;
+    border-radius: 100%;
+}
+#addTag{
+    background-color: transparent;
+    border:none;
+    color:white;
+    font-family: 'Titillium', sans-serif;
+    line-height:40px;
+    cursor:pointer;
+    float:left;
+    padding-right: 15px;
+}
+#addTag:focus{
+    outline:none;
+}
+span.ui-helper-hidden-accessible {
+    display: none!important;
 }
 /*ADD STORY END*/
 
@@ -2166,6 +2213,10 @@ label#story_content-error{
     float:left;
     margin-right:-1px;
 }
+button.plcPagerBtn.lastPage,
+button.plcPagerBtn.firstPage {
+    width: auto;
+}
 .current_page,.plcPagerInnerWrapper button:hover {
     border: solid 1px #fb5c43!important;
     background-color: white!important;
@@ -2330,7 +2381,9 @@ label#story_content-error{
 
 /*COMMENT*/
 #plcSendComment,
-#plcSendComment:focus{
+#plcSendComment:focus,
+button.plcSendComment,
+button.plcSendComment:focus{
     border-radius: 50px;
     border: solid 2px #fb5c43;
     background-color: transparent;
@@ -2347,6 +2400,10 @@ label#story_content-error{
     -ms-transition: all 250ms ease-in-out;
     -o-transition: all 250ms ease-in-out;
     transition: all 250ms ease-in-out;
+}
+button.plcSendComment{
+    float:right;
+    margin-top:10px;
 }
 #plcSendComment:hover{
     color:white;
@@ -2400,7 +2457,7 @@ label#story_content-error{
     float: left;
     color: black!important;
     font-size: 16px;
-    padding: 10px 0 0 0 !important;
+    padding:10px 30px 0 0 !important;
 }
 .plcCommentReplyBtn {
     padding: 0;
@@ -2439,6 +2496,9 @@ label#story_content-error{
     padding: 10px;
 	resize: none;
 }
+.plcReplyText:focus{
+    outline:none;
+}
 .nightstyle .plcCommentWrapper {
     background-color: transparent;
     border: solid 1px #2b2b2b;
@@ -2454,6 +2514,10 @@ label#story_content-error{
 .plcCommentWrapper.lvl-1 {
     margin-left: 5%;
     width: 95%;
+}
+.plcCommentWrapper.lvl-2 {
+    margin-left: 10%;
+    width: 90%;
 }
 .polcCommentWrapper.nightstyle textarea {
     background-color: rgba(255,255,255,0.1);
@@ -3156,6 +3220,11 @@ span.hasContent:before{
     display: table;
 }
 /*MEMBERS END*/
+.plcFbPageLikeWrapper {
+    float: right;
+    width: 25%;
+    margin-top:25px;
+}
 
 /*RESPONSIVE BREAKPOINTS*/
 @media all and (max-width: 1600px){
@@ -3257,6 +3326,7 @@ span.hasContent:before{
     .sectionContainer .part h1,.sectionContainer .part h2{text-align:center;}
     .sectionContainer .part h1:after{margin:0 auto;}
     .sectionContainer .part:nth-of-type(2){height:160px;}
+    #addTag{margin: 15px auto; float: none; display: block;}
 }
 
 @media all and (max-width: 480px) {
